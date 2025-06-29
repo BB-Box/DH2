@@ -21,32 +21,82 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Venusaur
 	greatflower: {
 		num: 3000,
-		accuracy: true,
+		accuracy: 100,
 		basePower: 100,
 		category: "Special",
 		name: "Great Flower",
-		desc: "The user gathers energy from its flower to attack with immense power. This move never misses.",
-		shortDesc: "Hits adjacent foes, Bypasses accuracy check.",
+		desc: "The user gathers energy from its flower to attack with immense power. This move continues to deal damage to opponents for three turns.",
+		shortDesc: "Hits adjacent foes, Damages non-Grass types for 3 turns.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: null,
+		condition: {
+			duration: 3,
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Great Flower');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(target) {
+				if (!target.hasType('Grass')) this.damage(target.baseMaxhp / 8, target);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 11,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Great Flower');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				onHit(source) {
+					for (const side of source.side.foeSidesWithConditions()) {
+						side.addSideCondition('greatflower');
+					}
+				},
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Grass",
 	},
 	//Charizard
 	greatflame: {
 		num: 3001,
-		accuracy: true,
+		accuracy: 100,
 		basePower: 100,
 		category: "Special",
 		name: "Great Flame",
-		desc: "The user focuses its power over fire and releases a huge blazing breath. This move never misses.",
-		shortDesc: "Hits adjacent foes, Bypasses accuracy check.",
+		desc: "The user focuses its power over fire and releases a huge blazing breath. This move continues to deal damage to opponents for three turns.",
+		shortDesc: "Hits adjacent foes, Damages non-Fire types for 3 turns.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: null,
+		condition: {
+			duration: 3,
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Great Flame');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(target) {
+				if (!target.hasType('Fire')) this.damage(target.baseMaxhp / 8, target);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 11,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Great Flame');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				onHit(source) {
+					for (const side of source.side.foeSidesWithConditions()) {
+						side.addSideCondition('greatflame');
+					}
+				},
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
@@ -57,12 +107,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 100,
 		category: "Special",
 		name: "Great Flood",
-		desc: "The user launches gallions of water at its foes using its cannons. This move never misses.",
-		shortDesc: "Hits adjacent foes, Bypasses accuracy check.",
+		desc: "The user launches gallions of water at its foes using its cannons. This move continues to deal damage to opponents for three turns.",
+		shortDesc: "Hits adjacent foes, Damages non-Water types for 3 turns.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: null,
+		condition: {
+			duration: 3,
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Great Flood');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(target) {
+				if (!target.hasType('Water')) this.damage(target.baseMaxhp / 8, target);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 11,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Great Flood');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				onHit(source) {
+					for (const side of source.side.foeSidesWithConditions()) {
+						side.addSideCondition('greatflood');
+					}
+				},
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Water",
 	},
