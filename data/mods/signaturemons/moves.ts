@@ -745,9 +745,26 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		//left in for technicality but won't be used without z-moves
 		zMove: {effect: 'clearnegativeboost'},
 	},
+	//Eelektross
+	exhaustion: {
+		num: 3022,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Exhaustion",
+		desc: "The user bites the target to drain its energy, while simultanuously shocking it with electricity. The user's HP is restored by up to half the damage taken by the target.",
+		shortDesc: "User recovers 50% of the damage dealt.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, heal: 1, metronome: 1, bite: 1},
+		drain: [1, 2],
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+	},
 
 	//Old moves remixed (for technicality)
-	//Heal block status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
+	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	healblock: {
 		inherit: true,
 		condition: {
