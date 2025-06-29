@@ -304,8 +304,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Gastrodon
 	stickyslime: {
 		num: 3010,
-		accuracy: 90,
-		basePower: 60,
+		accuracy: 100,
+		basePower: 40,
 		category: "Special",
 		name: "Sticky Slime",
 		desc: "The user shoots a sticky ooze that traps the target during its next turn. After making its attack, the user switches out immediately.",
@@ -431,12 +431,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	killerwail: {
 		num: 3014,
 		accuracy: 100,
-		basePower: 70,
+		basePower: 95,
 		category: "Special",
 		name: "Killer Wail",
 		desc: "The user blasts its target with ultrasonic soundwaves. This move has a high chance of landing a critical hit.",
 		shortDesc: "Sound move. High critical hit ratio.",
-		pp: 15,
+		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
 		critRatio: 2,
