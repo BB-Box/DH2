@@ -762,7 +762,41 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Electric",
 	},
+	//Honchkrow
+	vileorders: {
+		num: 3023,
+		accuracy: 100,
+		basePower: 0,
+		basePowerCallback(pokemon, target, move) {
+			const currentSpecies = move.allies!.shift()!.species;
+			const bp = 5 + Math.floor(currentSpecies.baseStats.atk / 10);
+			this.debug('BP for ' + currentSpecies.name + ' hit: ' + bp);
+			return bp;
+		},
+		category: "Physical",
+		name: "Vile Orders",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, allyanim: 1, metronome: 1},
+		onModifyMove(move, pokemon) {
+			//Line below taken from Beat Up, reactivate if the move has issues
+			//move.allies = pokemon.side.pokemon.filter(ally => ally === pokemon || !ally.fainted && !ally.status);
+			
+			//Get data on user and its allies on the field for their first hits
+			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
+			//For the second hit of each ally, we push a clone of their data at the end of the created array
+			for (const allySecondHit of move.allies) {
+				move.allies.push(allySecondHit);
+			}
+			
+			move.multihit = move.allies.length;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dark",
+	},
 
+	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	healblock: {
