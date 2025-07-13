@@ -784,7 +784,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onModifyMove(move, pokemon) {
 			//Get data on user and its allies on the field for their first hits
 			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
-			move.allNames = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status).species.name;
+			//move.allNames = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status).species.name;
 			//For the second hit of each ally, we duplicate their data at the end of the created array of allies
 			move.allies = move.allies.concat(move.allies);
 
@@ -797,8 +797,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const
 			for (const ally of target.adjacentAllies()) {
 				this.damage(ally.baseMaxhp / 8, ally, source, this.dex.conditions.get('Water Bombshell'));
-			}*/
-			this.add('-message', `${pokemon.name} is prepping its ally for an assault!`);
+			}
+			this.add('-message', `${pokemon.name} is prepping its ally for an assault!`);*/
 		},
 		secondary: null,
 		target: "normal",
