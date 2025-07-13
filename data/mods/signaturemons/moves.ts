@@ -769,7 +769,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 0,
 		basePowerCallback(pokemon, target, move) {
 			const currentSpecies = move.allies!.shift()!.species;
-			const bp = 5 + Math.floor(currentSpecies.baseStats.atk / 10);
+			const bp = 20 + Math.floor(currentSpecies.baseStats.atk / 10);
 			this.debug('BP for ' + currentSpecies.name + ' hit: ' + bp);
 			return bp;
 		},
@@ -786,7 +786,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			
 			//Get data on user and its allies on the field for their first hits
 			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
-			//For the second hit of each ally, we push a clone of their data at the end of the created array
+			
+			//For the second hit of each ally, we duplicate their data at the end of the created array of allies
+			move.allies = move.allies.concat(move.allies);
 			/*for (const allySecondHit of move.allies) {
 				move.allies.push(allySecondHit);
 			}*/
