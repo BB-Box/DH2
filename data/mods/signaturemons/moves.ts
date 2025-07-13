@@ -21,32 +21,82 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Venusaur
 	greatflower: {
 		num: 3000,
-		accuracy: true,
+		accuracy: 100,
 		basePower: 100,
 		category: "Special",
 		name: "Great Flower",
-		desc: "The user gathers energy from its flower to attack with immense power. This move never misses.",
-		shortDesc: "Hits adjacent foes, Bypasses accuracy check.",
+		desc: "The user gathers energy from its flower to attack with immense power. This move continues to deal damage to opponents for three turns.",
+		shortDesc: "Hits adjacent foes, Damages non-Grass types for 3 turns.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: null,
+		condition: {
+			duration: 3,
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Great Flower');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(target) {
+				if (!target.hasType('Grass')) this.damage(target.baseMaxhp / 8, target);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 11,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Great Flower');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				onHit(source) {
+					for (const side of source.side.foeSidesWithConditions()) {
+						side.addSideCondition('greatflower');
+					}
+				},
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Grass",
 	},
 	//Charizard
 	greatflame: {
 		num: 3001,
-		accuracy: true,
+		accuracy: 100,
 		basePower: 100,
 		category: "Special",
 		name: "Great Flame",
-		desc: "The user focuses its power over fire and releases a huge blazing breath. This move never misses.",
-		shortDesc: "Hits adjacent foes, Bypasses accuracy check.",
+		desc: "The user focuses its power over fire and releases a huge blazing breath. This move continues to deal damage to opponents for three turns.",
+		shortDesc: "Hits adjacent foes, Damages non-Fire types for 3 turns.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: null,
+		condition: {
+			duration: 3,
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Great Flame');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(target) {
+				if (!target.hasType('Fire')) this.damage(target.baseMaxhp / 8, target);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 11,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Great Flame');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				onHit(source) {
+					for (const side of source.side.foeSidesWithConditions()) {
+						side.addSideCondition('greatflame');
+					}
+				},
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
@@ -57,12 +107,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 100,
 		category: "Special",
 		name: "Great Flood",
-		desc: "The user launches gallions of water at its foes using its cannons. This move never misses.",
-		shortDesc: "Hits adjacent foes, Bypasses accuracy check.",
+		desc: "The user launches gallions of water at its foes using its cannons. This move continues to deal damage to opponents for three turns.",
+		shortDesc: "Hits adjacent foes, Damages non-Water types for 3 turns.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
-		secondary: null,
+		condition: {
+			duration: 3,
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Great Flood');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(target) {
+				if (!target.hasType('Water')) this.damage(target.baseMaxhp / 8, target);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 11,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Great Flood');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				onHit(source) {
+					for (const side of source.side.foeSidesWithConditions()) {
+						side.addSideCondition('greatflood');
+					}
+				},
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Water",
 	},
@@ -670,9 +745,60 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		//left in for technicality but won't be used without z-moves
 		zMove: {effect: 'clearnegativeboost'},
 	},
+	//Eelektross
+	exhaustion: {
+		num: 3022,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Exhaustion",
+		desc: "The user bites the target to drain its energy, while simultanuously shocking it with electricity. The user's HP is restored by up to half the damage taken by the target.",
+		shortDesc: "User recovers 50% of the damage dealt.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, heal: 1, metronome: 1, bite: 1},
+		drain: [1, 2],
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+	},
+	//Honchkrow
+	vileorders: {
+		num: 3023,
+		accuracy: 100,
+		basePower: 0,
+		basePowerCallback(pokemon, target, move) {
+			const currentSpecies = move.allies!.shift()!.species;
+			const bp = 5 + Math.floor(currentSpecies.baseStats.atk / 10);
+			this.debug('BP for ' + currentSpecies.name + ' hit: ' + bp);
+			return bp;
+		},
+		category: "Physical",
+		name: "Vile Orders",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, allyanim: 1, metronome: 1},
+		onModifyMove(move, pokemon) {
+			//Line below taken from Beat Up, reactivate if the move has issues
+			//move.allies = pokemon.side.pokemon.filter(ally => ally === pokemon || !ally.fainted && !ally.status);
+			
+			//Get data on user and its allies on the field for their first hits
+			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
+			//For the second hit of each ally, we push a clone of their data at the end of the created array
+			for (const allySecondHit of move.allies) {
+				move.allies.push(allySecondHit);
+			}
+			
+			move.multihit = move.allies.length;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dark",
+	},
 
+	
 	//Old moves remixed (for technicality)
-	//Heal block status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
+	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	healblock: {
 		inherit: true,
 		condition: {

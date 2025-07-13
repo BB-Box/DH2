@@ -1077,7 +1077,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "DUU",
 	},
 	honchkrow: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	misdreavus: {
@@ -2587,7 +2587,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	eelektross: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	elgyem: {

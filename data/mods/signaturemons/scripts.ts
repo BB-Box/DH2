@@ -27,11 +27,13 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 4
 		this.modData('Learnsets', 'roserade').learnset.secretthorns = ['9L1'];
 		this.modData('Learnsets', 'gastrodon').learnset.stickyslime = ['9L1'];
+		this.modData('Learnsets', 'honchkrow').learnset.vileorders = ['9L1'];
 		this.modData('Learnsets', 'weavile').learnset.sinisterclaw = ['9L1'];
 		this.modData('Learnsets', 'froslass').learnset.curseofsnow = ['9L1'];
 
 		//Gen 5
 		this.modData('Learnsets', 'scolipede').learnset.poisonwheel = ['9L1'];
+		this.modData('Learnsets', 'eelektross').learnset.exhaustion = ['9L1'];
 		this.modData('Learnsets', 'hydreigon').learnset.triplethreat = ['9L1'];
 
 		//Gen 6
