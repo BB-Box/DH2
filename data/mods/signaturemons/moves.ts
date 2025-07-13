@@ -765,13 +765,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Honchkrow
 	vileorders: {
 		num: 3023,
-		accuracy: 100,
+		accuracy: 95,
 		basePower: 0,
 		basePowerCallback(pokemon, target, move) {
 			const currentSpecies = move.allies!.shift()!.species;
 			const bp = 20 + Math.floor(currentSpecies.baseStats.atk / 10);
 			this.debug('BP for ' + currentSpecies.name + ' hit: ' + bp);
-			this.add('-message', `BP for ${currentSpecies.name} hit: ${bp}`);
+			//That text works, but it only takes the name of the species instead of the potential nickname
+			this.add('-message', `${currentSpecies.name} attacks!`);
 			return bp;
 		},
 		category: "Physical",
@@ -784,21 +785,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onModifyMove(move, pokemon) {
 			//Get data on user and its allies on the field for their first hits
 			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
-			//move.allNames = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status).species.name;
 			//For the second hit of each ally, we duplicate their data at the end of the created array of allies
 			move.allies = move.allies.concat(move.allies);
 
 			move.multihit = move.allies.length;
-		},
-		onBeforeMove(pokemon, target, move) {
-			/*if (move.allNames.length <= 1) {
-				return;
-			}
-			const
-			for (const ally of target.adjacentAllies()) {
-				this.damage(ally.baseMaxhp / 8, ally, source, this.dex.conditions.get('Water Bombshell'));
-			}
-			this.add('-message', `${pokemon.name} is prepping its ally for an assault!`);*/
 		},
 		secondary: null,
 		target: "normal",
