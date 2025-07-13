@@ -769,7 +769,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 0,
 		basePowerCallback(pokemon, target, move) {
 			const currentSpecies = move.allies!.shift()!.species;
+			const currentAlly = move.allies!.shift()!.name;
 			const bp = 20 + Math.floor(currentSpecies.baseStats.atk / 10);
+			this.add('-message', `${currentAlly.name} attacks!:`);
 			this.debug('BP for ' + currentSpecies.name + ' hit: ' + bp);
 			return bp;
 		},
@@ -781,18 +783,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, allyanim: 1, metronome: 1},
 		onModifyMove(move, pokemon) {
-			//Line below taken from Beat Up, reactivate if the move has issues
-			//move.allies = pokemon.side.pokemon.filter(ally => ally === pokemon || !ally.fainted && !ally.status);
-			
 			//Get data on user and its allies on the field for their first hits
 			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
-			
 			//For the second hit of each ally, we duplicate their data at the end of the created array of allies
 			move.allies = move.allies.concat(move.allies);
-			/*for (const allySecondHit of move.allies) {
-				move.allies.push(allySecondHit);
-			}*/
-			
 			move.multihit = move.allies.length;
 		},
 		secondary: null,
