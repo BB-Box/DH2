@@ -775,6 +775,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		category: "Physical",
 		name: "Vile Orders",
+		desc: "The user attacks relentlessly alongside its underlings. Both the user and each ally on the field gets to hit the target two times during the move.",
+		shortDesc: "Healthy allies on field hit the target.",
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, allyanim: 1, metronome: 1},
@@ -785,9 +787,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Get data on user and its allies on the field for their first hits
 			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
 			//For the second hit of each ally, we push a clone of their data at the end of the created array
-			for (const allySecondHit of move.allies) {
+			/*for (const allySecondHit of move.allies) {
 				move.allies.push(allySecondHit);
-			}
+			}*/
 			
 			move.multihit = move.allies.length;
 		},
