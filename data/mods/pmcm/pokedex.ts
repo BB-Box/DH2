@@ -235,6 +235,11 @@ export const Pokedex: { [k: string]: ModdedSpeciesData } = {
 		abilities: {0: "Earth Eater"},
 		types: ["Normal", "Ground"],
 	},
+	dudunsparcethreesegment: {
+		inherit: true,
+		abilities: {0: "Earth Eater"},
+		types: ["Normal", "Ground"],
+	},
 	chienpao: {
 		inherit: true,
 		abilities: {0: "Tablets of Ruin"},
@@ -249,8 +254,8 @@ export const Pokedex: { [k: string]: ModdedSpeciesData } = {
 	},
 	araquanid: {
 		inherit: true,
-		baseStats: { hp: 1, atk: 140, def: 92, spa: 50, spd: 132, spe: 42 },
-		maxHP: 1,
+		baseStats: { hp: 2, atk: 140, def: 92, spa: 50, spd: 132, spe: 42 },
+		maxHP: 16,
 	},
 	avalugghisui: {
 		inherit: true,
@@ -297,4 +302,40 @@ export const Pokedex: { [k: string]: ModdedSpeciesData } = {
 	golurk: {
 		inherit: true,
 	},
+	meowscarada: {
+		inherit: true,
+	},
+	infernape: {
+		inherit: true,
+		abilities: {0: "Berserk"},
+	},
+	salamence: {
+		inherit: true,
+		abilities: {0: "Aerilate"},
+	},
+	salamencemega: {
+		num: 373,
+		name: "Salamence-Mega",
+		baseSpecies: "Salamence",
+		forme: "Mega",
+		types: ["Dragon", "Flying"],
+		baseStats: { hp: 95, atk: 145, def: 130, spa: 120, spd: 90, spe: 120 },
+		abilities: { 0: "Blood-Soaked Crescent" },
+		heightm: 1.8,
+		weightkg: 112.6,
+		color: "Blue",
+		eggGroups: ["Dragon"],
+		requiredItem: "Salamencite",
+	},
+	urshifu: {
+		inherit: true,
+		abilities: {0: "Sniper"},
+	},
+	urshifurapidstrike: {
+		inherit: true,
+		abilities: {0: "Sniper"},
+	},
+	stonjourner: {
+		inherit: true,
+	}
 };

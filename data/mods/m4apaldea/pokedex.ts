@@ -606,4 +606,71 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 		megaStone: "Okidogite",
 		megaCreator: "DrPumpkinz",
 	},
+
+	// slate 14
+
+	perrserker: {
+		inherit: true,
+		otherFormes: [
+			"Perrserker-Mega",  "Brambleghast-Mega-Busted",
+		],
+		formeOrder: [
+			"Perrserker", "Perrserker-Mega",  "Brambleghast-Mega-Busted",
+		],
+	},
+	perrserkermega: {
+		num: 947,
+		name: "Perrserker-Mega", 
+		baseSpecies: "Perrserker",
+		forme: "Mega",
+		types: ["Steel"],
+		baseStats: {hp: 70, atk: 190, def: 100, spa: 50, spd: 70, spe: 60},
+		abilities: {0: "Ice Face"},
+		heightm: 0.8,
+		weightkg: 28,
+		color: "Brown",
+		eggGroups: ["Field"],
+		requiredItem: "Perrserkite",
+		battleOnly: "Perrserker",
+		creator: "DrPumpkinz",
+	},
+	perrserkermegabusted: {
+		num: 947,
+		name: "Perrserker-Mega-Busted",
+		baseSpecies: "Perrserker",
+		forme: "Mega-1",
+		types: ["Steel"],
+		baseStats: {hp: 70, atk: 190, def: 100, spa: 50, spd: 70, spe: 60},
+		abilities: {0: "Ice Face"},
+		heightm: 0.8,
+		weightkg: 28,
+		color: "Brown",
+		eggGroups: ["Field"],
+		requiredItem: "Perrserkite",
+		battleOnly: "Perrserker",
+		creator: "DrPumpkinz",
+	},
+
+	meowscarada: {
+		inherit: true,
+		mega: "meowscaradamega",
+		megaName: "Meowscarada-Mega",
+		megaAbility: {0: "Tricky Surge"},
+		megaStats: {hp: 76, atk: 130, def: 100, spa: 91, spd: 95, spe: 138},
+		megaStone: "Meowscaradite",
+		movepoolAdditions: ["fakeout"],
+		megaCreator: "War Incarnate",
+	},
+
+	maushold: {
+		inherit: true,
+		mega: "mausholdmega",
+		megaName: "Maushold-Mega",
+		megaType: ["Normal", "Fairy"],
+		megaAbility: {0: "Prankster"},
+		megaStats: {hp: 74, atk: 95, def: 120, spa: 65, spd: 110, spe: 101},
+		megaStone: "Mausholdinite",
+		movepoolAdditions: ["moonlight"],
+		megaCreator: "LordThemberchaud",
+	},
 };

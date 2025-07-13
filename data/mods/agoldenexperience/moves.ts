@@ -1166,7 +1166,7 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
-				if (move.flags['pulse'] && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
+				if ((move.type === 'Fighting' || move.flags['pulse']) && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
 					this.debug('chakra terrain boost');
 					return this.chainModify([0x14CD, 0x1000]);
 				}
@@ -2587,23 +2587,13 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 			},
 		},
 	},
-	lastrespects: {
-		inherit: true,
-		basePowerCallback(pokemon, target, move) {
-			return 50 + 25 * pokemon.side.totalFainted
-		},
-		onModifyMove(move, pokemon) {
-			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
-		},
-		shortDesc: "+25 power for each time an ally fainted. Special if user's SpA > Atk.",
-	},
 	ragefist: {
 		inherit: true,
 		basePowerCallback(pokemon) {
-			return Math.min(200, 50 + 25 * pokemon.timesAttacked);
+			return Math.min(100, 50 + 50 * pokemon.timesAttacked);
 		},
-		shortDesc: "+25 power for each time user was hit. Max 6 hits.",
-		desc: "Power increases by 25 for each time the user was hit this turn. Max 6 hits.",
+		shortDesc: "+50 power for each time user was hit. Max 100 BP.",
+		desc: "Power increases by 50 for each time the user was hit this turn. Max 100 BP.",
 	},
 	gigatonhammer: {
 		inherit: true,
