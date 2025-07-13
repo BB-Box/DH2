@@ -1953,7 +1953,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	mothim: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	combee: {
 		tier: "NoSign",

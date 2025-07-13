@@ -794,7 +794,55 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-
+	//Mothim
+	razzia: {
+		num: 3024,
+		accuracy: 100,
+		basePower: 55,
+		category: "Physical",
+		name: "Razzia",
+		desc: "The user charges at its target for a surprise attack. This move deals more damage and has more effects during the first turn the user is on the field.",
+		shortDesc: "+1 Prio. Steals boosts and item on first turn.",
+		pp: 10,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, failmefirst: 1, noassist: 1, failcopycat: 1},
+		onBasePower(basePower, source) {
+			//Move is stronger on the first turn
+			if (source.activeMoveActions <= 1) {
+				this.debug('first turn buff');
+				return this.chainModify(2);
+			}
+		},
+		onModifyMove(move, source, target) {
+			//Steals stat boosts on the first turn
+			if (source.activeMoveActions <= 1) {
+				move.stealsBoosts = true;
+			}
+		},
+		onAfterHit(target, source, move) {
+			//Steals held item on the first turn
+			if (source.activeMoveActions > 1) {
+				return;
+			}
+			if (source.item || source.volatiles['gem']) {
+				return;
+			}
+			const yourItem = target.takeItem(source);
+			if (!yourItem) {
+				return;
+			}
+			if (!this.singleEvent('TakeItem', yourItem, target.itemState, source, target, move, yourItem) ||
+				!source.setItem(yourItem)) {
+				target.item = yourItem.id; // bypass setItem so we don't break choicelock or anything
+				return;
+			}
+			this.add('-enditem', target, yourItem, '[silent]', '[from] move: Razzia', '[of] ' + source);
+			this.add('-item', source, yourItem, '[from] move: Razzia', '[of] ' + target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Bug",
+	},
 	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
