@@ -771,6 +771,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const currentSpecies = move.allies!.shift()!.species;
 			const bp = 20 + Math.floor(currentSpecies.baseStats.atk / 10);
 			this.debug('BP for ' + currentSpecies.name + ' hit: ' + bp);
+			this.add('-message', `BP for ${currentSpecies.name} hit: ${bp}`);
 			return bp;
 		},
 		category: "Physical",
@@ -790,10 +791,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			move.multihit = move.allies.length;
 		},
 		onBeforeMove(pokemon, target, move) {
-			if (move.allNames.length <= 1) {
+			/*if (move.allNames.length <= 1) {
 				return;
 			}
-			/*const
+			const
 			for (const ally of target.adjacentAllies()) {
 				this.damage(ally.baseMaxhp / 8, ally, source, this.dex.conditions.get('Water Bombshell'));
 			}*/
