@@ -576,7 +576,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "NoSign",
 	},
 	electrode: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	electrodehisui: {

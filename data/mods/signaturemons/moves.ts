@@ -843,6 +843,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Bug",
 	},
+	//Electrode
+	electroblast: {
+		num: 3025,
+		accuracy: 100,
+		basePower: 250,
+		category: "Special",
+		name: "Electroblast",
+		desc: "The user harnesses its amassed electricity to create a powerful explosion that damages everything. The user will faint upon using this move.",
+		shortDesc: "Hits adjacent Pokemon. The user faints.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, noparentalbond: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Explosion", target);
+		},
+		selfdestruct: "always",
+		secondary: null,
+		target: "allAdjacent",
+		type: "Electric",
+	},
 	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
