@@ -864,6 +864,38 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacent",
 		type: "Electric",
 	},
+	//Cursola
+	ghastlywail: {
+		num: 3026,
+		accuracy: 100,
+		basePower: 60,
+		category: "Special",
+		name: "Ghastly Wail",
+		desc: "The user lets out a soulful cry that shakes the target's spirit. If the target is affected by Perish Song, its countdown will be reduced to zero.",
+		shortDesc: "Sound move. Reduces target's Perish Count to minimum.",
+		pp: 5,
+		priority: -1,
+		flags: {protect: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
+		secondary: {
+			chance: 100,
+			onHit(target) {
+				if (!target.hp) return;
+				let result = false;
+				let message = false;
+				//Check for existing Perish Count and reduce counter to 1
+				if (target.volatiles['perishsong']) {
+					target.volatiles['perishsong'].duration = 1;
+					this.add('-start', target, 'perish1', '[silent]');
+					result = true;
+					message = true;
+				}
+				if (!result) return false;
+				if (message) this.add('-message', `${target.name} Perish Count has been reduced!`);
+			},
+		},
+		target: "normal",
+		type: "Ghost",
+	},
 	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself

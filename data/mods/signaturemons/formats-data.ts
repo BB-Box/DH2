@@ -1207,7 +1207,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	cursola: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	remoraid: {
 		tier: "NoSign",
