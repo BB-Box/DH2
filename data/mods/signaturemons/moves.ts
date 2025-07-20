@@ -1030,8 +1030,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Hyper Beam", target);
 		},
-		onModifyMove(move, pokemon, target) {
-			move.willCrit = true;
+		onModifyMove(move, source, target) {
+			if (source.hp <= (source.maxhp * 5 / 100)) move.willCrit = true;
 		},
 		/*onModifyCritRatio(critRatio, source, target) {
 			if (source.hp <= (source.maxhp * 5 / 100)) return 5;
