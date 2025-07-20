@@ -1007,7 +1007,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePowerCallback(pokemon) {
 			const ratio = Math.max(Math.floor(pokemon.hp * 20 / pokemon.maxhp), 1);
 			let bp;
-			if (ratio < 1) {
+			if (ratio <= 1) {
 				bp = 130;
 			} else if (ratio < 8) {
 				bp = 120;
@@ -1031,7 +1031,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-anim', source, "Hyper Beam", target);
 		},
 		onModifyCritRatio(critRatio, source, target) {
-			if (source.hp < (source.maxhp * 5 / 100) || source.maxhp === 1) return 5;
+			if (source.hp <= (source.maxhp * 5 / 100)) return 5;
 		},
 		secondary: null,
 		target: "any",
