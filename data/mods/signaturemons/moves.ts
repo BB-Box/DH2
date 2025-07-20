@@ -999,6 +999,47 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
+	//Lucario
+	aurastorm: {
+		num: 3027,
+		accuracy: true,
+		basePower: 0,
+		basePowerCallback(pokemon) {
+			const ratio = Math.max(Math.floor(pokemon.hp * 20 / pokemon.maxhp), 1);
+			let bp;
+			if (ratio < 1) {
+				bp = 130;
+			} else if (ratio < 8) {
+				bp = 120;
+			} else if (ratio < 15) {
+				bp = 100;
+			} else {
+				bp = 70;
+			}
+			this.debug('BP: ' + bp);
+			return bp;
+		},
+		category: "Special",
+		name: "Aura Storm",
+		desc: "Calling upon the power of Aura, the user releases a powerful beam of light that always hits its target. This move gains power the less HP the user has.",
+		shortDesc: "Never misses. More power with less HP on user.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, distance: 1, metronome: 1, pulse: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Hyper Beam", target);
+		},
+		onModifyMove(move, source, target) {
+			const ratio = Math.max(Math.floor(source.hp * 20 / source.maxhp), 1);
+			if (ratio < 1) {
+				move.willCrit = true;
+			}
+		},
+		secondary: null,
+		target: "any",
+		type: "Fighting",
+	},
 	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
