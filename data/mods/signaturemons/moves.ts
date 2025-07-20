@@ -1031,7 +1031,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-anim', source, "Hyper Beam", target);
 		},
 		onModifyCritRatio(critRatio, source, target) {
-			if (source.hp <= (source.maxhp * 5 / 100)) return 5;
+			//if (source.hp <= (source.maxhp * 5 / 100))
+				return 5;
 		},
 		secondary: null,
 		target: "any",
