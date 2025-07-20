@@ -1030,10 +1030,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Hyper Beam", target);
 		},
-		onTryHit(move, source, target) {
-			if (Math.max(Math.floor(source.hp * 20 / source.maxhp), 1) < 1) {
-				move.willCrit = true;
-			}
+		onModifyCritRatio(critRatio, source, target) {
+			if (Math.max(Math.floor(source.hp * 20 / source.maxhp), 1) < 1) return 5;
 		},
 		secondary: null,
 		target: "any",
