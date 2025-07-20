@@ -971,7 +971,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Special",
 		name: "Ghastly Wail",
 		desc: "The user lets out a soulful cry that shakes the target's spirit. If the target is affected by Perish Song, its countdown will be reduced to zero.",
-		shortDesc: "Sound move. Reduces target's Perish Count to minimum.",
+		shortDesc: "Sound move. Reduces target's Perish Count to zero.",
 		pp: 5,
 		priority: -1,
 		flags: {protect: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
@@ -1021,7 +1021,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		category: "Special",
 		name: "Aura Storm",
-		desc: "Calling upon the power of Aura, the user releases a powerful beam of light that always hits its target. This move gains power the less HP the user has.",
+		desc: "Calling upon the power of Aura, the user releases a powerful beam of light that always hits its target. This move gains power the less HP the user has. Guaranteed critical hit at 5% HP or below.",
 		shortDesc: "Never misses. More power with less HP on user.",
 		pp: 5,
 		priority: 0,
@@ -1033,9 +1033,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onModifyMove(move, source, target) {
 			if (source.hp <= (source.maxhp * 5 / 100)) move.willCrit = true;
 		},
-		/*onModifyCritRatio(critRatio, source, target) {
-			if (source.hp <= (source.maxhp * 5 / 100)) return 5;
-		},*/
 		secondary: null,
 		target: "any",
 		type: "Fighting",
