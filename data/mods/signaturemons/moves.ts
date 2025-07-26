@@ -1114,6 +1114,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 0,
 		category: "Status",
 		name: "Front Guard",
+		desc: "The user solidifies its body and endures an attack with at least 1 HP before switching out. This move's chance of failing rises if used in succession.",
+		shortDesc: "Endures 1 move then switches out when hit.",
 		pp: 10,
 		priority: 4,
 		flags: {noassist: 1, failcopycat: 1},
@@ -1139,23 +1141,19 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					return target.hp - 1;
 				}
 			},
-			//Switch out process taken from the Eject Pack item
+			//Switch out process taken from the Eject Button item
 			onAfterMoveSecondaryPriority: 2,
 			onAfterMoveSecondary(target, source, move) {
-			if (source && source !== target && target.hp && move && move.category !== 'Status' && !move.flags['futuremove']) {
-				if (!this.canSwitch(target.side) || target.forceSwitchFlag || target.beingCalledBack || target.isSkyDropped()) return;
-				if (target.volatiles['commanding'] || target.volatiles['commanded']) return;
-				for (const pokemon of this.getAllActive()) {
-					if (pokemon.switchFlag === true) return;
+				if (source && source !== target && target.hp && move && move.category !== 'Status' && !move.flags['futuremove']) {
+					if (!this.canSwitch(target.side) || target.forceSwitchFlag || target.beingCalledBack || target.isSkyDropped()) return;
+					if (target.volatiles['commanding'] || target.volatiles['commanded']) return;
+					for (const pokemon of this.getAllActive()) {
+						if (pokemon.switchFlag === true) return;
+					}
+					target.switchFlag = true;
+					this.add('-end', target, 'move: Front Guard');
 				}
-				target.switchFlag = true;
-				/*if (target.useItem()) {
-					source.switchFlag = false;
-				} else {
-					target.switchFlag = false;
-				}*/
-			}
-		},
+			},
 		},
 		secondary: null,
 		target: "self",
