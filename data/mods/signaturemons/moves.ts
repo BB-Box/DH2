@@ -1065,8 +1065,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onAfterMove(pokemon) {
 			if (pokemon.removeVolatile('truant')) {
 				this.add('cant', pokemon, 'ability: Truant');
-				//pokemon.moveThisTurnResult = undefined;
-				//return false;
 			}
 		},
 		secondary: {

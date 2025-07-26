@@ -3,19 +3,17 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 	truant: {
 		inherit: true,
 		onBeforeMove(pokemon, target, move) {
-			/*if (move.id === 'procrastinate') {
+			//Procrastinate exception: On turns where Truant should proc and Procrastinate is used, ignore the turn skip and reapply the volatile status
+			if (move.id === 'procrastinate' && pokemon.removeVolatile('truant')) {
 				pokemon.addVolatile('truant');
 				return true;
-			} */
-			if (pokemon.removeVolatile('truant')) {
-				//Procrastinate exception
-				if (move.id === 'procrastinate') return true;
-				
-				else {
-					this.add('cant', pokemon, 'ability: Truant');
-					return false;
-				}
 			}
+			//Turn skip if the volatile status is removed
+			if (pokemon.removeVolatile('truant')) {
+				this.add('cant', pokemon, 'ability: Truant');
+				return false;
+			}
+			//No turn skip - Add volatile if not present
 			pokemon.addVolatile('truant');
 		},
 	},
