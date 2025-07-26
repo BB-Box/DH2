@@ -2075,7 +2075,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	carnivine: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	finneon: {
 		tier: "NoSign",

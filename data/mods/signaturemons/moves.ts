@@ -1076,6 +1076,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Normal",
 	},
+	//Carnivine
+	flytrap: {
+		num: 3029,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Flytrap",
+		desc: "The user munches on the target with its giant mouth. This move is super effective on Bug types and may poison the target.",
+		shortDesc: "20% chance of Poison. Super effective against Bug-types.",
+		pp: 15,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Crunch", target);
+		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Bug') return 1;
+		},
+		onBasePower(basePower, attacker, defender, move) {
+			if (defender.hasType('Bug')) {
+				return this.chainModify(1.5);
+			}
+		},
+		secondary: {
+			chance: 20,
+			status: 'poison',
+		},
+		target: "normal",
+		type: "Grass",
+	},
 	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
