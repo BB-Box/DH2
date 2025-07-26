@@ -1157,7 +1157,48 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		secondary: null,
 		target: "self",
-		type: "Steel"
+		type: "Steel",
+	},
+	//Dachsbun
+	breadflavor: {
+		num: 476,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Bread Flavor",
+		desc: "The user makes its foes hungry with a sweet pastry aroma. This move makes all opposing Pokémon take aim only at the user unless their held item is a berry.",
+		shortDesc: "Redirects opposing moves to user, except Berry holders.",
+		pp: 20,
+		priority: 2,
+		flags: {noassist: 1, failcopycat: 1},
+		volatileStatus: 'breadflavor',
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sweet Scent", target);
+		},
+		onTry(source) {
+			return this.activePerHalf > 1;
+		},
+		condition: {
+			duration: 1,
+			onStart(pokemon) {
+				this.add('-singleturn', pokemon, 'move: Bread Flavor');
+			},
+			onFoeRedirectTargetPriority: 1,
+			onFoeRedirectTarget(target, source, source2, move) {
+				const breadFlavorUser = this.effectState.target;
+				if (breadFlavorUser.isSkyDropped()) return;
+
+				if (!source.getItem().isBerry && this.validTarget(breadFlavorUser, source, move.target)) {
+					if (move.smartTarget) move.smartTarget = false;
+					this.debug("Bread Flavor redirected target of move");
+					return breadFlavorUser;
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Fairy",
 	},
 	
 	//Old moves remixed (for technicality)
