@@ -1055,7 +1055,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		//volatileStatus: 'truant',
 		onTry(source, target, move) {
-			if (source.ability === 'truant') {
+			if (source.ability === 'truant' && source.volatiles['truant']) {
 				this.add('-message', `${source.name} is skipping this turn with Truant!`);
 				return;
 			}
