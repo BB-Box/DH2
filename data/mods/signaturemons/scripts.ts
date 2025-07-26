@@ -39,6 +39,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 5
 		this.modData('Learnsets', 'scolipede').learnset.poisonwheel = ['9L1'];
 		this.modData('Learnsets', 'eelektross').learnset.exhaustion = ['9L1'];
+		this.modData('Learnsets', 'durant').learnset.frontguard = ['9L1'];
 		this.modData('Learnsets', 'hydreigon').learnset.triplethreat = ['9L1'];
 
 		//Gen 6

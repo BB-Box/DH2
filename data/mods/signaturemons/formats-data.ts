@@ -2688,7 +2688,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	durant: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	deino: {
 		tier: "NoSign",
