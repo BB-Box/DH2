@@ -1109,7 +1109,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	},
 	//Durant
 	frontguard: {
-		num: 203,
+		num: 3030,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -1159,7 +1159,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		secondary: null,
 		target: "self",
-		type: "Normal"
+		type: "Steel"
 	},
 	
 	//Old moves remixed (for technicality)
