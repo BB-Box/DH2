@@ -1037,6 +1037,48 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "any",
 		type: "Fighting",
 	},
+	//Slaking
+	procrastinate: {
+		num: 3028,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Procrastinate",
+		desc: "The user is taken by a sudden surge of laziness and activates its Ability Truant to skip this turn, giving it a chance to attack next turn.",
+		shortDesc: "Activates Truant. 50% chance of Atk +1.",
+		pp: 10,
+		priority: 0,
+		flags: {noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Slack Off", target);
+		},
+		volatileStatus: 'truant',
+		onTry(source, target, move) {
+			if (target.ability === 'truant' && !source.abilityState.ending) {
+				return;
+			}
+			this.add('-fail', source, 'move: Procrastinate');
+			this.hint("The ability Truant is required on the user for this move.");
+			return null;
+		},
+		onAfterMove(pokemon) {
+			//pokemon.removeVolatile('truant');
+			//pokemon.moveThisTurnResult = undefined;
+			if (pokemon.removeVolatile('truant')) {
+				this.add('cant', pokemon, 'ability: Truant');
+				return false;
+			}
+		},
+		secondary: {
+			chance: 50,
+			boosts: {
+				atk: 1,
+			},
+		},
+		target: "self",
+		type: "Normal",
+	},
 	
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
