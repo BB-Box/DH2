@@ -1053,9 +1053,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Slack Off", target);
 		},
-		volatileStatus: 'truant',
+		//volatileStatus: 'truant',
 		onTry(source, target, move) {
-			if (target.ability === 'truant') {
+			if (source.ability === 'truant') {
 				this.add('-message', `${source.name} is skipping this turn with Truant!`);
 				return;
 			}
@@ -1068,7 +1068,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			
 			if (pokemon.removeVolatile('truant')) {
 				this.add('cant', pokemon, 'ability: Truant');
-				pokemon.moveThisTurnResult = undefined;
+				//pokemon.moveThisTurnResult = undefined;
 				//return false;
 			}
 		},
