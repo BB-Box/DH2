@@ -1055,7 +1055,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		volatileStatus: 'truant',
 		onTry(source, target, move) {
-			if (target.ability === 'truant' && !source.abilityState.ending) {
+			if (target.ability === 'truant') {
+				this.add('-message', `${source.name} is skipping this turn with Truant!`);
 				return;
 			}
 			this.add('-fail', source, 'move: Procrastinate');
