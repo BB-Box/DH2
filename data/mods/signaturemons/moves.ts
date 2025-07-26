@@ -1119,10 +1119,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {noassist: 1, failcopycat: 1},
 		stallingMove: true,
 		volatileStatus: 'frontguard',
-		onPrepareHit(pokemon) {
+		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Endure", target);
-			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
