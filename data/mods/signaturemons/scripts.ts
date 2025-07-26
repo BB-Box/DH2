@@ -12,7 +12,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'blastoise').learnset.greatflood = ['9L1'];
 		this.modData('Learnsets', 'dugtrio').learnset.tripledig = ['9L1'];
 		this.modData('Learnsets', 'dugtrioalola').learnset.tripledig = ['9L1'];
-		this.modData('Learnsets', 'tentacruel').learnset.tentaclelock = ['9L1'];
+		this.modData('Learnsets', 'tentacruel').learnset.tentacoil = ['9L1'];
 		this.modData('Learnsets', 'electrode').learnset.electroblast = ['9L1'];
 		this.modData('Learnsets', 'snorlax').learnset.bellyflop = ['9L1'];
 
@@ -52,6 +52,6 @@ export const Scripts: ModdedBattleScriptsData = {
 
 		//Gen 9
 		this.modData('Learnsets', 'bellibolt').learnset.bellyspot = ['9L1'];
-		this.modData('Learnsets', 'toedscruel').learnset.tentaclelock = ['9L1'];
+		this.modData('Learnsets', 'toedscruel').learnset.tentacoil = ['9L1'];
 	}
 };

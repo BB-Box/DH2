@@ -177,12 +177,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	},
 	//Tentacruel
 	//Toedscruel
-	tentaclelock: {
+	tentacoil: {
 		num: 3004,
 		accuracy: 90,
 		basePower: 0,
 		category: "Status",
-		name: "Tentacle Lock",
+		name: "Tentacoil",
 		desc: "The user extends its tentacles to catch its target and prevent them from fleeing. This move raises the user's Sp. Attack and lowers the target's Sp. Defense every turn.",
 		shortDesc: "Traps foe. SpD -1 on foe and SpA +1 on user each turn",
 		pp: 15,
@@ -195,22 +195,22 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onTryImmunity(target) {
 			return this.dex.getImmunity('trapped', target);
 		},
-		volatileStatus: 'tentaclelock',
+		volatileStatus: 'tentacoil',
 		condition: {
 			onStart(pokemon, source) {
-				this.add('-start', pokemon, 'move: TentacleLock', '[of] ' + source);
+				this.add('-start', pokemon, 'move: Tentacoil', '[of] ' + source);
 			},
 			onResidualOrder: 14,
 			onResidual(pokemon) {
 				const source = this.effectState.source;
 				if (source && (!source.isActive || source.hp <= 0 || !source.activeTurns)) {
-					delete pokemon.volatiles['tentaclelock'];
-					this.add('-end', pokemon, 'Tentacle Lock', '[partiallytrapped]', '[silent]');
+					delete pokemon.volatiles['tentacoil'];
+					this.add('-end', pokemon, 'Tentacoil', '[partiallytrapped]', '[silent]');
 					return;
 				}
-				const debuff = this.boost({spd: -1}, pokemon, source, this.dex.getActiveMove('tentaclelock'));
+				const debuff = this.boost({spd: -1}, pokemon, source, this.dex.getActiveMove('tentacoil'));
 				if (debuff) {
-					this.boost({spa: +1}, source, pokemon, this.dex.getActiveMove('tentaclelock'));
+					this.boost({spa: +1}, source, pokemon, this.dex.getActiveMove('tentacoil'));
 				}
 			},
 			onTrapPokemon(pokemon) {
