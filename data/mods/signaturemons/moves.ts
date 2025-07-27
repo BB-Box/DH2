@@ -1212,6 +1212,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Flash", target);
+		},
 		secondaries: [
 			{
 				chance: 100,
@@ -1249,6 +1253,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
+	//For 'Secret Thorns'
 	healblock: {
 		inherit: true,
 		condition: {
@@ -1306,16 +1311,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 	},
 	//Moves boosted against a target that used Minimize are defined inside the move itself
+	//For 'Poison Wheel'
 	minimize: {
-		num: 107,
-		accuracy: true,
-		basePower: 0,
-		category: "Status",
-		name: "Minimize",
-		pp: 10,
-		priority: 0,
-		flags: {snatch: 1, metronome: 1},
-		volatileStatus: 'minimize',
+		inherit: true,
 		condition: {
 			noCopy: true,
 			onRestart: () => null,
@@ -1339,13 +1337,5 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				return accuracy;
 			},
 		},
-		boosts: {
-			evasion: 2,
-		},
-		secondary: null,
-		target: "self",
-		type: "Normal",
-		zMove: {effect: 'clearnegativeboost'},
-		contestType: "Cute",
 	},
 };
