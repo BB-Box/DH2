@@ -1284,6 +1284,41 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
+	//Absol (unfinished)
+	badomen: {
+		num: 3035,
+		accuracy: 100,
+		basePower: 75,
+		/*basePowerCallback(pokemon, target, move) {
+			if (target.newlySwitched || this.queue.willMove(target)) {
+				this.debug('Bad Omen damage boost');
+				return move.basePower * 2;
+			}
+			this.debug('Bad Omen NOT boosted');
+			return move.basePower;
+		},*/
+		category: "Physical",
+		name: "Bad Omen",
+		pp: 5,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
+		onTry(source, target) {
+			//const opponents = target.alliesAndSelf();
+
+			const action = this.queue.willMove(target); //opponents
+			const move = action?.choice === 'move' ? action.move : null;
+			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
+				return false;
+			}
+		},
+		/*onModifyMove(move, pokemon) {
+			//Get data on target and its allies on the field for their first hits
+			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
+		},*/
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Dark",
+	},
 
 	//Signature moves remixed
 	//Raticate

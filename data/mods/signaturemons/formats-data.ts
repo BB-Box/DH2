@@ -1726,7 +1726,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	absol: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*absolmega: {
 		tier: "NoSign",
