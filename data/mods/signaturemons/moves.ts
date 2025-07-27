@@ -1293,12 +1293,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Check how many targets are attacking
 			const chosenActions = this.queue.willMove(target);
 			const movesSelected = chosenActions?.choice === 'move' ? chosenActions.move : null;
-			if (((movesSelected.category === 'Status' && movesSelected.id !== 'mefirst') || target.volatiles['mustrecharge']).length > 1)
+			this.add('-message', `${chosenActions}`);
+			this.add('-message', `${movesSelected}`);
+			/*if (((movesSelected.category === 'Status' && movesSelected.id !== 'mefirst') || target.volatiles['mustrecharge']).length > 1)
 			{
 				this.debug('Bad Omen damage boost');
 				this.add('-message', `${pokemon.name} sensed great danger!`);
 				return move.basePower * 2;
-			}
+			}*/
 			this.debug('Bad Omen NOT boosted');
 			return move.basePower;
 		},
