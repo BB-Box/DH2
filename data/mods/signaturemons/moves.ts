@@ -1240,7 +1240,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
-		name: "pummeling",
+		name: "Pummeling",
 		desc: "The user attacks desperately using its tendrils. The less HP the user has, the more times this move hits.",
 		shortDesc: "Hits more times with less HP on user (2-5 times).",
 		pp: 10,
@@ -1259,6 +1259,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
+	},
+	//Lokix
+	evilkick: {
+		num: 3034,
+		accuracy: true,
+		basePower: 120,
+		category: "Physical",
+		name: "Evil Kick",
+		desc: "A powerful kick that takes the target by surprise and never misses. But if the move is blocked by a move such as Protect, the user takes damage instead.",
+		shortDesc: "Never misses. User takes damage if target protects.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "High Jump Kick", target);
+		},
+		hasCrashDamage: true,
+		onMoveFail(target, source, move) {
+			this.damage(source.baseMaxhp / 2, source, source, this.dex.conditions.get('High Jump Kick'));
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dark",
 	},
 
 	//Signature moves remixed

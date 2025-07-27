@@ -55,6 +55,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'cursola').learnset.ghastlywail = ['9L1'];
 
 		//Gen 9
+		this.modData('Learnsets', 'lokix').learnset.evilkick = ['9L1'];
 		this.modData('Learnsets', 'dachsbun').learnset.breadflavor = ['9L1'];
 		this.modData('Learnsets', 'bellibolt').learnset.bellyspot = ['9L1'];
 		this.modData('Learnsets', 'toedscruel').learnset.tentacoil = ['9L1'];
