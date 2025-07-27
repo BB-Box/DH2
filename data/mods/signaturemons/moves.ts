@@ -1200,6 +1200,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Fairy",
 	},
+	//Lanturn
+	stunlight: {
+		num: 3032,
+		accuracy: 95,
+		basePower: 55,
+		category: "Special",
+		name: "Stunlight",
+		desc: "The user emits a damaging flash of light that both raises the user's Special Attack stat and lowers opposing Pokémon's Speed stat.",
+		shortDesc: "Sp. Atk. +1 to user. Spe -1 to targets.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		secondaries: [
+			{
+				chance: 100,
+				self: {
+					boosts: {
+						spa: 1,
+					},
+				},
+			}, {
+				chance: 100,
+				boosts: {
+					spe: -1,
+				},
+			},
+		],
+		target: "allAdjacentFoes",
+		type: "Electric",
+	},
 
 	//Signature moves remixed
 	//Raticate
