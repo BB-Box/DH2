@@ -1200,7 +1200,21 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Fairy",
 	},
-	
+
+	//Signature moves remixed
+	//Raticate
+	//Raticate-Alola
+	hyperfang: {
+		inherit: true,
+		accuracy: 100,
+		basePower: 100,
+		pp: 10,
+		secondary: {
+			chance: 30,
+			volatileStatus: 'flinch',
+		},
+	},
+
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	healblock: {

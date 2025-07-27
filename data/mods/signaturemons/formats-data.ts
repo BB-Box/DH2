@@ -88,16 +88,16 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},*/
 	rattata: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	rattataalola: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	raticate: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	raticatealola: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*raticatealolatotem: {
 		tier: "NoSign",

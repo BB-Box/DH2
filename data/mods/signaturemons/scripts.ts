@@ -57,5 +57,15 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'dachsbun').learnset.breadflavor = ['9L1'];
 		this.modData('Learnsets', 'bellibolt').learnset.bellyspot = ['9L1'];
 		this.modData('Learnsets', 'toedscruel').learnset.tentacoil = ['9L1'];
+
+		//Remove reworked signature moves to Pokémon who got them in later generations (by move, then dex order)
+		//Hyper Fang (Raticate/Raticate-Alola)
+		delete this.modData('Learnsets', 'bidoof').learnset.hyperfang;
+		delete this.modData('Learnsets', 'bibarel').learnset.hyperfang;
+		delete this.modData('Learnsets', 'pachirisu').learnset.hyperfang;
+		delete this.modData('Learnsets', 'patrat').learnset.hyperfang;
+		delete this.modData('Learnsets', 'watchog').learnset.hyperfang;
+		delete this.modData('Learnsets', 'yungoos').learnset.hyperfang;
+		delete this.modData('Learnsets', 'gumshoos').learnset.hyperfang;
 	}
 };
