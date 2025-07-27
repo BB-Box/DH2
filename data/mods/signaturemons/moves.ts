@@ -1161,7 +1161,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	},
 	//Dachsbun
 	breadflavor: {
-		num: 476,
+		num: 3031,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -1206,6 +1206,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Raticate-Alola
 	hyperfang: {
 		inherit: true,
+		desc: "The user bites hard on the target with its sharp front fangs. This may also make the target flinch.",
+		shortDesc: "30% chance of Flinch on target.",
 		accuracy: 100,
 		basePower: 100,
 		pp: 10,
