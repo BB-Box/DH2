@@ -1291,11 +1291,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 75,
 		basePowerCallback(pokemon, target, move) {
 			//Check how many targets are attacking
-			const chosenActions = this.queue.willMove(target);
-			const movesSelected = chosenActions?.choice === 'move' ? chosenActions.move : null;
-			this.add('-message', `${chosenActions}`);
-			this.add('-message', `${movesSelected}`);
-			/*if (((movesSelected.category === 'Status' && movesSelected.id !== 'mefirst') || target.volatiles['mustrecharge']).length > 1)
+			//This is gonna take a while...
+
+			/*if (dmgMoves > 1)
 			{
 				this.debug('Bad Omen damage boost');
 				this.add('-message', `${pokemon.name} sensed great danger!`);
@@ -1312,11 +1310,18 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
 		onTry(source, target) {
+			const dmgMoves = 0;
 			const action = this.queue.willMove(target);
 			const move = action?.choice === 'move' ? action.move : null;
+			this.add('-message', `${move}`);
 			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
 				return false;
 			}
+		},
+		onModifyMove(move, source, target) {
+			/*for (const opponent in move.target) {
+				if (opponent.)
+			}*/
 		},
 		secondary: null,
 		target: "allAdjacentFoes",
