@@ -1234,6 +1234,32 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Electric",
 	},
+	//Orthworm
+	pummelling: {
+		num: 3033,
+		accuracy: 100,
+		basePower: 40,
+		category: "Physical",
+		name: "Pummelling",
+		desc: "The user attacks desperately using its tendrils. The less HP the user has, the more times this move hits.",
+		shortDesc: "Hits more times with less HP on user (2 min - 5 max).",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Bullet Punch", target);
+		},
+		onModifyMove(move, source, target) {
+			if (source.hp <= (source.maxhp * 1 / 4)) move.multihit = 5;
+			else if (source.hp <= (source.maxhp * 1 / 2)) move.multihit = 4;
+			else if (source.hp <= (source.maxhp * 3 / 4)) move.multihit = 3;
+		},
+		multihit: 2,
+		secondary: null,
+		target: "normal",
+		type: "Steel",
+	},
 
 	//Signature moves remixed
 	//Raticate
