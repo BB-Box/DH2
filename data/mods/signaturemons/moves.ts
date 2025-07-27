@@ -1289,32 +1289,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		num: 3035,
 		accuracy: 100,
 		basePower: 75,
-		/*basePowerCallback(pokemon, target, move) {
-			if (target.newlySwitched || this.queue.willMove(target)) {
+		basePowerCallback(pokemon, target, move) {
+			//Check how many targets are attacking
+			const chosenActions = this.queue.willMove(target);
+			const movesSelected = chosenActions?.choice === 'move' ? chosenActions.move : null;
+			if (((movesSelected.category === 'Status' && movesSelected.id !== 'mefirst') || target.volatiles['mustrecharge']).length > 1)
+			{
 				this.debug('Bad Omen damage boost');
+				this.add('-message', `${pokemon.name} sensed great danger!`);
 				return move.basePower * 2;
 			}
 			this.debug('Bad Omen NOT boosted');
 			return move.basePower;
-		},*/
+		},
 		category: "Physical",
 		name: "Bad Omen",
+		desc: "Sensing incoming danger, the user strikes its foes first with a slash attack. This move fails if no target is readying an attack.",
+		shortDesc: "Hits all foes. Power doubles if all targets are attacking.",
 		pp: 5,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
 		onTry(source, target) {
-			//const opponents = target.alliesAndSelf();
-
-			const action = this.queue.willMove(target); //opponents
+			const action = this.queue.willMove(target);
 			const move = action?.choice === 'move' ? action.move : null;
 			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
 				return false;
 			}
 		},
-		/*onModifyMove(move, pokemon) {
-			//Get data on target and its allies on the field for their first hits
-			move.allies = pokemon.alliesAndSelf().filter(ally => ally === pokemon || !ally.status);
-		},*/
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Dark",
