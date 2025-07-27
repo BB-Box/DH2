@@ -1235,14 +1235,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Electric",
 	},
 	//Orthworm
-	pummelling: {
+	pummeling: {
 		num: 3033,
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
-		name: "Pummelling",
+		name: "pummeling",
 		desc: "The user attacks desperately using its tendrils. The less HP the user has, the more times this move hits.",
-		shortDesc: "Hits more times with less HP on user (2 min - 5 max).",
+		shortDesc: "Hits more times with less HP on user (2-5 times).",
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},

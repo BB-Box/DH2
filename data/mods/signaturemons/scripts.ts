@@ -58,7 +58,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'dachsbun').learnset.breadflavor = ['9L1'];
 		this.modData('Learnsets', 'bellibolt').learnset.bellyspot = ['9L1'];
 		this.modData('Learnsets', 'toedscruel').learnset.tentacoil = ['9L1'];
-		this.modData('Learnsets', 'orthworm').learnset.pummelling = ['9L1'];
+		this.modData('Learnsets', 'orthworm').learnset.pummeling = ['9L1'];
 
 		//Remove reworked signature moves to Pokémon who got them in later generations (by move, then dex order)
 		//Hyper Fang (Raticate/Raticate-Alola)
