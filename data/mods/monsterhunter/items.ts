@@ -276,10 +276,22 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			},
 			gen: 9,
 	},
+	harudomerite: {
+			name: "Harudomerite",
+			shortDesc: "If held by Harudomerugu, this item allows it to Mega Evolve in battle.",
+			spritenum: 578,
+			megaStone: "Harudomerugu-Z",
+			megaEvolves: "Harudomerugu",
+			itemUser: ["Harudomerugu"],
+			onTakeItem(item, source) {
+				if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+				return true;
+			},
+			gen: 9,
+	},
 	crimsongem: {
 		name: "Crimson Gem",
 		shortDesc: "If held by Fatalis, this item triggers its Crimson Form in battle.",
-		spritenum: 141,
 		onSwitchIn(pokemon) {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Fatalis') {
 				this.queue.insertChoice({choice: 'runPrimal', pokemon: pokemon});
@@ -299,7 +311,6 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 		whitegem: {
 		name: "White Gem",
 		shortDesc: "If held by Fatalis, this item triggers its White Form in battle.",
-		spritenum: 307,
 		onSwitchIn(pokemon) {
 			if (pokemon.isActive && pokemon.baseSpecies.name === 'Fatalis') {
 				this.queue.insertChoice({choice: 'runPrimal', pokemon: pokemon});
@@ -361,18 +372,4 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 		},
 		desc: "Activates abilities with Protosynthesis or Quark Drive effects. Single use.",
 	},
-	valstraxite: {
-			name: "Valstraxite",
-			shortDesc: "If held by Valstrax, this item allows it to Mega Evolve in battle.",
-			spritenum: 605,
-			megaStone: "Crimson Glow Valstrax",
-			megaEvolves: "Valstrax",
-			itemUser: ["Valstrax"],
-			onTakeItem(item, source) {
-				if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-				return true;
-			},
-			num: 1012,
-			gen: 9,
-	},
-};
+}

@@ -42,4 +42,95 @@ export const Pokedex: { [k: string]: ModdedSpeciesData } = {
 		requiredItem: null,
 		requiredItems: ["Latiosite", "Soul Dew"],
 	},
+	// Arceus
+	arceus: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Rock Head"},
+		unreleasedHidden: true,
+	},
+	arceusbug: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Magic Guard"},
+		unreleasedHidden: true,
+	},
+	arceusdark: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Limber"},
+		unreleasedHidden: true,
+	},
+	arceusdragon: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Regenerator"},
+		unreleasedHidden: true,
+	},
+	arceuselectric: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Earth Eater"},
+		unreleasedHidden: true,
+	},
+	arceusfairy: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Opportunist"},
+		unreleasedHidden: true,
+	},
+	arceusfighting: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Scrappy"},
+		unreleasedHidden: true,
+	},
+	arceusfire: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Dry Skin"},
+		unreleasedHidden: true,
+	},
+	arceusflying: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Wind Power"},
+		unreleasedHidden: true,
+	},
+	arceusghost: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Super Luck"},
+		unreleasedHidden: true,
+	},
+	arceusgrass: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Cotton Down"},
+		unreleasedHidden: true,
+	},
+	arceusground: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Clear Body"},
+		unreleasedHidden: true,
+	},
+	arceusice: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Snow Warning"},
+		unreleasedHidden: true,
+	},
+	arceuspoison: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Levitate"},
+		unreleasedHidden: true,
+	},
+	arceuspsychic: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Intimidate"},
+		unreleasedHidden: true,
+	},
+	arceusrock: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Sand Stream"},
+		unreleasedHidden: true,
+	},
+	arceussteel: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Shield Dust"},
+		unreleasedHidden: true,
+	},
+	arceuswater: {
+		inherit: true,
+		abilities: {0: "Multitype", H: "Cloud Nine"},
+		unreleasedHidden: true,
+	},
 };
