@@ -1311,13 +1311,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
 		onTry(source, target) {
-			for (const foe in target) {
-				const action = this.queue.willMove(foe);
-				const move = action?.choice === 'move' ? action.move : null;
-				this.add('-message', `${move}`);
-				if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
-					return null;
-				}
+			const action = this.queue.willMove(target);
+			const move = action?.choice === 'move' ? action.move : null;
+			this.add('-message', `${target}`);
+			this.add('-message', `${move}`);
+			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
+				return null;
 			}
 			/*const action = this.queue.willMove(target);
 			const move = action?.choice === 'move' ? action.move : null;
