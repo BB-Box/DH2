@@ -1435,6 +1435,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "any",
 		type: "Flying",
 	},
+	//Cacturne
+	scarecrow: {
+		num: 3040,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Scarecrow",
+		desc: "A menacing stance that strikes fear into a foe, forcing it to flee the battlefield. This move goes first but works only on the first turn each time the user enters battle.",
+		shortDesc: "Target is forced out. Works only each first active turn.",
+		pp: 5,
+		priority: 3,
+		flags: {reflectable: 1, mirror: 1, bypasssub: 1, allyanim: 1, metronome: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Scary Face", target);
+		},
+		onTry(source) {
+			if (source.activeMoveActions > 1) {
+				this.hint("Scarecrow only works on your first turn out.");
+				return false;
+			}
+		},
+		forceSwitch: true,
+		secondary: null,
+		target: "normal",
+		type: "Dark",
+	},
 
 	//Signature moves remixed
 	//Raticate

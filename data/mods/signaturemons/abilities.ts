@@ -28,4 +28,66 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			}
 		},
 	},
+	//Inner Focus modified to be immune to Scarecrow
+	innerfocus: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'scarecrow') {
+				this.add('-immune', pokemon, '[from] ability: Inner Focus');
+				return null;
+			}
+		},
+	},
+	//Oblivious modified to be immune to Scarecrow
+	oblivious: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'attract' || move.id === 'captivate' || move.id === 'scarecrow' || move.id === 'taunt') {
+				this.add('-immune', pokemon, '[from] ability: Oblivious');
+				return null;
+			}
+		},
+	},
+	//Own Tempo modified to be immune to Scarecrow
+	owntempo: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'scarecrow') {
+				this.add('-immune', pokemon, '[from] ability: Own Tempo');
+				return null;
+			}
+		},
+	},
+	//Rattled modified to trigger itself and be immune to Scarecrow
+	rattled: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'scarecrow') {
+				this.add('-immune', pokemon, '[from] ability: Rattled');
+				this.boost({spe: 1});
+				return null;
+			}
+		},
+	},
+	//Scrappy modified to be immune to Scarecrow
+	scrappy: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'scarecrow') {
+				this.add('-immune', pokemon, '[from] ability: Scrappy');
+				return null;
+			}
+		},
+	},
+	//Steadfast modified to trigger itself and be immune to Scarecrow
+	steadfast: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'scarecrow') {
+				this.add('-immune', pokemon, '[from] ability: Steadfast');
+				this.boost({spe: 1});
+				return null;
+			}
+		},
+	},
 }
