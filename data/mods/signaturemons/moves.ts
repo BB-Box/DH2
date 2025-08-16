@@ -1369,7 +1369,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			{
 				move.flags['protect'] = false;
 				move.accuracy = true;
+				this.add('-message', `${source.name} knows all of ${target.name}'s moves! There is no escape!`);
 			}
+			else this.hint("Final Deduction is more powerful against targets that used all of their moves in battle.");
 		},
 		secondary: null,
 		target: "normal",
