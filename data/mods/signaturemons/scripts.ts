@@ -50,6 +50,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'noivern').learnset.killerwail = ['9L1'];
 
 		//Gen 7
+		this.modData('Learnsets', 'gumshoos').learnset.finaldeduction = ['9L1'];
 		this.modData('Learnsets', 'mimikyu').learnset.snuggle = ['9L1'];
 
 		//Gen 8

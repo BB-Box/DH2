@@ -1300,6 +1300,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Night Slash", target);
 		},
+		//Check every target's planned move to see if they attack. No damage (immune) if no damaging move is planned.
 		onTryImmunity(pokemon, source) {
 			const action = this.queue.willMove(pokemon);
 			const move = action?.choice === 'move' ? action.move : null;
@@ -1334,6 +1335,45 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
+	},
+	//Gumshoos
+	finaldeduction: {
+		num: 3037,
+		accuracy: 100,
+		basePower: 50,
+		category: "Physical",
+		name: "Final Deduction",
+		desc: "If the chosen target has used all of their moves during battle, this move becomes more powerful and cannot be blocked or miss.",
+		shortDesc: "If target used all of their moves: 150 BP, cannot block/miss.",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Crunch", target);
+		},
+		//BP Modifier
+		onBasePower(basePower, attacker, defender, move) {
+			for (const moveSlot of defender.moveSlots) {
+				if (!moveSlot.used) return this.chainModify(1);
+			}
+			return this.chainModify(3);
+		},
+		onModifyMove(move, source, target) {
+			let deduction = true; //Variable used to check if the move should get the new attributes
+			for (const moveSlot of target.moveSlots) {
+				if (!moveSlot.used) deduction = false;
+			}
+			//If the target has used all of their moves, modify Final Deduction
+			if (deduction)
+			{
+				move.flags['protect'] = false;
+				move.accuracy = true;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
 	},
 
 	//Signature moves remixed
