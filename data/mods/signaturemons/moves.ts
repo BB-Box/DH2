@@ -1284,7 +1284,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	//Absol (unfinished)
+	//Absol
 	badomen: {
 		num: 3035,
 		accuracy: 100,
@@ -1298,7 +1298,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Razor Wind", target);
+			this.add('-anim', source, "Night Slash", target);
 		},
 		onTryImmunity(pokemon, source) {
 			const action = this.queue.willMove(pokemon);
