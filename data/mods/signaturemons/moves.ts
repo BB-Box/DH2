@@ -1344,7 +1344,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Physical",
 		name: "Final Deduction",
 		desc: "If the chosen target has used all of their moves during battle, this move becomes more powerful and cannot be blocked or miss.",
-		shortDesc: "If target used all of their moves: 150 BP, cannot block/miss.",
+		shortDesc: "If target used all moves: 150 BP, cannot block/miss.",
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
@@ -1383,6 +1383,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
+	},
+	//Seviper
+	blackstab: {
+		num: 3038,
+		accuracy: 100,
+		basePower: 70,
+		category: "Physical",
+		name: "Black Stab",
+		desc: "The user stabs its target with its jet-black fangs or tail. This move goes first and may poison the target, but will fail if the target is not preparing an attack.",
+		shortDesc: "20% chance of Poison. Goes first. Hits attacking target.",
+		pp: 5,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Poison Tail", target);
+		},
+		onTry(source, target) {
+			const action = this.queue.willMove(target);
+			const move = action?.choice === 'move' ? action.move : null;
+			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
+				return false;
+			}
+		},
+		secondary: {
+			chance: 20,
+			status: 'psn',
+		},
+		target: "normal",
+		type: "Poison",
 	},
 
 	//Signature moves remixed
