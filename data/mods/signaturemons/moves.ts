@@ -1359,6 +1359,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 			return this.chainModify(3);
 		},
+		//Attributes modifications
 		onModifyMove(move, source, target) {
 			let deduction = true; //Variable used to check if the move should get the new attributes
 			for (const moveSlot of target.moveSlots) {
@@ -1369,9 +1370,15 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			{
 				move.flags['protect'] = false;
 				move.accuracy = true;
-				this.add('-message', `${source.name} knows all of ${target.name}'s moves! There is no escape!`);
 			}
-			else this.hint("Final Deduction is more powerful against targets that used all of their moves in battle.");
+		},
+		//This is for flavor text
+		onHit(target, source, move) {
+			let deduction = true;
+			for (const moveSlot of target.moveSlots) {
+				if (!moveSlot.used) deduction = false;
+			}
+			if (deduction) this.add('-message', `${source.name} knows all of ${target.name}'s moves! There is no escape!`);
 		},
 		secondary: null,
 		target: "normal",
