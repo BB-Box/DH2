@@ -1,5 +1,5 @@
 export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTable = {
-	//Modified so that Procrastinate can be used on natural Truant turns
+	//Truant modified so that Procrastinate can be used on natural Truant turns
 	truant: {
 		inherit: true,
 		onBeforeMove(pokemon, target, move) {
@@ -15,6 +15,17 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			}
 			//No turn skip - Add volatile if not present
 			pokemon.addVolatile('truant');
+		},
+	},
+	//Damp modified to include new explosive moves
+	damp: {
+		inherit: true,
+		onAnyTryMove(target, source, effect) {
+			if (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct', 'electroblast'].includes(effect.id)) {
+				this.attrLastMove('[still]');
+				this.add('cant', this.effectState.target, 'ability: Damp', effect, '[of] ' + target);
+				return false;
+			}
 		},
 	},
 }
