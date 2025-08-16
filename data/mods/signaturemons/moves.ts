@@ -1311,6 +1311,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Dark",
 	},
+	//Dragonite
+	dracoforce: {
+		num: 3036,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Dracoforce",
+		desc: "The user strikes its target with enough power to remove all of the target's stat boosts.",
+		shortDesc: "Removes target's stat boosts.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fire Punch", target);
+		},
+		onHit(target) {
+			target.clearBoosts();
+			this.add('-clearboost', target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dragon",
+	},
 
 	//Signature moves remixed
 	//Raticate

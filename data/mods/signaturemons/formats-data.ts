@@ -901,7 +901,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	dragonite: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DOU",
 	},
 	mewtwo: {

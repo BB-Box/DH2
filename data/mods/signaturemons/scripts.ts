@@ -15,6 +15,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'tentacruel').learnset.tentacoil = ['9L1'];
 		this.modData('Learnsets', 'electrode').learnset.electroblast = ['9L1'];
 		this.modData('Learnsets', 'snorlax').learnset.bellyflop = ['9L1'];
+		this.modData('Learnsets', 'dragonite').learnset.dracoforce = ['9L1'];
 
 		//Gen 2
 		this.modData('Learnsets', 'lanturn').learnset.stunlight = ['9L1'];
