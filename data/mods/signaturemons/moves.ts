@@ -1288,9 +1288,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	badomen: {
 		num: 3035,
 		accuracy: 100,
-		basePower: 75,
+		basePower: 85,
 		basePowerCallback(pokemon, target, move) {
 			//Check how many targets are attacking
+			//Right now it only checks the leftmost target for moves
 			//This is gonna take a while...
 
 			/*if (dmgMoves > 1)
@@ -1310,17 +1311,19 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
 		onTry(source, target) {
-			const dmgMoves = 0;
-			const action = this.queue.willMove(target);
+			for (const foe in target) {
+				const action = this.queue.willMove(foe);
+				const move = action?.choice === 'move' ? action.move : null;
+				this.add('-message', `${move}`);
+				if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
+					return null;
+				}
+			}
+			/*const action = this.queue.willMove(target);
 			const move = action?.choice === 'move' ? action.move : null;
 			this.add('-message', `${move}`);
 			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
 				return false;
-			}
-		},
-		onModifyMove(move, source, target) {
-			/*for (const opponent in move.target) {
-				if (opponent.)
 			}*/
 		},
 		secondary: null,
