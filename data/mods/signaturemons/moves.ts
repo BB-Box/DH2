@@ -1289,20 +1289,20 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		num: 3035,
 		accuracy: 100,
 		basePower: 85,
-		basePowerCallback(pokemon, target, move) {
+		/*basePowerCallback(pokemon, target, move) {
 			//Check how many targets are attacking
 			//Right now it only checks the leftmost target for moves
 			//This is gonna take a while...
 
-			/*if (dmgMoves > 1)
+			if (dmgMoves > 1)
 			{
 				this.debug('Bad Omen damage boost');
 				this.add('-message', `${pokemon.name} sensed great danger!`);
 				return move.basePower * 2;
-			}*/
+			}
 			this.debug('Bad Omen NOT boosted');
 			return move.basePower;
-		},
+		},*/
 		category: "Physical",
 		name: "Bad Omen",
 		desc: "Sensing incoming danger, the user strikes its foes first with a slash attack. This move fails if no target is readying an attack.",
@@ -1310,20 +1310,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 5,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
-		onTry(source, target) {
-			const action = this.queue.willMove(target);
+		/*onTry(source, target) {
+			/*const action = this.queue.willMove(target);
 			const move = action?.choice === 'move' ? action.move : null;
 			this.add('-message', `${target}`);
 			this.add('-message', `${move}`);
 			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
 				return null;
 			}
-			/*const action = this.queue.willMove(target);
+			const action = this.queue.willMove(target);
 			const move = action?.choice === 'move' ? action.move : null;
 			this.add('-message', `${move}`);
 			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
 				return false;
-			}*/
+			}
+		},*/
+		onTryImmunity(pokemon, source) {
+			const action = this.queue.willMove(pokemon);
+			const move = action?.choice === 'move' ? action.move : null;
+			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || pokemon.volatiles['mustrecharge']) {
+				return false;
+			}
+			//return (pokemon.gender === 'M' && source.gender === 'F') || (pokemon.gender === 'F' && source.gender === 'M');
 		},
 		secondary: null,
 		target: "allAdjacentFoes",
