@@ -1462,7 +1462,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	//Relicanth
+	//Relicanth (Not working yet)
 	stillwater: {
 		num: 3041,
 		accuracy: true,
@@ -1481,7 +1481,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		sideCondition: 'stillwater',
 		condition: {
 			duration: 5,
-			//Stat boosts nullification (Taken from Unaware)
+			//Stat boosts nullification (Taken from Unaware - Unsure on how to make it work)
 			onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
 				if (unawareUser === pokemon) return;
@@ -1499,6 +1499,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					boosts['accuracy'] = 0;
 				}
 			},
+			//This part works but there is no animation for it
 			onSideStart(side) {
 				this.add('-sidestart', side, 'move: Still Water');
 			},
