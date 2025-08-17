@@ -217,10 +217,10 @@ export const Abilities: { [abilityid: string]: ModdedAbilityData; } = {
 					target.side.removeSlotCondition(target, 'hospitality');
 				}
 			},
-			onResidual(pokemon) {
-				if (pokemon.volatiles['healoneturn']) {
-					this.heal(pokemon.baseMaxhp / 16);
-					pokemon.removeVolatile('healoneturn');
+			onResidual(target) {
+				if (target.volatiles['healoneturn']) {
+					this.heal(target.baseMaxhp / 16);
+					target.removeVolatile('healoneturn');
 				}
 			},
 		},
@@ -752,20 +752,18 @@ export const Abilities: { [abilityid: string]: ModdedAbilityData; } = {
 	unconcerned: {
 		name: "Unconcerned",
 		onAnyModifyBoost(boosts, pokemon) {
-			const unconcernedUser = this.effectState.target;
-			if (unconcernedUser === this.activePokemon) {
+			const unconcerned = this.effectState.target;
+			if (target === pokemon) return;
+			if (pokemon === this.activePokemon && unconcerned === this.activeTarget) {
+				boosts['def'] = 0;
+				boosts['spd'] = 0;
+				boosts['evasion'] = 0;
+			}
+			if (unconcerned === this.activePokemon && pokemon === this.activeTarget) {
 				boosts['atk'] = 0;
 				boosts['def'] = 0;
 				boosts['spa'] = 0;
 				boosts['spd'] = 0;
-				//boosts['spe'] = 0;
-				boosts['accuracy'] = 0;
-				boosts['evasion'] = 0;
-			}
-			if (pokemon === this.activePokemon && unconcernedUser === this.activeTarget) {
-				boosts['atk'] = 0;
-				boosts['def'] = 0;
-				boosts['spa'] = 0;
 				boosts['accuracy'] = 0;
 			}
 		},
@@ -992,14 +990,14 @@ export const Abilities: { [abilityid: string]: ModdedAbilityData; } = {
 	gulpmissile: {
 		inherit: true,
 		onSourceModifyDamage(damage, source, target, move) {
-			const currentForme = source.species.id;
+			const currentForme = target.species.id;
 			if (currentForme === 'cramorantgulping' || currentForme === 'cramorantgorging') {
 				return this.chainModify(0.67);
 			}
 		},
 		onDamagingHit(damage, target, source, move) {
 			if (!source.hp || !source.isActive || target.isSemiInvulnerable()) return;
-			if (['cramorantgulping', 'cramorantgorging'].includes(target.species.id)) {
+			if ('cramorantgulping' || 'cramorantgorging' === target.species.id) {
 				this.damage(source.baseMaxhp / 4, source, target);
 				if (target.species.id === 'cramorantgulping') {
 					this.boost({def: -1, spd: -1}, source, target, null, true);
@@ -1009,15 +1007,14 @@ export const Abilities: { [abilityid: string]: ModdedAbilityData; } = {
 				target.formeChange('cramorant', move);
 			}
 		},
-		// The Dive part of this mechanic is implemented in Dive's `onTryMove` in moves.ts
 		onSourceTryPrimaryHit(target, source, effect) {
 			if (effect?.effectType === 'Move' && (effect?.type === 'Water' || effect?.type === 'Flying') && source.hasAbility('gulpmissile') && source.species.name === 'Cramorant') {
+				source.heal(source.baseMaxhp / 8);
 				const forme = source.hp <= source.maxhp / 2 ? 'cramorantgorging' : 'cramorantgulping';
 				source.formeChange(forme, effect);
-				this.heal(source.baseMaxhp / 8);
 			}
 		},
-		shortDesc: "Cramorant: 1/3 less damage in Gulping/Gourging, +1/8 max HP if uses a Water-/Flying-type move. Arrokuda = -1 Def/-SpD, Pikachu = -2 Spe.",
+		shortDesc: "Cramorant: 1/3 less damage in Gulping/Gourging, +1/8 max HP if uses a Water-/Flying-type move. >1/2 hp = -1 Def/-SpD, <=1/2hp = -2 Spe.",
 	},
 	northernmist: {
 		onStart(pokemon) {
@@ -1164,17 +1161,17 @@ export const Abilities: { [abilityid: string]: ModdedAbilityData; } = {
 	},
 	savage: {
 		shortDesc: "The Pokémon’s Attack or Special Attack copies from the higher stat (held items does not apply for which is higher). Stat stages and held items apply as normal.",
-		onModifyAtkPriority: 5,
-		onModifyAtk(atk, pokemon) {
-			const currentatk = pokemon.storedStats.atk;
-			const currentspa = pokemon.storedStats.spa;
-			if (currentspa > currentatk) return currentspa;
-		},
-		onModifySpAPriority: 5,
-		onModifySpA(spa, pokemon) {
-			const currentatk = pokemon.storedStats.atk;
-			const currentspa = pokemon.storedStats.spa;
-			if (currentatk > currentspa) return currentatk;
+		onModifyMove(move, attacker) {
+			const currentatk = attacker.storedStats.atk;
+			const currentspa = attacker.storedStats.spa;
+			if (move.category === 'Special' || move.category === 'Physical') {
+				if (currentspa > currentatk) {
+					move.overrideOffensiveStat = 'spa';
+				}
+				else if (currentatk > currentspa) {
+					move.overrideOffensiveStat = 'atk';
+				}
+			}
 		},
 		flags: {},
 		name: "Savage",
