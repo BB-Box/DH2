@@ -1764,7 +1764,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	relicanth: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	luvdisc: {
 		tier: "Sign",
