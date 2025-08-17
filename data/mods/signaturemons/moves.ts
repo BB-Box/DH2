@@ -1481,10 +1481,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		sideCondition: 'stillwater',
 		condition: {
 			duration: 5,
-			// this is a side condition
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Still Water');
-			},
 			//Stat boosts nullification (Taken from Unaware)
 			onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
@@ -1502,6 +1498,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					boosts['spa'] = 0;
 					boosts['accuracy'] = 0;
 				}
+			},
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Still Water');
 			},
 			onSideResidualOrder: 26,
 			onSideResidualSubOrder: 6,
