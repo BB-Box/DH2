@@ -1344,7 +1344,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Physical",
 		name: "Final Deduction",
 		desc: "If the chosen target has used all of their moves during battle, this move becomes more powerful and cannot be blocked or miss.",
-		shortDesc: "If target used all of their moves: 150 BP, cannot block/miss.",
+		shortDesc: "If target used all moves: 150 BP, cannot block/miss.",
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
@@ -1359,6 +1359,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 			return this.chainModify(3);
 		},
+		//Attributes modifications
 		onModifyMove(move, source, target) {
 			let deduction = true; //Variable used to check if the move should get the new attributes
 			for (const moveSlot of target.moveSlots) {
@@ -1369,13 +1370,97 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			{
 				move.flags['protect'] = false;
 				move.accuracy = true;
-				this.add('-message', `${source.name} knows all of ${target.name}'s moves! There is no escape!`);
 			}
-			else this.hint("Final Deduction is more powerful against targets that used all of their moves in battle.");
+		},
+		//This is for flavor text
+		onHit(target, source, move) {
+			let deduction = true;
+			for (const moveSlot of target.moveSlots) {
+				if (!moveSlot.used) deduction = false;
+			}
+			if (deduction) this.add('-message', `${source.name} knows all of ${target.name}'s moves! There is no escape!`);
 		},
 		secondary: null,
 		target: "normal",
 		type: "Normal",
+	},
+	//Seviper
+	blackstab: {
+		num: 3038,
+		accuracy: 100,
+		basePower: 70,
+		category: "Physical",
+		name: "Black Stab",
+		desc: "The user stabs its target with its jet-black fangs or tail. This move goes first and may poison the target, but will fail if the target is not preparing an attack.",
+		shortDesc: "20% chance of Poison. Goes first. Hits attacking target.",
+		pp: 5,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Poison Tail", target);
+		},
+		onTry(source, target) {
+			const action = this.queue.willMove(target);
+			const move = action?.choice === 'move' ? action.move : null;
+			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
+				return false;
+			}
+		},
+		secondary: {
+			chance: 20,
+			status: 'psn',
+		},
+		target: "normal",
+		type: "Poison",
+	},
+	//Talonflame
+	airstrike: {
+		num: 3039,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Air Strike",
+		desc: "The user delivers an aerial kick using its talons. If the target is in the air, it will be knocked down to the ground.",
+		shortDesc: "Makes target grounded.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, nonsky: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Aerial Ace", target);
+		},
+		volatileStatus: 'smackdown',
+		secondary: null,
+		target: "any",
+		type: "Flying",
+	},
+	//Cacturne (Done)
+	scarecrow: {
+		num: 3040,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Scarecrow",
+		desc: "A menacing stance that strikes fear into a foe, forcing it to flee the battlefield. This move goes first but works only on the first turn each time the user enters battle.",
+		shortDesc: "Target is forced out. Works only each first active turn.",
+		pp: 5,
+		priority: 3,
+		flags: {reflectable: 1, mirror: 1, bypasssub: 1, allyanim: 1, metronome: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Scary Face", target);
+		},
+		onTry(source) {
+			if (source.activeMoveActions > 1) {
+				this.hint("Scarecrow only works on your first turn out.");
+				return false;
+			}
+		},
+		forceSwitch: true,
+		secondary: null,
+		target: "normal",
+		type: "Dark",
 	},
 
 	//Signature moves remixed
@@ -1478,6 +1563,99 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					return true;
 				}
 				return accuracy;
+			},
+		},
+	},
+	//Moves that grants aerial invulnerability (Fly, Bounce, Sky Drop) have specific checks that need to be defined within the move itself
+	//For 'Air Strike'
+	bounce: {
+		inherit: true,
+		condition: {
+			duration: 2,
+			onInvulnerability(target, source, move) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'airstrike'].includes(move.id)) {
+					return;
+				}
+				return false;
+			},
+			onSourceBasePower(basePower, target, source, move) {
+				if (move.id === 'gust' || move.id === 'twister') {
+					return this.chainModify(2);
+				}
+			},
+		},
+	},
+	fly: {
+		inherit: true,
+		condition: {
+			duration: 2,
+			onInvulnerability(target, source, move) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'airstrike'].includes(move.id)) {
+					return;
+				}
+				return false;
+			},
+			onSourceBasePower(basePower, target, source, move) {
+				if (move.id === 'gust' || move.id === 'twister') {
+					return this.chainModify(2);
+				}
+			},
+		},
+	},
+	skydrop: {
+		inherit: true,
+		condition: {
+			duration: 2,
+			onAnyDragOut(pokemon) {
+				if (pokemon === this.effectState.target || pokemon === this.effectState.source) return false;
+			},
+			onFoeTrapPokemonPriority: -15,
+			onFoeTrapPokemon(defender) {
+				if (defender !== this.effectState.source) return;
+				defender.trapped = true;
+			},
+			onFoeBeforeMovePriority: 12,
+			onFoeBeforeMove(attacker, defender, move) {
+				if (attacker === this.effectState.source) {
+					attacker.activeMoveActions--;
+					this.debug('Sky drop nullifying.');
+					return null;
+				}
+			},
+			onRedirectTargetPriority: 99,
+			onRedirectTarget(target, source, source2) {
+				if (source !== this.effectState.target) return;
+				if (this.effectState.source.fainted) return;
+				return this.effectState.source;
+			},
+			onAnyInvulnerability(target, source, move) {
+				if (target !== this.effectState.target && target !== this.effectState.source) {
+					return;
+				}
+				if (source === this.effectState.target && target === this.effectState.source) {
+					return;
+				}
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'airstrike'].includes(move.id)) {
+					return;
+				}
+				return false;
+			},
+			onAnyBasePower(basePower, target, source, move) {
+				if (target !== this.effectState.target && target !== this.effectState.source) {
+					return;
+				}
+				if (source === this.effectState.target && target === this.effectState.source) {
+					return;
+				}
+				if (move.id === 'gust' || move.id === 'twister') {
+					this.debug('BP doubled on midair target');
+					return this.chainModify(2);
+				}
+			},
+			onFaint(target) {
+				if (target.volatiles['skydrop'] && target.volatiles['twoturnmove'].source) {
+					this.add('-end', target.volatiles['twoturnmove'].source, 'Sky Drop', '[interrupt]');
+				}
 			},
 		},
 	},

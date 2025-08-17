@@ -25,7 +25,9 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 3
 		this.modData('Learnsets', 'slaking').learnset.procrastinate = ['9L1'];
 		this.modData('Learnsets', 'spinda').learnset.spintowin = ['9L1'];
+		this.modData('Learnsets', 'cacturne').learnset.scarecrow = ['9L1'];
 		this.modData('Learnsets', 'zangoose').learnset.whiteclaw = ['9L1'];
+		this.modData('Learnsets', 'seviper').learnset.blackstab = ['9L1'];
 		this.modData('Learnsets', 'absol').learnset.badomen = ['9L1'];
 		this.modData('Learnsets', 'luvdisc').learnset.loveadvice = ['9L1'];
 
@@ -46,6 +48,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'hydreigon').learnset.triplethreat = ['9L1'];
 
 		//Gen 6
+		this.modData('Learnsets', 'talonflame').learnset.airstrike = ['9L1'];
 		this.modData('Learnsets', 'clawitzer').learnset.waterbombshell = ['9L1'];
 		this.modData('Learnsets', 'noivern').learnset.killerwail = ['9L1'];
 

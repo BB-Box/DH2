@@ -1616,7 +1616,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	cacturne: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	swablu: {
@@ -1634,7 +1634,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	seviper: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	lunatone: {
@@ -2832,7 +2832,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	talonflame: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUU",
 	},
 	scatterbug: {
