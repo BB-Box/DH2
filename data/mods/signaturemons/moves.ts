@@ -1488,12 +1488,16 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Stat boosts nullification (Taken from Unaware ability - Unsure on how to make it work)
 			onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
+				this.add('-message', `${unawareUser} is the unaware.`);
+				this.add('-message', `${pokemon} is the pokemon.`);
+				this.add('-message', `${this.activePokemon} is the active pokemon.`);
 				if (unawareUser === pokemon) return;
 				//When ally attacks - ignores foe's boosts to Def, SpD & Evasion
 				if (unawareUser === this.activePokemon && pokemon === this.activeTarget) {
 					boosts['def'] = 0;
 					boosts['spd'] = 0;
 					boosts['evasion'] = 0;
+					this.add('-message', `${unawareUser} ignores defensive.`);
 				}
 				//When ally is getting hit - ignores foe's boosts to Atk, Def, SpA & Accuracy
 				if (pokemon === this.activePokemon && unawareUser === this.activeTarget) {
@@ -1501,6 +1505,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					boosts['def'] = 0; //Body Press
 					boosts['spa'] = 0;
 					boosts['accuracy'] = 0;
+					this.add('-message', `${unawareUser} ignores offensive.`);
 				}
 			},
 			onSideResidualOrder: 26,
