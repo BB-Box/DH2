@@ -1373,12 +1373,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 		},
 		//This is for flavor text
-		onHit(target, source, move) {
+		onBeforeMove(pokemon, target, move) {
 			let deduction = true;
 			for (const moveSlot of target.moveSlots) {
 				if (!moveSlot.used) deduction = false;
 			}
-			if (deduction) this.add('-message', `${source.name} knows all of ${target.name}'s moves! There is no escape!`);
+			if (deduction) this.add('-message', `${pokemon.name} knows all of ${target.name}'s moves! There is no escape!`);
 		},
 		secondary: null,
 		target: "normal",
@@ -1481,27 +1481,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		sideCondition: 'stillwater',
 		condition: {
 			duration: 5,
-			//Stat boosts nullification (Taken from Unaware - Unsure on how to make it work)
+			//This part works but there is no animation for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Still Water');
+			},
+			//Stat boosts nullification (Taken from Unaware ability - Unsure on how to make it work)
 			onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
 				if (unawareUser === pokemon) return;
-				//When ally attacks
+				//When ally attacks - ignores foe's boosts to Def, SpD & Evasion
 				if (unawareUser === this.activePokemon && pokemon === this.activeTarget) {
 					boosts['def'] = 0;
 					boosts['spd'] = 0;
 					boosts['evasion'] = 0;
 				}
-				//When ally is getting hit
+				//When ally is getting hit - ignores foe's boosts to Atk, Def, SpA & Accuracy
 				if (pokemon === this.activePokemon && unawareUser === this.activeTarget) {
 					boosts['atk'] = 0;
 					boosts['def'] = 0; //Body Press
 					boosts['spa'] = 0;
 					boosts['accuracy'] = 0;
 				}
-			},
-			//This part works but there is no animation for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Still Water');
 			},
 			onSideResidualOrder: 26,
 			onSideResidualSubOrder: 6,
