@@ -1486,7 +1486,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				this.add('-sidestart', side, 'move: Still Water');
 			},
 			//Stat boosts nullification (Taken from Unaware ability - Unsure on how to make it work)
-			onAnyModifyBoost(boosts, pokemon) {
+
+			//onAnyModifyBoost?: (this: Battle, boosts: SparseBoostsTable, pokemon: Pokemon) => SparseBoostsTable | void;
+			/*onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
 				this.add('-message', `${unawareUser} is the unaware.`);
 				this.add('-message', `${pokemon} is the pokemon.`);
@@ -1506,6 +1508,18 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					boosts['spa'] = 0;
 					boosts['accuracy'] = 0;
 					this.add('-message', `${unawareUser} ignores offensive.`);
+				}
+			},*/
+
+			//On a move basis
+			onModifyMove(move, source, target) {
+				//When ally is getting hit - ignores foe's boosts to Atk, Def, SpA & Accuracy
+				if (target !== source && this.effectState.target.hasAlly(target)) {
+					if (!target.getMoveHitData(move).crit && !move.infiltrates) {
+						move.ignoreOffensive = true;
+						move.ignoreAccuracy = true;
+						this.add('-message', `${target} ignores defensive.`);
+					}
 				}
 			},
 			onSideResidualOrder: 26,
