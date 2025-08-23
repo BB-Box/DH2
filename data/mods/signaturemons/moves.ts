@@ -1462,7 +1462,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	//Relicanth (Not working yet)
+	//Relicanth
 	stillwater: {
 		num: 3041,
 		accuracy: true,
@@ -1481,87 +1481,43 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		sideCondition: 'stillwater',
 		condition: {
 			duration: 5,
-			//Stat boosts nullification (Taken from Unaware ability - Unsure on how to make it work)
-
-			//onAnyModifyBoost?: (this: Battle, boosts: SparseBoostsTable, pokemon: Pokemon) => SparseBoostsTable | void;
-			//This checks every boost before every move
-			/*onAnyModifyBoost(boosts, pokemon) {
-				const unawareUser = this.effectState.target;
-				if (unawareUser === pokemon) return;
-				//When ally attacks - ignores foe's boosts to Def, SpD & Evasion
-				if (unawareUser === this.activePokemon && pokemon === this.activeTarget) {
-					boosts['def'] = 0;
-					boosts['spd'] = 0;
-					boosts['evasion'] = 0;
-					this.add('-message', `${unawareUser} ignores defensive.`);
-				}
-				//When ally is getting hit - ignores foe's boosts to Atk, Def, SpA & Accuracy
-				if (pokemon === this.activePokemon && unawareUser === this.activeTarget) {
-					boosts['atk'] = 0;
-					boosts['def'] = 0; //Body Press
-					boosts['spa'] = 0;
-					boosts['accuracy'] = 0;
-					this.add('-message', `${unawareUser} ignores offensive.`);
-				}
-			},*/
-
-			//On a move basis
-			/*onModifyMove(move, source, target) {
-				//When ally is getting hit - ignores foe's boosts to Atk, Def, SpA & Accuracy
-				if (target !== source && this.effectState.target.hasAlly(target)) {
-					if (!target.getMoveHitData(move).crit && !move.infiltrates) {
-						move.ignoreOffensive = true;
-						move.ignoreAccuracy = true;
-						this.add('-message', `${target} ignores defensive.`);
-					}
-				}
-			},*/
+			//Stat boosts nullification
+			//onAnyModifyBoost?: (this: Battle, boosts: SparseBoostsTable, pokemon: Pokemon) => SparseBoostsTable | void; //From Unaware ability
 			onModifyBoost(boosts, pokemon) {
 				const targetCheck = this.activeTarget;
 				const activeCheck = this.activePokemon;
 				if (targetCheck && activeCheck)
 				{
-					//this.add('-message', `The unaware is: ${pokemon}.`);
-					//this.add('-message', `Target ${targetCheck} is an ally: ${targetCheck.isAlly(pokemon)}.`);
-					//this.add('-message', `Active ${activeCheck} is an ally: ${activeCheck.isAlly(pokemon)}.`);
 					//When pokemon is getting hit - ignores boosts to Def, SpD & Evasion
 					if (targetCheck === pokemon) {
 						if (boosts.def && boosts.def > 0) {
-							this.add('-message', `def boosts nullified.`);
 							boosts.def = 0;
 						}
 						if (boosts.spd && boosts.spd > 0) {
-							this.add('-message', `def boosts nullified.`);
 							boosts.spd = 0;
 						}
 						if (boosts.evasion && boosts.evasion > 0) {
-							this.add('-message', `def boosts nullified.`);
 							boosts.evasion = 0;
 						}
 					}
-
-					//When pokemon attacks - ignores boosts to Atk, Def, SpA & Accuracy
-					if (activeCheck === pokemon) {
+					//When pokemon attacks - ignores boosts to Atk, Def, SpA & Accuracy, unless the move is affected by Infiltrator
+					if (activeCheck === pokemon && !this.ActiveMove.infiltrates) {
 						if (boosts.atk && boosts.atk > 0) {
-							this.add('-message', `atk boosts nullified.`);
 							boosts.atk = 0;
 						}
 						if (boosts.def && boosts.def > 0) { //Body Press
-							this.add('-message', `def boosts nullified.`);
 							boosts.def = 0;
 						}
 						if (boosts.spa && boosts.spa > 0) {
-							this.add('-message', `spa boosts nullified.`);
 							boosts.spa = 0;
 						}
 						if (boosts.accuracy && boosts.accuracy > 0) {
-							this.add('-message', `accuracy boosts nullified.`);
 							boosts.accuracy = 0;
 						}
 					}
 				}
 			},
-			//This part works but there is no animation for it
+			//This part works but there is no animation or UI text for it
 			onSideStart(side) {
 				this.add('-sidestart', side, 'move: Still Water');
 			},
