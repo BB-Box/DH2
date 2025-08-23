@@ -1523,11 +1523,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				const activeCheck = this.activePokemon;
 				if (targetCheck && activeCheck)
 				{
-					this.add('-message', `Target is an ally: ${targetCheck.isAlly(pokemon)}.`);
-					this.add('-message', `Active is an ally: ${activeCheck.isAlly(pokemon)}.`);
+					this.add('-message', `The unaware is: ${pokemon}.`);
+					this.add('-message', `Target ${targetCheck} is an ally: ${targetCheck.isAlly(pokemon)}.`);
+					this.add('-message', `Active ${activeCheck} is an ally: ${activeCheck.isAlly(pokemon)}.`);
 					//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
 					if (this.activePokemon === pokemon /*&& !this.activeTarget.isAlly(pokemon)*/) {
-						this.debug('defense boosts nullified.');
+						this.add('-message', `Defensive boosts nullified.`);
 						if (boosts.def && boosts.def > 0) {
 							boosts.def = 0;
 						}
@@ -1541,7 +1542,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 
 					//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
 					if (this.activeTarget === pokemon /*&& !this.activePokemon.isAlly(pokemon)*/) {
-						this.debug('offense boosts nullified.');
+						this.add('-message', `Offensive boosts nullified.`);
 						if (boosts.atk && boosts.atk > 0) {
 							boosts.atk = 0;
 						}
