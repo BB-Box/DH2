@@ -1517,42 +1517,46 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 			},*/
 			onModifyBoost(boosts, pokemon) {
-				//this.add('-message', `${pokemon} is the pokemon.`);
 				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
 				const targetCheck = this.activeTarget;
 				const activeCheck = this.activePokemon;
 				if (targetCheck && activeCheck)
 				{
-					this.add('-message', `The unaware is: ${pokemon}.`);
+					//this.add('-message', `The unaware is: ${pokemon}.`);
 					this.add('-message', `Target ${targetCheck} is an ally: ${targetCheck.isAlly(pokemon)}.`);
 					this.add('-message', `Active ${activeCheck} is an ally: ${activeCheck.isAlly(pokemon)}.`);
 					//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
-					if (this.activePokemon === pokemon /*&& !this.activeTarget.isAlly(pokemon)*/) {
-						this.add('-message', `Defensive boosts nullified.`);
+					if (activeCheck === pokemon /*&& !targetCheck.isAlly(pokemon)*/) {
 						if (boosts.def && boosts.def > 0) {
+							this.add('-message', `def boosts nullified.`);
 							boosts.def = 0;
 						}
 						if (boosts.spd && boosts.spd > 0) {
+							this.add('-message', `def boosts nullified.`);
 							boosts.spd = 0;
 						}
 						if (boosts.evasion && boosts.evasion > 0) {
+							this.add('-message', `def boosts nullified.`);
 							boosts.evasion = 0;
 						}
 					}
 
 					//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
-					if (this.activeTarget === pokemon /*&& !this.activePokemon.isAlly(pokemon)*/) {
-						this.add('-message', `Offensive boosts nullified.`);
+					if (targetCheck === pokemon /*&& !activeCheck.isAlly(pokemon)*/) {
 						if (boosts.atk && boosts.atk > 0) {
+							this.add('-message', `atk boosts nullified.`);
 							boosts.atk = 0;
 						}
 						if (boosts.def && boosts.def > 0) { //Body Press
+							this.add('-message', `def boosts nullified.`);
 							boosts.def = 0;
 						}
 						if (boosts.spa && boosts.spa > 0) {
+							this.add('-message', `spa boosts nullified.`);
 							boosts.spa = 0;
 						}
 						if (boosts.accuracy && boosts.accuracy > 0) {
+							this.add('-message', `accuracy boosts nullified.`);
 							boosts.accuracy = 0;
 						}
 					}
