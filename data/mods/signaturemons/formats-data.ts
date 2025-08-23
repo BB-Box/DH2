@@ -3568,7 +3568,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	thievul: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	gossifleur: {
 		tier: "NoSign",

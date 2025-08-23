@@ -1531,6 +1531,50 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "foeSide",
 		type: "Water",
 	},
+	//Thievul
+	callingcard: {
+		num: 3042,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Calling Card",
+		desc: "The user marks its target with a mysterious scented card. During the next turn, any move hitting the target will result in a critical hit.",
+		shortDesc: "Guarantees critical hits on target next turn.",
+		pp: 10,
+		priority: 0,
+		flags: {mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Trump Card", target);
+		},
+		onTryHit(target, source) {
+			if (source.volatiles['callingcard']) return false;
+		},
+		onHit(target, source) {
+			source.addVolatile('callingcard', target);
+			this.add('-activate', source, 'move: Calling Card', '[of] ' + target);
+		},
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 2,
+			onTryHit(target, source, move) {
+				//This unsures that the guarenteed crit does not proc on the same turn as the calling card proc
+				if (target.volatiles['callingcard'].duration === 1) {
+					move.critRatio = 5;
+				}
+			},
+			onStart(target, source) {
+				this.add('-start', target, 'move: Calling Card', '[of] ' + source);
+			},
+			onResidualOrder: 23,
+			onEnd(target) {
+				this.add('-end', target, 'move: Calling Card', '[silent]');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dark",
+	},
 
 	//Signature moves remixed
 	//Raticate
