@@ -1470,7 +1470,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Status",
 		name: "Still Water",
 		desc: "The user creates a slow water current with special calming effects. This move nullifies the opposing team's stat boosts for five turns.",
-		shortDesc: "Ally team ignores opposing stat boosts for 5 turns.",
+		shortDesc: "Stat boosts for opposing side are ignored for 5 turns.",
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, metronome: 1},
@@ -1517,16 +1517,15 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 			},*/
 			onModifyBoost(boosts, pokemon) {
-				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
 				const targetCheck = this.activeTarget;
 				const activeCheck = this.activePokemon;
 				if (targetCheck && activeCheck)
 				{
 					//this.add('-message', `The unaware is: ${pokemon}.`);
-					this.add('-message', `Target ${targetCheck} is an ally: ${targetCheck.isAlly(pokemon)}.`);
-					this.add('-message', `Active ${activeCheck} is an ally: ${activeCheck.isAlly(pokemon)}.`);
-					//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
-					if (activeCheck === pokemon /*&& !targetCheck.isAlly(pokemon)*/) {
+					//this.add('-message', `Target ${targetCheck} is an ally: ${targetCheck.isAlly(pokemon)}.`);
+					//this.add('-message', `Active ${activeCheck} is an ally: ${activeCheck.isAlly(pokemon)}.`);
+					//When pokemon is getting hit - ignores boosts to Def, SpD & Evasion
+					if (targetCheck === pokemon) {
 						if (boosts.def && boosts.def > 0) {
 							this.add('-message', `def boosts nullified.`);
 							boosts.def = 0;
@@ -1541,8 +1540,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						}
 					}
 
-					//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
-					if (targetCheck === pokemon /*&& !activeCheck.isAlly(pokemon)*/) {
+					//When pokemon attacks - ignores boosts to Atk, Def, SpA & Accuracy
+					if (activeCheck === pokemon) {
 						if (boosts.atk && boosts.atk > 0) {
 							this.add('-message', `atk boosts nullified.`);
 							boosts.atk = 0;
@@ -1573,7 +1572,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			},
 		},
 		secondary: null,
-		target: "allySide",
+		target: "foeSide",
 		type: "Water",
 	},
 
