@@ -1520,10 +1520,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 			},*/
 			onModifyBoost(boosts, pokemon) {
-				this.add('-message', `${pokemon} is the pokemon.`);
-				this.add('-message', `${this.activePokemon} is the active pokemon.`);
-				if (boosts.def && boosts.def > 0) {
-					boosts.def = 0;
+				//this.add('-message', `${pokemon} is the pokemon.`);
+				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
+
+				//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
+				if (pokemon === this.activePokemon && this.activeTarget.side !== pokemon.side) {
+					if (boosts.def && boosts.def > 0) {
+						boosts.def = 0;
+					}
+					if (boosts.spd && boosts.spd > 0) {
+						boosts.spd = 0;
+					}
+					if (boosts.evasion && boosts.evasion > 0) {
+						boosts.evasion = 0;
+					}
+				}
+
+				//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
+				if (pokemon.side !== this.activePokemon.side && this.activeTarget === pokemon) {
+					if (boosts.atk && boosts.atk > 0) {
+						boosts.atk = 0;
+					}
+					if (boosts.def && boosts.def > 0) { //Body Press
+						boosts.def = 0;
+					}
+					if (boosts.spa && boosts.spa > 0) {
+						boosts.spa = 0;
+					}
+					if (boosts.accuracy && boosts.accuracy > 0) {
+						boosts.accuracy = 0;
+					}
 				}
 			},
 			//This part works but there is no animation for it
