@@ -1487,9 +1487,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//This checks every boost before every move
 			/*onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
-				//this.add('-message', `${unawareUser} is the unaware.`); //Battle name
-				//this.add('-message', `${pokemon} is the pokemon.`);
-				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
 				if (unawareUser === pokemon) return;
 				//When ally attacks - ignores foe's boosts to Def, SpD & Evasion
 				if (unawareUser === this.activePokemon && pokemon === this.activeTarget) {
@@ -1524,36 +1521,39 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
 				const targetCheck = this.activeTarget;
 				const activeCheck = this.activePokemon;
-				this.add('-message', `Target is an ally: ${targetCheck}.`);
-				this.add('-message', `Active is an ally: ${activeCheck}.`);
-				//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
-				if (this.activePokemon === pokemon /*&& !this.activeTarget.isAlly(pokemon)*/) {
-					this.debug('defense boosts nullified.');
-					if (boosts.def && boosts.def > 0) {
-						boosts.def = 0;
+				if (targetCheck && activeCheck)
+				{
+					this.add('-message', `Target is an ally: ${targetCheck.isAlly(pokemon)}.`);
+					this.add('-message', `Active is an ally: ${activeCheck.isAlly(pokemon)}.`);
+					//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
+					if (this.activePokemon === pokemon /*&& !this.activeTarget.isAlly(pokemon)*/) {
+						this.debug('defense boosts nullified.');
+						if (boosts.def && boosts.def > 0) {
+							boosts.def = 0;
+						}
+						if (boosts.spd && boosts.spd > 0) {
+							boosts.spd = 0;
+						}
+						if (boosts.evasion && boosts.evasion > 0) {
+							boosts.evasion = 0;
+						}
 					}
-					if (boosts.spd && boosts.spd > 0) {
-						boosts.spd = 0;
-					}
-					if (boosts.evasion && boosts.evasion > 0) {
-						boosts.evasion = 0;
-					}
-				}
 
-				//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
-				if (this.activeTarget === pokemon /*&& !this.activePokemon.isAlly(pokemon)*/) {
-					this.debug('offense boosts nullified.');
-					if (boosts.atk && boosts.atk > 0) {
-						boosts.atk = 0;
-					}
-					if (boosts.def && boosts.def > 0) { //Body Press
-						boosts.def = 0;
-					}
-					if (boosts.spa && boosts.spa > 0) {
-						boosts.spa = 0;
-					}
-					if (boosts.accuracy && boosts.accuracy > 0) {
-						boosts.accuracy = 0;
+					//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
+					if (this.activeTarget === pokemon /*&& !this.activePokemon.isAlly(pokemon)*/) {
+						this.debug('offense boosts nullified.');
+						if (boosts.atk && boosts.atk > 0) {
+							boosts.atk = 0;
+						}
+						if (boosts.def && boosts.def > 0) { //Body Press
+							boosts.def = 0;
+						}
+						if (boosts.spa && boosts.spa > 0) {
+							boosts.spa = 0;
+						}
+						if (boosts.accuracy && boosts.accuracy > 0) {
+							boosts.accuracy = 0;
+						}
 					}
 				}
 			},
