@@ -1500,8 +1500,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 							boosts.evasion = 0;
 						}
 					}
-					//When pokemon attacks - ignores boosts to Atk, Def, SpA & Accuracy, unless the move is affected by Infiltrator
-					if (activeCheck === pokemon && !this.ActiveMove.infiltrates) {
+					//When pokemon attacks - ignores boosts to Atk, Def, SpA & Accuracy
+					if (activeCheck === pokemon) {
 						if (boosts.atk && boosts.atk > 0) {
 							boosts.atk = 0;
 						}
