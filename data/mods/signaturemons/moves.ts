@@ -1524,7 +1524,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
 
 				//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
-				if (pokemon === this.activePokemon && this.activeTarget.side !== pokemon.side) {
+				if (this.activePokemon === pokemon && !this.activeTarget.isAlly(pokemon)) {
 					if (boosts.def && boosts.def > 0) {
 						boosts.def = 0;
 					}
@@ -1537,7 +1537,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 
 				//When pokemon is getting hit by a foe - ignores foe's boosts to Atk, Def, SpA & Accuracy
-				if (pokemon.side !== this.activePokemon.side && this.activeTarget === pokemon) {
+				if (this.activeTarget === pokemon && !this.activePokemon.isAlly(pokemon)) {
 					if (boosts.atk && boosts.atk > 0) {
 						boosts.atk = 0;
 					}
