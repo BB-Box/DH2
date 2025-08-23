@@ -1522,7 +1522,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onModifyBoost(boosts, pokemon) {
 				//this.add('-message', `${pokemon} is the pokemon.`);
 				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
-
+				this.add('-message', `Target is an ally: ${this.activeTarget.isAlly(pokemon)}.`);
+				this.add('-message', `Active is an ally: ${this.activePokemon.isAlly(pokemon)}.`);
 				//When pokemon attacks a foe - ignores foe's boosts to Def, SpD & Evasion
 				if (this.activePokemon === pokemon && !this.activeTarget.isAlly(pokemon)) {
 					this.debug('defense boosts nullified.');
