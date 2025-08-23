@@ -1481,18 +1481,15 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		sideCondition: 'stillwater',
 		condition: {
 			duration: 5,
-			//This part works but there is no animation for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Still Water');
-			},
 			//Stat boosts nullification (Taken from Unaware ability - Unsure on how to make it work)
 
 			//onAnyModifyBoost?: (this: Battle, boosts: SparseBoostsTable, pokemon: Pokemon) => SparseBoostsTable | void;
+			//This checks every boost before every move
 			/*onAnyModifyBoost(boosts, pokemon) {
 				const unawareUser = this.effectState.target;
-				this.add('-message', `${unawareUser} is the unaware.`);
-				this.add('-message', `${pokemon} is the pokemon.`);
-				this.add('-message', `${this.activePokemon} is the active pokemon.`);
+				//this.add('-message', `${unawareUser} is the unaware.`); //Battle name
+				//this.add('-message', `${pokemon} is the pokemon.`);
+				//this.add('-message', `${this.activePokemon} is the active pokemon.`);
 				if (unawareUser === pokemon) return;
 				//When ally attacks - ignores foe's boosts to Def, SpD & Evasion
 				if (unawareUser === this.activePokemon && pokemon === this.activeTarget) {
@@ -1512,7 +1509,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			},*/
 
 			//On a move basis
-			onModifyMove(move, source, target) {
+			/*onModifyMove(move, source, target) {
 				//When ally is getting hit - ignores foe's boosts to Atk, Def, SpA & Accuracy
 				if (target !== source && this.effectState.target.hasAlly(target)) {
 					if (!target.getMoveHitData(move).crit && !move.infiltrates) {
@@ -1521,6 +1518,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						this.add('-message', `${target} ignores defensive.`);
 					}
 				}
+			},*/
+			onModifyBoost(boosts, pokemon) {
+				this.add('-message', `${pokemon} is the pokemon.`);
+				this.add('-message', `${this.activePokemon} is the active pokemon.`);
+				if (boosts.def && boosts.def > 0) {
+					boosts.def = 0;
+				}
+			},
+			//This part works but there is no animation for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Still Water');
 			},
 			onSideResidualOrder: 26,
 			onSideResidualSubOrder: 6,
