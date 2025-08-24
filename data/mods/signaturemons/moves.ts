@@ -1671,6 +1671,64 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
+	//Tyranitar
+	landslide: {
+		num: 3047,
+		accuracy: 100,
+		basePower: 140,
+		category: "Physical",
+		name: "Landslide",
+		desc: "The user throws big rocks everywhere, damaging surrounding Pokémon and the battlefield alike. This move removes every hazard from the field, but also hurts the user.",
+		shortDesc: "Removes terrain, hazards and screens. 33% HP recoil damage.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Rock Slide", target);
+		},
+		mindBlownRecoil: true,
+		onHit(pokemon) {
+			const removeAll = [
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+			];
+			const sides = [pokemon.side, ...pokemon.side.foeSidesWithConditions()];
+			for (const side of sides) {
+				for (const sideCondition of removeAll) {
+					if (side.removeSideCondition(sideCondition)) {
+						this.add('-sideend', side, this.dex.conditions.get(sideCondition).name);
+					}
+				}
+			}
+			this.field.clearTerrain();
+		},
+		onAfterSubDamage(pokemon) {
+			const removeAll = [
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+			];
+			const sides = [pokemon.side, ...pokemon.side.foeSidesWithConditions()];
+			for (const side of sides) {
+				for (const sideCondition of removeAll) {
+					if (side.removeSideCondition(sideCondition)) {
+						this.add('-sideend', side, this.dex.conditions.get(sideCondition).name);
+					}
+				}
+			}
+			this.field.clearTerrain();
+		},
+		onAfterMove(pokemon, target, move) {
+			if (move.mindBlownRecoil && !move.multihit) {
+				const hpBeforeRecoil = pokemon.hp;
+				this.damage(Math.round(pokemon.maxhp / 3), pokemon, pokemon, this.dex.conditions.get('Landslide'), true);
+				if (pokemon.hp <= pokemon.maxhp / 2 && hpBeforeRecoil > pokemon.maxhp / 2) {
+					this.runEvent('EmergencyExit', pokemon, pokemon);
+				}
+			}
+		},
+		secondary: null,
+		target: "allAdjacent",
+		type: "Rock",
+	},
 
 	//Signature moves remixed
 	//Raticate

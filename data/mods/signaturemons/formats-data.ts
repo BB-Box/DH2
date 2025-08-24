@@ -1279,7 +1279,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	tyranitar: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DOU",
 	},
 	/*tyranitarmega: {
