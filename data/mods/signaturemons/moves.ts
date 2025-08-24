@@ -1216,21 +1216,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Flash", target);
 		},
-		secondaries: [
-			{
-				chance: 100,
-				self: {
-					boosts: {
-						spa: 1,
-					},
-				},
-			}, {
-				chance: 100,
-				boosts: {
-					spe: -1,
-				},
+		selfBoost: {
+			boosts: {
+				spa: 1,
 			},
-		],
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
 		target: "allAdjacentFoes",
 		type: "Electric",
 	},
