@@ -1542,18 +1542,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		shortDesc: "Guarantees critical hits on target next turn.",
 		pp: 10,
 		priority: 0,
-		flags: {mirror: 1, metronome: 1},
+		flags: {reflectable: 1, mirror: 1, bypasssub: 1, metronome: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Trump Card", target);
 		},
-		onTryHit(target, source) {
-			if (source.volatiles['callingcard']) return false;
-		},
-		onHit(target, source) {
-			source.addVolatile('callingcard', target);
-			this.add('-activate', source, 'move: Calling Card', '[of] ' + target);
-		},
+		volatileStatus: 'callingcard',
 		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 2,
