@@ -1577,6 +1577,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Blizzard", target);
+		},
 		onModifyMove(move, source, target) {
 			if (source.side.getSideCondition('tailwind')) {
 				move.target = 'allAdjacentFoes';
@@ -1601,6 +1605,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Overdrive", target);
+		},
 		onModifyMove(move, source, target) {
 			if (source.side.getSideCondition('tailwind')) {
 				move.target = 'allAdjacentFoes';
@@ -1625,6 +1633,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Heat Wave", target);
+		},
 		onModifyMove(move, source, target) {
 			if (source.side.getSideCondition('tailwind')) {
 				move.target = 'allAdjacentFoes';
