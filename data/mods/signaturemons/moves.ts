@@ -1462,7 +1462,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	//Relicanth
+	//Relicanth (TO FIX: No animation)
 	stillwater: {
 		num: 3041,
 		accuracy: true,
@@ -1568,6 +1568,78 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
+	},
+	//Articuno
+	icestorm: {
+		num: 3043,
+		accuracy: 100,
+		basePower: 100,
+		category: "Special",
+		name: "Ice Storm",
+		desc: "The user engulfs its foe in a cold air current that may freeze the target. If Tailwind is in effect for the user, this move hits all opposing Pokémon.",
+		shortDesc: "10% chance of Freeze. If Tailwind active: Hits all foes.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onModifyMove(move, source, target) {
+			if (source.side.getSideCondition('tailwind')) {
+				move.target = 'allAdjacentFoes';
+			}
+		},
+		secondary: {
+			chance: 10,
+			status: 'frz',
+		},
+		target: "normal",
+		type: "Ice",
+	},
+	//Zapdos
+	thunderstorm: {
+		num: 3044,
+		accuracy: 100,
+		basePower: 100,
+		category: "Special",
+		name: "Thunder Storm",
+		desc: "The user engulfs its foe in an electrifying air current that may paralyse the target. If Tailwind is in effect for the user, this move hits all opposing Pokémon.",
+		shortDesc: "10% chance of Paralysis. If Tailwind active: Hits all foes.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onModifyMove(move, source, target) {
+			if (source.side.getSideCondition('tailwind')) {
+				move.target = 'allAdjacentFoes';
+			}
+		},
+		secondary: {
+			chance: 10,
+			status: 'par',
+		},
+		target: "normal",
+		type: "Electric",
+	},
+	//Moltres
+	firestorm: {
+		num: 3045,
+		accuracy: 100,
+		basePower: 100,
+		category: "Special",
+		name: "Fire Storm",
+		desc: "The user engulfs its foe in a fierce air current that may burn the target. If Tailwind is in effect for the user, this move hits all opposing Pokémon.",
+		shortDesc: "10% chance of Burn. If Tailwind active: Hits all foes.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onModifyMove(move, source, target) {
+			if (source.side.getSideCondition('tailwind')) {
+				move.target = 'allAdjacentFoes';
+			}
+		},
+		secondary: {
+			chance: 10,
+			status: 'brn',
+		},
+		target: "normal",
+		type: "Fire",
 	},
 
 	//Signature moves remixed
