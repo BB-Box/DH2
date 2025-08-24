@@ -1534,7 +1534,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Thievul
 	callingcard: {
 		num: 3042,
-		accuracy: true,
+		accuracy: 100,
 		basePower: 0,
 		category: "Status",
 		name: "Calling Card",
@@ -1557,12 +1557,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					move.critRatio = 5;
 				}
 			},
-			onStart(target, source) {
-				this.add('-start', target, 'move: Calling Card', '[of] ' + source);
+			onStart(pokemon, source, effect) {
+				this.add('-start', pokemon, 'move: Calling Card');
 			},
 			onResidualOrder: 23,
-			onEnd(target) {
-				this.add('-end', target, 'move: Calling Card', '[silent]');
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'move: Calling Card', '[silent]');
 			},
 		},
 		secondary: null,
