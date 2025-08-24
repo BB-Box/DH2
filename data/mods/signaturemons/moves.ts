@@ -1542,7 +1542,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		shortDesc: "Guarantees critical hits on target next turn.",
 		pp: 10,
 		priority: 0,
-		flags: {reflectable: 1, mirror: 1, bypasssub: 1, metronome: 1},
+		flags: {reflectable: 1, mirror: 1, metronome: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Trump Card", target);
@@ -1557,7 +1557,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					move.critRatio = 5;
 				}
 			},
-			onStart(pokemon, source, effect) {
+			onStart(pokemon) {
 				this.add('-start', pokemon, 'move: Calling Card');
 			},
 			onResidualOrder: 23,
