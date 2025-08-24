@@ -2371,7 +2371,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	lilligant: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	lilliganthisui: {
@@ -3187,7 +3187,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	lycanrocmidnight: {
-		tier: "Sign",
+		tier: "NoSign",
 		//doublesTier: "(DUU)",
 	},
 	lycanrocdusk: {

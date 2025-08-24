@@ -1732,6 +1732,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacent",
 		type: "Rock",
 	},
+	//Lilligant
+	sublimescent: {
+		num: 3048,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Sublime Scent",
+		desc: "The user releases a rich scent from its rare flower. This move lowers the Attack, Special Attack and evasiveness of all foes.",
+		shortDesc: "Lowers foes' Atk and SpA by 1 and evasiveness by 2.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sweet Scent", target);
+		},
+		boosts: {
+			atk: -1,
+			spa: -1,
+			evasion: -2,
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Grass",
+	},
 
 	//Signature moves remixed
 	//Raticate
