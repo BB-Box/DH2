@@ -21,7 +21,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 	damp: {
 		inherit: true,
 		onAnyTryMove(target, source, effect) {
-			if (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct', 'electroblast'].includes(effect.id)) {
+			if (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct', 'electroblast', 'burningwill'].includes(effect.id)) {
 				this.attrLastMove('[still]');
 				this.add('cant', this.effectState.target, 'ability: Damp', effect, '[of] ' + target);
 				return false;

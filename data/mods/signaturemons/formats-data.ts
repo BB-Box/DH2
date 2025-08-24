@@ -2407,12 +2407,12 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	darmanitan: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	darmanitanzen: {
 	},
 	darmanitangalar: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	darmanitangalarzen: {
 	},
