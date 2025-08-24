@@ -1649,6 +1649,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Linoone
+	linedash: {
+		num: 3046,
+		accuracy: 100,
+		basePower: 50,
+		category: "Physical",
+		name: "Line Dash",
+		desc: "A superfast dash attack that ignores redirection and can hit a target using a move such as Protect or Detect. This also lifts the effects of those moves.",
+		shortDesc: "Goes first. Lifts Protect and cannot be redirected.",
+		pp: 5,
+		priority: 2,
+		flags: {contact: 1, mirror: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Take Down", target);
+		},
+		breaksProtect: true, // Breaking protection implemented in scripts.js
+		tracksTarget: true,
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
 
 	//Signature moves remixed
 	//Raticate

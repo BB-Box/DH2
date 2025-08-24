@@ -1349,7 +1349,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	linoone: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	linoonegalar: {
 		tier: "NoSign",
