@@ -506,7 +506,6 @@ export const Formats: FormatList = [
 		ruleset: ['Standard'],
 		banlist: [
 			'AG', 'Uber',
-			'Aegislash', 'Hoopa-Unbound', 'Greninja', 'Mawilite',
 			'Arena Trap', 'Power Construct', 'Shadow Tag',
 			'Baton Pass',
 			'King\'s Rock', 'Razor Fang', 'Quick Claw',
@@ -516,8 +515,11 @@ export const Formats: FormatList = [
 			let speciesTable = {};
 			for (const set of team) {
 				let template = this.dex.species.get(set.species);
-				if (template.tier !== 'Kalos' && template.tier !== 'Kalos (NFE)') {
+				if (template.tier !== 'Kalos' && template.tier !== 'Kalos (NFE)' && template.tier !== 'Kalos Uber') {
 					return [set.species + ' is not a part of the Kalos Pokédex.'];
+				}
+				else if (template.tier === 'Kalos Uber') {
+					return [set.species + ' is banned from DLCmons.'];
 				}
 			}
 		},
@@ -1445,7 +1447,7 @@ export const Formats: FormatList = [
 		],
 		mod: 'publicdomain',
 		teambuilderFormat: "National Dex",
-		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Data Mod', 'Sleep Clause Mod', 'Terastal Clause', 'Mega Data Mod'],
+		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Data Mod', 'Sleep Clause Mod', 'Terastal Clause', 'Mega Data Mod', 'Z-Move Clause'],
 		onValidateTeam(team, format) {
 			/**@type {{[k: string]: true}}*/
 			let speciesTable = {};
@@ -1638,15 +1640,42 @@ export const Formats: FormatList = [
 		},
 	},
 	{
+		name: "[Gen 9] Six by Six",
+		desc: [
+			`<b>Six by Six</b>: A Gen 9 micrometa featuring only 6 Pokemon, each with 6 forms.`,
+		],
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/six-by-six-slate-0-winners.3769141/">Six by Six on the Smogon Forums</a>`,
+		],
+		mod: 'sixbysix',
+		ruleset: ['Standard', 'Sleep Moves Clause', '!Sleep Clause Mod', 'Terastal Clause', 'Data Mod'],
+		banlist: ['King\'s Rock', 'Razor Fang', 'Baton Pass', 'Last Respects', 'Shed Tail'],
+		onValidateTeam(team, format) {
+			let speciesTable = {};
+			let allowedTiers = ['King', 'Queen', 'Bishop', 'Knight', 'Rook', 'Pawn'];
+			for (const set of team) {
+				let template = this.dex.species.get(set.species);
+				if (!allowedTiers.includes(template.tier)) {
+					return [set.species + ' is not legal in Six by Six.'];
+				}
+			}
+		},
+	},
+	{
 		name: "[Gen 9] Super Smash Mods Brawl",
 		desc: [
 			"<b>Super Smash Mods Brawl</b>: The third in the Super Smash Mods series, creating a micrometa using Pokemon from other Pet Mods and Solomods.",
 		],
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3768342/">Super Smash Mods Brawl on Smogon Forums</a>`,
-		      ],
-		ruleset: ['Standard NatDex', 'Sleep Moves Clause', 'Z-Move Clause', 'Data Mod', 'Mega Data Mod'],
-		banlist: ['Arena Trap', 'Moody', 'Sand Veil', 'Shadow Tag', 'Snow Cloak', 'King\'s Rock', 'Razor Fang', 'Baton Pass', 'Last Respects', 'Shed Tail'],
+		],
+		teambuilderFormat: "National Dex",
+		ruleset: ['Standard NatDex', 'Sleep Moves Clause', 'Terastal Clause', /*'Z-Move Clause',*/ 'Data Mod', 'Mega Data Mod'],
+		banlist: [
+			'Arena Trap', 'Moody', 'Sand Veil', 'Shadow Tag', 'Snow Cloak', 'King\'s Rock', 'Razor Fang', 'Baton Pass', 'Last Respects', 'Shed Tail',
+			'Normalium Z', 'Fairium Z', 'Fightinium Z', 'Firium Z', 'Flyinium Z', 'Darkinium Z', 'Dragonium Z', 'Buginium Z', 'Waterium Z', 'Electrium Z',
+			'Ghostium Z', 'Grassium Z', 'Groundium Z', 'Icium Z', 'Poisonium Z', 'Psychium Z', 'Rockium Z', 'Steelium Z',
+		],
 		onValidateTeam(team, format) {
 			/**@type {{[k: string]: true}} */
 			let speciesTable = {};
@@ -1669,10 +1698,10 @@ export const Formats: FormatList = [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/super-smash-stereotypes-fire-grass-water.3690227/">Super Smash Mods Melee on Smogon Forums</a>`,
 		      ],
 		ruleset: ['Standard', 'Z-Move Clause', 'Data Mod', 'Mega Data Mod',
-			'STABmons Move Legality', 'Sketchmons Move Legality',],
+			'Revelationmons Mod',],
 		banlist: ['Baton Pass'],
 		onValidateTeam(team, format) {
-			// @type {{[k: string]: true}}
+			// @type {{[k: string]: true}} 
 			let speciesTable = {};
 			for (const set of team) {
 				let template = this.dex.species.get(set.species);
@@ -1680,6 +1709,39 @@ export const Formats: FormatList = [
 				if (!allowedTiers.includes(template.tier)) {
 					return [set.species + ' is not usable in Super Smash OMs.'];
 				}
+			}
+		},
+		onValidateSet(set) {
+			const stabmons = [
+				'Arboliva', 'Porygon2', 'Terrakion',
+			];
+			const sketchmons = [
+				'Registeel', 'Garchomp', 
+			];
+			const aaa = [
+				'Cresselia', 'Slither Wing', 'Quaquaval', 'Scream Tail',
+			];
+			const convergence = [
+				'Greninja', 'Ogerpon', 'Zarude',
+			];
+			const franticfusions = [
+				'Bellibolt', 'Tinkaton', 'Ninetales', 'Crabominable',
+			];
+			const species = this.dex.species.get(set.species);
+			console.log("Species is " + species.name);
+			const speciesAbilities = [];
+			console.log("Species abilities are ");
+			for (let key in species.abilities) {
+			    let value = species.abilities[key];
+			    console.log(value);
+			    speciesAbilities.push(value);
+			}
+			console.log("Set has ability " + set.ability);
+			console.log("Is it AAA? " + aaa.includes(species.name));
+			console.log("Is ability there? " + speciesAbilities.includes(set.ability))
+			if (aaa.includes(species.name) && !speciesAbilities.includes(set.ability)) {
+				console.log("Hello there");
+				return [];
 			}
 		},
 		mod: 'supersmashoms',
@@ -3141,7 +3203,7 @@ export const Formats: FormatList = [
 		gameType: 'doubles',
 		teambuilderFormat: 'National Dex Doubles',
 		ruleset: ['Standard NatDex', 'Item Clause', 'Adjust Level = 50', 'Picked Team Size = 4', 'VGC Timer', 'Data Mod', 'Force Open Team Sheets', 'Terastal Clause', 'Z-Move Clause', 'Best of = 3', 'Limit One Restricted'],
-		restricted: ['Cottonee', 'Dewpider', 'Diglett-Alola', 'Flittle', 'Gulpin', 'Nidoran-M', 'Wattrel', 'Wingull', 'Zigzagoon', 'Shedinja'],
+		restricted: ['Cottonee', 'Dewpider', 'Diglett-Alola', 'Flittle', 'Nidoran-M', 'Wattrel', 'Wingull', 'Zigzagoon', 'Shedinja'],
 		banlist: ['Huge Power', 'Pure Power', 'Smeargle', 'Wishiwashi', 'Goomy'],
 		unbanlist: ['Assist'],
 		onValidateTeam(team, format) {
@@ -3629,13 +3691,13 @@ export const Formats: FormatList = [
 		name: "[Gen 9] Hax Meters",
 		mod: 'haxmeters',
 		ruleset: ['Standard', 'Sleep Moves Clause', '!Sleep Clause Mod', '!Evasion Moves Clause', '!Evasion Items Clause', 'Hax Meter Rule'],
-		banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'Baton Pass', 'Last Respects', 'Shed Tail', 'Minimize', 'Double Team'],
+		banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'Baton Pass', 'Last Respects', 'Shed Tail', 'Minimize', 'Double Team', 'King\'s Rock', 'Razor Fang', 'Stench'],
 	},
 	{
 		name: "[Gen 8] Hax Meters",
 		mod: 'gen8haxmeters',
 		ruleset: ['Obtainable', 'Team Preview', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Moves Clause', 'Hax Meter Rule'],
-		banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'Baton Pass', 'Minimize', 'Double Team'],
+		banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'Baton Pass', 'Minimize', 'Double Team', 'King\'s Rock', 'Razor Fang', 'Stench'],
 	},
    /* {
 		name: "[Gen 3] Hoennification",

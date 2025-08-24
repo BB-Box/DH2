@@ -2762,7 +2762,7 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 	fatbombing: {
 		num: -63,
 		accuracy: 100,
-		basePower: 100,
+		basePower: 130,
 		category: "Physical",
 		name: "Fat Bombing",
 		pp: 10,
@@ -3282,18 +3282,34 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 	porthosbroadsword: {
 		num: -78,
 		accuracy: 100,
-		basePower: 70,
+		basePower: 120,
 		category: "Physical",
 		name: "Porthos Broadsword",
-		pp: 5,
-		priority: 1,
-		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
-		onTry(source, target) {
-			const action = this.queue.willMove(target);
-			const move = action?.choice === 'move' ? action.move : null;
-			if (!move || (move.category === 'Status' && move.id !== 'mefirst') || target.volatiles['mustrecharge']) {
-				return false;
+		pp: 20,
+		priority: -3,
+		flags: {contact: 1, protect: 1, slicing: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
+		priorityChargeCallback(pokemon) {
+			pokemon.addVolatile('focuspunch');
+		},
+		beforeMoveCallback(pokemon) {
+			if (pokemon.volatiles['focuspunch']?.lostFocus) {
+				this.add('cant', pokemon, 'Porthos Broadsword', 'Porthos Broadsword');
+				return true;
 			}
+		},
+		condition: {
+			duration: 1,
+			onStart(pokemon) {
+				this.add('-singleturn', pokemon, 'move: Porthos Broadsword');
+			},
+			onHit(pokemon, source, move) {
+				if (move.category !== 'Status') {
+					this.effectState.lostFocus = true;
+				}
+			},
+			onTryAddVolatile(status, pokemon) {
+				if (status.id === 'flinch') return null;
+			},
 		},
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
@@ -3302,9 +3318,9 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		contestType: "Clever",
-		desc: "Fails if the target did not select a physical attack, special attack, or Me First for use this turn, or if the target moves before the user.",
-		shortDesc: "Usually goes first. Fails if target is not attacking.",
+		contestType: "Tough",
+		desc: "The user loses its focus and does nothing if it is hit by a damaging attack this turn before it can execute the move.",
+		shortDesc: "Fails if the user takes damage before it hits.",
 	},
 	razorwind: {
 		inherit: true,
@@ -3396,7 +3412,7 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 		accuracy: 90,
 		basePower: 70,
 		basePowerCallback(pokemon) {
-			if (pokemon.volatiles['stockpile'].layers === 3) return move.basePower * 2;
+			if (pokemon.volatiles['stockpile']?.layers === 3) return move.basePower * 2;
 		},
 		category: "Special",
 		name: "Ventilation",
@@ -3540,6 +3556,86 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 		accuracy: 100,
 		basePower: 80,
 	},
+	ningencry: {
+		num: -86,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Ningen Cry",
+		pp: 5,
+		priority: 0,
+		flags: { snatch: 1, dance: 1 },
+		self: {
+			boosts: {
+				atk: 1,
+			},
+		},
+		weather: 'snow',
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Snowscape", target);
+		},
+		secondary: null,
+		target: "all",
+		type: "Ice",
+		shortDesc: "Raises the user's Atk by 1. Summons Snow.",
+		zMove: { effect: 'clearnegativeboost' },
+		contestType: "Beautiful",
+	},
+	mantisslash: {
+		num: -87,
+		accuracy: 100,
+		basePower: 100,
+		category: "Physical",
+		name: "Mantis Slash",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		self: {
+			boosts: {
+				spe: -2,
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Grass",
+		desc: "Lowers the user's Speed by 2 stages.",
+		shortDesc: "Lowers the user's Speed by 2.",
+	},
+	tropkick: {
+		inherit: true,
+		basePower: 90,
+	},
+	intrepidcrash: {
+		num: -88,
+		accuracy: 100,
+		basePower: 60,
+		category: "Physical",
+		name: "Intrepid Crash",
+		shortDesc: "Has 33% recoil. Usually goes first.",
+		pp: 10,
+		priority: 1,
+		flags: { contact: 1, protect: 1, mirror: 1 },
+		recoil: [1, 3],
+		secondary: null,
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Brave Bird", target);
+		},
+		target: "normal",
+		type: "Flying",
+		contestType: "Cool",
+	},
+	doublehit: {
+		inherit: true,
+		basePower: 50,
+	},
+
+
+
+
+
+
 	// Everlasting Winter field
 	auroraveil: {
 		inherit: true,
@@ -3815,6 +3911,16 @@ export const Moves: { [k: string]: ModdedMoveData; } = {
 				}
 			}
 			return source.status === 'slp' || source.hasAbility('comatose') || usable;
+		},
+	},
+	// Blowhole
+	waterspout: {
+		inherit: true,
+		basePowerCallback(pokemon, target, move) {
+			if (pokemon.hasAbility('blowhole')) return 150;
+			const bp = move.basePower * pokemon.hp / pokemon.maxhp;
+			this.debug('BP: ' + bp);
+			return bp;
 		},
 	},
 };
