@@ -1558,7 +1558,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 2,
 			onTryHit(target, source, move) {
-				//This unsures that the guarenteed crit does not proc on the same turn as the calling card proc
+				//This unsures that the guarenteed crit does not activate on the same turn as the calling card proc
 				if (target.volatiles['callingcard'].duration === 1) {
 					move.critRatio = 5;
 				}
