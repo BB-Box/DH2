@@ -1687,37 +1687,40 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Rock Slide", target);
 		},
-		mindBlownRecoil: true,
-		onHit(pokemon) {
-			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-			];
-			const sides = [pokemon.side, ...pokemon.side.foeSidesWithConditions()];
-			for (const side of sides) {
-				for (const sideCondition of removeAll) {
-					if (side.removeSideCondition(sideCondition)) {
-						this.add('-sideend', side, this.dex.conditions.get(sideCondition).name);
+		onAfterHit(target, source, move) {
+			if (!move.hasSheerForce && source.hp) {
+				const removeAll = [
+					'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+				];
+				const sides = [source.side, ...source.side.foeSidesWithConditions()];
+				for (const side of sides) {
+					for (const sideCondition of removeAll) {
+						if (side.removeSideCondition(sideCondition)) {
+							this.add('-sideend', side, this.dex.conditions.get(sideCondition).name);
+						}
 					}
 				}
+				this.field.clearTerrain();
 			}
-			this.field.clearTerrain();
 		},
-		onAfterSubDamage(pokemon) {
-			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-			];
-			const sides = [pokemon.side, ...pokemon.side.foeSidesWithConditions()];
-			for (const side of sides) {
-				for (const sideCondition of removeAll) {
-					if (side.removeSideCondition(sideCondition)) {
-						this.add('-sideend', side, this.dex.conditions.get(sideCondition).name);
+		onAfterSubDamage(target, source, move) {
+			if (!move.hasSheerForce && source.hp) {
+				const removeAll = [
+					'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+				];
+				const sides = [source.side, ...source.side.foeSidesWithConditions()];
+				for (const side of sides) {
+					for (const sideCondition of removeAll) {
+						if (side.removeSideCondition(sideCondition)) {
+							this.add('-sideend', side, this.dex.conditions.get(sideCondition).name);
+						}
 					}
 				}
+				this.field.clearTerrain();
 			}
-			this.field.clearTerrain();
 		},
 		onAfterMove(pokemon, target, move) {
-			if (move.mindBlownRecoil && !move.multihit) {
+			if (!pokemon.hasAbility('rockhead') && !move.multihit) {
 				const hpBeforeRecoil = pokemon.hp;
 				this.damage(Math.round(pokemon.maxhp / 3), pokemon, pokemon, this.dex.conditions.get('Landslide'), true);
 				if (pokemon.hp <= pokemon.maxhp / 2 && hpBeforeRecoil > pokemon.maxhp / 2) {
@@ -1725,7 +1728,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 			}
 		},
-		secondary: null,
+		secondary: {}, // Sheer Force-boosted
 		target: "allAdjacent",
 		type: "Rock",
 	},
