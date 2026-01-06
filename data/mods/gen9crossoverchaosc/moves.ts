@@ -255,6 +255,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {},
 		onTryHit(source, move) {
 			if (!this.canSwitch(source.side) || !move.selfSwitch) {
+				// nanoboosted Implemented within conditions.ts
 				source.addVolatile('nanoboosted');
 				return this.NOT_FAIL;
 			}
@@ -432,6 +433,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			duration: 1,
 			onSwap(target) {
 				if (!target.fainted) {
+					// hazardshield implemented within conditions.ts
 					target.addVolatile('hazardshield');
 				}
 				target.side.removeSlotCondition(target, 'dimensionalcape');
@@ -590,7 +592,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
 		onModifyMove(move, pokemon, target) {
-			if (target.getStat('spd', false, true) > target.getStat('def', false, true)) move.overrideDefensiveStat = 'spd';
+			if (target.getStat('spd', false, true) < target.getStat('def', false, true)) move.overrideDefensiveStat = 'spd';
 		},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
@@ -662,7 +664,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 65,
 		category: "Physical",
 		name: "Bonesaw",
-		shortDesc: "High critical hit ratio.",
+		shortDesc: "Extra high critical hit ratio.",
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
@@ -778,6 +780,349 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 		contestType: "Clever",
+	},
+	psychbomb: {
+		num: -27,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Psych Bomb",
+		shortDesc: "Bypass protect & substitute. Hits all adjacent foes.",
+		pp: 10,
+		priority: 0,
+		flags: {bullet: 1, mirror: 1, metronome: 1, slicing: 1, bypasssub: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fling", target);
+			this.add('-anim', target, "Overheat", target);
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Normal",
+		contestType: "Cute",
+	},
+	sunbeam: {
+		num: -28,
+		accuracy: 100,
+		basePower: 85,
+		category: "Special",
+		name: "Sun Beam",
+		shortDesc: "User recovers 50% of the damage dealt.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, heal: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Growth", source);
+			this.add('-anim', source, "Solar Beam", target);
+		},
+		drain: [1, 2],
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+	},
+	moltenburst: {
+		num: -29,
+		accuracy: 100,
+		basePower: 50,
+		category: "Physical",
+		name: "Molten Burst",
+		shortDesc: "Sets Sea of Fire for 2 turns.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Gigaton Hammer", target);
+			this.add('-anim', target, "Eruption", target);
+		},
+		sideCondition: 'firepledge',
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+	},
+	dragonfang: {
+		num: -30,
+		accuracy: 100,
+		basePower: 95,
+		category: "Physical",
+		name: "Dragon Fang",
+		shortDesc: "User gains Dragon type before attacking.",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, contact: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dragon Claw", target);
+		},
+		priorityChargeCallback(pokemon) {
+			pokemon.addVolatile('dragonfang');
+		},
+		condition: {
+			duration: 1,
+			onBeforeMovePriority: 10,
+			onBeforeMove(attacker, defender, move) {
+				if(move.id == 'dragonfang' && !attacker.hasType('Dragon') && attacker.addType('Dragon')) {
+					this.add('-anim', attacker, "Focus Energy", attacker);
+					this.add('-start', attacker, 'typeadd', 'Dragon', '[from] move: Dragon Fang');
+					attacker.addVolatile("dftypechange");
+				}
+			},
+			onEnd(pokemon) {
+				if(pokemon.volatiles['dftypechange']) {
+					pokemon.setType(pokemon.getTypes(true).map(type => type === "Dragon" ? "???" : type));
+					this.add('-start', pokemon, 'typechange', pokemon.getTypes().join('/'));
+					pokemon.removeVolatile('dftypechange')
+				}
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dragon",
+		contestType: "Tough",
+	},
+	gloombreath: {
+		num: -31,
+		accuracy: 100,
+		basePower: 95,
+		category: "Special",
+		name: "Gloom Breath",
+		shortDesc: "Lowers target Atk & SpA by 1.",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dragon Breath", target);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				atk: -1,
+				spa: -1,
+			},
+		},
+		target: "normal",
+		type: "Dragon",
+		contestType: "Cool",
+	},
+	torrentialroar: {
+		num: -32,
+		accuracy: true,
+		basePower: 140,
+		category: "Physical",
+		name: "Torrential Roar",
+		shortDesc: "Resets target's stat boosts.",
+		pp: 1,
+		priority: 0,
+		flags: {},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dragon Claw", source);
+			this.add('-anim', source, "Origin Pulse", target);
+		},
+		onHit(target) {
+			target.clearBoosts();
+			this.add('-clearboost', target);
+		},
+		isZ: "corriniumz",
+		secondary: null,
+		target: "normal",
+		type: "Water",
+		contestType: "Beautiful",
+	},
+	gemstonerush: {
+		num: -33,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Gemstone Rush",
+		shortDesc: "No additional effect.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, contact: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Power Gem", target);
+			this.add('-anim', source, "Accelerock", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Rock",
+		contestType: "Beautiful",
+	},
+	stormwingcyclone: {
+		num: -34,
+		accuracy: true,
+		basePower: 140,
+		category: "Physical",
+		name: "Stormwing Cyclone",
+		shortDesc: "Sets an 80 bp future move that will hit in 3 turns.",
+		pp: 1,
+		priority: 0,
+		flags: {},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Hurricane", source);
+			this.add('-anim', source, "Rapid Spin", target);
+		},
+		onAfterMove(source, target) {
+			if (target.side.addSlotCondition(target, 'futuremove')) {
+				Object.assign(target.side.slotConditions[target.position]['futuremove'], {
+					duration: 3,
+					move: 'stormwingcyclone',
+					source: source,
+					moveData: {
+						id: 'stormwingcyclone',
+						name: "Stormwing Cyclone",
+						accuracy: 100,
+						basePower: 80,
+						category: "Physical",
+						priority: 0,
+						flags: {allyanim: 1, futuremove: 1},
+						onPrepareHit(target, source, move) {
+							this.attrLastMove('[still]');
+							this.add('-anim', source, "Hurricane", target);
+						},
+						ignoreImmunity: false,
+						effectType: 'Move',
+						type: 'Flying',
+					},
+				});
+				this.add('-start', source, 'move: Stormwing Cyclone');
+			}
+		},
+		isZ: "moriumz",
+		secondary: null,
+		target: "normal",
+		type: "Flying",
+		contestType: "Tough",
+	},
+	punishmenttime: {
+		num: -35,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Punishment Time!",
+		shortDesc: "Nearly always goes first. First turn out only.",
+		pp: 10,
+		priority: 2,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Nasty Plot", source);
+			this.add('-anim', source, "Anchor Shot", target);
+			this.add('-anim', source, "Thunder Cage", target);
+		},
+		onTry(source) {
+			if (source.activeMoveActions > 1) {
+				this.hint("Punishment Time only works on your first turn out.");
+				return false;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+		contestType: "Beautiful",
+	},
+	spearofgungnir: {
+		num: -36,
+		accuracy: true,
+		basePower: 80,
+		category: "Physical",
+		name: "Spear of Gungnir",
+		shortDesc: "Hits twice.",
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Ceaseless Edge", source);
+			this.add('-anim', target, "Thunder Claw", target);
+		},
+		pp: 1,
+		priority: 0,
+		flags: {},
+		multihit: 2,
+		isZ: "monokumiumz",
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+		contestType: "Tough",
+	},
+	coralstrike: {
+		num: -37,
+		accuracy: 100,
+		basePower: 60,
+		basePowerCallback(pokemon, target, move) {
+			if (target.side.getSideCondition('stealthrock')) {
+				this.debug('Coral Strike damage boost');
+				return move.basePower * 2;
+			}
+			this.debug('Coral Strike NOT boosted');
+			return move.basePower;
+		},
+		category: "Physical",
+		name: "Coral Strike",
+		shortDesc: "Power is doubled if target side has Stealth Rock active.",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Origin Pulse", target);
+			this.add('-anim', source, "Stone Edge", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Water",
+		contestType: "Tough",
+	},
+	bunnybeam: {
+		num: -38,
+		accuracy: true,
+		basePower: 90,
+		category: "Physical",
+		name: "Bunny Beam",
+		shortDesc: "This move does not check accuracy.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Ice Beam", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+		contestType: "Beautiful",
+	},
+	splatbomb: {
+		num: -39,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Splat Bomb",
+		shortDesc: "Uses the higher attacking stat to calculate damage. Super effective on Poison types.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			if (source.getStat('atk', false, true) < source.getStat('spa', false, true)) {
+				this.add('-anim', source, "Sludge Bomb", target);
+			}
+			else {
+				this.add('-anim', source, "Gunk Shot", target);
+			}
+		},
+		onModifyMove(move, pokemon) {
+			if (pokemon.getStat('atk', false, true) < pokemon.getStat('spa', false, true)) move.category = 'Special';
+		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Poison') return 1;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Poison",
+		contestType: "Tough",
 	},
 
 	// Altering Pre-Existing Moves
@@ -1044,5 +1389,78 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
+	},
+	firepledge: {
+		num: 519,
+		accuracy: 100,
+		basePower: 80,
+		basePowerCallback(target, source, move) {
+			if (['grasspledge', 'waterpledge'].includes(move.sourceEffect)) {
+				this.add('-combine');
+				return 150;
+			}
+			return move.basePower;
+		},
+		category: "Special",
+		name: "Fire Pledge",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, nonsky: 1, metronome: 1, pledgecombo: 1},
+		onPrepareHit(target, source, move) {
+			for (const action of this.queue.list as MoveAction[]) {
+				if (
+					!action.move || !action.pokemon?.isActive ||
+					action.pokemon.fainted || action.maxMove || action.zmove
+				) {
+					continue;
+				}
+				if (action.pokemon.isAlly(source) && ['grasspledge', 'waterpledge'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
+		onModifyMove(move) {
+			if (move.sourceEffect === 'waterpledge') {
+				move.type = 'Water';
+				move.forceSTAB = true;
+				move.self = {sideCondition: 'waterpledge'};
+			}
+			if (move.sourceEffect === 'grasspledge') {
+				move.type = 'Fire';
+				move.forceSTAB = true;
+				move.sideCondition = 'firepledge';
+			}
+		},
+		condition: {
+			duration: 4,
+			durationCallback(target, source, effect) {
+				if (effect?.name === "Molten Burst") {
+					return 2;
+				}
+				return 4;
+			},
+			onRestart(target, source, effect) {
+				if (effect?.name === 'Molten Burst') return;
+			},
+			onSideStart(targetSide) {
+				this.add('-sidestart', targetSide, 'Fire Pledge');
+			},
+			onResidualOrder: 5,
+			onResidualSubOrder: 1,
+			onResidual(pokemon) {
+				if (!pokemon.hasType('Fire')) this.damage(pokemon.baseMaxhp / 8, pokemon);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 8,
+			onSideEnd(targetSide) {
+				this.add('-sideend', targetSide, 'Fire Pledge');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+		contestType: "Beautiful",
 	},
 };

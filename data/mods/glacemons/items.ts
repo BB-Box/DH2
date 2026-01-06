@@ -6,13 +6,13 @@ export const Items: { [k: string]: ModdedItemData; } = {
 		rating: 3,
 		shortDesc: "0.67x damage from Z-Move/Mega/Dynamax/Tera. Attack = -1/8 HP.",
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.isZ || (source.volatiles['dynamax'] && source.volatiles['dynamax'].isActive) || source.volatiles['terastallized'] || (source.forme && source.species.id.includes('mega'))) {
+			if (move.isZ || (source.volatiles['dynamax'] && source.volatiles['dynamax'].isActive) || source.volatiles['terastallized'] || (source.species.forme == "Mega")) {
 				return this.chainModify(0.67);
 			}
 		},
 		onDamagingHitOrder: 2,
 		onDamagingHit(damage, target, source, move) {
-			if (move.isZ || (source.volatiles['dynamax'] && source.volatiles['dynamax'].isActive) || source.volatiles['terastallized'] || (source.forme && source.species.id.includes('mega'))) {
+			if (move.isZ || (source.volatiles['dynamax'] && source.volatiles['dynamax'].isActive) || source.volatiles['terastallized'] || (source.species.forme == "Mega")) {
 				this.damage(source.baseMaxhp / 8, source, target);
 			}
 		},
@@ -1376,6 +1376,26 @@ export const Items: { [k: string]: ModdedItemData; } = {
 		},
 		shortDesc: "Halves damage taken from a supereffective Fighting-type attack. Once per switch-in.",
 	},
+	cobaberry: {
+		inherit: true,
+		onStart(pokemon) {
+			pokemon.addVolatile('cobaberry');
+		},
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.type === 'Flying' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['bypasssub'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
+				if (target.volatiles['cobaberry']) {
+					this.debug('-50% reduction');
+					this.add('-enditem', target, this.effect, '[weaken]');
+					target.removeVolatile('cobaberry');
+					return this.chainModify(0.5);
+				}
+			}
+		},
+		shortDesc: "Halves damage taken from a supereffective Flying-type attack. Once per switch-in.",
+	},
 	colburberry: {
 		inherit: true,
 		onStart(pokemon) {
@@ -1667,7 +1687,7 @@ export const Items: { [k: string]: ModdedItemData; } = {
 			},
 			onModifyDamage(damage, source, target, move) {
 				const dmgMod = [4096, 5120, 6144, 7168, 8192];
-				const numConsecutive = this.effectState.numConsecutive > 5 ? 5 : this.effectState.numConsecutive;
+				const numConsecutive = this.effectState.numConsecutive > 4 ? 4 : this.effectState.numConsecutive;
 				this.debug(`Current Metronome boost: ${dmgMod[numConsecutive]}/4096`);
 				return this.chainModify([dmgMod[numConsecutive], 4096]);
 			},
@@ -1946,7 +1966,8 @@ export const Items: { [k: string]: ModdedItemData; } = {
 				&& !(move.name === 'Tera Blast' && pokemon.terastallized)
 				&& !(move.name === 'Tera Blast' && pokemon.hasItem('legendplate'))) {
 				if (move.id === pokemon.moveSlots[0].id) type = pokemon.types[0];
-				else if (move.id === pokemon.moveSlots[1].id && types.length == 2) type = pokemon.types[1];
+				else if (move.id === pokemon.moveSlots[1].id && pokemon.types[1]) type = pokemon.types[1];
+				else type = 'Normal';
 				move.type = type;
 				move.typeChangerBoosted = this.effect;
 			}
@@ -2005,7 +2026,7 @@ export const Items: { [k: string]: ModdedItemData; } = {
 		gen: 9,
 		shortDesc: "All abilities active at once.",
 		onTakeItem: false,
-		onPreStart(target) {
+		onStart(target) {
 			this.add('-item', target, 'Dungeon\'s Looplet');
 			this.add('-message', `${target.name} is holding a Dungeon's Looplet!`);
 			target.m.innates = Object.keys(target.species.abilities)
@@ -2018,13 +2039,7 @@ export const Items: { [k: string]: ModdedItemData; } = {
 				}
 			}
 		},
-		onDamage(damage, target, source, effect) {
-			if (target.species.abilities['0'].id && target.species.abilities['1'].id && target.species.abilities['H'].id && target.species.abilities['S'].id !== "magicguard") return;
-			if (effect.effectType !== 'Move') {
-				if (effect.effectType === 'Ability') this.add('-activate', source, 'ability: ' + effect.name);
-				return false;
-			}
-		},
+		rating: 3,
 	},
 	surprisebomb: {
 		name: "Surprise Bomb",
@@ -2035,7 +2050,7 @@ export const Items: { [k: string]: ModdedItemData; } = {
 		onStart(pokemon) {
 			this.actions.useMove("surprise", pokemon)
 			this.add('-enditem', pokemon, "Surprise Bomb");
-			this.useItem();
+			pokemon.useItem();
 		},
 		onModifyTypePriority: -1,
 		onModifyType(move, pokemon) {

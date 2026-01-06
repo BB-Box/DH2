@@ -633,6 +633,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		desc: "After a successful hit, has different effects based on the weather. Lowers foe's Speed in rain and damages foe by an extra 1/8 of its max HP in sun.",
 		shortDesc: "Lowers foe's Speed in rain, deals extra 12.5% in sun.",
 		basePower: 80,
+		viable: true,
 		onHit(target, source, move) {
 			switch (target?.effectiveWeather()) {
 			case 'raindance':
@@ -754,6 +755,20 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	lockon: {
 		inherit: true,
 		accuracy: 100,
+	},
+	lunge: {
+		inherit: true,
+		basePower: 85,
+		pp: 20,
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+			},
+		},
+		desc: "Has a 100% chance to lower the target's Defense by 1 stage.",
+		shortDesc: "100% chance to lower the target's Defense by 1.",
+		gen: 3,
 	},
 	megadrain: {
 		inherit: true,
@@ -940,6 +955,11 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		inherit: true,
 		accuracy: 100,
 	},
+	sacredsword: {
+		inherit: true,
+		gen: 3,
+		pp: 15,
+	},
 	sandstorm: {
 		inherit: true,
 		desc: "For 5 turns, the weather becomes Sandstorm. At the end of each turn except the last, all active Pokemon lose 1/16 of their maximum HP, rounded down, unless they are a Ground, Rock, or Steel type, or have the Sand Veil Ability. Fails if the current weather is Sandstorm.",
@@ -1042,6 +1062,11 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		recoil: [1, 4],
 		struggleRecoil: false,
 	},
+	suckerpunch: {
+		inherit: true,
+		basePower: 80,
+		gen: 3,
+	},
 	surf: {
 		inherit: true,
 		desc: "Power doubles if the target is using Dive.",
@@ -1051,6 +1076,29 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	swallow: {
 		inherit: true,
 		flags: {snatch: 1, heal: 1, metronome: 1},
+	},
+	swandive: {
+		num: 1112,
+		accuracy: 100,
+		basePower: 140,
+		category: "Physical",
+		name: "Swan Dive",
+		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move, unless the target was knocked out by this move.",
+		shortDesc: "Can't move next turn if target is not KOed.",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1, metronome: 1, protect: 1, mirror: 1, contact: 1},
+		onPrepareHit(target, pokemon, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', pokemon, "Brave Bird", target);
+		},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		secondary: null,
+		target: "normal",
+		type: "Flying",
+		gen: 3,
 	},
 	synthesis: {
 		inherit: true,
@@ -1209,6 +1257,11 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	wish: {
 		inherit: true,
 		flags: {snatch: 1, heal: 1, metronome: 1},
+	},
+	workup: {
+		inherit: true,
+		viable: true,
+		gen: 3,
 	},
 	wrap: {
 		inherit: true,

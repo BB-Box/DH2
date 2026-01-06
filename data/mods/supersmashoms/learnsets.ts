@@ -1,4 +1,16 @@
 export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
+	altariamega: {
+		learnset: {},
+	},
+	sceptilemega: {
+		learnset: {},
+	},
+	swampertmega: {
+		learnset: {},
+	},
+	venusaurmega: {
+		learnset: {},
+	},
 	moltresgalar: {
 		learnset: {
 			acrobatics: ["9M", "8M", "7M", "6M", "5M"],
@@ -176,6 +188,8 @@ export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
 			swift: ["9M", "8M"],
 			tailwind: ["9M"],
 			uturn: ["9M", "8M"],
+			defog: ["9E", "8E"],
+			roost: ["9E", "8E"],
 		},
 	},
 	mamoswine: {

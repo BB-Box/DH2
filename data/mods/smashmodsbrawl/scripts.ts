@@ -12,6 +12,29 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', "centiskorch").learnset.firstimpression = ["9L1"];
 		this.modData('Learnsets', "centiskorch").learnset.superpower = ["9L1"];
 		this.modData('Learnsets', "centiskorch").learnset.wildcharge = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.agility = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.breakingswipe = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.dracometeor = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.dragonbreath = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.dragonpulse = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.nastyplot = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.ominouswind = ["9L1"];
+		this.modData("Learnsets", "amaura").learnset.recover = ["9L1"];
+		delete this.modData('Learnsets', 'amaura').learnset.ancientpower;
+		delete this.modData('Learnsets', 'amaura').learnset.aurorabeam;
+		delete this.modData('Learnsets', 'amaura').learnset.auroraveil;
+		delete this.modData('Learnsets', 'amaura').learnset.avalanche;
+		delete this.modData('Learnsets', 'amaura').learnset.freezedry;
+		delete this.modData('Learnsets', 'amaura').learnset.frostbreath;
+		delete this.modData('Learnsets', 'amaura').learnset.meteorbeam;
+		delete this.modData('Learnsets', 'amaura').learnset.powdersnow;
+		delete this.modData('Learnsets', 'amaura').learnset.rockblast;
+		delete this.modData('Learnsets', 'amaura').learnset.rockpolish;
+		delete this.modData('Learnsets', 'amaura').learnset.rockslide;
+		delete this.modData('Learnsets', 'amaura').learnset.rockthrow;
+		delete this.modData('Learnsets', 'amaura').learnset.rocktomb;
+		delete this.modData('Learnsets', 'amaura').learnset.stealthrock;
+		delete this.modData('Learnsets', 'amaura').learnset.stoneedge;
 		this.modData('Learnsets', "aurorus").learnset.agility = ["9L1"];
 		this.modData('Learnsets', "aurorus").learnset.breakingswipe = ["9L1"];
 		this.modData('Learnsets', "aurorus").learnset.dracometeor = ["9L1"];
@@ -162,71 +185,154 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', "dialga").learnset.focusblast = ["9L1"];
 		this.modData('Learnsets', "dialga").learnset.trick = ["9L1"];
     	this.modData('Learnsets', 'gogoat').learnset.natureswrath = ['9M'];
-   	this.modData('Learnsets', 'gogoat').learnset.golemstrike = ['9L1'];
-	   this.modData('Learnsets', 'gogoat').learnset.stealthrock = ['9L1'];
-	   this.modData('Learnsets', 'gogoat').learnset.swordsdance = ['9L1'];
-	   this.modData('Learnsets', 'gogoat').learnset.stoneedge = ['9L1'];
+	   	this.modData('Learnsets', 'gogoat').learnset.golemstrike = ['9L1'];
+		this.modData('Learnsets', 'gogoat').learnset.stealthrock = ['9L1'];
+		this.modData('Learnsets', 'gogoat').learnset.swordsdance = ['9L1'];
+		this.modData('Learnsets', 'gogoat').learnset.stoneedge = ['9L1'];
+		this.modData('Learnsets', 'gyarados').learnset.acrobatics = ['9L1'];
+		this.modData('Learnsets', 'gyarados').learnset.ragingtorrent = ['9L1'];
+		this.modData('Learnsets', 'dhelmise').learnset.wavecrash = ['9L1'];
+		this.modData('Learnsets', 'dhelmise').learnset.waterfall = ['9L1'];
+		this.modData("Learnsets", "garbodor").learnset.knockoff = ["9L1"];
+		this.modData("Learnsets", "garbodor").learnset.earthquake = ["9L1"];
+		this.modData("Learnsets", "garbodor").learnset.mortalspin = ["9L1"];
+		this.modData("Learnsets", "garbodor").learnset.powerwhip = ["9L1"];
+		this.modData("Learnsets", "garbodor").learnset.barbbarrage = ["9L1"];
+		this.modData("Learnsets", "garbodor").learnset.strengthsap = ["9L1"];
+		this.modData("Learnsets", "garbodor").learnset.hammerarm = ["9L1"];
+		delete this.modData('Learnsets', 'kubfu').learnset.swordsdance;
+		delete this.modData('Learnsets', 'urshifu').learnset.swordsdance;
+		delete this.modData('Learnsets', 'houndour').learnset.incinerate;
+		this.modData("Learnsets", "ironleaves").learnset.partingshot = ["9L1"];
+		this.modData("Learnsets", "ironleaves").learnset.supercellslam = ["9L1"];
+		this.modData("Learnsets", "flittle").learnset.airslash = ["9L1"];
+		this.modData("Learnsets", "flittle").learnset.bravebird = ["9L1"];
+		this.modData("Learnsets", "flittle").learnset.shadowball = ["9L1"];
+		this.modData("Learnsets", "flittle").learnset.teleport = ["9L1"];
+		delete this.modData('Learnsets', 'skiddo').learnset.milkdrink;
+		delete this.modData('Learnsets', 'skiddo').learnset.grassyglide;
+		delete this.modData('Learnsets', 'skiddo').learnset.hiddenpower;
+		delete this.modData('Learnsets', 'gogoat').learnset.milkdrink;
+		delete this.modData('Learnsets', 'gogoat').learnset.grassyglide;
+		delete this.modData('Learnsets', 'gogoat').learnset.hiddenpower;
+		this.modData('Learnsets', 'gogoat').learnset.milkdrinkage = ['9L1'];
+		this.modData('Learnsets', 'gogoat').learnset.grassyglideage = ['9L1'];
+		this.modData("Learnsets", "clodsire").learnset.knockoff = ["9L1"];
+		this.modData("Learnsets", "clodsire").learnset.taunt = ["9L1"];
+		this.modData("Learnsets", "clodsire").learnset.crunch = ["9L1"];
+		this.modData("Learnsets", "clodsire").learnset.snarl = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.jetpunch = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.bulletpunch = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.machpunch = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.hammerarm = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.knockoff = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.slackoff = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.swordsdance = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.brickbreakvaporemons = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.lashoutvaporemons = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.stormthrowvaporemons = ["9L1"];
+		this.modData("Learnsets", "crabominable").learnset.sledgehammerblow = ["9L1"];
+		delete this.modData('Learnsets', 'crabrawler').learnset.brickbreak;
+		delete this.modData('Learnsets', 'crabominable').learnset.brickbreak;
+		delete this.modData('Learnsets', 'eevee').learnset.rest;
+		delete this.modData('Learnsets', 'eevee').learnset.sleeptalk;
+		delete this.modData('Learnsets', 'glaceon').learnset.rest;
+		delete this.modData('Learnsets', 'glaceon').learnset.sleeptalk;
+		this.modData("Learnsets", "glaceon").learnset.slackoffglacemons = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.earthpower = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.scorchingsands = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.chargebeam = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.stealthrock = ['9L1'];
+		this.modData('Learnsets', 'glaceon').learnset.quicksanddrain = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.restglacemons = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.sleeptalkglacemons = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.tripleaxelglacemons = ['9L1'];
+		delete this.modData('Learnsets', 'glaceon').learnset.tripleaxel;
+		this.modData("Learnsets", "glaceon").learnset.synchronoiseglacemons = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.salvestrike = ['9L1'];
+		this.modData("Learnsets", "glaceon").learnset.rainbowblast = ['9L1'];
+		// this.modData('Learnsets', 'glaceon').learnset.frostnip = ['9L1'];
+		this.modData('Learnsets', 'glaceon').learnset.breezeburn = ['9L1'];
+		this.modData('Learnsets', 'glaceon').learnset.breezeshock = ['9L1'];
+		this.modData('Learnsets', "yanmega").learnset.earthpower = ["9L1"];
+		this.modData('Learnsets', 'ampharos').learnset.overvoltrail = ['9L1'];
+		this.modData('Learnsets', 'ampharos').learnset.parabolicchargeglacemons = ['9L1'];
+		this.modData('Learnsets', 'ampharos').learnset.sleeptalkglacemons = ['9L1'];
+		this.modData('Learnsets', 'ampharos').learnset.restglacemons = ['9L1'];
+		this.modData("Learnsets", "toxtricity").learnset.icepunch = ["9L1"];
+		this.modData("Learnsets", "toxtricity").learnset.barbbarrage = ["9L1"];
+		this.modData("Learnsets", "toxtricity").learnset.needlearm = ["9L1"];
+		this.modData('Learnsets', 'hatterene').learnset.peekaboo = ['9L1'];
+		this.modData('Learnsets', 'hatterene').learnset.healingstones = ['9L1'];
+		this.modData('Learnsets', 'hatterene').learnset.lifedewvaporemons = ['9L1'];
+		this.modData('Learnsets', 'hatterene').learnset.psychicnoisevaporemons = ['9L1'];
+		delete this.modData('Learnsets', 'hatterene').learnset.psychicnoise;
+		delete this.modData('Learnsets', 'hatterene').learnset.lifedew;
+		delete this.modData('Learnsets', 'hatenna').learnset.lifedew;
+		delete this.modData('Learnsets', 'hattrem').learnset.lifedew;
+
 	},
-  pokemon: {
-	inherit: true,
-  	lostItemForDelibird: null,
-  	setItem(item: string | Item, source?: Pokemon, effect?: Effect) {
-  		if (!this.hp) return false;
-  		if (this.itemState.knockedOff) return false;
-  		if (typeof item === 'string') item = this.battle.dex.items.get(item);
-  
-  		const effectid = this.battle.effect ? this.battle.effect.id : '';
-  		const RESTORATIVE_BERRIES = new Set([
-  			'leppaberry', 'aguavberry', 'enigmaberry', 'figyberry', 'iapapaberry', 'magoberry', 'sitrusberry', 'wikiberry', 'oranberry',
-  		] as ID[]); // manually pasted in const RESTORATIVE_BERRIES because its absence caused a bug
-  		if (RESTORATIVE_BERRIES.has('leppaberry' as ID)) {
-  			const inflicted = ['trick', 'switcheroo'].includes(effectid);
-  			const external = inflicted && source && !source.isAlly(this);
-  			this.pendingStaleness = external ? 'external' : 'internal';
-  		} else {
-  			this.pendingStaleness = undefined;
-  		}
-  		const oldItem = this.getItem();
-  		const oldItemState = this.itemState;
-  		this.item = item.id;
-  		this.itemState = {id: item.id, target: this};
-  		if (oldItem.exists) this.battle.singleEvent('End', oldItem, oldItemState, this);
-  		if (item.id) {
-  			this.battle.singleEvent('Start', item, this.itemState, this, source, effect);
-  		}
-  		return true;
-  	},
-	getDynamaxRequest(skipChecks?: boolean) {
-		// {gigantamax?: string, maxMoves: {[k: string]: string} | null}[]
-		if (!skipChecks) {
-			if (!this.side.canDynamaxNow()) return;
-			if (
-				this.species.isMega || this.species.isPrimal || this.species.forme === "Ultra" || this.canMegaEvo || this.item !== 'wishingstone'
-			) {
-				return;
+	pokemon: {
+		inherit: true,
+	  	lostItemForDelibird: null,
+	  	setItem(item: string | Item, source?: Pokemon, effect?: Effect) {
+	  		if (!this.hp) return false;
+	  		if (this.itemState.knockedOff) return false;
+	  		if (typeof item === 'string') item = this.battle.dex.items.get(item);
+	  
+	  		const effectid = this.battle.effect ? this.battle.effect.id : '';
+	  		const RESTORATIVE_BERRIES = new Set([
+	  			'leppaberry', 'aguavberry', 'enigmaberry', 'figyberry', 'iapapaberry', 'magoberry', 'sitrusberry', 'wikiberry', 'oranberry',
+	  		] as ID[]); // manually pasted in const RESTORATIVE_BERRIES because its absence caused a bug
+	  		if (RESTORATIVE_BERRIES.has('leppaberry' as ID)) {
+	  			const inflicted = ['trick', 'switcheroo'].includes(effectid);
+	  			const external = inflicted && source && !source.isAlly(this);
+	  			this.pendingStaleness = external ? 'external' : 'internal';
+	  		} else {
+	  			this.pendingStaleness = undefined;
+	  		}
+	  		const oldItem = this.getItem();
+	  		const oldItemState = this.itemState;
+	  		this.item = item.id;
+	  		this.itemState = {id: item.id, target: this};
+	  		if (oldItem.exists) this.battle.singleEvent('End', oldItem, oldItemState, this);
+	  		if (item.id) {
+	  			this.battle.singleEvent('Start', item, this.itemState, this, source, effect);
+	  		}
+	  		return true;
+  		},
+		getDynamaxRequest(skipChecks?: boolean) {
+			// {gigantamax?: string, maxMoves: {[k: string]: string} | null}[]
+			if (!skipChecks) {
+				const teramaxMons = ['garbodor', 'centiskorch'];
+				if (!this.side.canDynamaxNow()) return;
+				if (
+					!teramaxMons.includes(this.baseSpecies.id) || this.item !== 'wishingstone' || this.species.isMega || this.species.isPrimal || this.species.forme === "Ultra" || this.canMegaEvo
+				) {
+					return;
+				}
+				// Some pokemon species are unable to dynamax
+				if (this.species.cannotDynamax || this.illusion?.species.cannotDynamax) return;
 			}
-			// Some pokemon species are unable to dynamax
-			if (this.species.cannotDynamax || this.illusion?.species.cannotDynamax) return;
-		}
-		const result: DynamaxOptions = {maxMoves: []};
-		let atLeastOne = false;
-		for (const moveSlot of this.moveSlots) {
-			const move = this.battle.dex.moves.get(moveSlot.id);
-			const maxMove = this.battle.actions.getMaxMove(move, this);
-			if (maxMove) {
-				if (this.maxMoveDisabled(move)) {
-					result.maxMoves.push({move: maxMove.id, target: maxMove.target, disabled: true});
-				} else {
-					result.maxMoves.push({move: maxMove.id, target: maxMove.target});
-					atLeastOne = true;
+			const result: DynamaxOptions = {maxMoves: []};
+			let atLeastOne = false;
+			for (const moveSlot of this.moveSlots) {
+				const move = this.battle.dex.moves.get(moveSlot.id);
+				const maxMove = this.battle.actions.getMaxMove(move, this);
+				if (maxMove) {
+					if (this.maxMoveDisabled(move)) {
+						result.maxMoves.push({move: maxMove.id, target: maxMove.target, disabled: true});
+					} else {
+						result.maxMoves.push({move: maxMove.id, target: maxMove.target});
+						atLeastOne = true;
+					}
 				}
 			}
-		}
-		if (!atLeastOne) return;
-		if (this.canGigantamax) result.gigantamax = this.canGigantamax;
-		return result;
+			if (!atLeastOne) return;
+			if (this.canGigantamax) result.gigantamax = this.canGigantamax;
+			return result;
+		},
 	},
-  },
 	side: {
 		inherit: true,
 		constructor(name: string, battle: Battle, sideNum: number, team: PokemonSet[]) {
@@ -282,8 +388,8 @@ export const Scripts: ModdedBattleScriptsData = {
 				zMove: false,
 				mega: false,
 				ultra: false,
-				terastallize: false,
 				dynamax: false,
+				terastallize: false,
 			};
 	
 			// old-gens
@@ -447,8 +553,14 @@ export const Scripts: ModdedBattleScriptsData = {
 			return true;
 		},
 		canDynamaxNow(): boolean {
-			if (this.battle.gen === 9) return false;
-			return true;
+			//if (this.battle.gen === 9) return false;
+			// In multi battles, players on a team are alternatingly given the option to dynamax each turn
+			// On turn 1, the players on their team's respective left have the first chance (p1 and p2)
+			if (this.battle.gameType === 'multi' && this.battle.turn % 2 !== [1, 1, 0, 0][this.n]) return false;
+			// if (this.battle.gameType === 'multitriples' && this.battle.turn % 3 !== [1, 1, 2, 2, 0, 0][this.side.n]) {
+			//		return false;
+			// }
+			return !this.dynamaxUsed;
 		},
 		addFishingTokens(amount: number) {
 			if (amount === 0 || Number.isNaN(amount)) return false;
@@ -493,13 +605,16 @@ export const Scripts: ModdedBattleScriptsData = {
 			}
 
 			let type = pokemon.teraType;
+			let canTeraFromAbility = false;
 			if (pokemon.set.ability === 'I Love Fishing') {
+				canTeraFromAbility = true;
 				type = 'Water';
 			}
-			if (pokemon.set.ability === 'Racer\'s Spirit') {
+			else if (pokemon.set.ability === 'Racer\'s Spirit') {
+				canTeraFromAbility = true;
 				type = 'Steel';
 			}
-			if (['zapdos', 'bigcrammer'].includes(pokemon.species.name) && pokemon.teraType !== 'Bug') {
+			if (['Zapdos', 'Big Crammer', 'Houndoom'].includes(pokemon.species.name) && !canTeraFromAbility && pokemon.teraType !== 'Bug') {
 				pokemon.addVolatile('bigbutton');
 				return;
 			}
@@ -511,8 +626,17 @@ export const Scripts: ModdedBattleScriptsData = {
 			pokemon.addedType = '';
 			pokemon.knownType = true;
 			pokemon.apparentType = type;
+			pokemon.side.addSideCondition('teraused', pokemon);
 			if (pokemon.species.baseSpecies === 'Ogerpon') {
 				const tera = pokemon.species.id === 'ogerpon' ? 'tealtera' : 'tera';
+				pokemon.formeChange(pokemon.species.id + tera, null, true);
+			}
+			if (pokemon.species.baseSpecies === 'Clodsire') {
+				const tera = pokemon.species.id === 'clodsire' ? 'tera' : 'tera';
+				pokemon.formeChange(pokemon.species.id + tera, null, true);
+			}
+			if (pokemon.species.baseSpecies === 'Chesnaught') {
+				const tera = pokemon.species.id === 'chesnaught' ? 'basetera' : 'tera';
 				pokemon.formeChange(pokemon.species.id + tera, null, true);
 			}
 			if (pokemon.species.name === 'Terapagos-Terastal' && type === 'Stellar') {
@@ -646,6 +770,130 @@ export const Scripts: ModdedBattleScriptsData = {
 				}
 			}
 			return hitResults;
+		},
+		getZMove(move: Move, pokemon: Pokemon, skipChecks?: boolean): string | undefined {
+			const Z_MOVES: {readonly [k: string]: string} = {
+				Poison: "Acid Downpour",
+				Fighting: "All-Out Pummeling",
+				Dark: "Black Hole Eclipse",
+				Grass: "Bloom Doom",
+				Normal: "Breakneck Blitz",
+				Rock: "Continental Crush",
+				Steel: "Corkscrew Crash",
+				Dragon: "Devastating Drake",
+				Electric: "Gigavolt Havoc",
+				Water: "Hydro Vortex",
+				Fire: "Inferno Overdrive",
+				Ghost: "Never-Ending Nightmare",
+				Bug: "Savage Spin-Out",
+				Psychic: "Shattered Psyche",
+				Ice: "Subzero Slammer",
+				Flying: "Supersonic Skystrike",
+				Ground: "Tectonic Rage",
+				Fairy: "Twinkle Tackle",
+				Stellar: "Tera Triple Basedball Barrage",
+			};
+			const item = pokemon.getItem();
+			if (!skipChecks) {
+				if (pokemon.side.zMoveUsed) return;
+				if (!item.zMove) return;
+				if (item.itemUser && !item.itemUser.includes(pokemon.species.name)) return;
+				const moveData = pokemon.getMoveData(move);
+				// Draining the PP of the base move prevents the corresponding Z-move from being used.
+				if (!moveData?.pp) return;
+			}
+
+			if (item.zMoveFrom) {
+				if (move.name === item.zMoveFrom) return item.zMove as string;
+			} else if (item.zMove === true) {
+				if (move.type === item.zMoveType || item.name === 'Stellarium Z') {
+					if (move.category === "Status") {
+						return move.name;
+					} else if (move.zMove?.basePower) {
+						if (item.name === 'Stellarium Z') return "Tera Triple Basedball Barrage";
+						else return Z_MOVES[move.type];
+					}
+				}
+			}
+		},
+		getActiveZMove(move: Move, pokemon: Pokemon): ActiveMove {
+			const Z_MOVES: {readonly [k: string]: string} = {
+				Poison: "Acid Downpour",
+				Fighting: "All-Out Pummeling",
+				Dark: "Black Hole Eclipse",
+				Grass: "Bloom Doom",
+				Normal: "Breakneck Blitz",
+				Rock: "Continental Crush",
+				Steel: "Corkscrew Crash",
+				Dragon: "Devastating Drake",
+				Electric: "Gigavolt Havoc",
+				Water: "Hydro Vortex",
+				Fire: "Inferno Overdrive",
+				Ghost: "Never-Ending Nightmare",
+				Bug: "Savage Spin-Out",
+				Psychic: "Shattered Psyche",
+				Ice: "Subzero Slammer",
+				Flying: "Supersonic Skystrike",
+				Ground: "Tectonic Rage",
+				Fairy: "Twinkle Tackle",
+				Stellar: "Tera Triple Basedball Barrage",
+			};
+			let item;
+			if (pokemon) {
+				item = pokemon.getItem();
+				if (move.name === item.zMoveFrom) {
+					const zMove = this.dex.getActiveMove(item.zMove as string);
+					zMove.isZOrMaxPowered = true;
+					return zMove;
+				}
+			}
+
+			if (move.category === 'Status') {
+				const zMove = this.dex.getActiveMove(move);
+				zMove.isZ = true;
+				zMove.isZOrMaxPowered = true;
+				return zMove;
+			}
+			let zMove = this.dex.getActiveMove(Z_MOVES[move.type]);
+			if(item && item.name === 'Stellarium Z') zMove = this.dex.getActiveMove("Tera Triple Basedball Barrage");
+			zMove.basePower = move.zMove!.basePower!;
+			zMove.category = move.category;
+			// copy the priority for Quick Guard
+			zMove.priority = move.priority;
+			zMove.isZOrMaxPowered = true;
+			return zMove;
+		},
+		canZMove(pokemon: Pokemon) {
+			if (pokemon.side.zMoveUsed ||
+				(pokemon.transformed &&
+					(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra"))
+			) return;
+			const item = pokemon.getItem();
+			if (!item.zMove) return;
+			if (item.itemUser && !item.itemUser.includes(pokemon.species.name)) return;
+			let atLeastOne = false;
+			let mustStruggle = true;
+			const zMoves: ZMoveOptions = [];
+			for (const moveSlot of pokemon.moveSlots) {
+				if (moveSlot.pp <= 0) {
+					zMoves.push(null);
+					continue;
+				}
+				if (!moveSlot.disabled) {
+					mustStruggle = false;
+				}
+				const move = this.dex.moves.get(moveSlot.move);
+				let zMoveName = this.getZMove(move, pokemon, true) || '';
+				if (zMoveName) {
+					const zMove = this.dex.moves.get(zMoveName);
+					if (!zMove.isZ && zMove.category === 'Status') zMoveName = "Z-" + zMoveName;
+					zMoves.push({move: zMoveName, target: zMove.target});
+				} else {
+					zMoves.push(null);
+				}
+				if (zMoveName) atLeastOne = true;
+			}
+			if (atLeastOne && !mustStruggle) return zMoves;
 		},
 	},
 	battle: {
@@ -1012,5 +1260,118 @@ export const Scripts: ModdedBattleScriptsData = {
 			target.addVolatile('healed');
 			return finalDamage;
 		},
+	},
+	
+	queue: {
+		resolveAction(action: ActionChoice, midTurn = false): Action[] {
+			if (!action) throw new Error(`Action not passed to resolveAction`);
+			if (action.choice === 'pass') return [];
+			const actions = [action];
+
+			if (!action.side && action.pokemon) action.side = action.pokemon.side;
+			if (!action.move && action.moveid) action.move = this.battle.dex.getActiveMove(action.moveid);
+			if (!action.order) {
+				const orders: {[choice: string]: number} = {
+					team: 1,
+					start: 2,
+					instaswitch: 3,
+					beforeTurn: 4,
+					beforeTurnMove: 5,
+					revivalblessing: 6,
+					epicbeam: 6,
+
+					runUnnerve: 100,
+					runSwitch: 101,
+					runPrimal: 102,
+					switch: 103,
+					megaEvo: 104,
+					megaEvoX: 104,
+					megaEvoY: 104,
+					runDynamax: 105,
+					terastallize: 106,
+					priorityChargeMove: 107,
+
+					shift: 200,
+					// default is 200 (for moves)
+
+					residual: 300,
+				};
+				if (action.choice in orders) {
+					action.order = orders[action.choice];
+				} else {
+					action.order = 200;
+					if (!['move', 'event'].includes(action.choice)) {
+						throw new Error(`Unexpected orderless action ${action.choice}`);
+					}
+				}
+			}
+			if (!midTurn) {
+				if (action.choice === 'move') {
+					if (!action.maxMove && !action.zmove && action.move.beforeTurnCallback) {
+						actions.unshift(...this.resolveAction({
+							choice: 'beforeTurnMove', pokemon: action.pokemon, move: action.move, targetLoc: action.targetLoc,
+						}));
+					}
+					if (action.mega && !action.pokemon.isSkyDropped()) {
+						actions.unshift(...this.resolveAction({
+							choice: 'megaEvo',
+							pokemon: action.pokemon,
+						}));
+					}
+					if (action.megax && !action.pokemon.isSkyDropped()) {
+						actions.unshift(...this.resolveAction({
+							choice: 'megaEvoX',
+							pokemon: action.pokemon,
+						}));
+					}
+					if (action.megay && !action.pokemon.isSkyDropped()) {
+						actions.unshift(...this.resolveAction({
+							choice: 'megaEvoY',
+							pokemon: action.pokemon,
+						}));
+					}
+					if (action.terastallize && !action.pokemon.terastallized) {
+						actions.unshift(...this.resolveAction({
+							choice: 'terastallize',
+							pokemon: action.pokemon,
+						}));
+					}
+					if (action.maxMove && !action.pokemon.volatiles['dynamax']) {
+						actions.unshift(...this.resolveAction({
+							choice: 'runDynamax',
+							pokemon: action.pokemon,
+						}));
+					}
+					if (!action.maxMove && !action.zmove && action.move.priorityChargeCallback) {
+						actions.unshift(...this.resolveAction({
+							choice: 'priorityChargeMove',
+							pokemon: action.pokemon,
+							move: action.move,
+						}));
+					}
+					action.fractionalPriority = this.battle.runEvent('FractionalPriority', action.pokemon, null, action.move, 0);
+				} else if (['switch', 'instaswitch'].includes(action.choice)) {
+					if (typeof action.pokemon.switchFlag === 'string') {
+						action.sourceEffect = this.battle.dex.moves.get(action.pokemon.switchFlag as ID) as any;
+					}
+					action.pokemon.switchFlag = false;
+				}
+			}
+
+			const deferPriority = this.battle.gen === 7 && action.mega && action.mega !== 'done';
+			if (action.move) {
+				let target = null;
+				action.move = this.battle.dex.getActiveMove(action.move);
+
+				if (!action.targetLoc) {
+					target = this.battle.getRandomTarget(action.pokemon, action.move);
+					// TODO: what actually happens here?
+					if (target) action.targetLoc = action.pokemon.getLocOf(target);
+				}
+				action.originalTarget = action.pokemon.getAtLoc(action.targetLoc);
+			}
+			if (!deferPriority) this.battle.getActionSpeed(action);
+			return actions as any;
+		}
 	},
 };

@@ -98,4 +98,26 @@ export function learnsetUpdate(dex: ModdedDex) {
 	dex.modData('Learnsets', 'celebi').learnset.grasspledge = ['3M'];
 	dex.modData('Learnsets', 'sunflora').learnset.grasspledge = ['3M'];
 	dex.modData('Learnsets', 'castform').learnset.grasspledge = ['3M'];
+	//Slate 4
+	dex.modData('Learnsets', 'lanturn').learnset.whirlpool = ['3M'];
+	dex.modData('Learnsets', 'lanturn').learnset.healbell = ['3M'];
+	dex.modData('Learnsets', 'ampharos').learnset.calmmind = ['3M'];
+	dex.modData('Learnsets', 'tauros').learnset.workup = ['3M'];
+	dex.modData('Learnsets', 'medicham').learnset.workup = ['3M'];
+	dex.modData('Learnsets', 'poliwrath').learnset.workup = ['3M'];
+	//Slate 5
+	dex.modData('Learnsets', 'rapidash').learnset.megahorn = ['3M'];
+	dex.modData('Learnsets', 'rapidash').learnset.jumpkick = ['3M'];
+	dex.modData('Learnsets', 'rapidash').learnset.workup = ['3M'];
+	delete dex.modData('Learnsets', 'rapidash').learnset.hypnosis;
+	delete dex.modData('Learnsets', 'ponyta').learnset.hypnosis;
+	dex.modData('Learnsets', 'shiftry').learnset.rockslide = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.heatwave = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.lowkick = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.willowisp = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.leafblade = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.pursuit = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.nightslash = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.workup = ['3M'];
+	dex.modData('Learnsets', 'shiftry').learnset.suckerpunch = ['3M'];
 }

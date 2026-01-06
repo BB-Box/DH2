@@ -135,4 +135,69 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "CC OU",
 		doublesTier: "DCC OU",
 	},
+		bowser: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	bowsermega: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	peach: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	peachmega: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	midbus: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	midbusmega: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	sunflower: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	svarog: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	gruntilda: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	corrin: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	morian: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	monokuma: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	crustkingkhann: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	usapyon: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	usapyonmega: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+	djoctavio: {
+		tier: "CC OU",
+		doublesTier: "DCC OU",
+	},
+
 };

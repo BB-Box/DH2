@@ -1,4 +1,110 @@
 export const Items: {[itemid: string]: ModdedItemData} = {
+	// ZA mega stones
+	barbaracite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	chandelurite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	chesnaughtite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	clefablite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	delphoxite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	dragalgite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	dragoninite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	drampanite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	eelektrossite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	emboarite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	excadrite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	falinksite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	feraligite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	floettite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	froslassite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	greninjite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	hawluchanite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	malamarite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	meganiumite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	pyroarite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	scolipite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	scraftinite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	skarmorite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	starminite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	victreebelite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	zygardite: {
+		inherit: true,
+		isNonstandard: null,
+	},
+	// end of ZA mega stones
     paraorb: {
 		name: "Para Orb",
 		spritenum: 515,
@@ -118,20 +224,6 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 		gen: 9,
 		desc: "If held by a Machamp, this item allows it to Mega Evolve in battle.",
 	},
-	meganite: {
-		name: "Meganite",
-		spritenum: 578,
-		megaStone: "Meganium-Mega",
-		megaEvolves: "Meganium",
-		itemUser: ["Meganium"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
-		},
-		num: -9,
-		gen: 9,
-		desc: "If held by a Meganium, this item allows it to Mega Evolve in battle.",
-	},
 	typhlosionite: {
 		name: "Typhlosionite",
 		spritenum: 578,
@@ -142,23 +234,9 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -10,
+		num: -9,
 		gen: 9,
 		desc: "If held by a Typhlosion or a Typhlosion-Hisui, this item allows it to Mega Evolve in battle.",
-	},
-	feraligatrite: {
-		name: "Feraligatrite",
-		spritenum: 578,
-		megaStone: "Feraligatr-Mega",
-		megaEvolves: "Feraligatr",
-		itemUser: ["Feraligatr"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
-		},
-		num: -11,
-		gen: 9,
-		desc: "If held by a Feraligatr, this item allows it to Mega Evolve in battle.",
 	},
 	noctowlite: {
 		name: "Noctowlite",
@@ -170,7 +248,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -12,
+		num: -10,
 		gen: 9,
 		desc: "If held by a Noctowl, this item allows it to Mega Evolve in battle.",
 	},
@@ -184,7 +262,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -13,
+		num: -11,
 		gen: 9,
 		desc: "If held by a Crobat, this item allows it to Mega Evolve in battle.",
 	},
@@ -198,7 +276,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -14,
+		num: -12,
 		gen: 9,
 		desc: "If held by a Flygon, this item allows it to Mega Evolve in battle.",
 	},
@@ -212,7 +290,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -15,
+		num: -13,
 		gen: 9,
 		desc: "If held by a Cacturne, this item allows it to Mega Evolve in battle.",
 	},
@@ -226,7 +304,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -16,
+		num: -14,
 		gen: 9,
 		desc: "If held by a Whiscash, this item allows it to Mega Evolve in battle.",
 	},
@@ -240,7 +318,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -17,
+		num: -15,
 		gen: 9,
 		desc: "If held by a Castform, this item allows it to Mega Evolve in battle.",
 	},
@@ -254,23 +332,37 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -18,
+		num: -16,
 		gen: 9,
 		desc: "If held by a Yanmega, this item allows it to Mega Evolve in battle.",
 	},
-	froslassite: {
-		name: "Froslassite",
+	serperiorite: {
+		name: "Serperiorite",
 		spritenum: 578,
-		megaStone: "Froslass-Mega",
-		megaEvolves: "Froslass",
-		itemUser: ["Froslass"],
+		megaStone: "Serperior-Mega",
+		megaEvolves: "Serperior",
+		itemUser: ["Serperior"],
 		onTakeItem(item, source) {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -19,
+		num: -17,
 		gen: 9,
-		desc: "If held by a Froslass, this item allows it to Mega Evolve in battle.",
+		desc: "If held by a Serperior, this item allows it to Mega Evolve in battle.",
+	},
+	samurottite: {
+		name: "Samurottite",
+		spritenum: 578,
+		megaStone: "Samurott-Mega",
+		megaEvolves: "Samurott",
+		itemUser: ["Samurott"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -18,
+		gen: 9,
+		desc: "If held by a Samurott, this item allows it to Mega Evolve in battle.",
 	},
 	krookodite: {
 		name: "Krookodite",
@@ -282,7 +374,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -20,
+		num: -19,
 		gen: 9,
 		desc: "If held by a Krookodile, this item allows it to Mega Evolve in battle.",
 	},
@@ -296,7 +388,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -21,
+		num: -20,
 		gen: 9,
 		desc: "If held by a Crustle, this item allows it to Mega Evolve in battle.",
 	},
@@ -310,50 +402,9 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -22,
+		num: -21,
 		gen: 9,
 		desc: "If held by a Zoroark, this item allows it to Mega Evolve in battle.",
-	},
-	chesnaughtite: {
-		name: "Chesnaughtite",
-		spritenum: 578,
-		megaStone: "Chesnaught-Mega",
-		megaEvolves: "Chesnaught",
-		itemUser: ["Chesnaught"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
-		},
-		num: -23,
-		gen: 9,
-		desc: "If held by a Chesnaught, this item allows it to Mega Evolve in battle.",
-	},
-	delphite: {
-		name: "Delphite",
-		spritenum: 578,
-		megaStone: "Delphox-Mega",
-		megaEvolves: "Delphox",
-		itemUser: ["Delphox"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
-		},
-		num: -24,
-		gen: 9,
-		desc: "If held by a Delphox, this item allows it to Mega Evolve in battle.",
-	},
-	greninjinite: {
-		name: "Greninjinite",
-		megaStone: "Greninja-Mega",
-		megaEvolves: "Greninja",
-		itemUser: ["Greninja"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
-		},
-		num: -25,
-		gen: 9,
-		desc: "If held by a Greninja, this item allows it to Mega Evolve in battle.",
 	},
 	ribombinite: {
 		name: "Ribombinite",
@@ -365,7 +416,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -26,
+		num: -22,
 		gen: 9,
 		desc: "If held by a Ribombee, this item allows it to Mega Evolve in battle.",
 	},
@@ -379,23 +430,9 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -27,
+		num: -23,
 		gen: 9,
 		desc: "If held by a Salazzle, this item allows it to Mega Evolve in battle.",
-	},
-	golisopodite: {
-		name: "Golisopodite",
-		spritenum: 578,
-		megaStone: "Golisopod-Mega",
-		megaEvolves: "Golisopod",
-		itemUser: ["Golisopod"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
-		},
-		num: -28,
-		gen: 9,
-		desc: "If held by a Golisopod, this item allows it to Mega Evolve in battle.",
 	},
 	dhelmite: {
 		name: "Dhelmite",
@@ -407,7 +444,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -29,
+		num: -25,
 		gen: 9,
 		desc: "If held by a Dhelmise, this item allows it to Mega Evolve in battle.",
 	},
@@ -420,9 +457,23 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -30,
+		num: -26,
 		gen: 9,
 		desc: "If held by a Cramorant, this item allows it to Mega Evolve in battle.",
+	},
+	toxtricitite: {
+		name: "Toxtricitite",
+		spritenum: 578,
+		megaStone: "Toxtricity-Mega",
+		megaEvolves: "Toxtricity",
+		itemUser: ["Toxtricity", "Toxtricity-Low-Key"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -27,
+		gen: 9,
+		desc: "If held by a Toxtricity, this item allows it to Mega Evolve in battle.",
 	},
 	centiskorchitex: {
 		name: "Centiskorchite X",
@@ -434,7 +485,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -31,
+		num: -28,
 		gen: 9,
 		desc: "If held by a Centiskorch, this item allows it to Mega Evolve in battle.",
 	},
@@ -448,7 +499,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -32,
+		num: -29,
 		gen: 9,
 		desc: "If held by a Centiskorch, this item allows it to Mega Evolve in battle.",
 	},
@@ -462,7 +513,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -33,
+		num: -30,
 		gen: 9,
 		desc: "If held by a Kleavor, this item allows it to Mega Evolve in battle.",
 	},
@@ -475,9 +526,23 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -34,
+		num: -31,
 		gen: 9,
 		desc: "If held by a Meowscarada, this item allows it to Mega Evolve in battle.",
+	},
+	skeledite: { 
+		name: "Skeledite",
+		spritenum: 578,
+		megaStone: "Skeledirge-Mega",
+		megaEvolves: "Skeledirge",
+		itemUser: ["Skeledirge"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -32,
+		gen: 9,
+		desc: "If held by a Skeledirge, this item allows it to Mega Evolve in battle.",
 	},
 	quaquavite: {
 		name: "Quaquavite",
@@ -488,7 +553,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -35,
+		num: -33,
 		gen: 9,
 		desc: "If held by a Quaquaval, this item allows it to Mega Evolve in battle.",
 	},
@@ -502,9 +567,23 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		num: -2048,
+		num: -34,
 		gen: 9,
 		desc: "If held by a Rabsca, this item allows it to Mega Evolve in battle.",
+	},
+	brambleghite: {
+		name: "Brambleghite",
+		spritenum: 578,
+		megaStone: "Brambleghast-Mega",
+		megaEvolves: "Brambleghast",
+		itemUser: ["Brambleghast"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+		num: -35,
+		gen: 9,
+		desc: "If held by a Brambleghast, this item allows it to Mega Evolve in battle.",
 	},
 	baskironite: {
 		name: "Baskironite",
@@ -602,7 +681,7 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			basePower: 30,
 		},
 		num: -41,
-		gen: 4,
+		gen: 9,
     	shortDesc: "Pokemon with the ability Honey Gather or Sweet Veil heal 12.5% when holding this item. Heals status.",
 		onAfterSetStatus(status, pokemon) {
 			pokemon.eatItem();
@@ -656,26 +735,6 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 		},
 		itemUser: ["Clamperl", "Huntail"],
 	},
-	awakeningeye: {
-		name: "Awakening Eye",
-		shortDesc: "If held by a Meowstic, its Sp. Atk and its Sp. Def are x1.5.",
-		// spritenum: 699,
-		onModifySpAPriority: 2,
-		onModifySpA(spa, pokemon) {
-			if (pokemon.baseSpecies.name === 'Meowstic' || pokemon.baseSpecies.name === 'Meowstic-F') {
-				return this.chainModify(1.5);
-			}
-		},
-		onModifySpDPriority: 2,
-		onModifySpD(spd, pokemon) {
-			if (pokemon.baseSpecies.name === 'Meowstic' || pokemon.baseSpecies.name === 'Meowstic-F') {
-				return this.chainModify(1.5);
-			}
-		},
-		itemUser: ["Meowstic", "Meowstic-F"],
-		num: -43,
-		gen: 9,
-	},
 	identitycard: { 
 		name: "Identity Card",
 		shortDesc: "Holder's typing cannot be changed by any move.",
@@ -721,30 +780,46 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 	},
 	lightball: {
 		inherit: true,
+		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			const group1 = ["Pikachu", "Pichu", "Plusle", "Minun", "Pachirisu", "Emolga", "Dedenne", "Togedemaru"];
-			const group2 = ["Raichu", "Raichu-Alola", "Morpeko", "Morpeko-Hangry", "Pawmi", "Pawmo", "Pawmot"];
-			if (pokemon.baseSpecies.baseSpecies.includes(group1)) {
+			if (pokemon.baseSpecies.baseSpecies === 'Pikachu') {
 				return this.chainModify(2);
 			}
-			else if (pokemon.baseSpecies.baseSpecies.includes(group2)) {
+			if (pokemon.baseSpecies.baseSpecies === 'Raichu' || pokemon.baseSpecies.baseSpecies === 'Raichu-Alola' || pokemon.baseSpecies.baseSpecies === 'Plusle' || pokemon.baseSpecies.baseSpecies === 'Togedemaru' || pokemon.baseSpecies.baseSpecies === 'Morpeko' || pokemon.baseSpecies.baseSpecies === 'Morpeko-Hangry' || pokemon.baseSpecies.baseSpecies === 'Pawmot') {
 				return this.chainModify(1.5);
 			}
 		},
+		onModifyDefPriority: 1,
+		onModifyDef(def, pokemon) {
+			if (pokemon.baseSpecies.baseSpecies === 'Minun' || pokemon.baseSpecies.baseSpecies === 'Pachirisu' || pokemon.baseSpecies.baseSpecies === 'Togedemaru') {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			const group1 = ["Pikachu", "Pichu", "Plusle", "Minun", "Pachirisu", "Emolga", "Dedenne", "Togedemaru"];
-			const group2 = ["Raichu", "Raichu-Alola", "Morpeko", "Morpeko-Hangry", "Pawmi", "Pawmo", "Pawmot"];
-			if (pokemon.baseSpecies.baseSpecies.includes(group1)) {
+			if (pokemon.baseSpecies.baseSpecies === 'Pikachu') {
 				return this.chainModify(2);
 			}
-			else if (pokemon.baseSpecies.baseSpecies.includes(group2)) {
+			if (pokemon.baseSpecies.baseSpecies === 'Raichu' || pokemon.baseSpecies.baseSpecies === 'Raichu-Alola' || pokemon.baseSpecies.baseSpecies === 'Plusle' || pokemon.baseSpecies.baseSpecies === 'Dedenne') {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpDPriority: 1,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.baseSpecies.baseSpecies === 'Minun' || pokemon.baseSpecies.baseSpecies === 'Emolga' || pokemon.baseSpecies.baseSpecies === 'Pawmot') {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpePriority: 1,
+		onModifySpe(spe, pokemon) {
+			if (pokemon.baseSpecies.baseSpecies === 'Pachirisu' || pokemon.baseSpecies.baseSpecies === 'Emolga' || pokemon.baseSpecies.baseSpecies === 'Dedenne' || pokemon.baseSpecies.baseSpecies === 'Morpeko' || pokemon.baseSpecies.baseSpecies === 'Morpeko-Hangry') {
 				return this.chainModify(1.5);
 			}
 		},
 		itemUser: ["Pikachu", "Pikachu-Cosplay", "Pikachu-Rock-Star", "Pikachu-Belle", "Pikachu-Pop-Star", "Pikachu-PhD", "Pikachu-Libre", "Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh", "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola", "Pikachu-Partner", "Pikachu-Starter", "Pikachu-World",
 			"Pichu", "Plusle", "Minun", "Pachirisu", "Emolga", "Dedenne", "Togedemaru", "Raichu", "Raichu-Alola", "Morpeko", "Morpeko-Hangry", "Pawmi", "Pawmo", "Pawmot"
 		],
-		shortDesc: "If held by a Pikachu, or a Pikaclone, its Attack and Sp. Atk are doubled or multiplied by 1.5.",
+		shortDesc: "If held by a Pikachu, or a Pikaclone, stats are boosted depending on the user.",
 	},
 	leek: {
 		inherit: true,
@@ -787,6 +862,166 @@ export const Items: {[itemid: string]: ModdedItemData} = {
 			if (item.itemUser == source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
+	},
+	helixfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Omanyte. Omastar-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Omastar-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Omastar') return false;
+			return true;
+		},
+		forcedForme: "Omastar-Revived",
+		itemUser: ["Omastar-Revived"],
+	},
+	domefossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Kabuto. Kabutops-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Kabutops-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Kabutops') return false;
+			return true;
+		},
+		forcedForme: "Kabutops-Revived",
+		itemUser: ["Kabutops-Revived"],
+	},
+	rootfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Lileep. Cradily-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Cradily-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Cradily') return false;
+			return true;
+		},
+		forcedForme: "Cradily-Revived",
+		itemUser: ["Cradily-Revived"],
+	},
+	clawfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Anorith. Armaldo-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Armaldo-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Armaldo') return false;
+			return true;
+		},
+		forcedForme: "Armaldo-Revived",
+		itemUser: ["Armaldo-Revived"],
+	},
+	skullfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Cranidos. Rampardos-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Rampardos-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Rampardos') return false;
+			return true;
+		},
+		forcedForme: "Rampardos-Revived",
+		itemUser: ["Rampardos-Revived"],
+	},
+	armorfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Shieldon. Bastiodon-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Bastiodon-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Bastiodon') return false;
+			return true;
+		},
+		forcedForme: "Bastiodon-Revived",
+		itemUser: ["Bastiodon-Revived"],
+	},
+	coverfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Tirtouga. Carracosta-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Carracosta-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Carracosta') return false;
+			return true;
+		},
+		forcedForme: "Carracosta-Revived",
+		itemUser: ["Carracosta-Revived"],
+	},
+	plumefossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Archen. Archeops-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Archeops-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Archeops') return false;
+			return true;
+		},
+		forcedForme: "Archeops-Revived",
+		itemUser: ["Archeops-Revived"],
+	},
+	jawfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Tyrunt. Tyrantrum-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Tyrantrum-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Tyrantrum') return false;
+			return true;
+		},
+		forcedForme: "Tyrantrum-Revived",
+		itemUser: ["Tyrantrum-Revived"],
+	},
+	sailfossil: {
+		inherit: true,
+		shortDesc: "Can be revived into Amaura. Aurorus-Revived: 1.2x power attacks.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (user.baseSpecies.name.startsWith('Aurorus-Revived')) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
+		onTakeItem(item, source) {
+			if (source.baseSpecies.baseSpecies === 'Aurorus') return false;
+			return true;
+		},
+		forcedForme: "Aurorus-Revived",
+		itemUser: ["Aurorus-Revived"],
 	},
 	// everlasting winter
 	safetygoggles: {

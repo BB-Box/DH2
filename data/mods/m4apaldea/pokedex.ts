@@ -473,11 +473,11 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 
 	emboar: {
 		inherit: true,
-		mega: "emboarmega",
-		megaName: "Emboar-Mega",
+		mega: "emboarmegay",
+		megaName: "Emboar-Mega-Y",
 		megaAbility: {0: "Inner Fortitude"},
 		megaStats: {hp: 110, atk: 143, def: 80, spa: 115, spd: 115, spe: 65},
-		megaStone: "Emboarite",
+		megaStone: "Emboarite-Y",
 		megaCreator: "War Incarnate",
 		megaWeight: 490,
 	},
@@ -662,19 +662,47 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 		megaCreator: "War Incarnate",
 	},
 
+	//ihateformsihateformsihateforms
 	maushold: {
 		inherit: true,
-		mega: "mausholdmega",
-		megaName: "Maushold-Mega",
-		megaType: ["Normal", "Fairy"],
-		megaAbility: {0: "Prankster"},
-		megaStats: {hp: 74, atk: 95, def: 120, spa: 65, spd: 110, spe: 101},
-		megaStone: "Mausholdinite",
+		otherFormes: ["Maushold-Four", "Maushold-Mega", "Maushold-Four-Mega"],
+		formeOrder: ["Maushold", "Maushold-Four", "Maushold-Mega", "Maushold-Four-Mega"],
 		movepoolAdditions: ["moonlight"],
-		megaCreator: "LordThemberchaud",
+	},
+	mausholdmega: {
+		num: 925,
+		name: "Maushold-Mega",
+		baseSpecies: "Maushold",
+		forme: "Mega",
+		types: ["Normal", "Fairy"],
+		baseStats: {hp: 74, atk: 95, def: 120, spa: 65, spd: 110, spe: 101},
+		abilities: {0: "Prankster"},
+		heightm: 0.3,
+		weightkg: 2.3,
+		color: "White",
+		eggGroups: ["Field", "Fairy"],
+		requiredItem: "Mausholdinite",
+		battleOnly: "Maushold",
+		creator: "LordThemberchaud",
+	},
+	mausholdfourmega: {
+		num: 925,
+		name: "Maushold-Four-Mega",
+		baseSpecies: "Maushold",
+		forme: "Four-Mega",
+		types: ["Normal", "Fairy"],
+		baseStats: {hp: 74, atk: 95, def: 120, spa: 65, spd: 110, spe: 101},
+		abilities: {0: "Prankster"},
+		heightm: 0.3,
+		weightkg: 2.3,
+		color: "White",
+		eggGroups: ["Field", "Fairy"],
+		requiredItem: "Mausholdinite",
+		battleOnly: "Maushold-Four",
+		creator: "LordThemberchaud",
 	},
 
-	// slate 14
+	// slate 15
 
 	cloyster: {
 		inherit: true,
@@ -746,7 +774,7 @@ export const Pokedex: {[speciesid: string]: ModdedSpeciesData} = {
 		megaCreator: "BlueRay & Lysion",
 	},
 
-	// slate 15
+	// slate 16
 
 	kingdra: {
 		inherit: true,

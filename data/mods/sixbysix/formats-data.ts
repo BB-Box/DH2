@@ -1,124 +1,112 @@
 export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormatsDataTable = {
-  kingdra: {
+  kingdraclassic: {
 		tier: "King",
 	},
-  /*
-  kingdra: {
+  kingdrabrinepool: {
+		tier: "King",
+	}, 
+	kingdradruid: {
 		tier: "King",
 	},
-  kingdra: {
+	kingdrabard: {
 		tier: "King",
 	},
-  kingdra: {
+	kingdragourmet: {
 		tier: "King",
 	},
-  kingdra: {
+	kingdraancient: {
 		tier: "King",
 	},
-  kingdra: {
-		tier: "King",
-	},
-  */
-	nidoqueen: {
+	nidoqueenclassic: {
 		tier: "Queen",
 	},
-  /*
-	nidoqueen: {
+	nidoqueenerudite: {
+		tier: "Queen",
+	},  
+	nidoqueenvolcanic: {
 		tier: "Queen",
 	},
-	nidoqueen: {
+	nidoqueenrosegold: {
 		tier: "Queen",
 	},
-	nidoqueen: {
+	nidoqueenshaman: {
 		tier: "Queen",
 	},
-	nidoqueen: {
+	nidoqueenjasper: {
 		tier: "Queen",
 	},
-	nidoqueen: {
-		tier: "Queen",
-	},
-  */
-	bisharp: {
+	bisharpcenturion: {
 		tier: "Bishop",
 	},
-  /*
-	bisharp: {
+  bisharpsavage: {
 		tier: "Bishop",
 	},
-	bisharp: {
+	bisharpronin: {
 		tier: "Bishop",
 	},
-	bisharp: {
+	bisharpmantis: {
 		tier: "Bishop",
 	},
-	bisharp: {
+	bisharprevenant: {
 		tier: "Bishop",
 	},
-	bisharp: {
+	bisharpassassin: {
 		tier: "Bishop",
 	},
-  */
-	corviknight: {
+	corviknightthunderbird: {
 		tier: "Knight",
 	},
-  /*
-	corviknight: {
+	corviknightgenie: {
 		tier: "Knight",
 	},
-	corviknight: {
+	corviknightyeti: {
 		tier: "Knight",
 	},
-	corviknight: {
+	corviknightanalytical: {
 		tier: "Knight",
 	},
-	corviknight: {
+	corviknightmartian: {
 		tier: "Knight",
 	},
-	corviknight: {
+	corviknightfalcon: {
 		tier: "Knight",
 	},
-  */
-	krookodile: {
+	krookodileinfernal: {
 		tier: "Rook",
 	},
-  /*
-	krookodile: {
+	krookodileabyssal: {
 		tier: "Rook",
 	},
-	krookodile: {
+	krookodilewetlander: {
 		tier: "Rook",
 	},
-	krookodile: {
+	krookodilecavedweller: {
 		tier: "Rook",
 	},
-	krookodile: {
+	krookodilecliffside: {
 		tier: "Rook",
 	},
-	krookodile: {
+	krookodilequantum: {
 		tier: "Rook",
 	},
-  */
-	ogerpon: {
+	ogerponmuerta: {
 		tier: "Pawn",
 	},
-  /*
-	ogerpon: {
+	ogerponeaster: {
 		tier: "Pawn",
 	},
-	ogerpon: {
+	ogerponankh: {
 		tier: "Pawn",
 	},
-	ogerpon: {
+	ogerponeid: {
 		tier: "Pawn",
 	},
-	ogerpon: {
+	ogerponvessel: {
 		tier: "Pawn",
 	},
-	ogerpon: {
+	ogerponkitsune: {
 		tier: "Pawn",
 	},
-  */
 	ogerpontealtera: {
 		tier: "Illegal",
 	},

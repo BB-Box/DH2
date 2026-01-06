@@ -11,6 +11,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
+	hamburgermega: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
 	rotomcarbonmonoxidedetector: {
 		tier: "PD",
 		doublesTier: "DPDOU",
@@ -63,7 +67,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
-	ttos: {
+	tynar: {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
@@ -80,6 +84,74 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublesTier: "DPDOU",
 	},
 	ursalunacrescentmoon: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	amoongusfairyring: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	floxicloak: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	vespiquen: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	llamonade: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	stunfiskgalar: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	stunfiskgalarmega: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	burningfeet: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	thefamiliarshadow: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	grapplevine: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	prinsutinea: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	mewtwomegaxy: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	teto: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	shockhopper: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	bibarelpurposeless: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	ironfisher: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	crowwhoknows: {
+		tier: "PD",
+		doublesTier: "DPDOU",
+	},
+	potentialvire: {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
