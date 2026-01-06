@@ -1781,6 +1781,45 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacent",
 		type: "Fire",
 	},
+	//Greedent
+	//(Uses a random berry with no filter)
+	berrysnack: {
+		num: 3050,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Berry Snack",
+		desc: "The user picks a Berry from its secret stash and eats it immediately to get its benefits. The berry can also be given to an ally on the field.",
+		shortDesc: "Target eats a random berry immediately.",
+		pp: 15,
+		priority: 1,
+		flags: {metronome: 1, noassist: 1, failcopycat: 1, failmimic: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Natural Gift", target);
+		},
+		onHit(target, source, effect) {
+			//Prepare the list of random berries (taken from Metronome)
+			const berries = this.dex.items.all().filter(item => (
+				item.isBerry
+			));
+			let randomBerry = '';
+			if (berries.length) {
+				berries.sort((a, b) => a.num - b.num);
+				randomBerry = this.sample(berries).id;
+			}
+			if (!randomBerry) return false;
+			//Eat the random berry (taken from Pluck)
+			this.add('-message', `${target.name} is snacking on a ${randomBerry.name}`);
+			if (this.singleEvent('Eat', randomBerry, null, target, null, null)) {
+				this.runEvent('EatItem', target, null, null, randomBerry);
+				if (randomBerry.id === 'leppaberry') target.staleness = 'external';
+			}
+		},
+		secondary: null,
+		target: "adjacentAllyOrSelf",
+		type: "Normal",
+	},
 
 	//Signature moves remixed
 	//Raticate
