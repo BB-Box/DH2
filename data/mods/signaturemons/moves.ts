@@ -1796,7 +1796,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {metronome: 1, noassist: 1, failcopycat: 1, failmimic: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Natural Gift", target);
+			this.add('-anim', source, "Stuff Cheeks", target);
 		},
 		onHit(target, source, effect) {
 			//Prepare the list of random berries (taken from Metronome)
@@ -1810,11 +1810,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 			if (!randomBerry) return false;
 			//Eat the random berry (taken from Pluck)
-			this.add('-message', `${target.name} is snacking on a ${randomBerry.name}`);
-			if (this.singleEvent('Eat', randomBerry, null, target, null, null)) {
+			const chosenBerry = target.getItem();
+			this.add('-message', `${target.name} is snacking on a ${randomBerry}`);
+			/*if (this.singleEvent('Eat', this.toID(randomBerry), null, target, null, null)) {
 				this.runEvent('EatItem', target, null, null, randomBerry);
 				if (randomBerry.id === 'leppaberry') target.staleness = 'external';
-			}
+			}*/
 		},
 		secondary: null,
 		target: "adjacentAllyOrSelf",
