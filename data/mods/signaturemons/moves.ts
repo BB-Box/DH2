@@ -1807,15 +1807,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (berries.length) {
 				berries.sort((a, b) => a.num - b.num);
 				randomBerry = this.sample(berries).id;
+				this.add('-message', `${randomBerry}`);
 			}
 			if (!randomBerry) return false;
 			//Eat the random berry (taken from Pluck)
-			const chosenBerry = target.getItem();
+			/*const chosenBerry = target.getItem();
 			this.add('-message', `${target.name} is snacking on a ${randomBerry}`);
-			/*if (this.singleEvent('Eat', this.toID(randomBerry), null, target, null, null)) {
-				this.runEvent('EatItem', target, null, null, randomBerry);
-				if (randomBerry.id === 'leppaberry') target.staleness = 'external';
-			}*/
+			if (this.singleEvent('Eat', item, null, source, null, null)) {
+				this.runEvent('EatItem', source, null, null, item);
+				if (item.id === 'leppaberry') target.staleness = 'external';
+			}
+			if (item.onEat) source.ateBerry = true;*/
 		},
 		secondary: null,
 		target: "adjacentAllyOrSelf",
