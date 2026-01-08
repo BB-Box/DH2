@@ -1807,13 +1807,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (berries.length) {
 				berries.sort((a, b) => a.num - b.num);
 				randomBerry = this.sample(berries).id;
-				this.add('-message', `${randomBerry}`);
 			}
 			if (!randomBerry) return false;
 			//Eat the random berry (taken from Pluck)
-			/*const chosenBerry = target.getItem();
-			this.add('-message', `${target.name} is snacking on a ${randomBerry}`);
-			if (this.singleEvent('Eat', item, null, source, null, null)) {
+			const chosenBerry = this.dex.items.get(randomBerry);
+			this.add('-message', `${target.name} is snacking on a ${chosenBerry.name}`);
+			/*if (this.singleEvent('Eat', item, null, source, null, null)) {
 				this.runEvent('EatItem', source, null, null, item);
 				if (item.id === 'leppaberry') target.staleness = 'external';
 			}
