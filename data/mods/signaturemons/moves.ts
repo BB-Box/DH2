@@ -1802,7 +1802,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Prepare the list of random berries (taken from Metronome)
 			const berries = this.dex.items.all().filter(item => (
 				item.isBerry &&
-				(item.onEat !== false || item.gen !== 2)
+				(item.onEat !== false || item.gen !== 2) &&
+				(!item.onFractionalPriority || !item.onSourceModifyDamage)
 			));
 			let randomBerry = '';
 			if (berries.length) {
