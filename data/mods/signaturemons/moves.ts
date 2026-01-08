@@ -1812,11 +1812,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Eat the random berry (taken from Pluck)
 			const chosenBerry = this.dex.items.get(randomBerry);
 			this.add('-message', `${target.name} is snacking on a ${chosenBerry.name}`);
-			/*if (this.singleEvent('Eat', item, null, source, null, null)) {
-				this.runEvent('EatItem', source, null, null, item);
-				if (item.id === 'leppaberry') target.staleness = 'external';
+			if (this.singleEvent('Eat', chosenBerry, null, target, null, null)) {
+				this.runEvent('EatItem', target, null, null, chosenBerry);
+				if (chosenBerry.id === 'leppaberry') target.staleness = 'external';
 			}
-			if (item.onEat) source.ateBerry = true;*/
+			if (chosenBerry.onEat) target.ateBerry = true;
 		},
 		secondary: null,
 		target: "adjacentAllyOrSelf",
