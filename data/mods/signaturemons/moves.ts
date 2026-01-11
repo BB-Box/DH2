@@ -1791,7 +1791,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		name: "Berry Snack",
 		desc: "The user picks a Berry from its secret stash and eats it immediately to get its benefits. The berry can also be given to an ally on the field.",
 		shortDesc: "Target eats a random berry immediately.",
-		pp: 15,
+		pp: 10,
 		priority: 1,
 		flags: {metronome: 1, noassist: 1, failcopycat: 1, failmimic: 1},
 		onPrepareHit(target, source, move) {
@@ -1800,8 +1800,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onHit(target, source, effect) {
 			//Prepare the list of random berries
-			//Default berry pool: Oran/Lum/Sitrus/stat-boosting berries
-			let numList = [155,157,158,201,202,203,204,205,207];
+			//Default berry pool: Leppa/Oran/Lum/Sitrus/stat-boosting berries
+			let numList = [154,155,157,158,201,202,203,204,205,207];
 			//If target is affected by status, add healing berry to the pool
 			if (target.status) {
 				switch (target.status) {
@@ -1842,7 +1842,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (!randomBerry) return false;
 			//Eat the random berry (taken from Pluck)
 			const chosenBerry = this.dex.items.get(randomBerry);
-			this.add('-message', `${target.name} is snacking on a ${chosenBerry.name}`);
+			this.add('-message', `${target.name} is snacking on a ${chosenBerry.name}!`);
 			if (this.singleEvent('Eat', chosenBerry, null, target, null, null)) {
 				this.runEvent('EatItem', target, null, null, chosenBerry);
 				if (chosenBerry.id === 'leppaberry') target.staleness = 'external';
