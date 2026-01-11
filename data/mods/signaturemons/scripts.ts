@@ -63,6 +63,7 @@ export const Scripts: ModdedBattleScriptsData = {
 
 		//Gen 7
 		this.modData('Learnsets', 'gumshoos').learnset.finaldeduction = ['9L1'];
+		this.modData('Learnsets', 'passimian').learnset.touchdown = ['9L1'];
 		this.modData('Learnsets', 'mimikyu').learnset.snuggle = ['9L1'];
 
 		//Gen 8

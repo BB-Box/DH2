@@ -1852,6 +1852,38 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "adjacentAllyOrSelf",
 		type: "Normal",
 	},
+	//Passimian
+	touchdown: {
+		num: 3051,
+		accuracy: 100,
+		basePower: 65,
+		basePowerCallback(pokemon, target, move) {
+			if (target.hurtThisTurn) {
+				this.debug('BP doubled on damaged target');
+				return move.basePower * 2;
+			}
+			return move.basePower;
+		},
+		category: "Physical",
+		name: "Touchdown",
+		desc: "The user throws a projectile at the target to lower their defense. If the target was hurt this turn, it will opt for a stronger throw with double the power.",
+		shortDesc: "Def -1 on target. Double power if target is hurt this turn.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Seed Bomb", target);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "normal",
+		type: "Fighting",
+	},
 
 	//Signature moves remixed
 	//Raticate
