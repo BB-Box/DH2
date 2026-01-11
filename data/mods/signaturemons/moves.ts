@@ -1884,6 +1884,62 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
+	//Cloyster
+	costlyescape: {
+		num: 3052,
+		accuracy: 100,
+		basePower: 0,
+		category: "Physical",
+		name: "Costly Escape",
+		desc: "The user launches a Pearl as a projectile from its shell and switch places with a party Pokemon. The power of the move varies and the target gains a Pearl, Big Pearl or Pearl String.",
+		shortDesc: "Hits 1 or 3 times. User switches out.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Pay Day", target);
+		},
+		onModifyMove(move, pokemon) {
+			const i = this.random(30);
+			if (i < 10 || pokemon.hasAbility('skilllink')) {
+				move.basePower = 30;
+				move.multihit = 3;
+			} else if (i < 20) {
+				move.basePower = 80;
+			} else {
+				move.basePower = 60;
+			}
+		},
+		onHit(target, source, move) {
+			if (target.item) {
+				return false;
+			}
+			let myItem = this.dex.items.get(9000);
+			switch (move.basePower) {
+				case 30:
+					myItem = this.dex.items.get(9002);
+					break;
+				case 80:
+					myItem = this.dex.items.get(9001);
+					break;
+				case 60:
+					myItem = this.dex.items.get(9000);
+					break;
+				}
+			//const myItem = source.takeItem();
+			if (!myItem) return false;
+			if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
+				source.item = myItem.id;
+				return false;
+			}
+			this.add('-item', target, myItem.name, '[from] move: Costly Escape', '[of] ' + source);
+		},
+		selfSwitch: true,
+		secondary: null,
+		target: "normal",
+		type: "Water",
+	},
 
 	//Signature moves remixed
 	//Raticate
