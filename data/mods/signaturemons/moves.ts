@@ -1800,8 +1800,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onHit(target, source, effect) {
 			//Prepare the list of random berries
-			//Default berry pool: Oran/Lum/Sitrus/Starf berries
-			let numList = [155,157,158,207];
+			//Default berry pool: Oran/Lum/Sitrus/stat-boosting berries
+			let numList = [155,157,158,201,202,203,204,205,207];
 			//If target is affected by status, add healing berry to the pool
 			if (target.status) {
 				switch (target.status) {
@@ -1826,12 +1826,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (target.volatiles['confusion']) { numList.push(156); }
 			//If target is missing HP, add pinch berries to the pool
 			if (!target.volatiles['healblock'] && target.hp < target.maxhp) { numList.push(159,160,161,162,163); }
-			//If target has a stat not at max boost, add boost berry to the pool (individual stat check)
-			if (target.boosts[atk] < 6) { numList.push(201) }
-			if (target.boosts[def] < 6) { numList.push(202) }
-			if (target.boosts[spe] < 6) { numList.push(203) }
-			if (target.boosts[spa] < 6) { numList.push(204) }
-			if (target.boosts[spd] < 6) { numList.push(205) }
 			//If target has no boosted critical ratio, add Lansat berry to the pool
 			if (!target.volatiles['focusenergy']) { numList.push(206) }
 			//Pick a random berry from the created pool (taken from Metronome)
