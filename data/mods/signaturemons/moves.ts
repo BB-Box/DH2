@@ -1799,12 +1799,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-anim', source, "Stuff Cheeks", target);
 		},
 		onHit(target, source, effect) {
-			//Prepare the list of random berries (taken from Metronome)
-			//TODO: prepare numList for eligible berries
-			//By default: Oran berry (num: 155), Lum berry (num: 157), Sitrus berry (num: 158) & Starf berry (num: 207)
+			//Prepare the list of random berries
+			//Default berry pool: Oran/Lum/Sitrus/Starf berries
 			let numList = [155,157,158,207];
 			//If target is affected by status, add healing berry to the pool
-			/*if (target.status) {
+			if (target.status) {
 				switch (target.status) {
 				case 'par':
 					numList.push(149);
@@ -1834,7 +1833,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (target.boosts[spa] < 6) { numList.push(204) }
 			if (target.boosts[spd] < 6) { numList.push(205) }
 			//If target has no boosted critical ratio, add Lansat berry to the pool
-			if (!target.volatiles['dragoncheer', 'focusenergy', 'gmaxchistrike', 'laserfocus']) { numList.push(206) }*/
+			if (!target.volatiles['focusenergy']) { numList.push(206) }
+			//Pick a random berry from the created pool (taken from Metronome)
 			const berries = this.dex.items.all().filter(item => (
 				item.isBerry &&
 				item.gen !== 2 &&
