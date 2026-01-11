@@ -1837,7 +1837,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (!target.volatiles['dragoncheer', 'focusenergy', 'gmaxchistrike', 'laserfocus']) { numList.push(206) }*/
 			const berries = this.dex.items.all().filter(item => (
 				item.isBerry &&
-				(item.onEat !== false || item.gen !== 2) &&
+				item.gen !== 2 &&
 				numList.includes(item.num)
 			));
 			let randomBerry = '';
