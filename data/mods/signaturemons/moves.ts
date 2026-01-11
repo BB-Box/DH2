@@ -1800,10 +1800,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onHit(target, source, effect) {
 			//Prepare the list of random berries (taken from Metronome)
+			//TODO: prepare numList for eligible berries
+			//By default: Micle berry (num: 209)
+			let numList = [209];
+			/*if (target.status) {
+				switch (target.status) {
+				case 'par':
+					numList = [0];
+					break;
+				case 'psn':
+				case 'tox':
+					numList = [0];
+					break;
+				case 'slp':
+					numList = [0];
+					break;
+				case 'brn':
+					numList = [0];
+					break;
+				case 'frz':
+					numList = [0];
+					break;
+				}
+			}
+			else if (target.volatiles['confusion']) { numList = [0]; }
+			else if (!target.volatiles['healblock'] && target.hp < target.maxhp) { numList = [0]; }
+			else { numList = [0]; }*/
 			const berries = this.dex.items.all().filter(item => (
 				item.isBerry &&
-				(item.onEat !== false || item.gen !== 2) &&
-				(!item.onFractionalPriority || !item.onSourceModifyDamage)
+				//(item.onEat !== false || item.gen !== 2) &&
+				numList.includes(item.num)
 			));
 			let randomBerry = '';
 			if (berries.length) {
