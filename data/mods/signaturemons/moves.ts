@@ -1782,7 +1782,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Fire",
 	},
 	//Greedent
-	//(Uses a random berry with no filter)
 	berrysnack: {
 		num: 3050,
 		accuracy: true,
