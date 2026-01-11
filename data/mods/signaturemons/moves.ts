@@ -1801,31 +1801,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onHit(target, source, effect) {
 			//Prepare the list of random berries (taken from Metronome)
 			//TODO: prepare numList for eligible berries
-			//By default: Micle berry (num: 209)
-			let numList = [209];
+			//By default: Oran berry (num: 155), Lum berry (num: 157), Sitrus berry (num: 158) & Starf berry (num: 207)
+			let numList = [155,157,158,207];
+			//If target is affected by status, add healing berry to the pool
 			/*if (target.status) {
 				switch (target.status) {
 				case 'par':
-					numList = [0];
+					numList.push(149);
+					break;
+				case 'slp':
+					numList.push(150);
 					break;
 				case 'psn':
 				case 'tox':
-					numList = [0];
-					break;
-				case 'slp':
-					numList = [0];
+					numList.push(151);
 					break;
 				case 'brn':
-					numList = [0];
+					numList.push(152);
 					break;
 				case 'frz':
-					numList = [0];
+					numList.push(153);
 					break;
 				}
 			}
-			else if (target.volatiles['confusion']) { numList = [0]; }
-			else if (!target.volatiles['healblock'] && target.hp < target.maxhp) { numList = [0]; }
-			else { numList = [0]; }*/
+			if (target.volatiles['confusion']) { numList.push(156); }
+			if (!target.volatiles['healblock'] && target.hp < target.maxhp) { numList.push(159,160,161,162,163); }
+			if (target.boosts[atk] < 6) { numList.push(201) }
+			if (target.boosts[def] < 6) { numList.push(201) }
+			if (target.boosts[spe] < 6) { numList.push(201) }
+			if (target.boosts[spa] < 6) { numList.push(201) }
+			if (target.boosts[spd] < 6) { numList.push(201) }
+			if (!target.volatiles['dragoncheer', 'focusenergy', 'gmaxchistrike', 'laserfocus']) { numList.push(206) }*/
 			const berries = this.dex.items.all().filter(item => (
 				item.isBerry &&
 				//(item.onEat !== false || item.gen !== 2) &&
