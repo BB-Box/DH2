@@ -1917,7 +1917,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (target.item) {
 				return false;
 			}
-			let myItem = this.dex.items.all().filter(item => (item.num == 581)); //Big Nugget (test)
+			let myItem = this.dex.items.all().filter(item => (item.num === 581)); //Big Nugget (test)
 			/*switch (move.basePower) {
 				case 30:
 					myItem = this.dex.items.get(9002);
@@ -1930,11 +1930,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					break;
 			}*/
 			if (!myItem) return false;
+			this.add('-message', `${target.name} should get a ${myItem} (debug)!`);
 			/*if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
 				source.item = myItem.id;
 				return false;
 			}*/
 			this.add('-item', target, myItem.name, '[from] move: Costly Escape', '[of] ' + source);
+			target.setItem(myItem);
 		},
 		selfSwitch: true,
 		secondary: null,
