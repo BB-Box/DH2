@@ -1914,33 +1914,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onAfterHit(target, source, move) {
 			//Give a Pearl item (taken from Bestow)
-			//Item check on target (this part works)
-			if (target.item) {
+			if (target.item) { //Item check on target
 				return false;
 			}
 			let pearlNum = 581; //Big Nugget by default (Pearls were not on default Showdown)
-			/*switch (move.basePower) {
+			switch (move.basePower) {
 				case 30:
-					pearlNum = 9002;
+					pearlNum = 9002; //Pearl String
 					break;
 				case 80:
-					pearlNum = 9001;
+					pearlNum = 9001; //Big Pearl
 					break;
 				case 60:
-					pearlNum = 9000;
+					pearlNum = 9000; //Pearl
 					break;
-			}*/
-			const pearlItem = this.dex.items.all().filter(item => (item.num === pearlNum)); //(test - this part works)
+			}
+			const pearlItem = this.dex.items.all().filter(item => (item.num === pearlNum));
 			let logicPearl = '';
 			logicPearl = this.sample(pearlItem).id;
 			if (!logicPearl) return false;
 			const chosenPearl = this.dex.items.get(logicPearl);
-			//this.add('-message', `${target.name} should get a ${pearlItem} (debug)!`);
-			/*if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
-				source.item = myItem.id;
-				return false;
-			}*/
-			target.setItem(chosenPearl); //This part does NOT work!!
+			target.setItem(chosenPearl);
 			this.add('-item', target, chosenPearl, '[from] move: Costly Escape');
 		},
 		selfSwitch: true,
