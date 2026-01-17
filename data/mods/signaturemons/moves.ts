@@ -1912,12 +1912,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				move.basePower = 60;
 			}
 		},
-		onHit(target, source, move) {
+		onAfterHit(target, source, move) {
 			//Give a Pearl item (taken from Bestow)
 			if (target.item) {
 				return false;
 			}
-			let myItem = this.dex.items.get(581); //Big Nugget (test)
+			let myItem = this.dex.items.all().filter(item => (item.num == 581)); //Big Nugget (test)
 			/*switch (move.basePower) {
 				case 30:
 					myItem = this.dex.items.get(9002);
@@ -1929,7 +1929,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					myItem = this.dex.items.get(9000);
 					break;
 			}*/
-			//const myItem = source.takeItem();
 			if (!myItem) return false;
 			/*if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
 				source.item = myItem.id;
