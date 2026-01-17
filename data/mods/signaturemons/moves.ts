@@ -1885,7 +1885,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Fighting",
 	},
 	//Cloyster
-	//TODO: Fix Pearl gift (nothing is showing up, no item is given)
+	//TODO: Fix Pearl gift (no item is given)
 	costlyescape: {
 		num: 3052,
 		accuracy: 100,
@@ -1914,29 +1914,34 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onAfterHit(target, source, move) {
 			//Give a Pearl item (taken from Bestow)
+			//Item check on target (this part works)
 			if (target.item) {
 				return false;
 			}
-			let pearlItem = this.dex.items.all().filter(item => (item.num === 581)); //Big Nugget (test - this part works)
+			let pearlNum = 581; //Big Nugget by default (Pearls were not on default Showdown)
 			/*switch (move.basePower) {
 				case 30:
-					pearlItem = this.dex.items.all().filter(item => (item.num === 9002));
+					pearlNum = 9002;
 					break;
 				case 80:
-					pearlItem = this.dex.items.all().filter(item => (item.num === 9001));
+					pearlNum = 9001;
 					break;
 				case 60:
-					pearlItem = this.dex.items.all().filter(item => (item.num === 9000));
+					pearlNum = 9000;
 					break;
 			}*/
-			if (!pearlItem) return false;
+			const pearlItem = this.dex.items.all().filter(item => (item.num === pearlNum)); //(test - this part works)
+			let logicPearl = '';
+			logicPearl = this.sample(pearlItem).id;
+			if (!logicPearl) return false;
+			const chosenPearl = this.dex.items.get(logicPearl);
 			//this.add('-message', `${target.name} should get a ${pearlItem} (debug)!`);
 			/*if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
 				source.item = myItem.id;
 				return false;
 			}*/
-			target.setItem(pearlItem);
-			this.add('-item', target, pearlItem, '[from] move: Costly Escape');
+			target.setItem(chosenPearl); //This part does NOT work!!
+			this.add('-item', target, chosenPearl, '[from] move: Costly Escape');
 		},
 		selfSwitch: true,
 		secondary: null,
