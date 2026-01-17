@@ -1885,6 +1885,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Fighting",
 	},
 	//Cloyster
+	//TODO: Fix Pearl gift (nothing is showing up, no item is given)
 	costlyescape: {
 		num: 3052,
 		accuracy: 100,
@@ -1912,11 +1913,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 		},
 		onHit(target, source, move) {
+			//Give a Pearl item (taken from Bestow)
 			if (target.item) {
 				return false;
 			}
-			let myItem = this.dex.items.get(9000);
-			switch (move.basePower) {
+			let myItem = this.dex.items.get(581); //Big Nugget (test)
+			/*switch (move.basePower) {
 				case 30:
 					myItem = this.dex.items.get(9002);
 					break;
@@ -1926,13 +1928,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				case 60:
 					myItem = this.dex.items.get(9000);
 					break;
-				}
+			}*/
 			//const myItem = source.takeItem();
 			if (!myItem) return false;
-			if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
+			/*if (!this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem) || !target.setItem(myItem)) {
 				source.item = myItem.id;
 				return false;
-			}
+			}*/
 			this.add('-item', target, myItem.name, '[from] move: Costly Escape', '[of] ' + source);
 		},
 		selfSwitch: true,
