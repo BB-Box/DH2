@@ -237,7 +237,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		volatileStatus: 'spintowin',
 		onPrepareHit(pokemon) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Rapid Spin", target);
+			this.add('-anim', pokemon, "Rapid Spin", pokemon);
 			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
@@ -1957,7 +1957,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		volatileStatus: 'airsurf',
 		onPrepareHit(pokemon) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Gust", target);
+			this.add('-anim', pokemon, "Gust", pokemon);
 			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
