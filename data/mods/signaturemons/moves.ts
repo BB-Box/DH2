@@ -2020,14 +2020,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const success = this.boost({spd: 2}, target, source);
 			if (!success) { return; }
 			//Ability change to Overcoat - Except if the ability cannot be changed or is already Overcoat
-			if (!target.getAbility().flags['cantsuppress'] || target.ability !== 'overcoat') {
-				const oldAbility = target.setAbility('overcoat');
-				if (oldAbility) {
-					this.add('-ability', target, 'Overcoat', '[from] move: Tailor-Made');
-					return;
-				}
-				return oldAbility as false | null;
+			if (target.getAbility().flags['cantsuppress'] || target.ability === 'overcoat') { return; }
+			const oldAbility = target.setAbility('overcoat');
+			if (oldAbility) {
+				this.add('-ability', target, 'Overcoat', '[from] move: Tailor-Made');
+				return;
 			}
+			return oldAbility as false | null;
 		},
 		secondary: null,
 		target: "adjacentAllyOrSelf",
