@@ -111,7 +111,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Blastoise
 	greatflood: {
 		num: 3002,
-		accuracy: true,
+		accuracy: 100,
 		basePower: 100,
 		category: "Special",
 		name: "Great Flood",
