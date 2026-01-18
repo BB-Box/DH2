@@ -1987,10 +1987,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						delete source.volatiles['lockedmove'];
 					}
 				}
-				if (move.category !== 'Status') {
+				/*if (move.category !== 'Status') {
 					this.boost({spa: 1}, target, target, this.dex.getActiveMove("Air Surf"));
 				}
-				else { this.boost({spe: 1}, target, target, this.dex.getActiveMove("Air Surf")); }
+				else { this.boost({spe: 1}, target, target, this.dex.getActiveMove("Air Surf")); }*/
 				return this.NOT_FAIL;
 			},
 		},
