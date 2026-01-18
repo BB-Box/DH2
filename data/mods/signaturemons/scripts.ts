@@ -50,6 +50,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'froslass').learnset.curseofsnow = ['9L1'];
 
 		//Gen 5
+		this.modData('Learnsets', 'leavanny').learnset.tailormade = ['9L1'];
 		this.modData('Learnsets', 'scolipede').learnset.poisonwheel = ['9L1'];
 		this.modData('Learnsets', 'lilligant').learnset.sublimescent = ['9L1'];
 		this.modData('Learnsets', 'darmanitan').learnset.burningwill = ['9L1'];

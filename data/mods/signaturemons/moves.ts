@@ -1998,6 +1998,41 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Flying",
 	},
+	//Leavanny
+	tailormade: {
+		num: 3016,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Tailor-Made",
+		desc: "Using a coat of leaves, the user greatly raises the Special Defense stat of itself or an ally on the field. The move also changes the target's Ability to Overcoat.",
+		shortDesc: "SpD +2. Target's ability changed to Overcoat.",
+		pp: 10,
+		priority: 0,
+		flags: {bypasssub: 1, allyanim: 1, snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grass Knot", target);
+		},
+		//Apply buff and change target's ability
+		onHit(target, source, move) {
+			//If the buff did not land, no ability change
+			const success = this.boost({atk: -1, spa: -1}, target, source);
+			if (!success) { return; }
+			//Ability change to Overcoat - Except if the ability cannot be changed or is already Overcoat
+			const oldAbility = target.setAbility('overcoat');
+			if (!target.getAbility().flags['cantsuppress'] || target.ability !== 'overcoat') {
+				if (oldAbility) {
+					this.add('-ability', target, 'Overcoat', '[from] move: Tailor-Made');
+					return;
+				}
+			}
+			return oldAbility as false | null;
+		},
+		secondary: null,
+		target: "adjacentAllyOrSelf",
+		type: "Grass",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
