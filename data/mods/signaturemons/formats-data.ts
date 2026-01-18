@@ -1223,7 +1223,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	mantine: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	skarmory: {
 		tier: "NoSign",

@@ -1885,7 +1885,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Fighting",
 	},
 	//Cloyster
-	//TODO: Fix Pearl gift (no item is given)
 	costlyescape: {
 		num: 3052,
 		accuracy: 100,
@@ -1942,7 +1941,63 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-
+	//Mantine
+	airsurf: {
+		num: 3053,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Air Surf",
+		desc: "The user evades all moves by surfing in the air. An attacking move blocked raises the user's Special Attack while status moves blocked raise Speed.",
+		shortDesc: "Protects from all moves. Boosts SpA or Spe on block.",
+		pp: 10,
+		priority: 4,
+		flags: {gravity: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
+		stallingMove: true,
+		volatileStatus: 'airsurf',
+		onPrepareHit(pokemon) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Tailwind", target);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
+		},
+		onHit(pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		condition: {
+			duration: 1,
+			onStart(target) {
+				this.add('-singleturn', target, 'move: Protect');
+			},
+			onTryHitPriority: 3,
+			onTryHit(target, source, move) {
+				if (!move.flags['protect']) {
+					if (['gmaxoneblow', 'gmaxrapidflow'].includes(move.id)) return;
+					if (move.isZ || move.isMax) target.getMoveHitData(move).zBrokeProtect = true;
+					return;
+				}
+				if (move.smartTarget) {
+					move.smartTarget = false;
+				} else {
+					this.add('-activate', target, 'move: Protect');
+				}
+				const lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				if (move.category !== 'Status') {
+					this.boost({spa: 1}, target, target, this.dex.getActiveMove("Air Surf"));
+				}
+				else { this.boost({spe: 1}, target, target, this.dex.getActiveMove("Air Surf")); }
+				return this.NOT_FAIL;
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Flying",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
