@@ -1956,8 +1956,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		stallingMove: true,
 		volatileStatus: 'airsurf',
 		onPrepareHit(pokemon) {
-			this.attrLastMove('[still]');
-			this.add('-anim', source, "Tailwind", target);
+			/*this.attrLastMove('[still]');
+			this.add('-anim', source, "Tailwind", target);*/
 			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
