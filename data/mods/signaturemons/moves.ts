@@ -2017,17 +2017,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		//Apply buff and change target's ability
 		onHit(target, source, move) {
 			//If the buff did not land, no ability change
-			const success = this.boost({atk: -1, spa: -1}, target, source);
+			const success = this.boost({spd: 2}, target, source);
 			if (!success) { return; }
 			//Ability change to Overcoat - Except if the ability cannot be changed or is already Overcoat
-			const oldAbility = target.setAbility('overcoat');
 			if (!target.getAbility().flags['cantsuppress'] || target.ability !== 'overcoat') {
+				const oldAbility = target.setAbility('overcoat');
 				if (oldAbility) {
 					this.add('-ability', target, 'Overcoat', '[from] move: Tailor-Made');
 					return;
 				}
+				return oldAbility as false | null;
 			}
-			return oldAbility as false | null;
 		},
 		secondary: null,
 		target: "adjacentAllyOrSelf",
