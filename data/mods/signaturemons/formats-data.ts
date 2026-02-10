@@ -2383,11 +2383,11 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	basculegion: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUber",
 	},
 	basculegionf: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUU",
 	},
 	sandile: {

@@ -2032,6 +2032,46 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "adjacentAllyOrSelf",
 		type: "Grass",
 	},
+	//Basculegion
+	abyssalboost: {
+		num: 3017,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Abyssal Boost",
+		desc: "The user gets help from its fallen comrades and increases its speed. The more defeated allies there are in the user's party, the greater the boost.",
+		shortDesc: "Spe +X to user (X = KO allies x2).",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grass Knot", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			const stack = 2*pokemon.side.totalFainted;
+			if (stack > 0 && stack <= 6) {
+				move.boosts = {
+					spe: stack,
+				};
+			}
+			else if (stack > 6) {
+				move.boosts = {
+					spe: 6,
+				};
+			}
+			else move.boosts = {};
+		},
+		onTry(source) {
+			if (source.side.totalFainted == 0) {
+				this.hint("Abyssal Boost only works with KO allies on the user's team.");
+				return false;
+			}
+		},
+		secondary: null,
+		target: "self",
+		type: "Ghost",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
