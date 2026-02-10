@@ -2046,7 +2046,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {snatch: 1, metronome: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Grass Knot", target);
+			this.add('-anim', source, "Grudge", target);
 		},
 		onModifyMove(move, pokemon, target) {
 			const stack = 2*pokemon.side.totalFainted;
