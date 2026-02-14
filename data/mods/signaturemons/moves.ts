@@ -2000,7 +2000,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	},
 	//Leavanny
 	tailormade: {
-		num: 3016,
+		num: 3054,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -2009,7 +2009,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		shortDesc: "SpD +2. Target's ability changed to Overcoat.",
 		pp: 10,
 		priority: 0,
-		flags: {bypasssub: 1, allyanim: 1, snatch: 1, metronome: 1},
+		flags: {bypasssub: 1, allyanim: 1, snatch: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Grass Knot", target);
@@ -2034,7 +2034,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	},
 	//Basculegion
 	abyssalboost: {
-		num: 3017,
+		num: 3055,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -2087,7 +2087,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			volatileStatus: 'flinch',
 		},
 	},
-
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	//For 'Secret Thorns'
