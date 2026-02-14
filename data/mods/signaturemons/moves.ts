@@ -2093,6 +2093,43 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
+	//Diggersby
+	excavate: {
+		num: 3057,
+		accuracy: 100,
+		basePower: 65,
+		category: "Physical",
+		name: "Excavate",
+		desc: "The user repeatedly stomps the ground to topple opposing Pokémon and lower their Defense stat. The user may also retrieve used items.",
+		shortDesc: "Hits adjacent foes, Retrives an item used during battle (any source).",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, nonsky: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Bulldoze", target);
+		},
+		onAfterHit(target, source, move) {
+			if (source.item) return;
+			const pickupTargets = this.getAllActive().filter(target => (
+				target.lastItem && target.usedItemThisTurn && source.isAdjacent(target)
+			));
+			if (!pickupTargets.length) return;
+			const randomTarget = this.sample(pickupTargets);
+			const item = randomTarget.lastItem;
+			randomTarget.lastItem = '';
+			this.add('-item', source, this.dex.items.get(item), '[from] ability: Pickup');
+			source.setItem(item);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Ground",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

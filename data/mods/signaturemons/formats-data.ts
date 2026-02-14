@@ -2823,7 +2823,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	diggersby: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	fletchling: {
 		tier: "NoSign",
