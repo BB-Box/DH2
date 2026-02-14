@@ -2118,7 +2118,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const randomTarget = this.sample(pickupTargets);
 			const item = randomTarget.lastItem;
 			randomTarget.lastItem = '';
-			this.add('-item', source, this.dex.items.get(item), '[from] ability: Pickup');
+			this.add('-item', source, this.dex.items.get(item), '[from] move: Excavate');
 			source.setItem(item);
 		},
 		secondary: {
