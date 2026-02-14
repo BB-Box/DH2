@@ -2111,14 +2111,18 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onAfterMove(source, target, move) {
 			if (source.item) { //Item check on user
-				this.add('-message', `Item on hand = No pickup!`);
 				return false;
 			}
 			const pickupTargets = this.getAllActive().filter(target => (
 				target.lastItem && target.usedItemThisTurn && source.isAdjacent(target)
 			));
-			if (!pickupTargets.length) return;
+			this.add('-message', `pickupTargets = ${pickupTargets}`);
+			if (!pickupTargets.length){ //Item check on user
+				this.add('-message', `pickupTargets.length = 0`);
+				return false;
+			}
 			const randomTarget = this.sample(pickupTargets);
+			this.add('-message', `randomTarget = ${randomTarget}`);
 			const item = randomTarget.lastItem;
 			randomTarget.lastItem = '';
 			this.add('-item', source, this.dex.items.get(item), '[from] move: Excavate');
