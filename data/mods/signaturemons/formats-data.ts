@@ -3253,7 +3253,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	bewear: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	bounsweet: {
 		tier: "NoSign",

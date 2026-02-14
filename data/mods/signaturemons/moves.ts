@@ -2072,6 +2072,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Ghost",
 	},
+	//Bewear
+	bighug: {
+		num: 3056,
+		accuracy: 90,
+		basePower: 80,
+		category: "Physical",
+		name: "Big Hug",
+		desc: "The user catches the target and gives it a big hug that inflicts damage for four to five turns.",
+		shortDesc: "Binds the target for 4-5 turns.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Bind", target);
+		},
+		volatileStatus: 'partiallytrapped',
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
