@@ -2109,8 +2109,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Bulldoze", target);
 		},
-		onAfterHit(target, source, move) {
-			if (source.item) return;
+		onAfterMove(source, target, move) {
+			if (source.item) { //Item check on user
+				this.add('-message', `Item on hand = No pickup!`);
+				return false;
+			}
 			const pickupTargets = this.getAllActive().filter(target => (
 				target.lastItem && target.usedItemThisTurn && source.isAdjacent(target)
 			));
