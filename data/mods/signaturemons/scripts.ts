@@ -60,7 +60,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'hydreigon').learnset.triplethreat = ['9L1'];
 
 		//Gen 6
-		this.modData('Learnsets', 'diggersby').learnset.excavate = ['9L1'];
+		this.modData('Learnsets', 'diggersby').learnset.topple = ['9L1'];
 		this.modData('Learnsets', 'talonflame').learnset.airstrike = ['9L1'];
 		this.modData('Learnsets', 'clawitzer').learnset.waterbombshell = ['9L1'];
 		this.modData('Learnsets', 'noivern').learnset.killerwail = ['9L1'];

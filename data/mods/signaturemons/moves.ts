@@ -2094,14 +2094,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Normal",
 	},
 	//Diggersby
-	excavate: {
+	topple: {
 		num: 3057,
 		accuracy: 100,
 		basePower: 65,
 		category: "Physical",
-		name: "Excavate",
+		name: "Topple",
 		desc: "The user repeatedly stomps the ground to topple opposing Pokémon and lower their Defense stat. The user may also retrieve used items.",
-		shortDesc: "Hits adjacent foes, Retrives an item used during battle (any source).",
+		shortDesc: "Hits adj. foes. Def -1 and 10% chance of Knock Off on foes.",
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, nonsky: 1, metronome: 1},
@@ -2109,24 +2109,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Bulldoze", target);
 		},
-		onAfterMove(source, target, move) {
-			if (source.item) { //Item check on user
-				return false;
+		onAfterHit(target, source) {
+			if (source.hp) {
+				const item = target.takeItem();
+				const i = this.random(100);
+				if (item && i < 10) {
+					this.add('-enditem', target, item.name, '[from] move: Topple', '[of] ' + source);
+				}
 			}
-			const pickupTargets = this.getAllActive().filter(target => (
-				target.lastItem && target.usedItemThisTurn && source.isAdjacent(target)
-			));
-			this.add('-message', `pickupTargets = ${pickupTargets}`);
-			if (!pickupTargets.length){ //Item check on user
-				this.add('-message', `pickupTargets.length = 0`);
-				return false;
-			}
-			const randomTarget = this.sample(pickupTargets);
-			this.add('-message', `randomTarget = ${randomTarget}`);
-			const item = randomTarget.lastItem;
-			randomTarget.lastItem = '';
-			this.add('-item', source, this.dex.items.get(item), '[from] move: Excavate');
-			source.setItem(item);
 		},
 		secondary: {
 			chance: 100,
