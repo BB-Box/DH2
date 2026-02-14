@@ -2101,7 +2101,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Physical",
 		name: "Topple",
 		desc: "The user repeatedly stomps the ground to topple opposing Pokémon and lower their Defense stat. The user may also retrieve used items.",
-		shortDesc: "Hits adj. foes. Def -1 and 10% chance of Knock Off on foes.",
+		shortDesc: "Hits adj. foes. Def -1 and 70% chance of Knock Off on foes.",
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, nonsky: 1, metronome: 1},
@@ -2113,7 +2113,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (source.hp) {
 				const item = target.takeItem();
 				const i = this.random(100);
-				if (item && i < 10) {
+				if (item && i < 70) {
 					this.add('-enditem', target, item.name, '[from] move: Topple', '[of] ' + source);
 				}
 			}
