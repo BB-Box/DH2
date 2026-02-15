@@ -2334,14 +2334,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		accuracy: 100,
 		basePower: 55,
 		basePowerCallback(pokemon, target, move) {
-			const action = this.queue.willMove(target);
-			const targetMove = action?.choice === 'move' ? action.move : null;
-			if (!targetMove || (targetMove.category === 'Status' && targetMove.id !== 'mefirst')
-				|| target.volatiles['mustrecharge'] || target.newlySwitched || this.queue.willMove(target)) {
+			//Target can't move (Must recharge, Switched in, Hasn't moved yet) OR has moved but used a status move (except Me First)
+			if (target.volatiles['mustrecharge'] || target.newlySwitched || this.queue.willMove(target)
+			|| (!this.queue.willMove(target) && target.lastMoveUsed.category === 'Status' && target.lastMoveUsed.id !== 'mefirst')) {
 				this.debug('BP doubled on passive target (did not use a move or used a status move)');
-				this.add('-message', `Damage boost! Caught you sleeping!`);
 				return move.basePower * 2;
 			}
+			//Target used an offensive move
+			this.debug('Normal BP on offensive targets');
 			return move.basePower;
 		},
 		category: "Physical",
