@@ -2130,7 +2130,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Slowbro
 	shellreaction: {
 		num: 3058,
-		accuracy: 100,
+		accuracy: true,
 		basePower: 0,
 		category: "Status",
 		name: "Shell Reaction",
@@ -2146,21 +2146,23 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-anim', source, "Nasty Plot", target);
 		},
 		onTry(source, target, move) {
-			//Only Slowbro in its base form can use this move
-			if (source.species.name === 'Slowbro') {
+			//Only Slowbro in its base form or Mega form can use this move
+			if (source.species.name === 'Slowbro' || source.species.name === 'Slowbro-Mega') {
 				//Special message if Slowbro is affected by a status that Shellder can ignore
 				//Interactions with Taunt are handled within the move itself
 				if (source.status['slp'] || source.volatiles['taunt']) {
 					this.add('-message', `${source.name} can use its move thanks to the Shellder on its tail!`);
 					return;
 				}
+				//If no status, return with no message
+				return;
 			}
-			this.hint("Only a Pokemon whose form is Slowbro (base form) can use this move.");
-			if (source.species.name === 'Slowbro-Galar') {
+			this.hint("Only a Pokemon whose form is Slowbro (base form) or its Mega-Evolution can use this move.");
+			/*if (source.species.name === 'Slowbro-Galar') {
 				this.attrLastMove('[still]');
 				this.add('-fail', source, 'move: Shell Reaction', '[forme]');
 				return null;
-			}
+			}*/
 			this.attrLastMove('[still]');
 			this.add('-fail', source, 'move: Shell Reaction');
 			return null;
