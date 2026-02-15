@@ -2328,6 +2328,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Electric",
 	},
+	//Scrafty
+	holdup: {
+		num: 3063,
+		accuracy: 100,
+		basePower: 55,
+		basePowerCallback(pokemon, target, move) {
+			const action = this.queue.willMove(target);
+			const targetMove = action?.choice === 'move' ? action.move : null;
+			if (!targetMove || (targetMove.category === 'Status' && targetMove.id !== 'mefirst')
+				|| target.volatiles['mustrecharge'] || target.newlySwitched || this.queue.willMove(target)) {
+				this.debug('BP doubled on passive target (did not use a move or used a status move)');
+				return move.basePower * 2;
+			}
+			return move.basePower;
+		},
+		category: "Physical",
+		name: "Hold-Up",
+		desc: "The user pressures its opponent to fight by using force. This move deals more damage if the target has not used an offensive move during the turn.",
+		shortDesc: "BP*2 if target did not use an offensive move.",
+		pp: 15,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Thrash", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dark",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
