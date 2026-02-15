@@ -48,6 +48,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'lucario').learnset.aurastorm = ['9L1'];
 		this.modData('Learnsets', 'carnivine').learnset.flytrap = ['9L1'];
 		this.modData('Learnsets', 'weavile').learnset.sinisterclaw = ['9L1'];
+		this.modData('Learnsets', 'lickilicky').learnset.tastetest = ['9L1'];
 		this.modData('Learnsets', 'froslass').learnset.curseofsnow = ['9L1'];
 
 		//Gen 5

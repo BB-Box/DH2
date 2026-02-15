@@ -625,7 +625,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	lickilicky: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	koffing: {
 		tier: "NoSign",

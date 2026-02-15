@@ -2191,6 +2191,61 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Psychic",
 	},
+	//Lickilicky
+	tastetest: {
+		num: 3059,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Taste Test",
+		desc: "The user gives a nasty lick to restore its HP by the same amount as the target's highest stat, which is then lowered by one stage.",
+		shortDesc: "Heals user by target's highest stat. -1 on that stat on target.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, heal: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Lick", target);
+		},
+		onHit(target, source) {
+			const atk = target.getStat('atk', false, true);
+			const def = target.getStat('def', false, true);
+			const spa = target.getStat('spa', false, true);
+			const spd = target.getStat('spd', false, true);
+			const spe = target.getStat('spe', false, true);
+			const higherStat = Math.max(atk, def, spa, spd, spe);
+			//Before healing, reduce the highest stat. If that highest stat is already at -6, the move fails.
+			let success = this.boost({atk: -1}, target, source, null, false, true); //default value is atk
+			switch (higherStat) {
+				case atk:
+					if (target.boosts.atk === -6) return false;
+					success = this.boost({atk: -1}, target, source, null, false, true);
+					break;
+				case def:
+					if (target.boosts.def === -6) return false;
+					success = this.boost({def: -1}, target, source, null, false, true);
+					break;
+				case spa:
+					if (target.boosts.spa === -6) return false;
+					success = this.boost({spa: -1}, target, source, null, false, true);
+					break;
+				case spd:
+					if (target.boosts.spd === -6) return false;
+					success = this.boost({spd: -1}, target, source, null, false, true);
+					break;
+				case spe:
+					if (target.boosts.spe === -6) return false;
+					success = this.boost({spe: -1}, target, source, null, false, true);
+					break;
+				default: //Failsafe if no equivalence was found somehow
+					return false;
+				}
+			return !!(this.heal(higherStat, source, target) || success);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
