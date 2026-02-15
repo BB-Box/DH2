@@ -2339,6 +2339,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (!targetMove || (targetMove.category === 'Status' && targetMove.id !== 'mefirst')
 				|| target.volatiles['mustrecharge'] || target.newlySwitched || this.queue.willMove(target)) {
 				this.debug('BP doubled on passive target (did not use a move or used a status move)');
+				this.add('-message', `Damage boost! Caught you sleeping!`);
 				return move.basePower * 2;
 			}
 			return move.basePower;
