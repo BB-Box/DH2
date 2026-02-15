@@ -2215,7 +2215,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			const spe = target.getStat('spe', false, true);
 			const higherStat = Math.max(atk, def, spa, spd, spe);
 			//Before healing, reduce the highest stat. If that highest stat is already at -6, the move fails.
-			let success = this.boost({atk: -1}, target, source, null, false, true); //default value is atk
+			let success = false; //default value is false
 			switch (higherStat) {
 				case atk:
 					if (target.boosts.atk === -6) return false;
