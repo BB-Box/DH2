@@ -26,6 +26,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 2
 		this.modData('Learnsets', 'ledian').learnset.superstarcombo = ['9L1'];
 		this.modData('Learnsets', 'lanturn').learnset.stunlight = ['9L1'];
+		this.modData('Learnsets', 'ampharos').learnset.lightburst = ['9L1'];
 		this.modData('Learnsets', 'azumarill').learnset.bubbleball = ['9L1'];
 		this.modData('Learnsets', 'sudowoodo').learnset.fakebranch = ['9L1'];
 		this.modData('Learnsets', 'mantine').learnset.airsurf = ['9L1'];

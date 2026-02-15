@@ -2298,6 +2298,45 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Bug",
 	},
+	//Ampharos
+	lightburst: {
+		num: 3062,
+		accuracy: 95,
+		basePower: 85,
+		category: "Special",
+		name: "Light Burst",
+		desc: "The user charges electricity into a single point and makes it explode. The resulting light makes attacks from allies more accurate, while foes may be blinded by it.",
+		shortDesc: "Acc +1 to user and allies. 30% chance of Acc -1 to targets.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Mirror Shot", target);
+		},
+		onAfterHit(target, source, move) {
+			if (source.hp && !move.hasSheerForce) {
+				for (const pokemon of source.alliesAndSelf()) {
+					this.boost({accuracy: 1}, pokemon);
+				}
+			}
+		},
+		onAfterSubDamage(damage, target, source, move) {
+			if (source.hp && !move.hasSheerForce) {
+				for (const pokemon of source.alliesAndSelf()) {
+					this.boost({accuracy: 1}, pokemon);
+				}
+			}
+		},
+		secondary: {
+			chance: 30,
+			boosts: {
+				accuracy: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Electric",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
