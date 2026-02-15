@@ -2262,6 +2262,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Scary Face", target);
 		},
+		onHit(target, source) {
+			this.add('-message', `${source.name} stole all of ${target.name} stat boosts!`);
+		},
 		stealsBoosts: true,
 		// Boost stealing implemented in scripts.js
 		secondary: null,
