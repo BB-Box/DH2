@@ -2246,6 +2246,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
+	//Gengar
+	shadowcreep: {
+		num: 3060,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Shadow Creep",
+		desc: "The user hides in the shadow of its target to scare it with a frightening smile. This move steal the targets stat boosts.",
+		shortDesc: "Steals target's stat boosts.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, allyanim: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Scary Face", target);
+		},
+		stealsBoosts: true,
+		// Boost stealing implemented in scripts.js
+		secondary: null,
+		target: "normal",
+		type: "Ghost",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
