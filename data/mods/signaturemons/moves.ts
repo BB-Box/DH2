@@ -2312,27 +2312,18 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {protect: 1, mirror: 1, metronome: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Mirror Shot", target);
-		},
-		onAfterHit(target, source, move) {
-			if (source.hp && !move.hasSheerForce) {
-				for (const pokemon of source.alliesAndSelf()) {
-					this.boost({accuracy: 1}, pokemon);
-				}
-			}
-		},
-		onAfterSubDamage(damage, target, source, move) {
-			if (source.hp && !move.hasSheerForce) {
-				for (const pokemon of source.alliesAndSelf()) {
-					this.boost({accuracy: 1}, pokemon);
-				}
-			}
+			this.add('-anim', source, "Discharge", target);
 		},
 		secondary: {
 			chance: 30,
 			boosts: {
 				accuracy: -1,
 			},
+		},
+		onAfterMove(source, target, move) {
+			for (const pokemon of source.alliesAndSelf()) {
+				this.boost({accuracy: 1}, pokemon);
+			}
 		},
 		target: "allAdjacentFoes",
 		type: "Electric",
