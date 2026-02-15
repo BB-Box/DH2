@@ -2127,6 +2127,68 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Ground",
 	},
+	//Slowbro
+	shellreaction: {
+		num: 3058,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Shell Reaction",
+		desc: "One bite of the Shellder on the tail compels Slowbro to randomly use one of its moves. This move can also be used while the user is affected by Sleep or Taunt.",
+		shortDesc: "Calls a move from another slot. Can be used in Slp or Taunt.",
+		pp: 10,
+		priority: 0,
+		flags: {failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
+		sleepUsable: true,
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Bite", target);
+			this.add('-anim', source, "Nasty Plot", target);
+		},
+		onTry(source, target, move) {
+			//Only Slowbro in its base form can use this move
+			if (source.species.name === 'Slowbro') {
+				//Special message if Slowbro is affected by a status that Shellder can ignore
+				//Interactions with Taunt are handled within the move itself
+				if (source.status['slp'] || source.volatiles['taunt']) {
+					this.add('-message', `${source.name} can use its move thanks to the Shellder on its tail!`);
+					return;
+				}
+			}
+			this.hint("Only a Pokemon whose form is Slowbro (base form) can use this move.");
+			if (source.species.name === 'Slowbro-Galar') {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Shell Reaction', '[forme]');
+				return null;
+			}
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Shell Reaction');
+			return null;
+			
+		},
+		onHit(pokemon) {
+			const moves = [];
+			for (const moveSlot of pokemon.moveSlots) {
+				const moveid = moveSlot.id;
+				if (!moveid) continue;
+				const move = this.dex.moves.get(moveid);
+				if (move.flags['nosleeptalk'] || move.flags['charge'] || (move.isZ && move.basePower !== 1) || move.isMax) {
+					continue;
+				}
+				moves.push(moveid);
+			}
+			let randomMove = '';
+			if (moves.length) randomMove = this.sample(moves);
+			if (!randomMove) {
+				return false;
+			}
+			this.actions.useMove(randomMove, pokemon);
+		},
+		callsMove: true,
+		secondary: null,
+		target: "self",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
@@ -2387,4 +2449,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-activate', source, 'move: Court Change');
 		},
 	},
+	//Moves that can bypass move-restricting volatile statuses (Taunt) are defined within the move itself
+	//Taunt - For 'Shell Reaction'
+	taunt: {
+		inherit: true,
+		condition: {
+			duration: 3,
+			onStart(target) {
+				if (target.activeTurns && !this.queue.willMove(target)) {
+					this.effectState.duration++;
+				}
+				this.add('-start', target, 'move: Taunt');
+			},
+			onResidualOrder: 15,
+			onEnd(target) {
+				this.add('-end', target, 'move: Taunt');
+			},
+			onDisableMove(pokemon) {
+				for (const moveSlot of pokemon.moveSlots) {
+					const move = this.dex.moves.get(moveSlot.id);
+					if (move.category === 'Status' && move.id !== 'mefirst' && move.id !== 'shellreaction') {
+						pokemon.disableMove(moveSlot.id);
+					}
+				}
+			},
+			onBeforeMovePriority: 5,
+			onBeforeMove(attacker, defender, move) {
+				if (!move.isZ && !move.isMax && move.category === 'Status' && move.id !== 'mefirst' && move.id !== 'shellreaction') {
+					this.add('cant', attacker, 'move: Taunt', move);
+					return false;
+				}
+			},
+		},
+	}
 };
