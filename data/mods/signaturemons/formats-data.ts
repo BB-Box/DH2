@@ -970,7 +970,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	ledian: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	spinarak: {
 		tier: "NoSign",

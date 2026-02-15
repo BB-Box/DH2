@@ -2268,6 +2268,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
+	//Ledian
+	superstarcombo: {
+		num: 3061,
+		accuracy: 100,
+		basePower: 20,
+		category: "Physical",
+		name: "Superstar Combo",
+		desc: "The user throws quick punches in droves, hitting its target seven to ten times in a row.",
+		shortDesc: "Hits 7-10 times.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Comet Punch", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			//Loaded Dice is hard-coded, gotta adjust the multi-hits here
+			if (pokemon.item = this.dex.items.all().filter(item => (item.num === 1886))) { //Loaded Dice check
+				move.multihit = [9, 10];
+			}
+		},
+		multihit: [7, 10],
+		secondary: null,
+		target: "normal",
+		type: "Bug",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
