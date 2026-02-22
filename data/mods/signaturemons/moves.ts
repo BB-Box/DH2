@@ -2368,7 +2368,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		name: "Armor Lance",
 		desc: "The user first sets up its armor, and then attacks the target with its lance. During the preparation, the Pokemon takes half the damage from every attack it receives.",
 		shortDesc: "Attacks at end of turn. Damage taken /2 during the turn.",
-		pp: 10,
+		pp: 5,
 		priority: -3,
 		flags: {contact: 1, protect: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
 		onPrepareHit(target, source, move) {
@@ -2383,7 +2383,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onStart(pokemon) {
 				this.attrLastMove('[still]');
 				this.add('-anim', pokemon, "Iron Defense", pokemon);
-				this.add('-singlemove', pokemon, 'Armor Lance', `${pokemon.name} is setting up its Armor Lance!`);
+				this.add('-singlemove', pokemon, 'Armor Lance');
 			},
 			onSourceModifyDamage() {
 				return this.chainModify(0.5);
