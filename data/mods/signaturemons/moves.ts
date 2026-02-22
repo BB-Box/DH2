@@ -2378,13 +2378,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priorityChargeCallback(pokemon) {
 			pokemon.addVolatile('armorlance');
 		},
-		/*self: {
-			volatileStatus: 'armorlance',
-		},*/
 		condition: {
 			noCopy: true,
 			onStart(pokemon) {
-				this.add('-singlemove', pokemon, 'Armor Lance', '[silent]');
+				this.attrLastMove('[still]');
+				this.add('-anim', pokemon, "Iron Defense", pokemon);
+				this.add('-singlemove', pokemon, 'Armor Lance', `${pokemon.name} is setting up its Armor Lance!`);
 			},
 			onSourceModifyDamage() {
 				return this.chainModify(0.5);
