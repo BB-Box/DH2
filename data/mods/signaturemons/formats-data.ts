@@ -2539,7 +2539,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	escavalier: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	foongus: {
 		tier: "NoSign",

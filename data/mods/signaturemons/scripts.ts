@@ -61,6 +61,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'darmanitan').learnset.burningwill = ['9L1'];
 		this.modData('Learnsets', 'darmanitangalar').learnset.burningwill = ['9L1'];
 		this.modData('Learnsets', 'scrafty').learnset.holdup = ['9L1'];
+		this.modData('Learnsets', 'escavalier').learnset.armorlance = ['9L1'];
 		this.modData('Learnsets', 'eelektross').learnset.exhaustion = ['9L1'];
 		this.modData('Learnsets', 'durant').learnset.frontguard = ['9L1'];
 		this.modData('Learnsets', 'hydreigon').learnset.triplethreat = ['9L1'];

@@ -2359,6 +2359,46 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
+	//Escavalier
+	armorlance: {
+		num: 3064,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Armor Lance",
+		desc: "The user first sets up its armor, and then attacks the target with its lance. During the preparation, the Pokemon takes half the damage from every attack it receives.",
+		shortDesc: "Attacks at end of turn. Damage taken /2 during the turn.",
+		pp: 10,
+		priority: -3,
+		flags: {contact: 1, protect: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Megahorn", target);
+		},
+		priorityChargeCallback(pokemon) {
+			pokemon.addVolatile('armorlance');
+		},
+		/*self: {
+			volatileStatus: 'armorlance',
+		},*/
+		condition: {
+			noCopy: true,
+			onStart(pokemon) {
+				this.add('-singlemove', pokemon, 'Armor Lance', '[silent]');
+			},
+			onSourceModifyDamage() {
+				return this.chainModify(0.5);
+			},
+			onBeforeMovePriority: 100,
+			onBeforeMove(pokemon) {
+				this.debug('removing Armor Lance buff before attack');
+				pokemon.removeVolatile('armorlance');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Steel",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
