@@ -2166,7 +2166,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-fail', source, 'move: Shell Reaction');
 			return null;
-			
 		},
 		onHit(pokemon) {
 			const moves = [];
@@ -2397,6 +2396,46 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
+	},
+	//Eiscue
+	iceblock: {
+		num: 3065,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Ice Block",
+		desc: "The user reinforces its Ice Face by making it colder. This move goes first and boosts the user's Defense and Special Defense, but only if the user's Ice Face is intact.",
+		shortDesc: "Goes first. Def +1 and SpD +1. Ice Face Eiscue only.",
+		pp: 10,
+		priority: 1,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Iron Defense", target);
+		},
+		onTry(source, target, move) {
+			//Only Eiscue with its Ice Face can use this move
+			if (source.species.name === 'Eiscue') {
+				return;
+			}
+			if (source.species.name === 'Eiscue-Noice') {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Ice Block', '[forme]');
+				this.add('-message', `${source.name} cannot use Ice Block without its Ice Face!`);
+				return null;
+			}
+			this.hint("Only a Pokemon whose form is Eiscue (Ice Face) can use this move.");
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Ice Block');
+			return null;
+		},
+		boosts: {
+			def: 1,
+			spd: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Ice",
 	},
 	//Signature moves remixed
 	//Raticate
