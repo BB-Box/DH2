@@ -2437,6 +2437,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Ice",
 	},
+	//Mawile
+	chompchomp: {
+		num: 3066,
+		accuracy: 95,
+		basePower: 50,
+		category: "Physical",
+		name: "Chomp-Chomp",
+		desc: "The user gnaws on its target with its powerful jaw. This move hits two times.",
+		shortDesc: "Hits 2 times.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Charm", target);
+			this.add('-anim', source, "Crunch", target);
+		},
+		multihit: 2,
+		secondary: null,
+		target: "normal",
+		type: "Fairy",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

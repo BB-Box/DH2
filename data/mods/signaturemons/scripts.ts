@@ -35,6 +35,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 3
 		this.modData('Learnsets', 'linoone').learnset.linedash = ['9L1'];
 		this.modData('Learnsets', 'slaking').learnset.procrastinate = ['9L1'];
+		this.modData('Learnsets', 'mawile').learnset.chompchomp = ['9L1'];
 		this.modData('Learnsets', 'spinda').learnset.spintowin = ['9L1'];
 		this.modData('Learnsets', 'cacturne').learnset.scarecrow = ['9L1'];
 		this.modData('Learnsets', 'zangoose').learnset.whiteclaw = ['9L1'];

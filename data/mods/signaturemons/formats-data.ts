@@ -1495,7 +1495,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},*/
 	mawile: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*mawilemega: {
 		tier: "NoSign",
