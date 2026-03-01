@@ -2451,7 +2451,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Charm", target);
 			this.add('-anim', source, "Crunch", target);
 		},
 		multihit: 2,
