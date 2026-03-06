@@ -2472,17 +2472,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {protect: 1, mirror: 1, metronome: 1, pulse: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Rapid Spin", target);
+			this.add('-anim', source, "Gyro Ball", target);
 		},
 		onAfterHit(target, pokemon, move) {
 			if (!move.hasSheerForce) {
 				if (pokemon.hp && pokemon.removeVolatile('leechseed')) {
-					this.add('-end', pokemon, 'Leech Seed', '[from] move: Rapid Spin', '[of] ' + pokemon);
+					this.add('-end', pokemon, 'Leech Seed', '[from] move: Gyro-Pulse', '[of] ' + pokemon);
 				}
 				const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge'];
 				for (const condition of sideConditions) {
 					if (pokemon.hp && pokemon.side.removeSideCondition(condition)) {
-						this.add('-sideend', pokemon.side, this.dex.conditions.get(condition).name, '[from] move: Rapid Spin', '[of] ' + pokemon);
+						this.add('-sideend', pokemon.side, this.dex.conditions.get(condition).name, '[from] move: Gyro-Pulse', '[of] ' + pokemon);
 					}
 				}
 				if (pokemon.hp && pokemon.volatiles['partiallytrapped']) {
