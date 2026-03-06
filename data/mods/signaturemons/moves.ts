@@ -2554,21 +2554,22 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						volatileStatus: 'flinch',
 					};
 					break;
-				default: //Effect 4: User attacks a foe (20 BP, 9 hits)
+				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
 					move.category = 'Physical';
 					move.target = 'randomNormal';
 					move.basePower = 20;
 					move.multihit = 9;
 					break;
-				/*default: //If i = 0 or any other value somehow, the move does nothing!
-					break;*/
+				default: //If i = 0 or any other value somehow, the move does nothing!
+					move.secondary = null;
+					break;
 			}
 		},
 		//Special messages depending on the move effects and target
-		onBeforeMove(target, source, move) {
+		onTryHit(target, source, move) {
 			if (target == source) //Messages for self
 			{
-				if (move.heal || move.secondaries)
+				if (move.heal || move.secondary)
 				{
 					this.add('-message', `${source.name} is practicing self-care!`);
 				}
@@ -2587,7 +2588,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				else this.add('-message', `${source.name} distracts ${target.name} with a fake move!`);
 			}
 		},
-		secondary: null,
+		secondary: {},
 		target: "self",
 		type: "Normal",
 	},
