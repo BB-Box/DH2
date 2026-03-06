@@ -1485,7 +1485,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	delcatty: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	sableye: {
 		tier: "NoSign",

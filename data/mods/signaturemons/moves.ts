@@ -2515,6 +2515,84 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Psychic",
 	},
+	//Delcatty
+	carteblanche: {
+		num: 3068,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Carte Blanche",
+		desc: "The user is given free rein to do what it wants. It may randomly support its team, attack or distract a foe, or do nothing.",
+		shortDesc: "Goes first. May heal or buff allies, attack or flinch a foe, or fail.",
+		pp: 5,
+		priority: 5,
+		flags: {failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Nasty Plot", target);
+		},
+		//The effects of the move are decided here by a random value
+		onModifyMove(move, pokemon, target) {
+			const i = this.random(4);
+			switch (i) {
+				case 1: //Effect 1: Heals itself and allies
+					move.target = 'allies';
+					move.heal = [1, 2];
+					break;
+				case 2: //Effect 2: Boosts Def. and SpD for itself and allies
+					move.target = 'allies';
+					move.secondaries.push({
+						boosts: {
+							def: 1,
+							spd: 1,
+						},
+					});
+					break;
+				case 3: //Effect 3: Inflicts flinch on a foe
+					move.target = 'randomNormal';
+					move.secondaries.push({
+						chance: 100,
+						volatileStatus: 'flinch',
+					});
+					break;
+				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
+					move.category = 'Physical';
+					move.target = 'randomNormal';
+					move.basePower = 20;
+					move.multihit = 9;
+					break;
+				default: //If i = 0 or any other value somehow, the move does nothing!
+					return false;
+					break;
+			}
+		},
+		//Special messages depending on the move effects and target
+		onBeforeMove(target, source, move) {
+			if (target == source) //Messages for self
+			{
+				if (move.heal || move.secondaries)
+				{
+					this.add('-message', `${source.name} is practicing self-care!`);
+				}
+				else this.add('-message', `${source.name} is distracted! Its move did nothing!`);
+			}
+			else if (target.isAlly(source)) //Messages for allies
+			{
+				this.add('-message', `${source.name} provides support for ${target.name}!`);
+			}
+			else //Messages for foes
+			{
+				if (move.basePower > 0)
+				{
+					this.add('-message', `${source.name} suddenly attacks ${target.name}!`);
+				}
+				else this.add('-message', `${source.name} distracts ${target.name} with a fake move!`);
+			}
+		},
+		secondary: null,
+		target: "self",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
