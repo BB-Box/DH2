@@ -2534,6 +2534,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		//The effects of the move are decided here by a random value
 		onModifyMove(move, pokemon, target) {
 			const i = this.random(4);
+			this.add('-message', `Random value: ${i}`);
 			switch (i) {
 				case 1: //Effect 1: Heals itself and allies
 					move.target = 'allies';
@@ -2548,25 +2549,25 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						},
 					});
 					break;
-				/*case 3: //Effect 3: Inflicts flinch on a foe
+				case 3: //Effect 3: Inflicts flinch on a foe
 					move.target = 'randomNormal';
 					move.secondaries.push({
 						chance: 100,
 						volatileStatus: 'flinch',
 					});
 					break;
-				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
+				default: //Effect 4: User attacks a foe (20 BP, 9 hits)
 					move.category = 'Physical';
 					move.target = 'randomNormal';
 					move.basePower = 20;
 					move.multihit = 9;
-					break;*/
-				default: //If i = 0 or any other value somehow, the move does nothing!
 					break;
+				/*default: //If i = 0 or any other value somehow, the move does nothing!
+					break;*/
 			}
 		},
 		//Special messages depending on the move effects and target
-		onHit(target, source, move) {
+		onBeforeMove(target, source, move) {
 			if (target == source) //Messages for self
 			{
 				if (move.heal || move.secondaries)
