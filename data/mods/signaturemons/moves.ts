@@ -2567,7 +2567,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 		},
 		//Special messages depending on the move effects and target
-		onBeforeMove(target, source, move) {
+		/*onBeforeMove(target, source, move) {
 			if (target == source) //Messages for self
 			{
 				if (move.heal || move.secondaries)
@@ -2588,7 +2588,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 				else this.add('-message', `${source.name} distracts ${target.name} with a fake move!`);
 			}
-		},
+		},*/
 		secondary: null,
 		target: "self",
 		type: "Normal",
