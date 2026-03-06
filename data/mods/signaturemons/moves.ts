@@ -2548,7 +2548,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						},
 					});
 					break;
-				case 3: //Effect 3: Inflicts flinch on a foe
+				/*case 3: //Effect 3: Inflicts flinch on a foe
 					move.target = 'randomNormal';
 					move.secondaries.push({
 						chance: 100,
@@ -2560,14 +2560,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					move.target = 'randomNormal';
 					move.basePower = 20;
 					move.multihit = 9;
-					break;
+					break;*/
 				default: //If i = 0 or any other value somehow, the move does nothing!
-					return false;
 					break;
 			}
 		},
 		//Special messages depending on the move effects and target
-		/*onBeforeMove(target, source, move) {
+		onHit(target, source, move) {
 			if (target == source) //Messages for self
 			{
 				if (move.heal || move.secondaries)
@@ -2588,7 +2587,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 				else this.add('-message', `${source.name} distracts ${target.name} with a fake move!`);
 			}
-		},*/
+		},
 		secondary: null,
 		target: "self",
 		type: "Normal",
