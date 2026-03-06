@@ -2542,19 +2542,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					break;
 				case 2: //Effect 2: Boosts Def. and SpD for itself and allies
 					move.target = 'allies';
-					move.secondaries.push({
-						boosts: {
-							def: 1,
-							spd: 1,
-						},
-					});
+					move.boosts = {
+						def: 1,
+						spd: 1,
+					};
 					break;
 				case 3: //Effect 3: Inflicts flinch on a foe
 					move.target = 'randomNormal';
-					move.secondaries.push({
+					move.secondary = {
 						chance: 100,
 						volatileStatus: 'flinch',
-					});
+					};
 					break;
 				default: //Effect 4: User attacks a foe (20 BP, 9 hits)
 					move.category = 'Physical';
