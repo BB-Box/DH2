@@ -2523,7 +2523,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Status",
 		name: "Carte Blanche",
 		desc: "The user is given free rein to do what it wants. It may randomly support its team, attack or distract a foe, or do nothing.",
-		shortDesc: "Goes first. May heal or buff allies, attack or flinch a foe, or fail.",
+		shortDesc: "Goes first. May support allies, disrupt a foe, or fail.",
 		pp: 5,
 		priority: 5,
 		flags: {failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
@@ -2533,8 +2533,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		//The effects of the move are decided here by a random value
 		onModifyMove(move, pokemon, target) {
-			const i = 3; //this.random(4);
-			move.secondaries = [];
+			const i = this.random(5);
 			switch (i) {
 				case 1: //Effect 1: Heals itself and allies
 					move.target = 'allies';
@@ -2547,10 +2546,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						spd: 1,
 					};
 					break;
-				case 3: //Effect 3: Attacks and inflicts flinch on a foe
-					move.category = 'Physical';
+				case 3: //Effect 3: Inflicts flinch on a foe
 					move.target = 'randomNormal';
-					move.basePower = 20;
 					move.volatileStatus = 'flinch';
 					break;
 				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
@@ -2586,7 +2583,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					{
 						this.add('-message', `${source.name} suddenly attacks ${target.name}!`);
 					}
-					else this.add('-message', `${source.name} distracts ${target.name} with a fake out!`);
+					else this.add('-message', `${source.name} distracts ${target.name} with a bluff!`);
 				}
 			}
 		},
