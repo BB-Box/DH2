@@ -2534,7 +2534,6 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		//The effects of the move are decided here by a random value
 		onModifyMove(move, pokemon, target) {
 			const i = this.random(4);
-			this.add('-message', `Random value: ${i}`);
 			switch (i) {
 				case 1: //Effect 1: Heals itself and allies
 					move.target = 'allies';
@@ -2547,11 +2546,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 						spd: 1,
 					};
 					break;
-				case 3: //Effect 3: Inflicts flinch on a foe
+				case 3: //Effect 3: Attacks and inflicts flinch on a foe
+					move.category = 'Physical';
 					move.target = 'randomNormal';
+					move.basePower = 20;
 					move.secondary = {
 						chance: 100,
-						volatileStatus: 'flinch',
+						volatileStatus: 'flinch', //Does not work for some reason
 					};
 					break;
 				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
@@ -2575,9 +2576,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 				else this.add('-message', `${source.name} is distracted! Its move did nothing!`);
 			}
-			else if (target.isAlly(source)) //Messages for allies
+			if (target.isAlly(source)) //Messages for allies
 			{
-				this.add('-message', `${source.name} provides support for ${target.name}!`);
+				this.add('-message', `${source.name} is providing support for ${target.name}!`);
 			}
 			else //Messages for foes
 			{
@@ -2585,7 +2586,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				{
 					this.add('-message', `${source.name} suddenly attacks ${target.name}!`);
 				}
-				else this.add('-message', `${source.name} distracts ${target.name} with a fake move!`);
+				else this.add('-message', `${source.name} distracts ${target.name} with a fake out!`);
 			}
 		},
 		secondary: {},
