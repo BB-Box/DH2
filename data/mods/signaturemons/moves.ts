@@ -1918,15 +1918,15 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 			let pearlNum = 581; //Big Nugget by default (Pearls were not on default Showdown)
 			switch (move.basePower) {
-				case 30:
-					pearlNum = 9002; //Pearl String
-					break;
-				case 80:
-					pearlNum = 9001; //Big Pearl
-					break;
-				case 60:
-					pearlNum = 9000; //Pearl
-					break;
+			case 30:
+				pearlNum = 9002; //Pearl String
+				break;
+			case 80:
+				pearlNum = 9001; //Big Pearl
+				break;
+			case 60:
+				pearlNum = 9000; //Pearl
+				break;
 			}
 			const pearlItem = this.dex.items.all().filter(item => (item.num === pearlNum));
 			let logicPearl = '';
@@ -2216,29 +2216,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Before healing, reduce the highest stat. If that highest stat is already at -6, the move fails.
 			let success = false; //default value is false
 			switch (higherStat) {
-				case atk:
-					if (target.boosts.atk === -6) return false;
-					success = this.boost({atk: -1}, target, source, null, false, true);
-					break;
-				case def:
-					if (target.boosts.def === -6) return false;
-					success = this.boost({def: -1}, target, source, null, false, true);
-					break;
-				case spa:
-					if (target.boosts.spa === -6) return false;
-					success = this.boost({spa: -1}, target, source, null, false, true);
-					break;
-				case spd:
-					if (target.boosts.spd === -6) return false;
-					success = this.boost({spd: -1}, target, source, null, false, true);
-					break;
-				case spe:
-					if (target.boosts.spe === -6) return false;
-					success = this.boost({spe: -1}, target, source, null, false, true);
-					break;
-				default: //Failsafe if no equivalence was found somehow
-					return false;
-				}
+			case atk:
+				if (target.boosts.atk === -6) return false;
+				success = this.boost({atk: -1}, target, source, null, false, true);
+				break;
+			case def:
+				if (target.boosts.def === -6) return false;
+				success = this.boost({def: -1}, target, source, null, false, true);
+				break;
+			case spa:
+				if (target.boosts.spa === -6) return false;
+				success = this.boost({spa: -1}, target, source, null, false, true);
+				break;
+			case spd:
+				if (target.boosts.spd === -6) return false;
+				success = this.boost({spd: -1}, target, source, null, false, true);
+				break;
+			case spe:
+				if (target.boosts.spe === -6) return false;
+				success = this.boost({spe: -1}, target, source, null, false, true);
+				break;
+			default: //Failsafe if no equivalence was found somehow
+				return false;
+			}
 			return !!(this.heal(higherStat, source, target) || success);
 		},
 		secondary: null,
@@ -2535,30 +2535,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onModifyMove(move, pokemon, target) {
 			const i = this.random(5);
 			switch (i) {
-				case 1: //Effect 1: Heals itself and allies
-					move.target = 'allies';
-					move.heal = [1, 2];
-					break;
-				case 2: //Effect 2: Boosts Def. and SpD for itself and allies
-					move.target = 'allies';
-					move.boosts = {
-						def: 1,
-						spd: 1,
-					};
-					break;
-				case 3: //Effect 3: Inflicts flinch on a foe
-					move.target = 'randomNormal';
-					move.volatileStatus = 'flinch';
-					break;
-				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
-					move.category = 'Physical';
-					move.target = 'randomNormal';
-					move.basePower = 20;
-					move.multihit = 9;
-					break;
-				default: //If i = 0 or any other value somehow, the move does nothing!
-					move.secondary = null;
-					break;
+			case 1: //Effect 1: Heals itself and allies
+				move.target = 'allies';
+				move.heal = [1, 2];
+				break;
+			case 2: //Effect 2: Boosts Def. and SpD for itself and allies
+				move.target = 'allies';
+				move.boosts = {
+					def: 1,
+					spd: 1,
+				};
+				break;
+			case 3: //Effect 3: Inflicts flinch on a foe
+				move.target = 'randomNormal';
+				move.volatileStatus = 'flinch';
+				break;
+			case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
+				move.category = 'Physical';
+				move.target = 'randomNormal';
+				move.basePower = 20;
+				move.multihit = 9;
+				break;
+			default: //If i = 0 or any other value somehow, the move does nothing!
+				move.secondary = null;
+				break;
 			}
 		},
 		//Special messages depending on the move effects and target
@@ -2590,6 +2590,120 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
+	},
+	//Florges (TO FIX: No animation)
+	magicgarden: {
+		num: 3069,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Magic Garden",
+		desc: "The user grows magical flowers to boost the stats of itself and its allies on the field. The type of boost changes depending on the active terrain.",
+		shortDesc: "Boosts ally stats 5 turns depending on active terrain.",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grassy Terrain", target);
+		},
+		onModifyMove(move, pokemon) {
+			switch (this.field.terrain) {
+			case 'electricterrain':
+				move.sideCondition = 'yellowflowergarden';
+				move.condition = {
+					duration: 5,
+					//This part works but there is no animation or UI text for it
+					onSideStart(side) {
+						this.add('-sidestart', side, 'move: Magic Garden');
+					},
+					onModifySpe(spe, pokemon) {
+						return this.chainModify(2);
+					},
+					onSideResidualOrder: 26,
+					onSideResidualSubOrder: 6,
+					onSideEnd(side) {
+						this.add('-sideend', side, 'move: Magic Garden');
+					},
+				};
+				break;
+			case 'grassyterrain':
+				move.sideCondition = 'orangeflowergarden';
+				move.condition = {
+					duration: 5,
+					//This part works but there is no animation or UI text for it
+					onSideStart(side) {
+						this.add('-sidestart', side, 'move: Magic Garden');
+					},
+					onModifyDef(def, pokemon) {
+						return this.chainModify(1.5);
+					},
+					onSideResidualOrder: 26,
+					onSideResidualSubOrder: 6,
+					onSideEnd(side) {
+						this.add('-sideend', side, 'move: Magic Garden');
+					},
+				};
+				break;
+			case 'mistyterrain':
+				move.sideCondition = 'blueflowergarden';
+				move.condition = {
+					duration: 5,
+					//This part works but there is no animation or UI text for it
+					onSideStart(side) {
+						this.add('-sidestart', side, 'move: Magic Garden');
+					},
+					onModifySpD(spd, pokemon) {
+						return this.chainModify(1.5);
+					},
+					onSideResidualOrder: 26,
+					onSideResidualSubOrder: 6,
+					onSideEnd(side) {
+						this.add('-sideend', side, 'move: Magic Garden');
+					},
+				};
+				break;
+			case 'psychicterrain':
+				move.sideCondition = 'redflowergarden';
+				move.condition = {
+					duration: 5,
+					//This part works but there is no animation or UI text for it
+					onSideStart(side) {
+						this.add('-sidestart', side, 'move: Magic Garden');
+					},
+					onModifySpA(spa, pokemon) {
+						return this.chainModify(1.5);
+					},
+					onSideResidualOrder: 26,
+					onSideResidualSubOrder: 6,
+					onSideEnd(side) {
+						this.add('-sideend', side, 'move: Magic Garden');
+					},
+				};
+				break;
+			default: //No terrain
+				move.sideCondition = 'whiteflowergarden';
+				move.condition = {
+					duration: 5,
+					//This part works but there is no animation or UI text for it
+					onSideStart(side) {
+						this.add('-sidestart', side, 'move: Magic Garden');
+					},
+					onModifyAtk(atk, pokemon) {
+						return this.chainModify(1.5);
+					},
+					onSideResidualOrder: 26,
+					onSideResidualSubOrder: 6,
+					onSideEnd(side) {
+						this.add('-sideend', side, 'move: Magic Garden');
+					},
+				};
+				break;
+			}
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
 	},
 	//Signature moves remixed
 	//Raticate
