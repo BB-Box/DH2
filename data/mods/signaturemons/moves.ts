@@ -2533,7 +2533,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		//The effects of the move are decided here by a random value
 		onModifyMove(move, pokemon, target) {
-			const i = this.random(4);
+			const i = 3; //this.random(4);
+			move.secondaries = [];
 			switch (i) {
 				case 1: //Effect 1: Heals itself and allies
 					move.target = 'allies';
@@ -2550,10 +2551,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					move.category = 'Physical';
 					move.target = 'randomNormal';
 					move.basePower = 20;
-					move.secondary = {
-						chance: 100,
-						volatileStatus: 'flinch', //Does not work for some reason
-					};
+					move.secondaries.push({
+						chance: 30,
+						status: 'slp',
+					});
 					break;
 				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
 					move.category = 'Physical';
@@ -2568,28 +2569,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		//Special messages depending on the move effects and target
 		onTryHit(target, source, move) {
-			if (target == source) //Messages for self
+			if (target === source) //Messages for self
 			{
-				if (move.heal || move.secondary)
+				if (move.heal || move.boosts)
 				{
 					this.add('-message', `${source.name} is practicing self-care!`);
 				}
 				else this.add('-message', `${source.name} is distracted! Its move did nothing!`);
 			}
-			if (target.isAlly(source)) //Messages for allies
+			else
 			{
-				this.add('-message', `${source.name} is providing support for ${target.name}!`);
-			}
-			else //Messages for foes
-			{
-				if (move.basePower > 0)
+				if (target.isAlly(source)) //Messages for allies
 				{
-					this.add('-message', `${source.name} suddenly attacks ${target.name}!`);
+					this.add('-message', `${source.name} is providing support for ${target.name}!`);
 				}
-				else this.add('-message', `${source.name} distracts ${target.name} with a fake out!`);
+				else //Messages for foes
+				{
+					if (move.basePower > 0)
+					{
+						this.add('-message', `${source.name} suddenly attacks ${target.name}!`);
+					}
+					else this.add('-message', `${source.name} distracts ${target.name} with a fake out!`);
+				}
 			}
 		},
-		secondary: {},
+		secondary: null,
 		target: "self",
 		type: "Normal",
 	},
