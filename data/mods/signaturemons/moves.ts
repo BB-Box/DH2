@@ -2551,10 +2551,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					move.category = 'Physical';
 					move.target = 'randomNormal';
 					move.basePower = 20;
-					move.secondaries.push({
-						chance: 30,
-						status: 'slp',
-					});
+					move.volatileStatus = 'flinch';
 					break;
 				case 4: //Effect 4: User attacks a foe (20 BP, 9 hits)
 					move.category = 'Physical';
