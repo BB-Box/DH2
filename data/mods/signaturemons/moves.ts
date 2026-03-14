@@ -2591,7 +2591,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Normal",
 	},
-	//Florges (TO FIX: No animation)
+	//Florges (TO FIX: No animation) (To Test: Side conditions)
 	magicgarden: {
 		num: 3069,
 		accuracy: true,
@@ -2607,99 +2607,199 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Grassy Terrain", target);
 		},
+		sideCondition: 'whiteflowergarden',
 		onModifyMove(move, pokemon) {
+			if (this.field.isTerrain('')) return;
 			switch (this.field.terrain) {
 			case 'electricterrain':
 				move.sideCondition = 'yellowflowergarden';
-				move.condition = {
-					duration: 5,
-					//This part works but there is no animation or UI text for it
-					onSideStart(side) {
-						this.add('-sidestart', side, 'move: Magic Garden');
-					},
-					onModifySpe(spe, pokemon) {
-						return this.chainModify(2);
-					},
-					onSideResidualOrder: 26,
-					onSideResidualSubOrder: 6,
-					onSideEnd(side) {
-						this.add('-sideend', side, 'move: Magic Garden');
-					},
-				};
 				break;
 			case 'grassyterrain':
 				move.sideCondition = 'orangeflowergarden';
-				move.condition = {
-					duration: 5,
-					//This part works but there is no animation or UI text for it
-					onSideStart(side) {
-						this.add('-sidestart', side, 'move: Magic Garden');
-					},
-					onModifyDef(def, pokemon) {
-						return this.chainModify(1.5);
-					},
-					onSideResidualOrder: 26,
-					onSideResidualSubOrder: 6,
-					onSideEnd(side) {
-						this.add('-sideend', side, 'move: Magic Garden');
-					},
-				};
 				break;
 			case 'mistyterrain':
 				move.sideCondition = 'blueflowergarden';
-				move.condition = {
-					duration: 5,
-					//This part works but there is no animation or UI text for it
-					onSideStart(side) {
-						this.add('-sidestart', side, 'move: Magic Garden');
-					},
-					onModifySpD(spd, pokemon) {
-						return this.chainModify(1.5);
-					},
-					onSideResidualOrder: 26,
-					onSideResidualSubOrder: 6,
-					onSideEnd(side) {
-						this.add('-sideend', side, 'move: Magic Garden');
-					},
-				};
 				break;
 			case 'psychicterrain':
 				move.sideCondition = 'redflowergarden';
-				move.condition = {
-					duration: 5,
-					//This part works but there is no animation or UI text for it
-					onSideStart(side) {
-						this.add('-sidestart', side, 'move: Magic Garden');
-					},
-					onModifySpA(spa, pokemon) {
-						return this.chainModify(1.5);
-					},
-					onSideResidualOrder: 26,
-					onSideResidualSubOrder: 6,
-					onSideEnd(side) {
-						this.add('-sideend', side, 'move: Magic Garden');
-					},
-				};
-				break;
-			default: //No terrain
-				move.sideCondition = 'whiteflowergarden';
-				move.condition = {
-					duration: 5,
-					//This part works but there is no animation or UI text for it
-					onSideStart(side) {
-						this.add('-sidestart', side, 'move: Magic Garden');
-					},
-					onModifyAtk(atk, pokemon) {
-						return this.chainModify(1.5);
-					},
-					onSideResidualOrder: 26,
-					onSideResidualSubOrder: 6,
-					onSideEnd(side) {
-						this.add('-sideend', side, 'move: Magic Garden');
-					},
-				};
 				break;
 			}
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
+	},
+	//Side conditions for Magic Garden. These moves are NOT learned by anyone.
+	whiteflowergarden: {
+		num: 3070,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "White Flower Garden",
+		desc: "The user grows magical flowers to boost the Atk stat of itself and its allies on the field.",
+		shortDesc: "Boosts party Atk by 50% for 5 turns.",
+		pp: 1,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grassy Terrain", target);
+		},
+		sideCondition: 'whiteflowergarden',
+		condition: {
+			duration: 5,
+			//This part works but there is no animation or UI text for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: White Flower Garden');
+			},
+			onModifyAtk(atk, pokemon) {
+				return this.chainModify(1.5);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 6,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: White Flower Garden');
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
+	},
+	orangeflowergarden: {
+		num: 3071,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Orange Flower Garden",
+		desc: "The user grows magical flowers to boost the Def stat of itself and its allies on the field.",
+		shortDesc: "Boosts party Def by 50% for 5 turns.",
+		pp: 1,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grassy Terrain", target);
+		},
+		sideCondition: 'orangeflowergarden',
+		condition: {
+			duration: 5,
+			//This part works but there is no animation or UI text for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Orange Flower Garden');
+			},
+			onModifyDef(def, pokemon) {
+				return this.chainModify(1.5);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 6,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Orange Flower Garden');
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
+	},
+	redflowergarden: {
+		num: 3072,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Red Flower Garden",
+		desc: "The user grows magical flowers to boost the SpA stat of itself and its allies on the field.",
+		shortDesc: "Boosts party SpA by 50% for 5 turns.",
+		pp: 1,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grassy Terrain", target);
+		},
+		sideCondition: 'redflowergarden',
+		condition: {
+			duration: 5,
+			//This part works but there is no animation or UI text for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Red Flower Garden');
+			},
+			onModifySpA(spa, pokemon) {
+				return this.chainModify(1.5);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 6,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Red Flower Garden');
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
+	},
+	blueflowergarden: {
+		num: 3073,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Blue Flower Garden",
+		desc: "The user grows magical flowers to boost the SpD stat of itself and its allies on the field.",
+		shortDesc: "Boosts party SpD by 50% for 5 turns.",
+		pp: 1,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grassy Terrain", target);
+		},
+		sideCondition: 'blueflowergarden',
+		condition: {
+			duration: 5,
+			//This part works but there is no animation or UI text for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Blue Flower Garden');
+			},
+			onModifySpA(spd, pokemon) {
+				return this.chainModify(1.5);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 6,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Blue Flower Garden');
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Grass",
+	},
+	yellowflowergarden: {
+		num: 3074,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Yellow Flower Garden",
+		desc: "The user grows magical flowers to boost the Spe stat of itself and its allies on the field.",
+		shortDesc: "Doubles party Speed stat for 5 turns.",
+		pp: 1,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Grassy Terrain", target);
+		},
+		sideCondition: 'yellowflowergarden',
+		condition: {
+			duration: 5,
+			//This part works but there is no animation or UI text for it
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Yellow Flower Garden');
+			},
+			onModifySpA(spd, pokemon) {
+				return this.chainModify(2);
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 6,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Yellow Flower Garden');
+			},
 		},
 		secondary: null,
 		target: "allySide",
