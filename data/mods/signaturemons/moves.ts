@@ -2840,6 +2840,49 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Grass",
 	},
+	//Delphox
+	pyromancy: {
+		num: 3076,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Pyromancy",
+		desc: "After charging up, the user increases its Special Attack, Special Defense and Speed. Making direct contact with the Pokémon while it's charging results in a burn.",
+		shortDesc: "SpA +2, SpD +1, Spe +1 at end of turn. Burns any Pokémon that makes contact.",
+		pp: 10,
+		priority: -3,
+		flags: {failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fire Spin", target);
+		},
+		priorityChargeCallback(pokemon) {
+			pokemon.addVolatile('pyromancy');
+		},
+		condition: {
+			duration: 1,
+			onStart(pokemon) {
+				this.add('-singleturn', pokemon, 'move: Pyromancy');
+			},
+			onHit(target, source, move) {
+				if (this.checkMoveMakesContact(move, source, target)) {
+					source.trySetStatus('brn', target);
+				}
+			},
+		},
+		// FIXME: onMoveAborted(pokemon) {pokemon.removeVolatile('pyromancy')}, (taken from Beak Blast)
+		onAfterMove(pokemon) {
+			pokemon.removeVolatile('pyromancy');
+		},
+		boosts: {
+			spa: 2,
+			spd: 1,
+			spe: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Fire",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
@@ -3132,5 +3175,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 			},
 		},
-	}
+	},
+	//Moves that visibly charge at the start of the turn and activate at the end of the turn have a specific check to make the move Instruct fail
+	//For 'Fake Branch', 'Armor Lance', 'Pyromancy'
+	instruct: {
+		inherit: true,
+		onHit(target, source) {
+			if (!target.lastMove || target.volatiles['dynamax']) return false;
+			const lastMove = target.lastMove;
+			const moveIndex = target.moves.indexOf(lastMove.id);
+			if (
+				lastMove.flags['failinstruct'] || lastMove.isZ || lastMove.isMax ||
+				lastMove.flags['charge'] || lastMove.flags['recharge'] ||
+				target.volatiles['beakblast'] || target.volatiles['focuspunch'] || target.volatiles['shelltrap'] || target.volatiles['fakebranch'] || target.volatiles['armorlance'] || target.volatiles['pyromancy'] ||
+				(target.moveSlots[moveIndex] && target.moveSlots[moveIndex].pp <= 0)
+			) {
+				return false;
+			}
+			this.add('-singleturn', target, 'move: Instruct', '[of] ' + source);
+			this.queue.prioritizeAction(this.queue.resolveAction({
+				choice: 'move',
+				pokemon: target,
+				moveid: target.lastMove.id,
+				targetLoc: target.lastMoveTargetLoc!,
+			})[0] as MoveAction);
+		},
+	},
 };

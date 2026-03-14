@@ -71,6 +71,7 @@ export const Scripts: ModdedBattleScriptsData = {
 
 		//Gen 6
 		this.modData('Learnsets', 'chesnaught').learnset.burbash = ['9L1'];
+		this.modData('Learnsets', 'delphox').learnset.pyromancy = ['9L1'];
 		this.modData('Learnsets', 'diggersby').learnset.topple = ['9L1'];
 		this.modData('Learnsets', 'talonflame').learnset.airstrike = ['9L1'];
 		this.modData('Learnsets', 'florges').learnset.magicgarden = ['9L1'];
