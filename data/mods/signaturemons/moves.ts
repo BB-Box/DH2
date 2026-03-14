@@ -2649,8 +2649,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		condition: {
 			duration: 5,
 			//This part works but there is no animation or UI text for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: White Flower Garden');
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: White Flower Garden', '[silent]');
+				this.add('-message', `Magical white flowers boosted the Atk of ${source.name}'s team!`);
 			},
 			onModifyAtk(atk, pokemon) {
 				return this.chainModify(1.5);
@@ -2659,6 +2660,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onSideResidualSubOrder: 6,
 			onSideEnd(side) {
 				this.add('-sideend', side, 'move: White Flower Garden');
+				this.add('-message', `The white flowers wilted away.`);
 			},
 		},
 		secondary: null,
