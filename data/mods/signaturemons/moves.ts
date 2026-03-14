@@ -2647,11 +2647,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		sideCondition: 'whiteflowergarden',
 		condition: {
-			duration: 5,
+			duration: 4,
 			//This part works but there is no animation or UI text for it
 			onSideStart(side, source) {
 				this.add('-sidestart', side, 'move: White Flower Garden', '[silent]');
-				this.add('-message', `Magical white flowers boosted the Atk of ${source.name}'s team!`);
+				this.add('-message', `Magical white flowers boosted the Attack of ${source.name}'s team!`);
 			},
 			onModifyAtk(atk, pokemon) {
 				return this.chainModify(1.5);
@@ -2684,10 +2684,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		sideCondition: 'orangeflowergarden',
 		condition: {
-			duration: 5,
+			duration: 4,
 			//This part works but there is no animation or UI text for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Orange Flower Garden');
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Orange Flower Garden', '[silent]');
+				this.add('-message', `Magical orange flowers boosted the Defense of ${source.name}'s team!`);
 			},
 			onModifyDef(def, pokemon) {
 				return this.chainModify(1.5);
@@ -2696,6 +2697,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onSideResidualSubOrder: 6,
 			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Orange Flower Garden');
+				this.add('-message', `The orange flowers wilted away.`);
 			},
 		},
 		secondary: null,
@@ -2719,10 +2721,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		sideCondition: 'redflowergarden',
 		condition: {
-			duration: 5,
+			duration: 4,
 			//This part works but there is no animation or UI text for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Red Flower Garden');
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Red Flower Garden', '[silent]');
+				this.add('-message', `Magical red flowers boosted the Special Attack of ${source.name}'s team!`);
 			},
 			onModifySpA(spa, pokemon) {
 				return this.chainModify(1.5);
@@ -2731,6 +2734,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onSideResidualSubOrder: 6,
 			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Red Flower Garden');
+				this.add('-message', `The red flowers wilted away.`);
 			},
 		},
 		secondary: null,
@@ -2754,10 +2758,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		sideCondition: 'blueflowergarden',
 		condition: {
-			duration: 5,
+			duration: 4,
 			//This part works but there is no animation or UI text for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Blue Flower Garden');
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Blue Flower Garden', '[silent]');
+				this.add('-message', `Magical blue flowers boosted the Special Defense of ${source.name}'s team!`);
 			},
 			onModifySpA(spd, pokemon) {
 				return this.chainModify(1.5);
@@ -2766,6 +2771,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onSideResidualSubOrder: 6,
 			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Blue Flower Garden');
+				this.add('-message', `The blue flowers wilted away.`);
 			},
 		},
 		secondary: null,
@@ -2789,10 +2795,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		sideCondition: 'yellowflowergarden',
 		condition: {
-			duration: 5,
+			duration: 4,
 			//This part works but there is no animation or UI text for it
-			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Yellow Flower Garden');
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Yellow Flower Garden', '[silent]');
+				this.add('-message', `Magical yellow flowers boosted the Speed of ${source.name}'s team!`);
 			},
 			onModifySpA(spd, pokemon) {
 				return this.chainModify(2);
@@ -2801,6 +2808,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onSideResidualSubOrder: 6,
 			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Yellow Flower Garden');
+				this.add('-message', `The yellow flowers wilted away.`);
 			},
 		},
 		secondary: null,
@@ -3003,13 +3011,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 	},
 	//Field effects have special interactions with specific moves
-	//Court Change - For 'Still Water'
+	//Court Change - For 'Still Water', 'Magic Garden' (all flowers)
 	courtchange: {
 		inherit: true,
 		onHitField(target, source) {
 			const sideConditions = [
 				'mist', 'lightscreen', 'reflect', 'spikes', 'safeguard', 'tailwind', 'toxicspikes', 'stealthrock', 'waterpledge', 'firepledge', 'grasspledge', 'stickyweb', 'auroraveil', 'gmaxsteelsurge', 'gmaxcannonade', 'gmaxvinelash', 'gmaxwildfire',
-				'stillwater',
+				'stillwater', 'whiteflowergarden', 'orangeflowergarden', 'redflowergarden', 'blueflowergarden', 'yellowflowergarden',
 			];
 			let success = false;
 			if (this.gameType === "freeforall") {
