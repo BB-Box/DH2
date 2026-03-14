@@ -2883,6 +2883,61 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Fire",
 	},
+	//Malamar
+	revolution: {
+		num: 3077,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Revolution",
+		desc: "The user creates a bizarre area in which Pokémon stat changes are reversed for five turns. Pokémon with the ability Contrary are not affected.",
+		shortDesc: "Inverse all occuring stat changes for 5 turns.",
+		pp: 10,
+		priority: 0,
+		flags: {mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Wonder Room", target);
+		},
+		pseudoWeather: 'revolution',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-activate', source, 'ability: Persistent', '[move] Revolution');
+					return 7;
+				}
+				return 5;
+			},
+			onChangeBoost(boost, target, source, effect) {
+				if (effect && effect.id === 'zpower') return;
+				if (target.hasAbility('contrary')) return;
+				let i: BoostID;
+				for (i in boost) {
+					boost[i]! *= -1;
+				}
+			},
+			onFieldStart(target, source) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-fieldstart', 'move: Revolution', '[of] ' + source, '[persistent]');
+				} else {
+					this.add('-fieldstart', 'move: Revolution', '[of] ' + source);
+				}
+				this.add('-message', `A Revolution started on the battlefield!`);
+			},
+			onFieldRestart(target, source) {
+				this.field.removePseudoWeather('revolution');
+			},
+			onFieldResidualOrder: 27,
+			onFieldResidualSubOrder: 5,
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Revolution');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
