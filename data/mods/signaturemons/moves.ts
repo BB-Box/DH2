@@ -2938,6 +2938,51 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "all",
 		type: "Psychic",
 	},
+	//Victreebel
+	acidambush: {
+		num: 3078,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Acid Ambush",
+		desc: "The user releases sweet-scented acid from its mouth to attract opposing Pokemon attacks to itself. The acid suppresses an attacker's Ability on contact.",
+		shortDesc: "Redirects opposing moves to user. Suppresses attacker's ability on contact.",
+		pp: 15,
+		priority: 2,
+		flags: {noassist: 1, failcopycat: 1},
+		volatileStatus: 'acidambush',
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sweet Scent", target);
+			this.add('-anim', source, "Toxic", target);
+		},
+		//Removed the failure if used in Singles
+		/*onTry(source) {
+			return this.activePerHalf > 1;
+		},*/
+		condition: {
+			duration: 1,
+			onStart(pokemon) {
+				this.add('-singleturn', pokemon, 'move: Acid Ambush');
+			},
+			onHit(target, source, move) {
+				if (this.checkMoveMakesContact(move, source, target)) {
+					source.addVolatile('gastroacid');
+				}
+			},
+			onFoeRedirectTargetPriority: 1,
+			onFoeRedirectTarget(target, source, source2, move) {
+				if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
+					if (move.smartTarget) move.smartTarget = false;
+					this.debug("Acid Ambush redirected target of move");
+					return this.effectState.target;
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Poison",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
