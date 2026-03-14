@@ -109,5 +109,8 @@ export const Scripts: ModdedBattleScriptsData = {
 		delete this.modData('Learnsets', 'watchog').learnset.hyperfang;
 		delete this.modData('Learnsets', 'yungoos').learnset.hyperfang;
 		delete this.modData('Learnsets', 'gumshoos').learnset.hyperfang;
+
+		//Water Shuriken (Greninja)
+		delete this.modData('Learnsets', 'accelgor').learnset.watershuriken;
 	}
 };
