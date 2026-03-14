@@ -2591,7 +2591,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Normal",
 	},
-	//Florges (TO FIX: No animation) (To Test: Side conditions)
+	//Florges (TO FIX: No animation)
 	magicgarden: {
 		num: 3069,
 		accuracy: true,
@@ -2813,6 +2813,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		secondary: null,
 		target: "allySide",
+		type: "Grass",
+	},
+	//Chesnaught
+	burbash: {
+		num: 3075,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Bur Bash",
+		desc: "The user delivers a heavy blow that may lower the target's Defense stat. The spiny shell used for the move protects the user from direct contact with the target.",
+		shortDesc: "No contact. 10% chance of Def -1 on target.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Needle Arm", target);
+		},
+		secondary: {
+			chance: 10,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "normal",
 		type: "Grass",
 	},
 	//Signature moves remixed
