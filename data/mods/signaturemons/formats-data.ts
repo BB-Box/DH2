@@ -2943,7 +2943,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	heliolisk: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	tyrunt: {
 		tier: "NoSign",

@@ -3047,6 +3047,35 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ground",
 	},
+	//Heliolisk
+	solarcharge: {
+		num: 3081,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Solar Charge",
+		desc: "The user absorbs sunlight to boost its Special Attack and Speed stats. Under sunny weather, this move also boost the power of their next Electric-type move.",
+		shortDesc: "SpA and Spe +1. If Sun is active: Charge effect.",
+		pp: 20,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Charge", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
+				move.volatileStatus = 'charge';
+			} 
+		},
+		boosts: {
+			spa: 1,
+			spe: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Electric",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
@@ -3363,6 +3392,47 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				moveid: target.lastMove.id,
 				targetLoc: target.lastMoveTargetLoc!,
 			})[0] as MoveAction);
+		},
+	},
+	//The Charge effect is removed if the user uses any Electric move besides Charge, so other exceptions are defined within the move itself
+	//For 'Solar Charge'
+	charge: {
+		inherit: true,
+		condition: {
+			onStart(pokemon, source, effect) {
+				if (effect && ['Electromorphosis', 'Wind Power'].includes(effect.name)) {
+					this.add('-start', pokemon, 'Charge', this.activeMove!.name, '[from] ability: ' + effect.name);
+				} else {
+					this.add('-start', pokemon, 'Charge');
+				}
+			},
+			onRestart(pokemon, source, effect) {
+				if (effect && ['Electromorphosis', 'Wind Power'].includes(effect.name)) {
+					this.add('-start', pokemon, 'Charge', this.activeMove!.name, '[from] ability: ' + effect.name);
+				} else {
+					this.add('-start', pokemon, 'Charge');
+				}
+			},
+			onBasePowerPriority: 9,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Electric') {
+					this.debug('charge boost');
+					return this.chainModify(2);
+				}
+			},
+			onMoveAborted(pokemon, target, move) {
+				if (move.type === 'Electric' && move.id !== 'charge' && move.id !== 'solarcharge') {
+					pokemon.removeVolatile('charge');
+				}
+			},
+			onAfterMove(pokemon, target, move) {
+				if (move.type === 'Electric' && move.id !== 'charge' && move.id !== 'solarcharge') {
+					pokemon.removeVolatile('charge');
+				}
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Charge', '[silent]');
+			},
 		},
 	},
 };

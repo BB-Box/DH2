@@ -79,6 +79,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'florges').learnset.magicgarden = ['9L1'];
 		this.modData('Learnsets', 'malamar').learnset.revolution = ['9L1'];
 		this.modData('Learnsets', 'clawitzer').learnset.waterbombshell = ['9L1'];
+		this.modData('Learnsets', 'heliolisk').learnset.solarcharge = ['9L1'];
 		this.modData('Learnsets', 'noivern').learnset.killerwail = ['9L1'];
 
 		//Gen 7
