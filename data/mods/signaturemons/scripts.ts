@@ -53,6 +53,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'mothim').learnset.razzia = ['9L1'];
 		this.modData('Learnsets', 'gastrodon').learnset.stickyslime = ['9L1'];
 		this.modData('Learnsets', 'honchkrow').learnset.vileorders = ['9L1'];
+		this.modData('Learnsets', 'bronzong').learnset.belltoll = ['9L1'];
 		this.modData('Learnsets', 'lucario').learnset.aurastorm = ['9L1'];
 		this.modData('Learnsets', 'carnivine').learnset.flytrap = ['9L1'];
 		this.modData('Learnsets', 'weavile').learnset.sinisterclaw = ['9L1'];

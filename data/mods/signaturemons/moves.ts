@@ -3076,6 +3076,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Electric",
 	},
+	//Bronzong
+	belltoll: {
+		num: 3082,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Bell Toll",
+		desc: "The user calls forth rain clouds with the tolling of a bell before switching places with a party Pokémon in waiting. This summons rain for five turns.",
+		shortDesc: "Calls Rain for 5 turns. User switches out.",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Metal Sound", target);
+		},
+		weather: 'RainDance',
+		selfSwitch: true,
+		secondary: null,
+		target: "all",
+		type: "Steel",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
