@@ -2983,6 +2983,39 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Poison",
 	},
+	//Wobbuffet
+	respite: {
+		num: 3079,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Respite",
+		desc: "This move usually goes last, but if the user did not take direct damage during the turn, it will recover its HP and cure itself from its status condition.",
+		shortDesc: "Heals all HP at end of turn unless user gets hit.",
+		pp: 5,
+		priority: -6,
+		flags: {heal: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
+		heal: [1, 1],
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Recover", target);
+		},
+		priorityChargeCallback(pokemon) {
+			pokemon.addVolatile('focuspunch');
+		},
+		beforeMoveCallback(pokemon) {
+			if (pokemon.volatiles['focuspunch']?.lostFocus) {
+				this.add('cant', pokemon, 'Respite', 'Respite');
+				return true;
+			}
+		},
+		onHit(pokemon) {
+			pokemon.cureStatus();
+		},
+		secondary: null,
+		target: "self",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

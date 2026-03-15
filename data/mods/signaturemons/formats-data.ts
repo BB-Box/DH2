@@ -1094,7 +1094,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	wobbuffet: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	girafarig: {
 		tier: "NoSign",

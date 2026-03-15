@@ -30,6 +30,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'ampharos').learnset.lightburst = ['9L1'];
 		this.modData('Learnsets', 'azumarill').learnset.bubbleball = ['9L1'];
 		this.modData('Learnsets', 'sudowoodo').learnset.fakebranch = ['9L1'];
+		this.modData('Learnsets', 'wobbuffet').learnset.respite = ['9L1'];
 		this.modData('Learnsets', 'mantine').learnset.airsurf = ['9L1'];
 		this.modData('Learnsets', 'tyranitar').learnset.landslide = ['9L1'];
 
