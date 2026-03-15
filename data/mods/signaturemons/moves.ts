@@ -3016,6 +3016,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Psychic",
 	},
+	//Sandaconda
+	siroccoshot: {
+		num: 3080,
+		accuracy: 100,
+		basePower: 95,
+		category: "Physical",
+		name: "Sirocco Shot",
+		desc: "The user shoots its target with a bullet made of sharp sand. During a sandstorm, this move has a chance to lower the target's Accuracy.",
+		shortDesc: "50% chance of Acc. -1 on target during Sandstorm.",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Rock Blast", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			if (target && ['sandstorm'].includes(target.effectiveWeather())) {
+				move.secondaries = [];
+				move.secondaries.push({
+					chance: 50,
+					boosts: {
+						accuracy: -1,
+					},
+				});
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ground",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
