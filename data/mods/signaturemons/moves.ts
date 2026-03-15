@@ -3098,6 +3098,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "all",
 		type: "Steel",
 	},
+	//Beartic
+	iceclaw: {
+		num: 3082,
+		accuracy: 95,
+		basePower: 85,
+		category: "Physical",
+		name: "Ice Claw",
+		desc: "The user uses its frost breath on its paws to attack with frozen claws. Under snow or rain, this move will land a critical hit.",
+		shortDesc: "If Rain or Snow is active: Critical Hit.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Metal Claw", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			if (['raindance', 'primordialsea', 'hail', 'snow'].includes(pokemon.effectiveWeather())) {
+				move.willCrit = true;
+			} 
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
