@@ -3123,6 +3123,44 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
+	//Castform
+	meteoforce: {
+		num: 3083,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Meteo Force",
+		desc: "This move calls upon the power of the atmosphere. It changes greatly depending on Castform's form and the current weather.",
+		shortDesc: "Heals 50% HP or uses a spread move depending on Castform's form.",
+		pp: 5,
+		priority: 0,
+		flags: {failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
+		/*onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Recover", target);
+		},*/
+		onModifyMove(move, pokemon) { //Meteo Force targets changes depending on Castform's current form
+			if (pokemon.species.name === 'Castform-Sunny' || pokemon.species.name === 'Castform-Rainy' || pokemon.species.name === 'Castform-Snowy') {
+				move.target = 'allAdjacentFoes';
+			}
+		},
+		onTryHit(target, pokemon) { //Meteo Force move cast changes depending on Castform's current form
+			let move = 'recover';
+			if (pokemon.species.name === 'Castform-Sunny') {
+				move = 'heatwave';
+			} else if (pokemon.species.name === 'Castform-Rainy') {
+				move = 'muddywater';
+			} else if (pokemon.species.name === 'Castform-Snowy') {
+				move = 'blizzard';
+			}
+			this.actions.useMove(move, pokemon, target);
+			return null;
+		},
+		callsMove: true,
+		secondary: null,
+		target: "self",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
