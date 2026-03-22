@@ -1681,10 +1681,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Physical",
 		name: "Landslide",
 		desc: "The user throws big rocks everywhere, damaging surrounding Pokémon and the battlefield alike. This move removes every hazard from the field, but also hurts the user.",
-		shortDesc: "Removes terrain, hazards and screens. 33% HP recoil damage.",
+		shortDesc: "Removes terrain, hazards and screens. Consumes 50% user's HP.",
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
+		mindBlownRecoil: true, //This variable actually forces the move to take 50% HP after use. But without it, some interactions break (Protect, Copycat, Spin To Win...).
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Rock Slide", target);
@@ -1722,9 +1723,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			}
 		},
 		onAfterMove(pokemon, target, move) {
-			if (!pokemon.hasAbility('rockhead') && !move.multihit) {
+			if (move.mindBlownRecoil && !move.multihit) {
 				const hpBeforeRecoil = pokemon.hp;
-				this.damage(Math.round(pokemon.maxhp / 3), pokemon, pokemon, this.dex.conditions.get('Landslide'), true);
+				this.damage(Math.round(pokemon.maxhp / 3), pokemon, pokemon, this.dex.conditions.get('Landslide'), true); //mindBlownRecoil forces a 50% HP cost instead of the intended 33%
 				if (pokemon.hp <= pokemon.maxhp / 2 && hpBeforeRecoil > pokemon.maxhp / 2) {
 					this.runEvent('EmergencyExit', pokemon, pokemon);
 				}
