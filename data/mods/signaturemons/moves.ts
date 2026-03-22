@@ -3153,7 +3153,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (pokemon.species.name === 'Castform-Sunny') {
 				move = 'scorchingheat';
 			} else if (pokemon.species.name === 'Castform-Rainy') {
-				move = 'muddywater';
+				move = 'rainstorm';
 			} else if (pokemon.species.name === 'Castform-Snowy') {
 				move = 'blizzard';
 			}
@@ -3233,6 +3233,75 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Fire",
+	},
+	//Castform-Rainy
+	rainstorm: {
+		num: 3085,
+		accuracy: 150,
+		basePower: 100,
+		category: "Special",
+		name: "Rainstorm",
+		desc: "A powerful mix of rain and thunder deals damage to opposing Pokémon and may paralyse them. This move will eliminate all effects of rain after use.",
+		shortDesc: "Meteo Force move. 30% chance of Paralysis. Ends Rain.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Water Spout", target);
+			this.add('-anim', source, "Ion Deluge", target);
+		},
+		onTry(source, target, move) {
+			//Only Castform in its Rainy form can use this move
+			//This move only works during rain
+			if (source.species.name === 'Castform-Rainy' && ['raindance', 'primordialsea'].includes(source.effectiveWeather())) {
+				return;
+			}
+			//Wrong Castfrom form
+			if (source.species.name === 'Castform' || source.species.name === 'Castform-Sunny' || source.species.name === 'Castform-Snowy') {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Rainstorm', '[forme]');
+				this.add('-message', `${source.name} cannot use Rainstorm in its current form!`);
+				return null;
+			}
+			//Wrong weather
+			if (!['raindance', 'primordialsea'].includes(source.effectiveWeather())) {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Rainstorm', '[forme]');
+				this.add('-message', `${source.name} cannot use Rainstorm with this weather!`);
+				return null;
+			}
+			//Wrong species or any other failure case
+			this.hint("Only a Pokemon whose form is Castform (Rainy form) can use this move.");
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Rainstorm');
+			return null;
+		},
+		onModifyMove(move, pokemon, target) {
+			if (['primordialsea'].includes(pokemon.effectiveWeather())) {
+				move.mindBlownRecoil = true;
+			}
+		},
+		onAfterHit(pokemon, target, move) {
+			if (['raindance'].includes(pokemon.effectiveWeather())) {
+				this.field.clearWeather();
+			}
+		},
+		onAfterMove(pokemon, target, move) {
+			if (move.mindBlownRecoil && !move.multihit) {
+				const hpBeforeRecoil = pokemon.hp;
+				this.damage(Math.round(pokemon.maxhp / 2), pokemon, pokemon, this.dex.conditions.get('Rainstorm'), true);
+				if (pokemon.hp <= pokemon.maxhp / 2 && hpBeforeRecoil > pokemon.maxhp / 2) {
+					this.runEvent('EmergencyExit', pokemon, pokemon);
+				}
+			}
+		},
+		secondary: {
+			chance: 30,
+			status: 'par',
+		},
+		target: "allAdjacentFoes",
+		type: "Water",
 	},
 	//Signature moves remixed
 	//Raticate
