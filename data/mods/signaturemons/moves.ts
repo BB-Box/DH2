@@ -340,14 +340,16 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onModifyMove(move, pokemon, target) {
 			if ((pokemon.gender === 'M' && target.gender === 'F') || (pokemon.gender === 'F' && target.gender === 'M')) {
-				move.secondary = {
+				move.secondaries = [];
+				move.secondaries.push({
 					chance: 100,
 					boosts: {
 						atk: -1,
 						spa: -1,
 						spe: -1,
 					},
-				};
+				});
+				//move.secondary = null;
 			}
 		},
 		secondary: {
