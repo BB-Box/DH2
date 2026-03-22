@@ -3155,7 +3155,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			} else if (pokemon.species.name === 'Castform-Rainy') {
 				move = 'rainstorm';
 			} else if (pokemon.species.name === 'Castform-Snowy') {
-				move = 'blizzard';
+				move = 'whiteout';
 			}
 			this.actions.useMove(move, pokemon, target);
 			return null;
@@ -3302,6 +3302,61 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Water",
+	},
+	//Castform-Snowy
+	whiteout: {
+		num: 3086,
+		accuracy: 150,
+		basePower: 100,
+		category: "Special",
+		name: "Whiteout",
+		desc: "A powerful gust of snow and cold fog that deals damage to opposing Pokémon and may freeze them. This move will eliminate all effects of snow weather after use.",
+		shortDesc: "Meteo Force move. 30% chance of Freeze. Ends Snow.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Mist", target);
+			this.add('-anim', source, "Blizzard", target);
+		},
+		onTry(source, target, move) {
+			//Only Castform in its Snowy form can use this move
+			//This move only works during snow
+			if (source.species.name === 'Castform-Snowy' && ['hail', 'snow'].includes(source.effectiveWeather())) {
+				return;
+			}
+			//Wrong Castfrom form
+			if (source.species.name === 'Castform' || source.species.name === 'Castform-Sunny' || source.species.name === 'Castform-Rainy') {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Whiteout', '[forme]');
+				this.add('-message', `${source.name} cannot use Whiteout in its current form!`);
+				return null;
+			}
+			//Wrong weather
+			if (!['hail', 'snow'].includes(source.effectiveWeather())) {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Whiteout', '[forme]');
+				this.add('-message', `${source.name} cannot use Whiteout with this weather!`);
+				return null;
+			}
+			//Wrong species or any other failure case
+			this.hint("Only a Pokemon whose form is Castform (Snowy form) can use this move.");
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Whiteout');
+			return null;
+		},
+		onAfterHit(pokemon, target, move) {
+			if (['hail', 'snow'].includes(pokemon.effectiveWeather())) {
+				this.field.clearWeather();
+			}
+		},
+		secondary: {
+			chance: 30,
+			status: 'frz',
+		},
+		target: "allAdjacentFoes",
+		type: "Ice",
 	},
 	//Signature moves remixed
 	//Raticate
