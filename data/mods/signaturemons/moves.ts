@@ -3126,7 +3126,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
-	//Castform
+	//Castform - All forms
 	meteoforce: {
 		num: 3083,
 		accuracy: true,
@@ -3138,10 +3138,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
-		/*onPrepareHit(target, source, move) {
+		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Recover", target);
-		},*/
+			this.add('-anim', source, "Geomancy", target);
+		},
 		onModifyMove(move, pokemon) { //Meteo Force targets changes depending on Castform's current form
 			if (pokemon.species.name === 'Castform-Sunny' || pokemon.species.name === 'Castform-Rainy' || pokemon.species.name === 'Castform-Snowy') {
 				move.target = 'allAdjacentFoes';
@@ -3150,7 +3150,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onTryHit(target, pokemon) { //Meteo Force move cast changes depending on Castform's current form
 			let move = 'recover';
 			if (pokemon.species.name === 'Castform-Sunny') {
-				move = 'heatwave';
+				move = 'scorchingheat';
 			} else if (pokemon.species.name === 'Castform-Rainy') {
 				move = 'muddywater';
 			} else if (pokemon.species.name === 'Castform-Snowy') {
@@ -3163,6 +3163,75 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
+	},
+	//Castform-Sunny
+	scorchingheat: {
+		num: 3084,
+		accuracy: 150,
+		basePower: 100,
+		category: "Special",
+		name: "Scorching Heat",
+		desc: "A powerful blast of heat that deals damage to opposing Pokémon and may burn them. This move will eliminate all effects of harsh sunlight after use.",
+		shortDesc: "Meteo Force move. 30% chance of Burn. Ends Harsh Sunlight.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sunny Day", target);
+			this.add('-anim', source, "Heat Wave", target);
+		},
+		onTry(source, target, move) {
+			//Only Castform in its Sunny form can use this move
+			//This move only works during sun
+			if (source.species.name === 'Castform-Sunny' && ['sunnyday', 'desolateland'].includes(source.effectiveWeather())) {
+				return;
+			}
+			//Wrong Castfrom form
+			if (source.species.name === 'Castform' || source.species.name === 'Castform-Rainy' || source.species.name === 'Castform-Snowy') {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Scorching Heat', '[forme]');
+				this.add('-message', `${source.name} cannot use Scorching Heat in its current form!`);
+				return null;
+			}
+			//Wrong weather
+			if (!['sunnyday', 'desolateland'].includes(source.effectiveWeather())) {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Scorching Heat', '[forme]');
+				this.add('-message', `${source.name} cannot use Scorching Heat with this weather!`);
+				return null;
+			}
+			//Wrong species or any other failure case
+			this.hint("Only a Pokemon whose form is Castform (Sunny form) can use this move.");
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Scorching Heat');
+			return null;
+		},
+		onModifyMove(move, pokemon, target) {
+			if (['desolateland'].includes(pokemon.effectiveWeather())) {
+				move.mindBlownRecoil = true;
+			}
+		},
+		onAfterHit(pokemon, target, move) {
+			if (['sunnyday'].includes(pokemon.effectiveWeather())) {
+				this.field.clearWeather();
+			}
+		},
+		onAfterMove(pokemon, target, move) {
+			if (move.mindBlownRecoil && !move.multihit) {
+				const hpBeforeRecoil = pokemon.hp;
+				this.damage(Math.round(pokemon.maxhp / 2), pokemon, pokemon, this.dex.conditions.get('Scorching Heat'), true);
+				if (pokemon.hp <= pokemon.maxhp / 2 && hpBeforeRecoil > pokemon.maxhp / 2) {
+					this.runEvent('EmergencyExit', pokemon, pokemon);
+				}
+			}
+		},
+		secondary: {
+			chance: 30,
+			status: 'brn',
+		},
+		target: "allAdjacentFoes",
+		type: "Fire",
 	},
 	//Signature moves remixed
 	//Raticate
