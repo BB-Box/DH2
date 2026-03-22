@@ -274,6 +274,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					if (!move.flags['mirror'] || move.flags['failcopycat'] || move.isZ || move.isMax) {
 						return false;
 					}
+					this.add('-message', `${target.name} deflects the move back with its spinning stance!`);
 					this.actions.useMove(move.id, target);
 				}
 				return this.NOT_FAIL;
