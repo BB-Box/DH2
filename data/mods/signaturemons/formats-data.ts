@@ -3580,7 +3580,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	dubwool: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	chewtle: {
 		tier: "NoSign",

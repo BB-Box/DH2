@@ -3439,6 +3439,70 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Dubwool
+	bouncyshield: {
+		num: 3089,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Bouncy Shield",
+		desc: "The user protects itself from all attacks with springy wool. If a Pokémon attempts to make contact, they will be knocked away, and a different Pokémon will be dragged out.",
+		shortDesc: "Protects from damaging moves. Attacker that makes contact is forced out.",
+		pp: 10,
+		priority: 4,
+		flags: {noassist: 1, failcopycat: 1},
+		stallingMove: true,
+		volatileStatus: 'bouncyshield',
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Cotton Guard", target);
+			return !!this.queue.willAct() && this.runEvent('StallMove', target);
+		},
+		onHit(pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		condition: {
+			duration: 1,
+			onStart(target) {
+				this.add('-singleturn', target, 'Protect');
+			},
+			onTryHitPriority: 3,
+			onTryHit(target, source, move) {
+				if (!move.flags['protect'] || move.category === 'Status') {
+					if (['gmaxoneblow', 'gmaxrapidflow'].includes(move.id)) return;
+					if (move.isZ || move.isMax) target.getMoveHitData(move).zBrokeProtect = true;
+					return;
+				}
+				if (move.smartTarget) {
+					move.smartTarget = false;
+				} else {
+					this.add('-activate', target, 'move: Protect');
+				}
+				const lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				if (this.checkMoveMakesContact(move, source, target)) {
+					//Forces attacker out if it makes contact - Taken from Red Card item
+					if (source && source !== target && source.hp && target.hp && move) {
+						if (!source.isActive || !this.canSwitch(source.side) || source.forceSwitchFlag || target.forceSwitchFlag) {
+							return;
+						}
+						if (this.runEvent('DragOut', source, target, move)) {
+							source.forceSwitchFlag = true;
+						}
+					}
+				}
+				return this.NOT_FAIL;
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
