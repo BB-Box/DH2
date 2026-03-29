@@ -3388,8 +3388,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				move.basePower = 30;
 			}
 			else {
-				if (foeMove.isMax && foeMove.baseMove) foeMove = this.dex.moves.get(foeMove.baseMove);
-				move.basePower = Math.min(foeMove.basePower +10, 250);
+				let foeMovePower;
+				if (foeMove.isMax && foeMove.baseMove) { foeMovePower = this.dex.moves.get(foeMove.baseMove); }
+				else { foeMovePower = foeMove.basePower; }
+				move.basePower = Math.min(foeMovePower +10, 250);
 			}
 		},
 		secondary: null,
