@@ -22,6 +22,10 @@ export const Formats: FormatData[] = [
 		teambuilderFormat: 'National Dex',
 		ruleset: ['Standard NatDex', 'Event Moves Clause', 'Species Clause', 'Terastal Clause', 'Z-Move Clause'],
 	},
+
+	//Random battles are unavailable until I can get some help on it!
+	//Main folder: data/random-battles/signaturemons
+	//TODO: Allow whole NatDex mons or Champions mons, Put signature moves in sets.json & doubles-sets.json, Add new moves to teams.ts
 	/*{
 		name: "[Gen 9] Signaturemons Random Doubles",
         desc: `National Dex solomod where new Signature moves are introduced for fully-evolved Pokémon that don't have any.`,
