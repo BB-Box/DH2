@@ -3412,17 +3412,20 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {charge: 1, protect: 1, mirror: 1, metronome: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Overheat", target);
+			this.add('-anim', source, "Fire Blast", target);
 		},
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name);
+			//Anim returns an error, line replaced for now.
+			//this.add('-prepare', attacker, move.name);
+			this.add('-message', `${attacker.name} is absorbing sun rays!`);
 			this.boost({spa: 1}, attacker, attacker, move);
+
 			if (['sunnyday', 'desolateland'].includes(attacker.effectiveWeather())) {
 				this.attrLastMove('[still]');
-				this.addMove('-anim', attacker, move.name, defender);
+				this.addMove('-anim', attacker, move.name, defender); 
 				return;
 			}
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
