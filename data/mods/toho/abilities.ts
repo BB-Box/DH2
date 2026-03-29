@@ -441,7 +441,28 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		shortDesc: "Consuming a berry increases Atk. by one stage.",
 	},
 	lunatictorch: {
-		//effects in pokemon/effectiveWeather
+		onModifyDamage(damage, source, target, move) {
+			if (!this.field.isTerrain('psychicterrain') || source.hasItem('utilityumbrella')) return;
+			if (move.type === 'Fire') {
+				return this.chainModify(1.5);
+			}
+			if (move.type === 'Water') {
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifyDamage(damage, source, target, move) {
+			if (!this.field.isTerrain('psychicterrain') || target.hasItem('utilityumbrella')) return;
+			if (move.type === 'Fire' && !source.hasAbility('lunatictorch')) {
+				return this.chainModify(1.5);
+			}
+			if (move.type === 'Water' && !source.hasAbility('lunatictorch')) {
+				return this.chainModify(0.5);
+			}
+		},
+		onImmunity(type, pokemon) {
+			if (!this.field.isTerrain('psychicterrain') || pokemon.hasItem('utilityumbrella')) return;
+			if (type === 'frz') return false;
+		},
 		flags: {},
 		name: "Lunatic Torch",
 		shortDesc: "Gain the effects of Sun while in Psychic Terrain.",
@@ -668,5 +689,36 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		flags: {failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, notransform: 1},
 		name: "Cactus Drive",
 		shortDesc: "Grassy Terrain active or Booster Energy used: highest stat is 1.3x, or 1.5x if Speed.",
+	},
+	corruptdata: {
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				source.setType("???");
+				this.add('-start', source, 'typechange', "???", '[from] ability: Corrupt Data');
+			}
+		},
+		flags: {},
+		name: "Corrupt Data",
+		shortDesc: "When an attacker makes contact with this pokémon, the attacker becomes typeless.",
+	},
+	immovable: {
+		onDragOutPriority: 1,
+		onDragOut(pokemon) {
+			this.add('-activate', pokemon, 'ability: Immovable');
+			return null;
+		},
+		flags: {breakable: 1},
+		name: "Immovable",
+	},
+	truthoverload: {
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(3, 10)) {
+					source.addVolatile('confusion', source, move);
+				}
+			}
+		},
+		flags: {},
+		name: "Truth Overload",
 	},
 };

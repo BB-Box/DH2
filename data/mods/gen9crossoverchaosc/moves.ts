@@ -254,7 +254,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		priority: 0,
 		flags: {},
 		onTryHit(source, move) {
-			if (!this.canSwitch(source.side) || !move.selfSwitch) {
+			if (!this.canSwitch(source.side) || source.volatiles['pivotsuppression']) {
 				// nanoboosted Implemented within conditions.ts
 				source.addVolatile('nanoboosted');
 				return this.NOT_FAIL;
@@ -534,7 +534,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		condition: {
 			duration: 1,
 			onStart(pokemon) {
-				this.add('-anim', source, "Defense Curl", source);
+				this.add('-anim', pokemon, "Defense Curl", pokemon);
 				this.add('-singleturn', pokemon, 'move: Upperdash Arm');
 			},
 			onSourceModifySpAPriority: 5,
@@ -713,7 +713,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		shortDesc: "Forces the target to switch to a random ally.",
 		pp: 10,
 		priority: -6,
-		flags: {protect: 1, mirror: 1, metronome: 1, noassist: 1, failcopycat: 1},
+		flags: {protect: 1, mirror: 1, metronome: 1, noassist: 1, failcopycat: 1, wind: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Overheat", target);
