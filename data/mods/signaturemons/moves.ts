@@ -3358,6 +3358,44 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Ice",
 	},
+	//Pangoro
+	haymaker: {
+		num: 3087,
+		accuracy: 100,
+		basePower: 0,
+		category: "Physical",
+		name: "Haymaker",
+		desc: "The user reads its opponent's next move and launches a preemptive strike. The power of this move depends on what kind of move the target will attempt to use.",
+		shortDesc: "Usually goes first. BP = Target's move BP +10 (Max: 250).",
+		pp: 5,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "First Impression", target);
+		},
+		onTry(source, target) {
+			const action = this.queue.willMove(target);
+			const move = action?.choice === 'move' ? action.move : null;
+			if (!move || target.volatiles['mustrecharge']) {
+				return false;
+			}
+		},
+		onTryHit(target, source, move) {
+			const action = this.queue.willMove(target);
+			const foeMove = action?.choice === 'move' ? action.move : null;
+			if ((foeMove.basePower === 0) || (foeMove.category === 'Status' && foeMove.id !== 'mefirst')) {
+				move.basePower = 30;
+			}
+			else {
+				if (foeMove.isMax && foeMove.baseMove) foeMove = this.dex.moves.get(foeMove.baseMove);
+				move.basePower = Math.min(foeMove.basePower +10, 250);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Dark",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

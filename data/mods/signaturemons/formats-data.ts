@@ -2876,7 +2876,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	pangoro: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	furfrou: {
 		tier: "NoSign",
