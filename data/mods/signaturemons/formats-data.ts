@@ -584,14 +584,14 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	exeggcute: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	exeggutor: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	exeggutoralola: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	cubone: {

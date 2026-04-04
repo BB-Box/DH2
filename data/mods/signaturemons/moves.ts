@@ -3639,6 +3639,22 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			volatileStatus: 'flinch',
 		},
 	},
+	//Exeggutor
+	//Exeggutor-Alola
+	barrage: {
+		inherit: true,
+		desc: "Round objects are hurled at the target to strike two to five times in a row. This move may confuse the target.",
+		shortDesc: "Hits 2-5 times. 20% chance of Confusion on target.",
+		accuracy: 85,
+		basePower: 25,
+		category: "Physical",
+		pp: 10,
+		secondary: {
+			chance: 30,
+			volatileStatus: 'confusion',
+		},
+		type: "Grass",
+	},
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	//For 'Secret Thorns'
