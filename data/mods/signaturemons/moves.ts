@@ -3603,6 +3603,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "adjacentAlly",
 		type: "Normal",
 	},
+	//Spiritomb
+	deathspiral: {
+		num: 3093,
+		accuracy: 75,
+		basePower: 0,
+		damage: 108,
+		category: "Special",
+		name: "Death Spiral",
+		desc: "Vengeful spirits deal 108 points of damage to a Pokémon and traps them in a damaging spell for four or five turns.",
+		shortDesc: "Deals 108 damage. Traps target for 4 or 5 turns.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		volatileStatus: 'partiallytrapped',
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Ominous Wind", target);
+		},
+		target: "normal",
+		type: "Ghost",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
