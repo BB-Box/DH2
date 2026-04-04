@@ -3748,7 +3748,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	indeedee: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUU",
 	},
 	indeedeef: {

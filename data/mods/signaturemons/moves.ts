@@ -3503,6 +3503,56 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Normal",
 	},
+	//Indeedee
+	butlerservice: {
+		num: 3090,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Butler Service",
+		desc: "The user puts itself in service of its ally. Depending on the ally's condition, the user will raise their ally's Atk. or Sp. Atk. stat or restore their HP.",
+		shortDesc: "Goes first. Atk.+1 or SpA.+1 to ally, or heal ally if wounded.",
+		pp: 5,
+		priority: 5,
+		flags: {bypasssub: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "After You", target);
+		},
+		onTry(source, target, move) {
+			//Only a male Indeedee can use this move
+			//An ally must be present on the field
+			if (source.species.name === 'Indeedee') {
+				return this.activePerHalf > 1;
+			}
+			//Wrong Indeedee form
+			if (source.species.name === 'Indeedee-F') {
+				this.attrLastMove('[still]');
+				this.add('-fail', source, 'move: Butler Service', '[forme]');
+				this.add('-message', `${source.name} could not perform the correct service!`);
+				return null;
+			}
+			//Wrong species or any other failure case
+			this.hint("Only a Pokemon whose form is Indeedee (Male) can use this move.");
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Butler Service');
+			return null;
+		},
+		onTryHit(target, source, move) {
+			if (target.hp * 2 <= target.maxhp) {
+				move.boosts = {};
+				move.heal = [1, 4];
+				return;
+			}
+			if (target.getStat('spa', false, true) > target.getStat('atk', false, true)) move.boosts = { spa: 1, };
+		},
+		secondary: null,
+		boosts: {
+			atk: 1,
+		},
+		target: "adjacentAlly",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

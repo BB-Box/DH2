@@ -101,6 +101,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'sandaconda').learnset.siroccoshot = ['9L1'];
 		this.modData('Learnsets', 'cursola').learnset.ghastlywail = ['9L1'];
 		this.modData('Learnsets', 'eiscue').learnset.iceblock = ['9L1'];
+		this.modData('Learnsets', 'indeedee').learnset.butlerservice = ['9L1'];
 		this.modData('Learnsets', 'basculegion').learnset.abyssalboost = ['9L1'];
 		this.modData('Learnsets', 'basculegionf').learnset.abyssalboost = ['9L1'];
 
