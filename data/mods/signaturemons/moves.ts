@@ -3624,7 +3624,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
-	//Nintales
+	//Ninetales
 	cursedflames: {
 		num: 3093,
 		accuracy: 100,
@@ -3652,7 +3652,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
-	//Nintales-Alola
+	//Ninetales-Alola
 	palelight: {
 		num: 3094,
 		accuracy: 100,
@@ -3679,6 +3679,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		],
 		target: "normal",
 		type: "Fairy",
+	},
+	//Shiftry
+	verdantwind: {
+		num: 3095,
+		accuracy: 95,
+		basePower: 95,
+		category: "Physical",
+		name: "Verdant Wind",
+		desc: "The user disperses thin sharp leaves to the wind, causing them to cut the target from afar. This move gains power if Tailwind is active for the user.",
+		shortDesc: "If Tailwind active: 33% damage increase.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, wind: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Leaf Tornado", target);
+		},
+		onBasePower(basePower, source, target, move) {
+			if (source.side.getSideCondition('tailwind')) {
+				return this.chainModify([5461, 4096]);
+			}
+		},
+		target: "normal",
+		type: "Grass",
 	},
 	//Signature moves remixed
 	//Raticate
