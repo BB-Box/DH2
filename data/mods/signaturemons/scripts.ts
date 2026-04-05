@@ -11,6 +11,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		this.modData('Learnsets', 'charizard').learnset.greatflame = ['9L1'];
 		this.modData('Learnsets', 'blastoise').learnset.greatflood = ['9L1'];
 		this.modData('Learnsets', 'ninetales').learnset.cursedflames = ['9L1'];
+		this.modData('Learnsets', 'ninetalesalola').learnset.palelight = ['9L1'];
 		this.modData('Learnsets', 'dugtrio').learnset.tripledig = ['9L1'];
 		this.modData('Learnsets', 'dugtrioalola').learnset.tripledig = ['9L1'];
 		this.modData('Learnsets', 'victreebel').learnset.acidambush = ['9L1'];

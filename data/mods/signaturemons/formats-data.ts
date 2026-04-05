@@ -245,7 +245,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "DUU",
 	},
 	ninetalesalola: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DOU",
 	},
 	igglybuff: {

@@ -3652,6 +3652,34 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Nintales-Alola
+	palelight: {
+		num: 3094,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		name: "Pale Light",
+		desc: "The user creates a mystical glow that deals damage. This move has a chance of freezing the target or disabling the target's last move.",
+		shortDesc: "10% chance of Freeze. 30% chance of Disable.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dazzling Gleam", target);
+		},
+		secondaries: [
+			{
+				chance: 10,
+				status: 'frz',
+			}, {
+				chance: 30,
+				volatileStatus: 'disable',
+			},
+		],
+		target: "normal",
+		type: "Fairy",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
