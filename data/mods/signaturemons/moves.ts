@@ -3605,7 +3605,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	},
 	//Spiritomb
 	deathspiral: {
-		num: 3093,
+		num: 3092,
 		accuracy: 75,
 		basePower: 0,
 		damage: 108,
@@ -3623,6 +3623,34 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
+	},
+	//Nintales
+	cursedflames: {
+		num: 3093,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		name: "Cursed Flames",
+		desc: "The user throws mysterious embers to deal damage. This move has a chance of burning the target or disabling the target's last move.",
+		shortDesc: "10% chance of Burn. 30% chance of Disable.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Mystical Fire", target);
+		},
+		secondaries: [
+			{
+				chance: 10,
+				status: 'brn',
+			}, {
+				chance: 30,
+				volatileStatus: 'disable',
+			},
+		],
+		target: "normal",
+		type: "Fire",
 	},
 	//Signature moves remixed
 	//Raticate
@@ -3647,10 +3675,9 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		shortDesc: "Hits 2-5 times. 20% chance of Confusion on target.",
 		accuracy: 85,
 		basePower: 25,
-		category: "Physical",
 		pp: 10,
 		secondary: {
-			chance: 30,
+			chance: 20,
 			volatileStatus: 'confusion',
 		},
 		type: "Grass",
