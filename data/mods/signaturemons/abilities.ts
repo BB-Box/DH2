@@ -1,5 +1,7 @@
 export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTable = {
-	//Truant modified so that Procrastinate can be used on natural Truant turns
+	//Abilities have no fundamental changes on their effects, but some new moves interact with some abilities in unique ways.
+	
+	//Truant: modified so that Procrastinate can be used on natural Truant turns
 	truant: {
 		inherit: true,
 		onBeforeMove(pokemon, target, move) {
@@ -17,18 +19,18 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			pokemon.addVolatile('truant');
 		},
 	},
-	//Damp modified to include new explosive moves
+	//Damp: includes new explosive moves (Burning Will, Electroblast)
 	damp: {
 		inherit: true,
 		onAnyTryMove(target, source, effect) {
-			if (['explosion', 'mindblown', 'mistyexplosion', 'selfdestruct', 'electroblast', 'burningwill'].includes(effect.id)) {
+			if (['burningwill', 'electroblast', 'explosion', 'mindblown', 'mistyexplosion', 'selfdestruct'].includes(effect.id)) {
 				this.attrLastMove('[still]');
 				this.add('cant', this.effectState.target, 'ability: Damp', effect, '[of] ' + target);
 				return false;
 			}
 		},
 	},
-	//Inner Focus modified to be immune to Scarecrow
+	//Inner Focus: immune to Scarecrow
 	innerfocus: {
 		inherit: true,
 		onTryHit(pokemon, target, move) {
@@ -38,27 +40,27 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			}
 		},
 	},
-	//Oblivious modified to be immune to Scarecrow
+	//Oblivious: immune to Scarecrow and Party Time
 	oblivious: {
 		inherit: true,
 		onTryHit(pokemon, target, move) {
-			if (move.id === 'attract' || move.id === 'captivate' || move.id === 'scarecrow' || move.id === 'taunt') {
+			if (move.id === 'attract' || move.id === 'captivate' || move.id === 'partytime' || move.id === 'scarecrow' || move.id === 'taunt') {
 				this.add('-immune', pokemon, '[from] ability: Oblivious');
 				return null;
 			}
 		},
 	},
-	//Own Tempo modified to be immune to Scarecrow
+	//Own Tempo: immune to Scarecrow and Party Time
 	owntempo: {
 		inherit: true,
 		onTryHit(pokemon, target, move) {
-			if (move.id === 'scarecrow') {
+			if (move.id === 'partytime' || move.id === 'scarecrow') {
 				this.add('-immune', pokemon, '[from] ability: Own Tempo');
 				return null;
 			}
 		},
 	},
-	//Rattled modified to trigger itself and be immune to Scarecrow
+	//Rattled: triggers itself and is immune to Scarecrow
 	rattled: {
 		inherit: true,
 		onTryHit(pokemon, target, move) {
@@ -69,7 +71,7 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			}
 		},
 	},
-	//Scrappy modified to be immune to Scarecrow
+	//Scrappy: immune to Scarecrow
 	scrappy: {
 		inherit: true,
 		onTryHit(pokemon, target, move) {
@@ -79,13 +81,36 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			}
 		},
 	},
-	//Steadfast modified to trigger itself and be immune to Scarecrow
+	//Steadfast: triggers itself and be immune to Scarecrow
 	steadfast: {
 		inherit: true,
 		onTryHit(pokemon, target, move) {
 			if (move.id === 'scarecrow') {
 				this.add('-immune', pokemon, '[from] ability: Steadfast');
 				this.boost({spe: 1});
+				return null;
+			}
+		},
+	},
+	//Dancer: immune to Party Time
+	dancer: {
+		inherit: true,
+		onTryHit(pokemon, target, move) {
+			if (move.id === 'partytime') {
+				this.add('-immune', pokemon, '[from] ability: Dancer');
+				return null;
+			}
+		},
+	},
+	//Aroma Veil: protects from Party Time effects
+	aromaveil: {
+		inherit: true,
+		onAllyTryAddVolatile(status, target, source, effect) {
+			if (['attract', 'disable', 'encore', 'healblock', 'partytime', 'taunt', 'torment'].includes(status.id)) {
+				if (effect.effectType === 'Move') {
+					const effectHolder = this.effectState.target;
+					this.add('-block', target, 'ability: Aroma Veil', '[of] ' + effectHolder);
+				}
 				return null;
 			}
 		},

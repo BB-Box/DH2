@@ -3704,6 +3704,83 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Grass",
 	},
+	//Ludicolo
+	partytime: {
+		num: 3096,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Party Time",
+		desc: "This move starts a fiesta on the battlefield. Each Pokémon can only use dance or sound-based moves until the end of the turn. This move only works on the first turn each time the user enters battle.",
+		shortDesc: "Targets must use Sound/Dance moves for 1 turn. Works only each first active turn.",
+		pp: 5,
+		priority: 2,
+		flags: {protect: 1, dance: 1, noassist: 1, failcopycat: 1},
+		volatileStatus: 'partytime',
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Teeter Dance", target);
+		},
+		onTry(source) {
+			if (source.activeMoveActions > 1) {
+				this.hint("Party Time only works on your first turn out.");
+				return false;
+			}
+		},
+		onHitField(target, source, move) {
+			let result = false;
+			let message = false;
+			for (const pokemon of this.getAllActive()) {
+				if (this.runEvent('Invulnerability', pokemon, source, move) === false) {
+					this.add('-miss', source, pokemon);
+					result = true;
+				} else if (this.runEvent('TryHit', pokemon, source, move) === null) {
+					result = true;
+				} else if (!pokemon.volatiles['partytime']) {
+					pokemon.addVolatile('partytime');
+					//this.add('-start', pokemon, 'perish3', '[silent]');
+					result = true;
+					message = true;
+				}
+			}
+			if (!result) return false;
+			if (message) {
+				this.add('-fieldactivate', 'move: Party Time');
+				this.hint(`Pokémon affected by Party Time can only use Sound-based moves or Dance moves.`);
+			}
+		},
+		condition: {
+			duration: 1,
+			onStart(target) {
+				/*if (target.activeTurns && !this.queue.willMove(target)) {
+					this.effectState.duration++;
+				}*/
+				this.add('-start', target, 'move: Party Time', '[silent]');
+			},
+			onBeforeMovePriority: 5,
+			onBeforeMove(attacker, defender, move) {
+				if (!move.isZ && !move.isMax && !move.flags['sound'] && !move.flags['dance']) {
+					this.add('cant', attacker, 'move: Party Time');
+					this.add('-message', `${attacker.name} got lost in the groove!`);
+					return false;
+				}
+			},
+			onModifyMove(move, pokemon, target) {
+				if (!move.isZ && !move.isMax && !move.flags['sound'] && !move.flags['dance']) {
+					this.add('cant', pokemon, 'move: Party Time');
+					this.add('-message', `${pokemon.name} got lost in the groove!`);
+					return false;
+				}
+			},
+			onResidualOrder: 22,
+			onEnd(target) {
+				this.add('-end', target, 'Party Time', '[silent]');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
