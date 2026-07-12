@@ -87,7 +87,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
-	amoongusfairyring: {
+	amoongussfairyring: {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
@@ -155,4 +155,65 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "PD",
 		doublesTier: "DPDOU",
 	},
+	assistakyuu: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	porygon10: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	pimento: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	fug: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	fugmega: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	goodrahisuireallife: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	tynarmega: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	theregent: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	waroftheworlds: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	applinwormy: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	espinas: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	espinaszenith: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	wirescruel: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	theringer: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+	necrozmalightningbeak: {
+		tier: "PD",
+		doublesTier: "DOU",
+	},
+
 };

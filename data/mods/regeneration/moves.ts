@@ -430,6 +430,165 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Normal",
 		contestType: "Clever",
 	},
+	tastetest: {
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		name: "Taste Test",
+		pp: 20,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		shortDesc: "Boosts damage user does to target; lowers target's Speed.",
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+			},
+		},
+		onAfterHit(target, source) {
+			if (source.hp && target.hp) {
+				if (!source.m.tasteTested) source.m.tasteTested = [];
+				if (!source.m.tasteTested.includes(target)) {
+					source.m.tasteTested.push(target);
+					this.add('-message', `${source.illusion ? source.illusion.name : source.name} licked ${target.illusion ? target.illusion.name : target.name} and learned its flavor and texture!`);
+					this.hint(`For the rest of the battle, all of ${source.illusion ? source.illusion.name : source.name}'s moves will do 1.5x the damage to ${target.illusion ? target.illusion.name : target.name}.`);
+				}
+			}
+		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Lick", target);
+		},
+		target: "normal",
+		type: "Normal",
+		contestType: "Clever",
+	},
+	toxicbite: {
+		num: 305,
+		accuracy: 100,
+		basePower: 65,
+		category: "Physical",
+		shortDesc: "Poisons the target.",
+		name: "Toxic Bite",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Poison Fang", target);
+		},
+		secondary: {
+			chance: 100,
+			status: 'psn',
+		},
+		target: "normal",
+		type: "Poison",
+		contestType: "Clever",
+	},
+	solarwind: {
+		accuracy: 100,
+		basePower: 40,
+		category: "Special",
+		shortDesc: "Usually moves first. Sets Aurora Veil for 3 turns in Sun.",
+		name: "Solar Wind",
+		pp: 10,
+		priority: 1,
+		flags: {protect: 1, mirror: 1, wind: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Rock Polish", source);
+			this.add('-anim', source, "Heat Wave", target);
+		},
+		onAfterHit(target, source, move) {
+			if (['sunnyday', 'desolateland'].includes(attacker.effectiveWeather())) {
+				source.side.addSideCondition('auroraveil');
+			}
+		},
+		onAfterSubDamage(damage, target, source, move) {
+			if (['sunnyday', 'desolateland'].includes(attacker.effectiveWeather())) {
+				source.side.addSideCondition('auroraveil');
+			}
+		},
+		secondary: {},
+		target: "normal",
+		type: "Steel",
+		contestType: "Clever",
+	},
+	hardrock: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		shortDesc: "User survives attacks this turn with at least 1 HP. Sets Stealth Rock if activated.",
+		name: "Hard Rock",
+		pp: 10,
+		priority: 4,
+		flags: {noassist: 1, failcopycat: 1},
+		stallingMove: true,
+		volatileStatus: 'hardrock',
+		onPrepareHit(pokemon) {
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
+		},
+		onHit(pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		condition: {
+			duration: 1,
+			onStart(target) {
+				this.add('-singleturn', target, 'move: Endure');
+			},
+			onDamagePriority: -10,
+			onDamage(damage, target, source, effect) {
+				if (effect?.effectType === 'Move' && damage >= target.hp) {
+					this.add('-activate', target, 'move: Endure');
+					return target.hp - 1;
+					for (const side of target.side.foeSidesWithConditions()) {
+						side.addSideCondition('stealthrock');
+					}
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Rock",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Tough",
+	},
+	auroraveil: {
+		inherit: true,
+		condition: {
+			duration: 5,
+			durationCallback(target, source, effect) {
+				if (source?.hasItem('lightclay') && effect?.name !== "Solar Wind") {
+					return 8;
+				}
+				if (effect?.name === "Solar Wind") {
+					return 3;
+				}
+				return 5;
+			},
+			onAnyModifyDamage(damage, source, target, move) {
+				if (target !== source && this.effectState.target.hasAlly(target)) {
+					if ((target.side.getSideCondition('reflect') && this.getCategory(move) === 'Physical') ||
+							(target.side.getSideCondition('lightscreen') && this.getCategory(move) === 'Special')) {
+						return;
+					}
+					if (!target.getMoveHitData(move).crit && !move.infiltrates) {
+						this.debug('Aurora Veil weaken');
+						if (this.activePerHalf > 1) return this.chainModify([2732, 4096]);
+						return this.chainModify(0.5);
+					}
+				}
+			},
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Aurora Veil');
+			},
+			onSideResidualOrder: 26,
+			onSideResidualSubOrder: 10,
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Aurora Veil');
+			},
+		},
+	},
 	stealthrock: {
 		inherit: true,
 		condition: {
