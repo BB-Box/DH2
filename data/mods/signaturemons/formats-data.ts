@@ -1,6 +1,6 @@
 export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
-
-	bulbasaur: {
+	//May be dropped later.
+	/*bulbasaur: {
 		tier: "NoSign",
 	},
 	ivysaur: {
@@ -12,10 +12,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*venusaurmega: {
 		tier: "NoSign",
-	},*/
+	},
 	/*venusaurgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	charmander: {
 		tier: "NoSign",
 	},
@@ -28,13 +28,13 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*charizardmegax: {
 		tier: "NoSign",
-	},*/
+	},
 	/*charizardmegay: {
 		tier: "NoSign",
-	},*/
+	},
 	/*charizardgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	squirtle: {
 		tier: "NoSign",
 	},
@@ -47,10 +47,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*blastoisemega: {
 		tier: "NoSign",
-	},*/
+	},
 	/*blastoisegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	caterpie: {
 		tier: "NoSign",
 	},
@@ -62,7 +62,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*butterfreegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	weedle: {
 		tier: "NoSign",
 	},
@@ -74,7 +74,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*beedrillmega: {
 		tier: "NoSign",
-	},*/
+	},
 	pidgey: {
 		tier: "NoSign",
 	},
@@ -86,7 +86,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*pidgeotmega: {
 		tier: "NoSign",
-	},*/
+	},
 	rattata: {
 		tier: "Sign",
 	},
@@ -101,7 +101,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*raticatealolatotem: {
 		tier: "NoSign",
-	},*/
+	},
 	spearow: {
 		tier: "NoSign",
 	},
@@ -120,7 +120,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*pichuspikyeared: {
 		tier: "NoSign",
-	},*/
+	},
 	pikachu: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -181,7 +181,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	pikachuworld: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
-	},*/
+	},
 	raichu: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -319,7 +319,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*meowthgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	persian: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -385,7 +385,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*alakazammega: {
 		tier: "NoSign",
-	},*/
+	},
 	machop: {
 		tier: "NoSign",
 	},
@@ -397,7 +397,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*machampgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	bellsprout: {
 		tier: "NoSign",
 	},
@@ -459,7 +459,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*slowbromega: {
 		tier: "NoSign",
-	},*/
+	},
 	slowbrogalar: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -539,10 +539,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*gengarmega: {
 		tier: "NoSign",
-	},*/
+	},
 	/*gengargmax: {
 		tier: "NoSign",
-	},*/
+	},
 	onix: {
 		tier: "NoSign",
 	},
@@ -551,7 +551,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*steelixmega: {
 		tier: "NoSign",
-	},*/
+	},
 	drowzee: {
 		tier: "NoSign",
 	},
@@ -567,7 +567,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*kinglergmax: {
 		tier: "NoSign",
-	},*/
+	},
 	voltorb: {
 		tier: "NoSign",
 	},
@@ -605,7 +605,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*marowakalolatotem: {
 		tier: "NoSign",
-	},*/
+	},
 	tyrogue: {
 		tier: "NoSign",
 	},
@@ -671,7 +671,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*kangaskhanmega: {
 		tier: "NoSign",
-	},*/
+	},
 	horsea: {
 		tier: "NoSign",
 	},
@@ -716,7 +716,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*scizormega: {
 		tier: "NoSign",
-	},*/
+	},
 	kleavor: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -752,7 +752,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*pinsirmega: {
 		tier: "NoSign",
-	},*/
+	},
 	tauros: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -778,14 +778,14 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*gyaradosmega: {
 		tier: "NoSign",
-	},*/
+	},
 	lapras: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
 	},
 	/*laprasgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	ditto: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -798,7 +798,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*eeveegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	vaporeon: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -859,7 +859,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*aerodactylmega: {
 		tier: "NoSign",
-	},*/
+	},
 	munchlax: {
 		tier: "NoSign",
 	},
@@ -869,7 +869,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*snorlaxgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	articuno: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -910,10 +910,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*mewtwomegax: {
 		tier: "NoSign",
-	},*/
+	},
 	/*mewtwomegay: {
 		tier: "NoSign",
-	},*/
+	},
 	mew: {
 		tier: "NoSign",
 		//doublesTier: "DUU",
@@ -1013,7 +1013,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*ampharosmega: {
 		tier: "NoSign",
-	},*/
+	},
 	azurill: {
 		tier: "NoSign",
 	},
@@ -1153,7 +1153,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*heracrossmega: {
 		tier: "NoSign",
-	},*/
+	},
 	sneasel: {
 		tier: "NoSign",
 		//doublesTier: "NoSign",
@@ -1238,7 +1238,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*houndoommega: {
 		tier: "NoSign",
-	},*/
+	},
 	phanpy: {
 		tier: "NoSign",
 	},
@@ -1284,7 +1284,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*tyranitarmega: {
 		tier: "NoSign",
-	},*/
+	},
 	lugia: {
 		tier: "Sign",
 		//doublesTier: "DUber",
@@ -1308,7 +1308,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*sceptilemega: {
 		tier: "NoSign",
-	},*/
+	},
 	torchic: {
 		tier: "NoSign",
 	},
@@ -1321,7 +1321,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*blazikenmega: {
 		tier: "NoSign",
-	},*/
+	},
 	mudkip: {
 		tier: "NoSign",
 	},
@@ -1334,7 +1334,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*swampertmega: {
 		tier: "NoSign",
-	},*/
+	},
 	poochyena: {
 		tier: "NoSign",
 	},
@@ -1417,14 +1417,14 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*gardevoirmega: {
 		tier: "NoSign",
-	},*/
+	},
 	gallade: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
 	},
 	/*gallademega: {
 		tier: "NoSign",
-	},*/
+	},
 	surskit: {
 		tier: "NoSign",
 	},
@@ -1493,13 +1493,13 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*sableyemega: {
 		tier: "NoSign",
-	},*/
+	},
 	mawile: {
 		tier: "Sign",
 	},
 	/*mawilemega: {
 		tier: "NoSign",
-	},*/
+	},
 	aron: {
 		tier: "NoSign",
 	},
@@ -1511,7 +1511,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*aggronmega: {
 		tier: "NoSign",
-	},*/
+	},
 	meditite: {
 		tier: "NoSign",
 	},
@@ -1521,7 +1521,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*medichammega: {
 		tier: "NoSign",
-	},*/
+	},
 	electrike: {
 		tier: "NoSign",
 	},
@@ -1530,7 +1530,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*manectricmega: {
 		tier: "NoSign",
-	},*/
+	},
 	plusle: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -1571,7 +1571,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*sharpedomega: {
 		tier: "NoSign",
-	},*/
+	},
 	wailmer: {
 		tier: "NoSign",
 	},
@@ -1587,7 +1587,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*cameruptmega: {
 		tier: "NoSign",
-	},*/
+	},
 	torkoal: {
 		tier: "NoSign",
 		//doublesTier: "DOU",
@@ -1628,7 +1628,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*altariamega: {
 		tier: "NoSign",
-	},*/
+	},
 	zangoose: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -1703,7 +1703,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*banettemega: {
 		tier: "NoSign",
-	},*/
+	},
 	duskull: {
 		tier: "NoSign",
 	},
@@ -1730,7 +1730,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*absolmega: {
 		tier: "NoSign",
-	},*/
+	},
 	snorunt: {
 		tier: "NoSign",
 	},
@@ -1740,7 +1740,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*glaliemega: {
 		tier: "NoSign",
-	},*/
+	},
 	froslass: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -1782,7 +1782,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*salamencemega: {
 		tier: "NoSign",
-	},*/
+	},
 	beldum: {
 		tier: "NoSign",
 	},
@@ -1795,7 +1795,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*metagrossmega: {
 		tier: "NoSign",
-	},*/
+	},
 	regirock: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -1814,35 +1814,35 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*latiasmega: {
 		tier: "NoSign",
-	},*/
+	},
 	latios: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	/*latiosmega: {
 		tier: "NoSign",
-	},*/
+	},
 	kyogre: {
 		tier: "Sign",
 		//doublesTier: "DUber",
 	},
 	/*kyogreprimal: {
 		tier: "NoSign",
-	},*/
+	},
 	groudon: {
 		tier: "Sign",
 		//doublesTier: "DUber",
 	},
 	/*groudonprimal: {
 		tier: "NoSign",
-	},*/
+	},
 	rayquaza: {
 		tier: "Sign",
 		//doublesTier: "DUber",
 	},
 	/*rayquazamega: {
 		tier: "NoSign",
-	},*/
+	},
 	jirachi: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -2003,7 +2003,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*lopunnymega: {
 		tier: "NoSign",
-	},*/
+	},
 	glameow: {
 		tier: "NoSign",
 	},
@@ -2043,7 +2043,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*garchompmega: {
 		tier: "NoSign",
-	},*/
+	},
 	riolu: {
 		tier: "NoSign",
 	},
@@ -2053,7 +2053,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*lucariomega: {
 		tier: "NoSign",
-	},*/
+	},
 	hippopotas: {
 		tier: "NoSign",
 	},
@@ -2093,7 +2093,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*abomasnowmega: {
 		tier: "NoSign",
-	},*/
+	},
 	rotom: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -2315,7 +2315,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*audinomega: {
 		tier: "NoSign",
-	},*/
+	},
 	timburr: {
 		tier: "NoSign",
 	},
@@ -2467,7 +2467,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*garbodorgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	zorua: {
 		tier: "NoSign",
 	},
@@ -3063,7 +3063,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*dianciemega: {
 		tier: "NoSign",
-	},*/
+	},
 	hoopa: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -3129,7 +3129,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*gumshoostotem: {
 		tier: "NoSign",
-	},*/
+	},
 	grubbin: {
 		tier: "NoSign",
 	},
@@ -3142,7 +3142,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*vikavolttotem: {
 		tier: "NoSign",
-	},*/
+	},
 	crabrawler: {
 		tier: "NoSign",
 	},
@@ -3175,7 +3175,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*ribombeetotem: {
 		tier: "NoSign",
-	},*/
+	},
 	rockruff: {
 		tier: "NoSign",
 	},
@@ -3222,7 +3222,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*araquanidtotem: {
 		tier: "NoSign",
-	},*/
+	},
 	fomantis: {
 		tier: "NoSign",
 	},
@@ -3232,7 +3232,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*lurantistotem: {
 		tier: "NoSign",
-	},*/
+	},
 	morelull: {
 		tier: "NoSign",
 	},
@@ -3248,7 +3248,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*salazzletotem: {
 		tier: "NoSign",
-	},*/
+	},
 	stufful: {
 		tier: "NoSign",
 	},
@@ -3366,17 +3366,17 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*togedemarutotem: {
 		tier: "NoSign",
-	},*/
+	},
 	mimikyu: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	/*mimikyutotem: {
 		tier: "NoSign",
-	},*/
+	},
 	/*mimikyubustedtotem: {
 		tier: "NoSign",
-	},*/
+	},
 	bruxish: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -3399,7 +3399,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*kommoototem: {
 		tier: "NoSign",
-	},*/
+	},
 	tapukoko: {
 		tier: "Sign",
 	},
@@ -3461,7 +3461,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*necrozmaultra: {
 		tier: "Sign",
-	},*/
+	},
 	magearna: {
 		tier: "Sign",
 		//doublesTier: "DUber",
@@ -3492,7 +3492,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*melmetalgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	grookey: {
 		tier: "NoSign",
 	},
@@ -3505,7 +3505,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*rillaboomgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	scorbunny: {
 		tier: "NoSign",
 	},
@@ -3518,7 +3518,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*cinderacegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	sobble: {
 		tier: "NoSign",
 	},
@@ -3531,7 +3531,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*inteleongmax: {
 		tier: "NoSign",
-	},*/
+	},
 	skwovet: {
 		tier: "NoSign",
 	},
@@ -3551,7 +3551,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*corviknightgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	blipbug: {
 		tier: "NoSign",
 	},
@@ -3563,7 +3563,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*orbeetlegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	nickit: {
 		tier: "NoSign",
 	},
@@ -3591,7 +3591,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*drednawgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	yamper: {
 		tier: "NoSign",
 	},
@@ -3610,7 +3610,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*coalossalgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	applin: {
 		tier: "NoSign",
 	},
@@ -3620,14 +3620,14 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*flapplegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	appletun: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	/*appletungmax: {
 		tier: "NoSign",
-	},*/
+	},
 	dipplin: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -3641,7 +3641,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*sandacondagmax: {
 		tier: "NoSign",
-	},*/
+	},
 	cramorant: {
 		tier: "NoSign",
 		//doublesTier: "(DUU)",
@@ -3662,10 +3662,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*toxtricitygmax: {
 		tier: "NoSign",
-	},*/
+	},
 	/*toxtricitylowkeygmax: {
 		tier: "NoSign",
-	},*/
+	},
 	sizzlipede: {
 		tier: "NoSign",
 	},
@@ -3674,7 +3674,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*centiskorchgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	clobbopus: {
 		tier: "NoSign",
 	},
@@ -3700,7 +3700,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*hatterenegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	impidimp: {
 		tier: "NoSign",
 	},
@@ -3713,7 +3713,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*grimmsnarlgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	milcery: {
 		tier: "NoSign",
 	},
@@ -3723,7 +3723,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*alcremiegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	falinks: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -3768,7 +3768,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*copperajahgmax: {
 		tier: "NoSign",
-	},*/
+	},
 	dracozolt: {
 		tier: "Sign",
 	},
@@ -3787,7 +3787,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*duraludongmax: {
 		tier: "NoSign",
-	},*/
+	},
 	dreepy: {
 		tier: "NoSign",
 	},
@@ -3820,7 +3820,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	/*eternatuseternamax: {
 		tier: "NoSign",
-	},*/
+	},
 	kubfu: {
 		tier: "NoSign",
 	},
@@ -3837,7 +3837,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	urshifurapidstrikegmax: {
 		tier: "NoSign",
-	},*/
+	},
 	zarude: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
@@ -4329,5 +4329,5 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	pecharunt: {
 		tier: "Sign",
 		//doublesTier: "(DUU)",
-	},
+	},*/
 };

@@ -5,9 +5,11 @@ export const Formats: FormatData[] = [
 		name: "[Gen 9] Signaturemons",
         desc: `National Dex solomod where new Signature moves are introduced for fully-evolved Pokémon that don't have any.`,
 		mod: 'signaturemons',
-		teambuilderFormat: 'National Dex',
-		ruleset: ['Standard NatDex', 'Event Moves Clause', 'Species Clause', 'Terastal Clause', 'Z-Move Clause'],
-		/*Tentative restrictions - will work on it later
+		//teambuilderFormat: 'National Dex',
+		//ruleset: ['Standard NatDex', 'Event Moves Clause', 'Species Clause', 'Terastal Clause', 'Z-Move Clause'], //Remnant of NatDex
+		ruleset: ['Flat Rules', 'Open Team Sheets', 'Data Mod'], //Bye VGC timer...?
+		
+		/*Tentative restrictions - will work on it later (if that's even needed!)
 		checkCanLearn(move, template, lsetData, set) {
 			if (['terablast'].includes(move.id)) return null; //Tera Blast for everyone (except Magikarp, Ditto, Smeargle, Cosmog, Cosmoem and Terapagos)
 			if (['hiddenpower'].includes(move.id)) return null; //Hidden power for no one (except Unown)
@@ -19,8 +21,8 @@ export const Formats: FormatData[] = [
         desc: `National Dex solomod where new Signature moves are introduced for fully-evolved Pokémon that don't have any.`,
 		mod: 'signaturemons',
 		gameType: 'doubles',
-		teambuilderFormat: 'National Dex',
-		ruleset: ['Standard NatDex', 'Event Moves Clause', 'Species Clause', 'Terastal Clause', 'Z-Move Clause'],
+		//teambuilderFormat: 'National Dex',
+		ruleset: ['Flat Rules', 'Open Team Sheets', 'Data Mod'],
 	},
 
 	//Random battles are unavailable until I can get some help on it!
