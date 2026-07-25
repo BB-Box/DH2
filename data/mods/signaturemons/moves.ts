@@ -3835,6 +3835,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Grass",
 	},
+	exploruption: {
+		num: 3098,
+		accuracy: 100,
+		basePower: 50,
+		category: "Special",
+		name: "Exploruption",
+		desc: "The user gathers its built-up energy and launches a barrage of fireballs. The number of hits increases as the user takes damage during battle.",
+		shortDesc: "Number of hits raises by 1 each time the user is hit (Max: 5).",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Incinerate", target);
+		},
+		onModifyMove(move, source, target) {
+			move.multihit = Math.min(5, 1 + source.timesAttacked);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
