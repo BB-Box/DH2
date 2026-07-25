@@ -3857,6 +3857,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Feraligatr
+	brutalbite: {
+		num: 3099,
+		accuracy: 100,
+		basePower: 40,
+		category: "Physical",
+		name: "Brutal Bite",
+		desc: "The user bites the target with haste and ferocity. This move goes first and lowers the target's Defense stat.",
+		shortDesc: "Goes first. Lowers the target's Def by 1.",
+		pp: 10,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fishious Rend", target);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "normal",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

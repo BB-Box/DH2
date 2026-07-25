@@ -54,6 +54,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 2
 		addMove('breathoflife', 'meganium');
 		addMove('exploruption', 'typhlosion');
+		addMove('brutalbite', 'feraligatr');
 		addMove('superstarcombo', 'ledian');
 		addMove('stunlight', 'lanturn');
 		addMove('lightburst', 'ampharos');
