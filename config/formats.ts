@@ -33,6 +33,7 @@ After that, find the right section within the formats list that describes your m
 import { Formats as Abilitypos                  } from '../data/mods/abilitypos/formats';
 import { Formats as Alternatium                 } from '../data/mods/alternatium/formats';
 import { Formats as AlternatiumEX               } from '../data/mods/alternatiumex/formats';
+import { Formats as NationalDexExpanded			} from '../data/mods/natdexexpanded/formats';
 import { Formats as BackToSinnoh                } from '../data/mods/backtosinnoh/formats';
 import { Formats as Balls                       } from '../data/mods/balls/formats';
 import { Formats as BanHammersC3                } from '../data/mods/banhammersc3/formats';
@@ -53,6 +54,7 @@ import { Formats as CommunityUsed2              } from '../data/mods/communityus
 import { Formats as ConquestDex                 } from '../data/mods/conquestdex/formats';
 import { Formats as CleanSlateMicro2            } from '../data/mods/csm2/formats';
 import { Formats as DeadCells                   } from '../data/mods/deadcells/formats';
+import { Formats as Deltamon					} from '../data/mods/deltamon/formats';
 import { Formats as DenseAF                     } from '../data/mods/denseaf/formats';
 import { Formats as DLCmons                     } from '../data/mods/dlcmons/formats';
 import { Formats as Dollhouse                   } from '../data/mods/dollhouse/formats';
@@ -160,6 +162,7 @@ import { Formats as MegasForAllPaldea           } from '../data/mods/m4apaldea/f
 import { Formats as gen8MegasForAllv6           } from '../data/mods/m4av6/formats';
 import { Formats as Maadowr                     } from '../data/mods/maadowr/formats';
 import { Formats as MaadowrLostZone             } from '../data/mods/maadowrlostzone/formats';
+import { Formats as Macrometa                   } from '../data/mods/macrometa/formats';
 import { Formats as Masquerade                  } from '../data/mods/masquerade/formats';
 import { Formats as MegaMania                   } from '../data/mods/megamania/formats';
 import { Formats as MegaRevolution              } from '../data/mods/megarevolution/formats';
@@ -246,6 +249,7 @@ import { Formats as Worldbuilding               } from '../data/mods/worldbuildi
 //import { Formats as YayaMons                    } from '../data/mods/yayamons/formats';
 import { Formats as Yokaimons                   } from '../data/mods/yokaimons/formats';
 import { Formats as ZAOU						} from '../data/mods/gen9legendsou/formats';
+import { Formats as NatDexZa					} from '../data/mods/natdexza/formats';
 
 export const Formats: import('../sim/dex-formats').FormatList = [
 	///////////////////////////////////////////////////////////////
@@ -290,6 +294,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	...SharedPowerIronFist,
 	...Ironmons,
 	...LittleColosseum,
+	...Macrometa,
 	...Masquerade,
 	...MegaRevolution,
 	...MegasForAllPaldea,
@@ -336,6 +341,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	...Worldbuilding,
 	...gen9VGC20XX,
 	...ZAOU,
+	...NatDexZa,
 	
 	///////////////////////////////////////////////////////////////
 	///////////////////// Gen 8 Pet Mods //////////////////////////
@@ -381,6 +387,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	...ConquestDex,
 	...gen2CrystalLegacy,
   ...DeadCells,
+	...Deltamon,
 	...DenseAF,
 	//...DexReversal,
 	...DoNotUse,
@@ -411,6 +418,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	...MaadowrLostZone,
 	...MegaMania,
 	...gen1Metronome,
+	...NationalDexExpanded,
 	...Solopet,
 	...gen1Moonside,
 	...Patratdex,

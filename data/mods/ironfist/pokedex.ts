@@ -1697,6 +1697,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		abilities: {0: "Drought"},
 		weightkg: 8.5,
 		requiredItem: "Red Orb",
+		battleOnly: "Solar Bean",
 	},
 	circall: {
 		num: -189,
@@ -1799,6 +1800,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		inherit: true,
 		num: -180,
 		name: "Girafarig",
+		trans: true,
 		types: ["Normal", "Psychic"],
 		baseStats: {hp: 70, atk: 80, def: 65, spa: 90, spd: 65, spe: 85},
 		abilities: {0: "Inner Focus", 1: "Early Bird", H: "Sap Sipper", S: "Psychic Surge"},
@@ -1808,6 +1810,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		name: "Girafarig-Mega",
 		baseSpecies: "Girafarig",
 		forme: "Mega",
+		trans: true,
 		types: ["Normal", "Psychic", "Silly"],
 		baseStats: {hp: 70, atk: 100, def: 75, spa: 130, spd: 75, spe: 105},
 		abilities: {0: "Parental Bond"},
@@ -1855,6 +1858,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		baseStats: {hp: 82, atk: 122, def: 102, spa: 122, spd: 102, spe: 122},
 		abilities: {0: "i'll get a mega this time i swear"},
 		weightkg: 82.0,
+		battleOnly: "Flygon",
 	},
 	vishzolt: {
 		num: -198,
@@ -1924,6 +1928,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		abilities: {0: "Lemonga Sour"},
 		weightkg: 201.0,
 		requiredItem: "Lemonganite",
+		battleOnly: "Lemonganium",
 	},
 	miniormeteor: {
 		num: -190,
@@ -1945,6 +1950,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Fire",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	miniororange: {
 		num: -190,
@@ -1957,6 +1963,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Ground",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	minioryellow: {
 		num: -190,
@@ -1969,6 +1976,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Lemon",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	miniorgreen: {
 		num: -190,
@@ -1981,6 +1989,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Silly",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	miniorblue: {
 		num: -190,
@@ -1993,6 +2002,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Flying",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	miniorindigo: {
 		num: -190,
@@ -2005,6 +2015,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Water",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	miniorviolet: {
 		num: -190,
@@ -2017,6 +2028,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		weightkg: 0.3,
 		requiredTeraType: "Ghost",
 		isCosmeticForme: null,
+		battleOnly: "Minior-Meteor",
 	},
 	kanon: {
 		num: -189,
@@ -2035,6 +2047,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		baseStats: {hp: 80, atk: 67, def: 86, spa: 136, spd: 100, spe: 119},
 		abilities: {0: "Without Love..."},
 		weightkg: 6.7,
+		battleOnly: "Kanon",
 	},
 	marlboro: {
 		num: -188,
@@ -2061,6 +2074,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		baseStats: {hp: 115, atk: 90, def: 105, spa: 140, spd: 125, spe: 75},
 		abilities: {0: "I Love Sewers"},
 		weightkg: 581.7,
+		battleOnly: "Dip",
 	},
 	bluminion: {
 		num: -186,
@@ -2081,6 +2095,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 		abilities: {0: "Grim Neigh"},
 		weightkg: 44.5,
 		requiredItem: "BIG ANVILITE",
+		battleOnly: "BIG ANVIL",
 	},
 	melmetal3: {
 		num: -184,
