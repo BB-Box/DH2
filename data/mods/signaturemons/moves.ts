@@ -3781,6 +3781,60 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "all",
 		type: "Normal",
 	},
+	//Meganium
+	breathoflife: {
+		num: 3097,
+		accuracy: 100,
+		basePower: 95,
+		category: "Special",
+		name: "Breath of Life",
+		desc: "The user exhales a sweet breath to attack a foe and heal itself and its allies. This move can also be used on an ally to restore more of its HP.",
+		shortDesc: "Heals 12.5% HP of all allies. On ally: heals 50% HP on target.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, heal: 1, allyanim: 1, metronome: 1,},
+		self: {
+			onHit(target, source, move) {
+				for (const pokemon of source.alliesAndSelf()) {
+					this.heal(pokemon.maxhp / 8, pokemon, source, move);
+				}
+			},
+		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dragon Breath", target);
+		},
+		onTryHit(target, source, move) {
+			if (source.isAlly(target)) {
+				move.basePower = 0;
+				move.infiltrates = true;
+				move.self = {};
+			}
+		},
+		onTryMove(source, target, move) {
+			if (source.isAlly(target) && source.volatiles['healblock']) {
+				this.attrLastMove('[still]');
+				this.add('cant', source, 'move: Heal Block', move);
+				return false;
+			}
+		},
+		onHit(target, source, move) {
+			if (source.isAlly(target)) {
+				if (!this.heal(Math.floor(target.baseMaxhp * 0.5))) {
+					if (target.volatiles['healblock'] && target.hp !== target.maxhp) {
+						this.attrLastMove('[still]');
+						// Wrong error message, correct one not supported yet
+						this.add('cant', source, 'move: Heal Block', move);
+					} else {
+						this.add('-immune', target);
+					}
+					return this.NOT_FAIL;
+				}
+			}
+		},
+		target: "normal",
+		type: "Grass",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
