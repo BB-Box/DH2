@@ -3937,6 +3937,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
+	//Samurott
+	shellsplitter: {
+		num: 3102,
+		accuracy: 100,
+		basePower: 15,
+		category: "Physical",
+		name: "Shell Splitter",
+		desc: "The user quickly draws its shell blade to open the enemy defenses and deal damage. This move usually goes first and will break all kinds of protections.",
+		shortDesc: "Goes first. Lifts Protect and screens.",
+		pp: 10,
+		priority: 1,
+		flags: {mirror: 1, slicing: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sacred Sword", target);
+		},
+		onTryHit(pokemon) {
+			// will shatter screens through sub, before you hit
+			pokemon.side.removeSideCondition('reflect');
+			pokemon.side.removeSideCondition('lightscreen');
+			pokemon.side.removeSideCondition('auroraveil');
+		},
+		breaksProtect: true, // Breaking protection implemented in scripts.js
+		secondary: null,
+		target: "normal",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
