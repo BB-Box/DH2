@@ -45,6 +45,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('costlyescape', 'cloyster');
 		addMove('shadowcreep', 'gengar');
 		addMove('electroblast', 'electrode');
+		addMove('meteordive', 'aerodactyl');
 		addMove('bellyflop', 'snorlax');
 		addMove('icestorm', 'articuno');
 		addMove('thunderstorm', 'zapdos');

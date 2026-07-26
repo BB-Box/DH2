@@ -3964,6 +3964,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Water",
 	},
+	//Aerodactyl
+	meteordive: {
+		num: 3103,
+		accuracy: 95,
+		basePower: 130,
+		category: "Physical",
+		name: "Meteor Dive",
+		desc: "The user makes its heavy body fall onto its target with high velocity. If the move misses, the user takes damage instead.",
+		shortDesc: "User takes damage if move fails.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Flying Press", target);
+		},
+		hasCrashDamage: true,
+		onMoveFail(target, source, move) {
+			this.damage(source.baseMaxhp / 2, source, source, this.dex.conditions.get('High Jump Kick'));
+		},
+		secondary: null,
+		target: "normal",
+		type: "Rock",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

@@ -855,7 +855,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	aerodactyl: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*aerodactylmega: {
 		tier: "NoSign",
