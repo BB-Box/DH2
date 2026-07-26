@@ -3914,6 +3914,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Grass",
 	},
+	//Emboar
+	roastedpunch: {
+		num: 3101,
+		accuracy: 95,
+		basePower: 100,
+		category: "Physical",
+		name: "Roasted Punch",
+		desc: "The user delivers a flaming-hot punch attack that can leave the target with a burn.",
+		shortDesc: "30% chance of Burn.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fire Punch", target);
+		},
+		secondary: {
+			chance: 30,
+			status: 'brn',
+		},
+		target: "normal",
+		type: "Fighting",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

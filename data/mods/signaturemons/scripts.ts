@@ -97,6 +97,7 @@ export const Scripts: ModdedBattleScriptsData = {
 
 		//Gen 5
 		addMove('sunradiance', 'serperior');
+		addMove('roastedpunch', 'emboar');
 		addMove('tailormade', 'leavanny');
 		addMove('poisonwheel', 'scolipede');
 		addMove('sublimescent', 'lilligant');
