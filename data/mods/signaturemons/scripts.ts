@@ -94,6 +94,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('flytrap', 'carnivine');
 		addMove('sinisterclaw', 'weavile');
 		addMove('tastetest', 'lickilicky');
+		addMove('skystinger', 'gliscor');
 		addMove('curseofsnow', 'froslass');
 
 		//Gen 5

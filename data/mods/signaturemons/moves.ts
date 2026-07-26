@@ -3988,6 +3988,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
+	//Gliscor
+	skystinger: {
+		num: 3104,
+		accuracy: 100,
+		basePower: 65,
+		category: "Physical",
+		name: "Sky Stinger",
+		desc: "The user glides silently and delivers a fatal blow with its tail. This move gains power if the target's HP is at half or less.",
+		shortDesc: "Damage *2 if target HP is equal or less than 50%.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Aerial Ace", target);
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (target.hp * 2 <= target.maxhp) {
+				return this.chainModify(2);
+			}
+		},
+		secondary: null,
+		target: "any",
+		type: "Flying",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
