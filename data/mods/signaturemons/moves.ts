@@ -3882,6 +3882,38 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Water",
 	},
+	//Serperior
+	sunradiance: {
+		num: 3100,
+		accuracy: 100,
+		basePower: 110,
+		basePowerCallback(pokemon, target, move) {
+			if (['sunnyday', 'desolateland'].includes(pokemon.effectiveWeather())) {
+				this.debug("BP changed under sunlight.");
+				return 140;
+			}
+			return move.basePower;
+		},
+		category: "Special",
+		name: "Sun Radiance",
+		desc: "The user attacks using its stored solar energy. This move lowers the user's Defense and Sp. Defense stats.",
+		shortDesc: "Hits all foes. Lowers user's Def. and SpD. by 1.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Flash", target);
+		},
+		self: {
+			boosts: {
+				def: -1,
+				spd: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Grass",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
