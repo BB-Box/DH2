@@ -4034,6 +4034,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
+	//Metagross
+	seekanddestroy: {
+		num: 3106,
+		accuracy: true,
+		basePower: 200,
+		category: "Physical",
+		name: "Seek and Destroy",
+		desc: "A desperate move where the user selects a target for a precise yet powerful explosion. This move cannot miss, but the user will faint upon using it.",
+		shortDesc: "Can't miss. User faints.",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, noparentalbond: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Smart Strike", target);
+			this.add('-anim', source, "Self-Destruct", target);
+		},
+		selfdestruct: "always",
+		secondary: null,
+		target: "normal",
+		type: "Steel",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

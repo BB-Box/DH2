@@ -82,6 +82,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('badomen', 'absol');
 		addMove('stillwater', 'relicanth');
 		addMove('loveadvice', 'luvdisc');
+		addMove('seekanddestroy', 'metagross');
 
 		//Gen 4
 		addMove('secretthorns', 'roserade');
