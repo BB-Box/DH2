@@ -4131,6 +4131,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
+	//Milotic
+	venuswave: {
+		num: 3108,
+		accuracy: 95,
+		basePower: 65,
+		category: "Special",
+		name: "Venus Wave",
+		desc: "The user strikes its foes with dazzling clear water. This move may lower the foes' Attack or make them infatuated with the user if they are of the opposing gender.",
+		shortDesc: "Hits all foes. 80% chance of Atk-1 or 20% chance of Infatuation.",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Surf", target);
+		},
+		secondary: {
+			chance: 100,
+			onHit(target, source, move) {
+				const result = this.random(5);
+				const genderCheck = ((source.gender === 'M' && target.gender === 'F') || (source.gender === 'F' && target.gender === 'M'));
+				if (result === 0 && genderCheck) { //20% chance of Attract if target is of opposite gender
+					target.addVolatile('attract', source, move);
+				} else {
+					this.boost({atk: -1}, target, source, null, false, true);
+				}
+			}
+		},
+		target: "allAdjacentFoes",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
