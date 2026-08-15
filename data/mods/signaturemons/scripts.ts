@@ -106,6 +106,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('sublimescent', 'lilligant');
 		addMove('burningwill', ['darmanitan', 'darmanitangalar']);
 		addMove('holdup', 'scrafty');
+		addMove('psychocrush', 'reuniclus');
 		addMove('armorlance', 'escavalier');
 		addMove('exhaustion', 'eelektross');
 		addMove('iceclaw', 'beartic');

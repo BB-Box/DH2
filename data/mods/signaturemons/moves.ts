@@ -4013,6 +4013,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "any",
 		type: "Flying",
 	},
+	//Reuniclus
+	psychocrush: {
+		num: 3105,
+		accuracy: 100,
+		basePower: 95,
+		category: "Physical",
+		name: "Psycho Crush",
+		desc: "The user compresses its target using psychic power encoated in its big arms. The higher the user's Special Attack stat, the greater the damage this move deals.",
+		shortDesc: "Uses Special Atk stat to calculate damage.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Smelling Salts", target);
+		},
+		overrideOffensiveStat: 'spa',
+		secondary: null,
+		target: "normal",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
