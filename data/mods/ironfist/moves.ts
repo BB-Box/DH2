@@ -648,24 +648,25 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
                     pokemon.cureStatus();
                 }
             }
-			pokemon.side.win();
         },
         onAfterMoveSecondarySelf(pokemon, target, move) {
             //order up
-            if (!pokemon.volatiles['commanded']) return;
-            const tatsugiri = pokemon.volatiles['commanded'].source;
-            if (tatsugiri.baseSpecies.baseSpecies !== 'Tatsugiri') return; // Should never happen
-            switch (tatsugiri.baseSpecies.forme) {
-            case 'Droopy':
-                this.boost({def: 1}, pokemon, pokemon);
-                break;
-            case 'Stretchy':
-                this.boost({spe: 1}, pokemon, pokemon);
-                break;
-            default:
-                this.boost({atk: 1}, pokemon, pokemon);
-                break;
-            }
+            if (pokemon.volatiles['commanded']) {
+				const tatsugiri = pokemon.volatiles['commanded'].source;
+				if (tatsugiri.baseSpecies.baseSpecies !== 'Tatsugiri') return; // Should never happen
+				switch (tatsugiri.baseSpecies.forme) {
+				case 'Droopy':
+					this.boost({def: 1}, pokemon, pokemon);
+					break;
+				case 'Stretchy':
+					this.boost({spe: 1}, pokemon, pokemon);
+					break;
+				default:
+					this.boost({atk: 1}, pokemon, pokemon);
+					break;
+				}
+			}
+			this.win(pokemon.side);
         },
         onAfterSubDamage(damage, target, pokemon, move) {
             //mortal spin
@@ -2275,11 +2276,11 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 				delete targetSideConditions[id];
 				success = true;
 			}
-			if (target.side.fishingTokens > 0 || source.side.fishingTokens > 0) {
-				const tempT = target.side.fishingTokens;
-				const tempS = source.side.fishingTokens;
-				target.side.removeFishingTokens(tempT);
-				target.side.addFishingTokens(tempS);
+			if (source.side.foe.fishingTokens > 0 || source.side.fishingTokens > 0) {
+				const tempT = source.side.foe.fishingTokens || 0;
+				const tempS = source.side.fishingTokens || 0;
+				source.side.foe.removeFishingTokens(tempT);
+				source.side.foe.addFishingTokens(tempS);
 				source.side.removeFishingTokens(tempS);
 				source.side.addFishingTokens(tempT);
 			}
@@ -2319,7 +2320,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 		name: "Brainrot Cudgel",
 		type: "Silly",
 		category: "Physical",
-		basePower: 80,
+		basePower: 70,
 		accuracy: 100,
 		pp: 10,
 		desc: "Always results in a critical hit.",
@@ -2390,6 +2391,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			if (!pokemon.side.trumpcard) pokemon.side.trumpcard = 0;
 			const bp = move.basePower + 20 * pokemon.side.trumpcard;
 			this.debug('BP: ' + bp);
+			this.add('-message', `${move.name} has ${bp} BP!`);
 			return bp;
 		},
 		accuracy: 100,
@@ -3292,6 +3294,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			return bp;
 		},
 		onPrepareHit(target, source, move) {
+			if (move.multihit) return;
 			if (!source.side.trumpcard) source.side.trumpcard = 0;
 			source.side.trumpcard ++;
 		},
@@ -3975,7 +3978,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 		flags: { snatch: 1, heal: 1, metronome: 1 },
 		onHit(pokemon) {
 			let factor = 0.5;
-			switch (pokemon.effectiveWeather(undefined, true)) {
+			switch (pokemon.effectiveWeather()) {
 				case 'acidrain':
 					factor = 0.667;
 					break;
@@ -4452,7 +4455,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 		condition: {
 			duration: 1,
 			onEnd(pokemon) {
-				pokemon.forceSwitch = true;
+				pokemon.forceSwitchFlag = true;
 			},
 		},
 		secondary: null,

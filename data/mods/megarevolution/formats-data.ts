@@ -4978,4 +4978,28 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 	grenegade : {
 		tier: "OU",
 	},
+	vendette: {
+		tier: "OU",
+	},
+	centrojan: {
+		tier: "OU",
+	},
+	karaiju: {
+		tier: "OU",
+	},
+	dragonitecupid: {
+		tier: "OU",
+	},
+	mechatar: {
+		tier: "OU",
+	},
+	salamencemoonchild: {
+		tier: "OU",
+	},
+	metagrosspaldea: {
+		tier: "OU",
+	},
+	gark: {
+		tier: "OU",
+	},
 };

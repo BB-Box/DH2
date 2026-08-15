@@ -403,4 +403,22 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	flingangel: {
 		tier: "BC D",
 	},
+	honeydue: {
+		tier: "BC D",
+	},
+	drug: {
+		tier: "BC D",
+	},
+	nekolepsy: {
+		tier: "BC D",
+	},
+	aberrockin: {
+		tier: "BC D",
+	},
+	tartzacoatl: {
+		tier: "BC D",
+	},
+	iusperare: {
+		tier: "BC D",
+	},
 };
