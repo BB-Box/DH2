@@ -4056,6 +4056,81 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Steel",
 	},
+	//Banette
+	puppetstrings: {
+		num: 3107,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Puppet Strings",
+		desc: "The user controls the target with puppet strings. The target is forced to keep using its last move and cannot flee for three turns.",
+		shortDesc: "Traps target and makes it repeat its last used move for 3 turns.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1, failencore: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "String Shot", target);
+		},
+		volatileStatus: 'puppetstrings',
+		condition: {
+			duration: 3,
+			noCopy: true, // doesn't get copied by Z-Baton Pass
+			onStart(pokemon, source) {
+				let move: Move | ActiveMove | null = pokemon.lastMove;
+				if (!move || pokemon.volatiles['dynamax']) return false;
+
+				if (move.isMax && move.baseMove) move = this.dex.moves.get(move.baseMove);
+				const moveIndex = pokemon.moves.indexOf(move.id);
+				if (move.isZ || move.flags['failencore'] || !pokemon.moveSlots[moveIndex] || pokemon.moveSlots[moveIndex].pp <= 0) {
+					// it failed
+					return false;
+				}
+				this.effectState.move = move.id;
+				this.add('-start', pokemon, 'move: Puppet Strings', '[of] ' + source);
+				if (!this.queue.willMove(pokemon)) {
+					this.effectState.duration++;
+				}
+			},
+			onOverrideAction(pokemon, target, move) {
+				if (move.id !== this.effectState.move) return this.effectState.move;
+			},
+			onResidualOrder: 14,
+			onResidual(pokemon) {
+				const source = this.effectState.source;
+				if (source && (!source.isActive || source.hp <= 0 || !source.activeTurns)) {
+					delete pokemon.volatiles['puppetstrings'];
+					this.add('-end', pokemon, 'Puppet Strings', '[partiallytrapped]', '[silent]');
+					return;
+				}
+
+				if (!pokemon.moves.includes(this.effectState.move) ||
+					pokemon.moveSlots[pokemon.moves.indexOf(this.effectState.move)].pp <= 0) {
+					// early termination if you run out of PP
+					pokemon.removeVolatile('puppetstrings');
+				}
+			},
+			onTrapPokemon(pokemon) {
+				if (this.effectState.source && this.effectState.source.isActive) pokemon.tryTrap();
+			},
+			onEnd(target) {
+				this.add('-end', target, 'Puppet Strings');
+			},
+			onDisableMove(pokemon) { //Disable has priority over Encore when using the move
+				if (!this.effectState.move || !pokemon.hasMove(this.effectState.move)) {
+					return;
+				}
+				for (const moveSlot of pokemon.moveSlots) {
+					if (moveSlot.id !== this.effectState.move) {
+						pokemon.disableMove(moveSlot.id);
+					}
+				}
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ghost",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

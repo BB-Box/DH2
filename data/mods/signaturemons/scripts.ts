@@ -79,6 +79,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('blackstab', 'seviper');
 		addMove('gyropulse', 'claydol');
 		addMove('meteoforce', 'castform');
+		addMove('puppetstrings', 'banette');
 		addMove('badomen', 'absol');
 		addMove('stillwater', 'relicanth');
 		addMove('loveadvice', 'luvdisc');

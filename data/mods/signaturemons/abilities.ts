@@ -102,11 +102,11 @@ export const Abilities: import('../../../sim/dex-abilities').ModdedAbilityDataTa
 			}
 		},
 	},
-	//Aroma Veil: protects from Party Time effects
+	//Aroma Veil: protects from move-locking effects of Party Time and Puppet Strings
 	aromaveil: {
 		inherit: true,
 		onAllyTryAddVolatile(status, target, source, effect) {
-			if (['attract', 'disable', 'encore', 'healblock', 'partytime', 'taunt', 'torment'].includes(status.id)) {
+			if (['attract', 'disable', 'encore', 'healblock', 'partytime', 'puppetstrings', 'taunt', 'torment'].includes(status.id)) {
 				if (effect.effectType === 'Move') {
 					const effectHolder = this.effectState.target;
 					this.add('-block', target, 'ability: Aroma Veil', '[of] ' + effectHolder);
