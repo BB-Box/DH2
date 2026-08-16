@@ -70,6 +70,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('linedash', 'linoone');
 		addMove('partytime', 'ludicolo');
 		addMove('verdantwind', 'shiftry');
+		addMove('aquadrop', 'pelipper');
 		addMove('procrastinate', 'slaking');
 		addMove('carteblanche', 'delcatty');
 		addMove('chompchomp', 'mawile');

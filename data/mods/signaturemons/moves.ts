@@ -4242,6 +4242,39 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allies",
 		type: "Normal",
 	},
+	//Pelipper
+	aquadrop: {
+		num: 3112,
+		accuracy: 100,
+		basePower: 75,
+		basePowerCallback(pokemon, target) {
+			let bp = move.basePower;
+			const targetWeight = target.getWeight();
+			const pokemonWeight = pokemon.getWeight();
+			if (this.field.getPseudoWeather('gravity')) {
+				bp = 100;
+			}
+			if (pokemonWeight > targetWeight) {
+				bp *= 1.5;
+			}			
+			this.debug('BP: ' + bp);
+			return bp;
+		},
+		category: "Special",
+		name: "Aqua Drop",
+		desc: "The user drops sea water on the target using its bill. If the target is lighter than the user, this move powers up as the target gets dropped with the move.",
+		shortDesc: "BP * 1.5 if target is lighter than user. 100 BP under Gravity.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Soak", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

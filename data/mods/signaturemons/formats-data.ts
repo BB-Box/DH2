@@ -1402,7 +1402,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	pelipper: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DOU",
 	},
 	ralts: {
