@@ -2311,7 +2311,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	audino: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*audinomega: {
 		tier: "NoSign",

@@ -4217,6 +4217,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
+	//Audino
+	audiotherapy: {
+		num: 3111,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Audio Therapy",
+		desc: "The user emits relaxing sounds to heal all allies on the field by 25% of their max HP and raise their Attack and Special Attack by one stage.",
+		shortDesc: "Heal 25% HP and Atk+1 & SpA+1 to user and allies on field.",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, heal: 1, bypasssub: 1, sound: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Round", target);
+		},
+		heal: [1, 4],
+		boosts: {
+			atk: 1,
+			spa: 1,
+		},
+		secondary: null,
+		target: "allies",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

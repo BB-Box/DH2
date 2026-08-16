@@ -105,6 +105,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('sunradiance', 'serperior');
 		addMove('roastedpunch', 'emboar');
 		addMove('shellsplitter', 'samurott');
+		addMove('audiotherapy', 'audino');
 		addMove('tailormade', 'leavanny');
 		addMove('poisonwheel', 'scolipede');
 		addMove('sublimescent', 'lilligant');
