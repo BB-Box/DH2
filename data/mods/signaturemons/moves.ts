@@ -4189,6 +4189,34 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Dragon",
 	},
+	//Mamoswine
+	iceivory: {
+		num: 3110,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Ice Ivory",
+		desc: "The user charges with its ice-fortified tusks. This move damages the user quite a lot, but may also raise the user's Speed.",
+		shortDesc: "10% chance of Spe+1 to user. 33% Recoil damage.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Double-Edge", target);
+		},
+		recoil: [33, 100],
+		secondary: {
+			chance: 10,
+			self: {
+				boosts: {
+					spe: 1,
+				},
+			},
+		},
+		target: "normal",
+		type: "Ice",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
