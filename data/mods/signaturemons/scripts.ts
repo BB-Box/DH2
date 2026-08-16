@@ -126,6 +126,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('revolution', 'malamar');
 		addMove('waterbombshell', 'clawitzer');
 		addMove('solarcharge', 'heliolisk');
+		addMove('rexfang', 'tyrantrum');
 		addMove('killerwail', 'noivern');
 
 		//Gen 7

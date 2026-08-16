@@ -4162,6 +4162,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Water",
 	},
+	//Tyrantrum
+	rexfang: {
+		num: 3109,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Rex Fang",
+		desc: "The user bites its foe with power fit for a king. If the target has a higher Attack stat than the user, the user will raise its Attack stat before attacking.",
+		shortDesc: "Before attacking: Raises user's Atk if target's Atk is higher.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Hyper Fang", target);
+		},
+		onTryMove(attacker, defender, move) {
+			if (defender.getStat('atk', false, true) > attacker.getStat('atk', false, true)) { 
+				this.boost({atk: 1}, attacker, attacker, move);
+			}
+			return null;
+		},
+		secondary: null,
+		hasSheerForce: true,
+		target: "normal",
+		type: "Dragon",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

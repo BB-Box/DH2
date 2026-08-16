@@ -2949,7 +2949,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	tyrantrum: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	amaura: {
 		tier: "NoSign",
