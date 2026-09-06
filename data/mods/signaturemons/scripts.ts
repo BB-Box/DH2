@@ -129,6 +129,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('magicgarden', 'florges');
 		addMove('haymaker', 'pangoro');
 		addMove('mysticshield', 'meowstic');
+		addMove('mysticforce', 'meowsticf');
 		addMove('revolution', 'malamar');
 		addMove('waterbombshell', 'clawitzer');
 		addMove('solarcharge', 'heliolisk');

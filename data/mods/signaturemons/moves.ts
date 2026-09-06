@@ -4418,6 +4418,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allySide",
 		type: "Psychic",
 	},
+	//Meowstic-Female
+	mysticforce: {
+		num: 3116,
+		accuracy: 100,
+		basePower: 120,
+		category: "Special",
+		name: "Mystic Force",
+		desc: "The target's stat boosts don't affect the damage inflicted by this move, but if they exist, they will cause the user to stagger on their next turn.",
+		shortDesc: "Ignores boosts in SpD and Evasion. If target has any stat boost: user must recharge.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Psychic", target);
+		},
+		ignoreEvasion: true,
+		ignoreDefensive: true,
+		onModifyMove(move, pokemon, target) {
+			if (target.positiveBoosts() > 0) {
+				move.self = {volatileStatus: 'mustrecharge'};
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
