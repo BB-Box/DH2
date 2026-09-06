@@ -46,6 +46,9 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('costlyescape', 'cloyster');
 		addMove('shadowcreep', 'gengar');
 		addMove('electroblast', 'electrode');
+		addMove('bouncybubble', 'vaporeon');
+		addMove('buzzybuzz', 'jolteon');
+		addMove('sizzlyslide', 'flareon');
 		addMove('meteordive', 'aerodactyl');
 		addMove('bellyflop', 'snorlax');
 		addMove('icestorm', 'articuno');
@@ -63,6 +66,8 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('bubbleball', 'azumarill');
 		addMove('fakebranch', 'sudowoodo');
 		addMove('sunshinebloom', 'sunflora');
+		addMove('glitzyglow', 'espeon');
+		addMove('baddybad', 'umbreon');
 		addMove('respite', 'wobbuffet');
 		addMove('airsurf', 'mantine');
 		addMove('landslide', 'tyranitar');
@@ -100,6 +105,8 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('flytrap', 'carnivine');
 		addMove('sinisterclaw', 'weavile');
 		addMove('tastetest', 'lickilicky');
+		addMove('sappyseed', 'leafeon');
+		addMove('freezyfrost', 'glaceon');
 		addMove('skystinger', 'gliscor');
 		addMove('iceivory', 'mamoswine');
 		addMove('curseofsnow', 'froslass');
@@ -134,6 +141,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('waterbombshell', 'clawitzer');
 		addMove('solarcharge', 'heliolisk');
 		addMove('rexfang', 'tyrantrum');
+		addMove('sparklyswirl', 'sylveon');
 		addMove('killerwail', 'noivern');
 
 		//Gen 7
