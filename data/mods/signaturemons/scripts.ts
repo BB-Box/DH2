@@ -74,6 +74,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('procrastinate', 'slaking');
 		addMove('carteblanche', 'delcatty');
 		addMove('chompchomp', 'mawile');
+		addMove('scrapmetal', 'aggron');
 		addMove('spintowin', 'spinda');
 		addMove('scarecrow', 'cacturne');
 		addMove('whiteclaw', 'zangoose');

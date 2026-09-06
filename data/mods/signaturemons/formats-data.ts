@@ -1507,7 +1507,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	aggron: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*aggronmega: {
 		tier: "NoSign",

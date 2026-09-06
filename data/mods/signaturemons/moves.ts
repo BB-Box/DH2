@@ -4278,6 +4278,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Water",
 	},
+	//Aggron
+	scrapmetal: {
+		num: 3113,
+		accuracy: 100,
+		basePower: 50,
+		basePowerCallback(pokemon) {
+			return Math.min(350, 50 + 50 * pokemon.timesAttacked);
+		},
+		category: "Physical",
+		name: "Scrap Metal",
+		desc: "The user charges with battle-hardened steel to attack. The more times the user has been hit by attacks, the greater the move's power.",
+		shortDesc: "+50 BP/hit on user. Max 6 hits. Resets on switch-out.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Iron Head", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Steel",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
