@@ -4335,6 +4335,89 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacent",
 		type: "Grass",
 	},
+	//Meowstic-Male
+	mysticshield: {
+		num: 3115,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Mystic Shield",
+		desc: "The user protects itself and its allies from all moves for this turn. The user must recharge next turn if no move was blocked during the turn.",
+		shortDesc: "Protects user and allies from all moves. Must recharge next turn unless at least 1 move has been blocked.",
+		pp: 5,
+		priority: 3,
+		flags: {snatch: 1, noassist: 1, failcopycat: 1, failinstruct: 1},
+		stallingMove: true, //Cannot combo with other Protection moves
+		sideCondition: 'mysticshield',
+		onPrepareHit(pokemon) {
+			this.attrLastMove('[still]');
+			this.add('-anim', pokemon, "Wide Guard", pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
+		},
+		onTry(source) {
+			if (source.species.name === 'Meowstic') {
+				return;
+			}
+			this.hint("Only a Pokemon whose form is Meowstic (Male) can use this move.");
+			this.attrLastMove('[still]');
+			this.add('-fail', source, 'move: Mystic Shield');
+			return null;
+		},
+		onHit(pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		condition: {
+			duration: 1,
+			onSideStart(target, source) {
+				this.add('-singleturn', source, 'move: Mystic Shield');
+			},
+			onTryHitPriority: 3,
+			onTryHit(target, source, move) {
+				if (!move.flags['protect']) {
+					if (['gmaxoneblow', 'gmaxrapidflow'].includes(move.id)) return;
+					if (move.isZ || move.isMax) target.getMoveHitData(move).zBrokeProtect = true;
+					return;
+				}
+				if (move && move.target === 'self') return;
+				if (move.smartTarget) {
+					move.smartTarget = false;
+				} else {
+					this.add('-activate', target, 'move: Mystic Shield', move.name);
+				}
+				const lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				//If the target of the move is protected by Mystic Shield, and the target's or its ally's last used move is Mystic Shield, then their recharge turn from Mystic Shield is removed.
+				for (const pokemon of target.alliesAndSelf()) {
+					const blockcheck = (pokemon.getVolatile('mustrecharge') && pokemon.lastMoveUsed.id === 'mysticshield');
+					if (blockcheck) {
+						pokemon.volatiles['mustrecharge'].duration = 1;
+						this.add('-message', `${pokemon.name}'s Mystic Shield successfully defended the party!`);
+					}
+				}
+				return this.NOT_FAIL;
+			},
+			onHit(target, source, move) {
+				for (const pokemon of target.alliesAndSelf()) {
+					const blockcheck = (move.isZOrMaxPowered && pokemon.getVolatile('mustrecharge') && pokemon.lastMoveUsed.id === 'mysticshield');
+					if (blockcheck) {
+						pokemon.volatiles['mustrecharge'].duration = 1;
+						this.add('-message', `${pokemon.name}'s Mystic Shield reduced damage for the party!`);
+					}
+				}
+			},
+		},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
