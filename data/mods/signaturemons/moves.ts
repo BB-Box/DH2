@@ -4179,10 +4179,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-anim', source, "Hyper Fang", target);
 		},
 		onTryMove(attacker, defender, move) {
+			//Boosts user's Atk once before damage if it's lower than the target's AtK.
 			if (defender.getStat('atk', false, true) > attacker.getStat('atk', false, true)) { 
 				this.boost({atk: 1}, attacker, attacker, move);
+				this.attrLastMove('[still]');
+				this.addMove('-anim', attacker, move.name, defender);
+				return;
 			}
-			return null;
 		},
 		secondary: null,
 		hasSheerForce: true,
