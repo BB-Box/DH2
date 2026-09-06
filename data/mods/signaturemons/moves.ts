@@ -4301,6 +4301,40 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Steel",
 	},
+	//Vileplume
+	pollenburst: {
+		num: 3114,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Pollen Burst",
+		desc: "An eruption of pollen submerges all surrounding Pokémon, which cause them to be afflicted with a random status effect.",
+		shortDesc: "Randomly inflicts Poison, Paralysis, Burn or Sleep on each target.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, noparentalbond: 1, powder: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Lava Plume", target);
+		},
+		secondary: {
+			chance: 100,
+			onHit(target, source) {
+				const result = this.random(4);
+				if (result === 0) {
+					target.trySetStatus('psn', source);
+				} else if (result === 1) {
+					target.trySetStatus('par', source);
+				} else if (result === 2) {
+					target.trySetStatus('brn', source);
+				} else {
+					target.trySetStatus('slp', source);
+				}
+			},
+		},
+		target: "allAdjacent",
+		type: "Grass",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
