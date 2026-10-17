@@ -4627,6 +4627,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
+	//Starmie
+	resonance: {
+		num: 3124,
+		accuracy: 100,
+		basePower: 85,
+		category: "Special",
+		name: "Resonance",
+		desc: "The user uses a great power from beyond to attack. The target's stat changes don't affect the damage inflicted by this move.",
+		shortDesc: "Ignores boosts in SpD and Evasion.",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Psychic", target);
+		},
+		ignoreEvasion: true,
+		ignoreDefensive: true,
+		secondary: null,
+		target: "normal",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
