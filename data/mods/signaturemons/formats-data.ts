@@ -748,7 +748,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	pinsir: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*pinsirmega: {
 		tier: "NoSign",

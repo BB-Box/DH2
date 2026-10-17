@@ -4649,6 +4649,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
+	//Pinsir
+	pincerpress: {
+		num: 3125,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Pincer Press",
+		desc: "The user attacks with its giant pincers and lowers the targets' Defense stat. This move does more damage if the target's HP is at half or less.",
+		shortDesc: "Inflicts Def -1 on target. BP*1.5 if target's HP is lower or equal to 50%.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Vise Grip", target);
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (target.hp * 2 <= target.maxhp) {
+				return this.chainModify(1.5);
+			}
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "normal",
+		type: "Bug",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

@@ -55,6 +55,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('electroblast', 'electrode');
 		addMove('repercussions', 'kangaskhan');
 		addMove('resonance', 'starmie');
+		addMove('pincerpress', 'pinsir');
 		addMove('bouncybubble', 'vaporeon');
 		addMove('buzzybuzz', 'jolteon');
 		addMove('sizzlyslide', 'flareon');
