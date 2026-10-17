@@ -4445,6 +4445,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
+	//Beedrill
+	venomstingers: {
+		num: 3117,
+		accuracy: 95,
+		basePower: 50,
+		category: "Physical",
+		name: "Venom Stingers",
+		desc: "The user stabs the target twice in succession with its stingers. This may also poison the target.",
+		shortDesc: "Hits 2 times. 30% chance of Poison on target.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Twineedle", target);
+		},
+		multihit: 2,
+		secondary: {
+			chance: 30,
+			status: 'psn',
+		},
+		target: "normal",
+		type: "Poison",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

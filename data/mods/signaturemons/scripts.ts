@@ -36,6 +36,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('greatflower', 'venusaur');
 		addMove('greatflame', 'charizard');
 		addMove('greatflood', 'blastoise');
+		addMove('venomstingers', 'beedrill');
 		addMove('cursedflames', 'ninetales');
 		addMove('palelight', 'ninetalesalola');
 		addMove('pollenburst', 'vileplume');

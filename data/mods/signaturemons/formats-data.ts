@@ -70,7 +70,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	beedrill: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*beedrillmega: {
 		tier: "NoSign",
