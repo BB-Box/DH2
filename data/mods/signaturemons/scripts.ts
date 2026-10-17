@@ -53,6 +53,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('costlyescape', 'cloyster');
 		addMove('shadowcreep', 'gengar');
 		addMove('electroblast', 'electrode');
+		addMove('repercussions', 'kangaskhan');
 		addMove('bouncybubble', 'vaporeon');
 		addMove('buzzybuzz', 'jolteon');
 		addMove('sizzlyslide', 'flareon');

@@ -4336,6 +4336,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Grass",
 	},
 	//Meowstic-Male
+	//May need some optimisation (see Magic Coat)
 	mysticshield: {
 		num: 3115,
 		accuracy: true,
@@ -4588,6 +4589,43 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
+	},
+	//Kangaskhan
+	repercussions: {
+		num: 3123,
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		name: "Repercussions",
+		desc: "The user takes revenge for a fainted ally. This move's power is boosted if an ally fainted during the turn or in the previous turn. This move cannot be used twice in a row.",
+		shortDesc: "BP doubled if an ally fainted this turn or the turn before. Cannot be used twice in a row.",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, cantusetwice: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Thrash", target);
+		},
+		//Power doubles if ally fainted last turn (Retaliate)
+		onBasePower(basePower, pokemon) {
+			if (pokemon.side.faintedLastTurn) {
+				this.debug('Boosted for a faint last turn');
+				return this.chainModify(2);
+			}
+		},
+		//Power also doubles if ally fainted this turn (Commander ability)
+		onTryHit(target, source, move) {
+			if (this.gameType !== 'doubles') return; //I don't think Triples will return unfortunately :(
+
+			const ally = source.allies()[0];
+			if (!source.side.faintedLastTurn && ally.fainted) { //Won't stack with boost from ally fainted last turn
+				this.debug('Boosted for a faint this turn');
+				move.basePower *= 2;
+			}			
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
 	},
 	//Signature moves remixed
 	//Raticate
