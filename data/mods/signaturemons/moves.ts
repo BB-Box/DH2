@@ -4679,6 +4679,34 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Bug",
 	},
+	//Gyarados
+	cataclysm: {
+		num: 3126,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Cataclysm",
+		desc: "The user attacks with furious waves that rends anything for two to three turns. The user then becomes confused.",
+		shortDesc: "Move repeats for 2-3 turns before the user becomes confused.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, failinstruct: 1},
+		self: {
+			volatileStatus: 'lockedmove',
+		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Wave Crash", target);
+		},
+		onAfterMove(pokemon) {
+			if (pokemon.volatiles['lockedmove'] && pokemon.volatiles['lockedmove'].duration === 1) {
+				pokemon.removeVolatile('lockedmove');
+			}
+		},
+		secondary: null,
+		target: "randomNormal",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
