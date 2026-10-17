@@ -82,7 +82,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	pidgeot: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*pidgeotmega: {
 		tier: "NoSign",

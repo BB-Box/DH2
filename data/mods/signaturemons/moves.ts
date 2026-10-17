@@ -4469,6 +4469,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Poison",
 	},
+	//Pidgeot
+	mach5: {
+		num: 3118,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Mach 5",
+		desc: "The user adjusts its flight for combat. This move raises both the user's Speed and its chances of landing a critical hit.",
+		shortDesc: "Spe +2 and Crit Ratio +2 to user.",
+		pp: 15,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Agility", target);
+		},
+		volatileStatus: 'focusenergy',
+		boosts: {
+			spe: 2,
+		},
+		secondary: null,
+		target: "self",
+		type: "Flying",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
