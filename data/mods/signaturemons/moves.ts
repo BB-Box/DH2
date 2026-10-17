@@ -4493,6 +4493,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Flying",
 	},
+	//Arbok
+	cruelviper: {
+		num: 3119,
+		accuracy: 100,
+		basePower: 80,
+		basePowerCallback(pokemon, target, move) {
+			if (target.status || target.hasAbility('comatose')) return move.basePower * 2;
+			return move.basePower;
+		},
+		category: "Physical",
+		name: "Cruel Viper",
+		desc: "The user bites the target with fangs encoated with a special venom. This move's power doubles if the target is affected by a status effect.",
+		shortDesc: "BP doubles if target has a status effect.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Poison Fang", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Poison",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
