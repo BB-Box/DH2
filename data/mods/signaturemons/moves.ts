@@ -4539,6 +4539,35 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Fairy",
 	},
+	//Arcanine
+	//Arcanine-Hisui
+	fiercefang: {
+		num: 3121,
+		accuracy: 95,
+		basePower: 60,
+		category: "Physical",
+		name: "Fierce Fang",
+		desc: "The user bites with dangerous fire-coated fangs that may burn the target. This move's power is doubled if the target's HP is at more than half.",
+		shortDesc: "10% chance of Burn. BP doubles if target's HP is higher or equal to 50%.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fire Fang", target);
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (target.hp * 2 >= target.maxhp) {
+				return this.chainModify(2);
+			}
+		},
+		secondary: {
+			chance: 10,
+			status: 'brn',
+		},
+		target: "normal",
+		type: "Fire",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
