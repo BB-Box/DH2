@@ -39,6 +39,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('venomstingers', 'beedrill');
 		addMove('mach5', 'pidgeot');
 		addMove('cruelviper', 'arbok');
+		addMove('clairdelune', 'clefable');
 		addMove('cursedflames', 'ninetales');
 		addMove('palelight', 'ninetalesalola');
 		addMove('pollenburst', 'vileplume');

@@ -4517,6 +4517,28 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Poison",
 	},
+	//Clefable
+	clairdelune: {
+		num: 3120,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Clair de Lune",
+		desc: "The user flees the moonlit battlefield. It switches places with a party Pokémon in waiting, if any, and the replacement's HP is restored by up to a third of the user's max HP.",
+		shortDesc: "User switches out. Heals replacement for 1/3 of user's max HP (if needed).",
+		pp: 5,
+		priority: 0,
+		flags: {heal: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Wish", target);
+		},
+		slotCondition: 'Wish',
+		selfSwitch: true,
+		secondary: null,
+		target: "self",
+		type: "Fairy",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
