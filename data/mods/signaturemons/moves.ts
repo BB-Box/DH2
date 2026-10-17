@@ -4598,6 +4598,17 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		type: "Grass",
 	},
+	//Alakazam
+	kinesis: {
+		inherit: true,
+		desc: "The user distracts the target by bending a spoon. This lowers the target's Special Attack, Special Defense and Accuracy stats.",
+		shortDesc: "Inflicts SpA -1, SpD -1 and Accuracy -1 to target.",
+		boosts: {
+			spa: -1,
+			spd: -1,
+			accuracy: -1,
+		},
+	},
 	//Old moves remixed (for technicality)
 	//[Heal block] status is defined in the 'Heal Block' move, so the duration of the status effect is set inside the move itself
 	//For 'Secret Thorns'

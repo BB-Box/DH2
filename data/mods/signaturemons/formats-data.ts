@@ -381,7 +381,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	alakazam: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*alakazammega: {
 		tier: "NoSign",
