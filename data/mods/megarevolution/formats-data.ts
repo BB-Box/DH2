@@ -841,10 +841,6 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		inherit: true,
 		tier: "LC",
 	},
-	gyarados: {
-		inherit: true,
-		tier: "UUBL",
-	},
 	gyaradosmega: {
 		inherit: true,
 		tier: "Illegal",
@@ -5000,6 +4996,72 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "OU",
 	},
 	gark: {
+		tier: "OU",
+	},
+	gemilin: {
+		tier: "OU",
+	},
+	scroundrel: {
+		tier: "OU",
+	},
+	eldropath: {
+		tier: "OU",
+	},
+	zeppelidon: {
+		tier: "OU",
+	},
+	mountamel: {
+		tier: "OU",
+	},
+	leonid: {
+		tier: "OU",
+	},
+	gyarados: {
+		tier: "OU",
+	},
+	atrociathan: {
+		tier: "OU",
+	},
+	staravage: {
+		tier: "OU",
+	},
+	mermanacle: {
+		tier: "OU",
+	},
+	belloatsom: {
+		tier: "OU",
+	},
+	aerodactylpresent: {
+		tier: "OU",
+	},
+	surgeelite: {
+		tier: "OU",
+	},
+	jingleam: {
+		tier: "OU",
+	},
+	chirrupsi: {
+		tier: "OU",
+	},
+	hissterica: {
+		tier: "OU",
+	},
+	meganiumeden: {
+		tier: "OU",
+	},
+	feraligatrcore: {
+		tier: "OU",
+	},
+	emboarwarmage: {
+		tier: "OU",
+	},
+	abzolution: {
+		tier: "OU",
+	},
+	zarchomp: {
+		tier: "OU",
+	},
+	paladaura: {
 		tier: "OU",
 	},
 };

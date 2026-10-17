@@ -131,7 +131,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		
 		flags: {},
 		name: "YOUR TAKING TOO LONG",
-		shortDesc: "After 5 turns, all Pokemon lose 25% of their HP per turn until it switches.",
+		shortDesc: "After 5 turns, all Pokemon lose 25% of their HP per turn until user switches.",
 	},
 		
 	//copied from Berserk
@@ -215,7 +215,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	undyingspirit: {	
 		onUpdate(pokemon) {
 			if (pokemon.undyingRecover) return;
-			if (pokemon.hp <= pokemon.maxhp / 4 && !pokemon.fainted) {
+			if (pokemon.hp <= pokemon.maxhp / 4 && !pokemon.fainted && !pokemon.volatiles['healblock']) {
 				this.heal(pokemon.baseMaxhp / 2);
 				pokemon.undyingRecover = true;
 			}
@@ -252,7 +252,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			}
 		},
 		
-		flags: {breakable: 1},
+		flags: {breakable: 1, failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1},
 		name: "Pyromancy",
 		shortDesc: "Enemy Fire moves: 50% dmg. Hit by Fire move: Fire moves get permanent +10 BP (max 2).",
 	},
@@ -267,6 +267,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		},
 		onAnyEffectivenessPriority: 1,
 		onAnyEffectiveness(typeMod, target, type, move) {
+			if (move && move.id === 'freezedry' && type === 'Water') return;
 			if (move && !this.dex.getImmunity(move, type)) return 1;
 			return typeMod * -1;
 		},
@@ -328,7 +329,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			}
 		},
 		
-		flags: {},
+		flags: {breakable: 1},
 		name: "Tem Outta Tem",
 		shortDesc: "Immunity to stat drops from other Pokemon and all non-volatile status conditions.",
 	},
@@ -431,9 +432,12 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				return this.chainModify(1.5);
 			}
 		},
+		onModifyMove(move) {
+			if (move.flags['bullet']) move.tracksTarget = true;
+		},
 		flags: {failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1},
 		name: "Sharpshooter",
-		shortDesc: "This Pokemon's bullet moves do 1.5x damage. Pollen Puff heals 3/4 of the target's max HP.",
+		shortDesc: "Bullet moves: 1.5x dmg, cannot be redirected. Pollen Puff heals 3/4.",
 	},
 	
 	//Many Seths were harmed in the making of this ability.
@@ -618,6 +622,55 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		flags: {breakable: 1},
 		name: "Stellar Guard",
 		shortDesc: "This Pokemon takes 0.9x damage from all attacks.",
+	},
+
+	darkspawn: {
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Dark') {
+				this.heal(target.baseMaxhp / 4, target, target);
+				if (!this.boost({atk: 1})) {
+						this.add('-immune', target, '[from] ability: Darkspawn');
+					}
+				return null;
+			}
+		},
+		onBasePowerPriority: 19,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['bite']) {
+				return this.chainModify(1.5);
+			}
+		},
+		flags: {breakable: 1, failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1},
+		name: "Darkspawn",
+		shortDesc: "Dark Immune: +1 Atk & heal 25%. Bite Moves: 1.5x BP.",
+	},
+
+	normalability: {
+		onBasePowerPriority: 23,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.type === 'Normal') {
+				return this.chainModify(1.2);
+			}
+		},
+
+		onResidualOrder: 13,
+		onResidual(pokemon) {
+			if (pokemon.baseSpecies.name !== 'Normal NPC') return;
+			for (const target of pokemon.adjacentFoes()) {
+				if (target.baseSpecies.name !== 'Onionsan' || target.volatiles['substitute'] || target.isSemiInvulnerable()) return;
+				if (this.randomChance(2, 10)) {
+					this.add('-message', `${pokemon.name} bludgeoned ${target.name}!`);
+					this.add('-anim', pokemon, "Close Combat", target);
+					target.faint();
+					this.add('-message', `${target.name} was turned into takoyaki!`);
+					this.heal(pokemon.baseMaxhp);
+					this.add('-message', `${pokemon.name} ate the takoyaki and fully restored its health!`);
+				}
+			}
+		},
+		flags: {failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1},
+		name: "Normal Ability",
+		shortDesc: "A normal ability. Does Normal things."
 	},
 	
 // Vanilla abilities edited to interact with Savage Roar

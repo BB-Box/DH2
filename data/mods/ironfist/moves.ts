@@ -298,8 +298,8 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			for (const target of pokemon.foes()) {
 				if (target.baseSpecies == "Goomba") {
 					if (target.volatiles['bigbutton']) {
-						basePower = 0;
-						damageCallback = function (target) {
+						move.basePower = 0;
+						move.damageCallback = function (target) {
 							return this.clampIntRange(target.getUndynamaxedHP() / 3, 1);
 						}
 					} else {
@@ -2311,7 +2311,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			this.add('-anim', pokemon, "Body Slam", target);
 		},
 		onAfterMoveSecondarySelf(pokemon, target, move) {
-			if (!target || target.fainted || target.hp <= 0) this.heal(pokemon.maxhp / 6, pokemon, target, move);
+			if (!target || target.fainted || target.hp <= 0) this.heal(pokemon.maxhp / 8, pokemon, target, move);
 		},
 		secondary: null,
 		target: "normal",
@@ -4379,8 +4379,8 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', pokemon, "Tera Starstorm", target);
 		},
-		onModifyType(move, pokemon) {
-			if (pokemon.lastMove) move.type = pokemon.lastMove.type;
+		onModifyMove(move, pokemon) {
+			if (pokemon.previousMove) move.type = pokemon.previousMove.type;
 		},
 		secondary: null,
 		target: "normal",
@@ -4504,16 +4504,15 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', pokemon, "Rain Dance", target);
 		},
-		onTry(source) {
-			return source.side.fishingTokens >= 3;
+		onTry(source, target, move) {
+			if (source.side.fishingTokens < 3) return false;
+			(move as any).krowZoneDuration = source.side.fishingTokens - 3;
+			source.side.removeFishingTokens(source.side.fishingTokens);
 		},
 		sideCondition: 'krowzone',
 		condition: {
-			duration: 1,
-			durationCallback(source, effect) {
-				const tokens = source.side.fishingTokens;
-				source.side.removeFishingTokens(tokens);
-				return tokens - 3;
+			durationCallback(targetSide, source, effect) {
+				return (effect as any)?.krowZoneDuration ?? 1;
 			},
 			onSideStart(targetSide) {
 				this.add('-sidestart', targetSide, 'Krow Zone');
@@ -4847,7 +4846,7 @@ export const Moves: {[moveid: string]: ModdedMoveData} = {
 		self: {
 			onHit(source) {
 				const diamondHand = source.side.pokemon.filter(p => p !== source && p.baseSpecies.diamondHand);
-				if (diamondHand.length === 6) this.heal(source.baseMaxhp);
+				if (diamondHand.length === 5) this.heal(source.baseMaxhp);
 			},
 		},
 		secondary: null,

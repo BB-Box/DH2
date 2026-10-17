@@ -99,4 +99,31 @@ export const FormatsData: {[speciesid: IDEntry]: ModdedSpeciesFormatsData} = {
 	excadrill: {
 		tier: "Head",
 	},
+	hippowdon: {
+		tier: "Head",
+	},
+	primarina: {
+		tier: "Head",
+	},
+	cinderace: {
+		tier: "Head",
+	},
+	empoleon: {
+		tier: "Head",
+	},
+	dudunsparce: {
+		tier: "Head",
+	},
+	scizor: {
+		tier: "Head",
+	},
+	mew: {
+		tier: "Head",
+	},
+	rhyperior: {
+		tier: "Head",
+	},
+	munkidori: {
+		tier: "Head",
+	},
 };

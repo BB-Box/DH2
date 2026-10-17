@@ -421,4 +421,49 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	iusperare: {
 		tier: "BC D",
 	},
+	wyrmwaren: {
+		tier: "BC D",
+	},
+	irdonerkeb: {
+		tier: "BC D",
+	},
+	kappaqua: {
+		tier: "BC D",
+	},
+	lactoxic: {
+		tier: "BC D",
+	},
+	horronimbus: {
+		tier: "BC D",
+	},
+	woollycrawler: {
+		tier: "BC D",
+	},
+	brainstrom: {
+		tier: "BC D",
+	},
+	monster: {
+		tier: "BC D",
+	},
+	grizbearab: {
+		tier: "BC D",
+	},
+	frospes: {
+		tier: "BC D",
+	},
+	bugpipes: {
+		tier: "BC D",
+	},
+	valentine: {
+		tier: "BC D",
+	},
+	dionalces: {
+		tier: "BC D",
+	},
+	ferrignalx: {
+		tier: "BC D",
+	},
+	gebbrilis: {
+		tier: "BC D",
+	},
 };
