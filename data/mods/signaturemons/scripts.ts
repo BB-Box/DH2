@@ -46,6 +46,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('tripledig', ['dugtrio', 'dugtrioalola']);
 		addMove('fiercefang', ['arcanine', 'arcaninehisui']);
 		addMove('kinesis', 'alakazam');
+		addMove('multimagnum', 'machamp');
 		addMove('acidambush', 'victreebel');
 		addMove('tentacoil', 'tentacruel');
 		addMove('shellreaction', 'slowbro');

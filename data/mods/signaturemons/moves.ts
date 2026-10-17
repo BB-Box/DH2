@@ -4568,6 +4568,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Machamp
+	multimagnum: {
+		num: 3122,
+		accuracy: 85,
+		basePower: 25,
+		category: "Physical",
+		name: "Multi-Magnum",
+		desc: "The user wallops the target with quick punches from every angle. This risky move hits 4 times in a row if it lands.",
+		shortDesc: "Goes first. Hits 4 times.",
+		pp: 5,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Bullet Punch", target);
+		},
+		multihit: 4,
+		secondary: null,
+		target: "normal",
+		type: "Fighting",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

@@ -393,7 +393,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	machamp: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*machampgmax: {
 		tier: "NoSign",
