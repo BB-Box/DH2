@@ -86,6 +86,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('irongrip', 'scizor');
 		addMove('beetlebash', 'heracross');
 		addMove('airsurf', 'mantine');
+		addMove('bladewing', 'skarmory');
 		addMove('landslide', 'tyranitar');
 
 		//Gen 3

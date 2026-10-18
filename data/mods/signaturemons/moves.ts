@@ -4856,6 +4856,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
+	//Skarmory
+	bladewing: {
+		num: 3132,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Blade Wing",
+		desc: "The user cuts the target with its sharp wings. This move has a heightened chance of landing a critical hit.",
+		shortDesc: "High critical hit ratio.",
+		pp: 15,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
+		critRatio: 2,
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Slash", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Flying",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
