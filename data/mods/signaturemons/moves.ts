@@ -4534,7 +4534,19 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Wish", target);
 		},
-		slotCondition: 'Wish',
+		slotCondition: 'clairdelune',
+		condition: {
+			onStart(pokemon, source) {
+				this.effectState.hp = source.maxhp / 3;
+			},
+			onSwap(target) {
+				if (!target.fainted && target.hp < target.maxhp) {
+					target.heal(this.effectState.hp);
+					this.add('-heal', target, target.getHealth, '[from] move: Clair de Lune');
+					target.side.removeSlotCondition(target, 'clairdelune');
+				}
+			},
+		},
 		selfSwitch: true,
 		secondary: null,
 		target: "self",
