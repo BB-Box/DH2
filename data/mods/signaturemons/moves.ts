@@ -4807,6 +4807,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Ground",
 	},
+	//Scizor
+	irongrip: {
+		num: 3130,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Iron Grip",
+		desc: "A high-powered pincer grips and compresses the target to deal damage. This move greatly reduce the target's Defense stat.",
+		shortDesc: "Inflicts Def-2 on target.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Hard Press", target);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -2,
+			},
+		},
+		target: "normal",
+		type: "Steel",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

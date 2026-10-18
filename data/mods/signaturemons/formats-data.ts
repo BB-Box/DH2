@@ -711,7 +711,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "NoSign",
 	},
 	scizor: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUU",
 	},
 	/*scizormega: {
