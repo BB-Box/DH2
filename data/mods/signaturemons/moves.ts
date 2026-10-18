@@ -4877,6 +4877,36 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Flying",
 	},
+	//Houndoom
+	grimfire: {
+		num: 3133,
+		accuracy: 90,
+		basePower: 90,
+		category: "Special",
+		name: "Grim Fire",
+		desc: "The user releases a dangerous fire breath that hurts the target to a deep level. This move also leaves the target burned or badly poisoned.",
+		shortDesc: "Inflicts Burn or Bad Poison.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Inferno", target);
+		},
+		secondary: {
+			chance: 100,
+			onHit(target, source) {
+				const result = this.random(2);
+				if (result === 0) {
+					target.trySetStatus('brn', source);
+				} else {
+					target.trySetStatus('tox', source);
+				}
+			},
+		},
+		target: "normal",
+		type: "Fire",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
