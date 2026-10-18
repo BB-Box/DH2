@@ -4748,6 +4748,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Water",
 	},
+	//Forretress
+	solidshell: {
+		num: 3128,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Solid Shell",
+		desc: "The user fires a projectile composed of the hardest parts of its shell to deal damage. This move also lowers the user's Defense stat.",
+		shortDesc: "Inflicts Def-1 to user.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Seed Bomb", target);
+		},
+		self: {
+			boosts: {
+				def: -1,
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Bug",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
