@@ -76,6 +76,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('lightburst', 'ampharos');
 		addMove('bubbleball', 'azumarill');
 		addMove('fakebranch', 'sudowoodo');
+		addMove('rainsong', 'politoed');
 		addMove('sunshinebloom', 'sunflora');
 		addMove('glitzyglow', 'espeon');
 		addMove('baddybad', 'umbreon');

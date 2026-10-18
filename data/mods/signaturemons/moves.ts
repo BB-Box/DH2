@@ -4719,6 +4719,35 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "randomNormal",
 		type: "Water",
 	},
+	//Politoed
+	rainsong: {
+		num: 3127,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Rain Song",
+		desc: "The user sings a song to cheer itself up and recover some HP. During rainy weather, this move also raises the Special Attack stat of the user and its allies.",
+		shortDesc: "Heal 50% HP. In Rain: SpA+1 to user and allies on field.",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1, heal: 1, bypasssub: 1, sound: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Round", target);
+		},
+		heal: [1, 2],
+		self: {
+			onHit(source) {
+				if (!['raindance', 'primordialsea'].includes(source.effectiveWeather())) return;
+				for (const pokemon of source.alliesAndSelf()) {
+					this.boost({spa: 1}, pokemon);
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
