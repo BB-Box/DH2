@@ -4832,6 +4832,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Steel",
 	},
+	//Heracross
+	beetlebash: {
+		num: 3131,
+		accuracy: 90,
+		basePower: 25,
+		basePowerCallback(pokemon, target, move) {
+			return 20 + (5 * move.hit);
+		},
+		category: "Physical",
+		name: "Beetle Bash",
+		desc: "The user strikes the target multiple times with every part of its body. The attack gets more powerful with each successful hit.",
+		shortDesc: "Hits 2-4 times. BP increases by 5 after each hit.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Thrash", target);
+		},
+		multihit: [2, 4],
+		secondary: null,
+		target: "normal",
+		type: "Fighting",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
