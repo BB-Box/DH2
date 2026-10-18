@@ -82,6 +82,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('baddybad', 'umbreon');
 		addMove('respite', 'wobbuffet');
 		addMove('solidshell', 'forretress');
+		addMove('groundrift', 'steelix');
 		addMove('airsurf', 'mantine');
 		addMove('landslide', 'tyranitar');
 

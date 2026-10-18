@@ -547,7 +547,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	steelix: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*steelixmega: {
 		tier: "NoSign",
