@@ -95,6 +95,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('partytime', 'ludicolo');
 		addMove('verdantwind', 'shiftry');
 		addMove('aquadrop', 'pelipper');
+		addMove('loyalheart', 'gardevoir');
 		addMove('procrastinate', 'slaking');
 		addMove('carteblanche', 'delcatty');
 		addMove('chompchomp', 'mawile');

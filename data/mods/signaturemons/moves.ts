@@ -4907,6 +4907,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Gardevoir
+	loyalheart: {
+		num: 3134,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Loyal Heart",
+		desc: "The user focuses its heart to protect its friends. With a vow, it increases its Sp. Attack and Sp. Defense, and restores the HP of itself and all allies on the field.",
+		shortDesc: "SpA+1 and SpD+1. Heal 25% HP to user and allies on field.",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, heal: 1, bypasssub: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Calm Mind", target);
+		},
+		self: {
+			onHit(source) {
+				for (const pokemon of source.alliesAndSelf()) {
+					this.heal(pokemon.maxhp / 4, pokemon, source, move);
+				}
+			},
+		},
+		boosts: {
+			spa: 1,
+			spd: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Fairy",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
