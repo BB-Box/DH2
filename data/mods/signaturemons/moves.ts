@@ -4980,6 +4980,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Dark",
 	},
+	//Medicham
+	mantra: {
+		num: 3136,
+		accuracy: true,
+		basePower: 130,
+		category: "Physical",
+		name: "Mantra",
+		desc: "The user focuses its spirit before delivering a punch of psychic energy. This move usually goes last, but it never misses and can even hit unseen targets.",
+		shortDesc: "Usually goes last. Cannot miss. Bypasses Substitute.",
+		pp: 5,
+		priority: -1,
+		flags: {protect: 1, punch: 1, bypasssub: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Focus Punch", target);
+		},
+		onAnyInvulnerability(target, source, move) {
+			if (move && (source === this.effectState.target || target === this.effectState.target)) return 0;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
