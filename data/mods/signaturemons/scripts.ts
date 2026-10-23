@@ -98,6 +98,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('loyalheart', 'gardevoir');
 		addMove('procrastinate', 'slaking');
 		addMove('carteblanche', 'delcatty');
+		addMove('eyeshine', 'sableye');
 		addMove('chompchomp', 'mawile');
 		addMove('scrapmetal', 'aggron');
 		addMove('spintowin', 'spinda');

@@ -4938,6 +4938,48 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Fairy",
 	},
+	//Sableye
+	eyeshine: {
+		num: 3135,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Eye Shine",
+		desc: "A sinister power envelops the user, allowing it to steal the effects of any healing move or stat-changing move for two turns.",
+		shortDesc: "Snatches the effects of any Status move targeting their user for two turns.",
+		pp: 5,
+		priority: 4,
+		flags: {bypasssub: 1, mustpressure: 1, noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Snatch", target);
+		},
+		volatileStatus: 'eyeshine',
+		condition: {
+			duration: 2,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Eye Shine');
+			},
+			onAnyPrepareHitPriority: -1,
+			onAnyPrepareHit(source, target, move) {
+				const snatchUser = this.effectState.source;
+				if (snatchUser.isSkyDropped()) return;
+				if (!move || move.isZ || move.isMax || !move.flags['snatch'] || move.sourceEffect === 'snatch') {
+					return;
+				}
+				this.add('-activate', snatchUser, 'move: Eye Shine', '[of] ' + source);
+				this.actions.useMove(move.id, snatchUser);
+				return null;
+			},
+			onResidualOrder: 20,
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'move: Eye Shine');
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Dark",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
