@@ -5023,6 +5023,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allies",
 		type: "Electric",
 	},
+	//Sharpedo
+	riptide: {
+		num: 3138,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Riptide",
+		desc: "The user charges all fangs out to bite its target as if it was prey. This move is super effective aganst Water types.",
+		shortDesc: "Super effective against Water-types.",
+		pp: 15,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bite: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Fishious Rend", target);
+		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Water') return 1;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

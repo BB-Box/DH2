@@ -103,6 +103,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('scrapmetal', 'aggron');
 		addMove('mantra', 'medicham');
 		addMove('thundercharge', 'manectric');
+		addMove('riptide', 'sharpedo');
 		addMove('spintowin', 'spinda');
 		addMove('scarecrow', 'cacturne');
 		addMove('whiteclaw', 'zangoose');

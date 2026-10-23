@@ -1567,7 +1567,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	sharpedo: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*sharpedomega: {
 		tier: "NoSign",
