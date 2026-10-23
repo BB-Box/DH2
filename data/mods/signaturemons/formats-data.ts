@@ -1526,7 +1526,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	manectric: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*manectricmega: {
 		tier: "NoSign",

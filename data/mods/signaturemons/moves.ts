@@ -5003,6 +5003,26 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
+	//Manectric
+	thundercharge: {
+		num: 3137,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Thunder Charge",
+		desc: "The user creates a lightning bolt to charge itself and its allies on the field, boosting the power of the next Electric-type move they use. This also boosts their Sp. Def stat.",
+		shortDesc: "SpD+1 and Charge effect to user and allies.",
+		pp: 15,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		volatileStatus: 'charge',
+		boosts: {
+			spd: 1,
+		},
+		secondary: null,
+		target: "allies",
+		type: "Electric",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
@@ -5348,7 +5368,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 	},
 	//The Charge effect is removed if the user uses any Electric move besides Charge, so other exceptions are defined within the move itself
-	//For 'Solar Charge'
+	//For 'Solar Charge', 'Thunder Charge'
 	charge: {
 		inherit: true,
 		condition: {
@@ -5374,12 +5394,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				}
 			},
 			onMoveAborted(pokemon, target, move) {
-				if (move.type === 'Electric' && move.id !== 'charge' && move.id !== 'solarcharge') {
+				if (move.type === 'Electric' && !['charge', 'solarcharge', 'thundercharge'].includes(move.id)) {
 					pokemon.removeVolatile('charge');
 				}
 			},
 			onAfterMove(pokemon, target, move) {
-				if (move.type === 'Electric' && move.id !== 'charge' && move.id !== 'solarcharge') {
+				if (move.type === 'Electric' && !['charge', 'solarcharge', 'thundercharge'].includes(move.id)) {
 					pokemon.removeVolatile('charge');
 				}
 			},
