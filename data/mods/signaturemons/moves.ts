@@ -5169,6 +5169,38 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allies",
 		type: "Dragon",
 	},
+	//Chimecho
+	quietbell: {
+		num: 3142,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Quiet Bell",
+		desc: "The user makes a chime sound that lowers the target's Attack. This move goes first and flinches the target, but works only on the first turn each time the user enters battle.",
+		shortDesc: "Goes first. Inflicts Atk-1 and Flinch. Only works first turn out.",
+		pp: 10,
+		priority: 3,
+		flags: {protect: 1, reflectable: 1, sound: 1, bypasssub: 1, allyanim: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Echoed Voice", target);
+		},
+		onTry(source) {
+			if (source.activeMoveActions > 1) {
+				this.hint("Fake Out only works on your first turn out.");
+				return false;
+			}
+		},
+		boosts: {
+			atk: -1,
+		},
+		secondary: {
+			chance: 100,
+			volatileStatus: 'flinch',
+		},
+		target: "normal",
+		type: "Psychic",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

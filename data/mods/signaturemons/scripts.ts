@@ -115,6 +115,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('venuswave', 'milotic');
 		addMove('meteoforce', 'castform');
 		addMove('puppetstrings', 'banette');
+		addMove('quietbell', 'chimecho');
 		addMove('badomen', 'absol');
 		addMove('stillwater', 'relicanth');
 		addMove('loveadvice', 'luvdisc');
