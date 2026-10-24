@@ -5046,6 +5046,64 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Water",
 	},
+	//Camerupt
+	magmachamber: {
+		num: 3139,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Magma Chamber",
+		desc: "The user makes its lava hotter to power up its next move. In this state, Water-type and Ice-type moves are neutralized against the user.",
+		shortDesc: "Grants immunity to Water and Ice until next move. Boosts next move by 50%.",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Burning Bulwark", target);
+		},
+		volatileStatus: 'magmachamber',
+		condition: {
+			onStart(pokemon, source, effect) {
+				this.add('-start', pokemon, 'move: Magma Chamber');
+			},
+			onBasePowerPriority: 9,
+			onBasePower(basePower, attacker, defender, move) {
+				this.debug('magma chamber boost');
+				return this.chainModify(1.5);
+			},
+			onTryHit(target, source, move) {
+				//If move from outside source is Water-type or Ice-type, user will be immune
+				if (target !== source && ['Water', 'Ice'].includes(move.type)) {
+					this.add('-immune', target, '[from] move: Magma Chamber');
+				}
+				const lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				return this.NOT_FAIL;
+			},
+			onMoveAborted(pokemon, target, move) {
+				if (move.id !== 'magmachamber') {
+					pokemon.removeVolatile('magmachamber');
+				}
+			},
+			onAfterMove(pokemon, target, move) {
+				if (move.id !== 'magmachamber') {
+					pokemon.removeVolatile('magmachamber');
+				}
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Magma Chamber', '[silent]');
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Fire",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
