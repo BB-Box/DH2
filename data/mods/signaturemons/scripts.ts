@@ -105,6 +105,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('thundercharge', 'manectric');
 		addMove('riptide', 'sharpedo');
 		addMove('magmachamber', 'camerupt');
+		addMove('blacksmoke', 'torkoal');
 		addMove('spintowin', 'spinda');
 		addMove('scarecrow', 'cacturne');
 		addMove('whiteclaw', 'zangoose');

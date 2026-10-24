@@ -1589,7 +1589,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	torkoal: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DOU",
 	},
 	spoink: {

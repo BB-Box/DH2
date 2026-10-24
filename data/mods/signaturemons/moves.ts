@@ -5104,6 +5104,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "self",
 		type: "Fire",
 	},
+	//Torkoal
+	blacksmoke: {
+		num: 3140,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		name: "Black Smoke",
+		desc: "The user exhausts a blast of coal smoke that eliminates every stat change among opposing Pokémon. It may also lower their Accuracy.",
+		shortDesc: "Clear targets' stat changes. 10% chance of Accuracy-1.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		onHit(target) {
+			target.clearBoosts();
+			this.add('-clearboost', target);
+		},
+		boosts: {
+			accuracy: -1,
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Fire",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
