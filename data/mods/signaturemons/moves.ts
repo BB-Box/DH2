@@ -5209,6 +5209,43 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
+	//Glalie
+	coldstare: {
+		num: 3143,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Cold Stare",
+		desc: "The user freeze the air around the target, harshly lowering its Speed stat. The target becomes weaker to Ice-type moves.",
+		shortDesc: "Inflicts Speed -3. Target gains Ice-type weakness.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Scary Face", target);
+		},
+		volatileStatus: 'coldstare',
+		condition: {
+			onStart(pokemon) {
+				if (pokemon.terastallized) return false;
+				this.add('-start', pokemon, 'Cold Stare');
+			},
+			onEffectivenessPriority: -2,
+			onEffectiveness(typeMod, target, type, move) {
+				if (move.type !== 'Ice') return;
+				if (!target) return;
+				if (type !== target.getTypes()[0]) return;
+				return typeMod + 1;
+			},
+		},
+		boosts: {
+			spe: -3,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

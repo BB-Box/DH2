@@ -117,6 +117,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('puppetstrings', 'banette');
 		addMove('quietbell', 'chimecho');
 		addMove('badomen', 'absol');
+		addMove('coldstare', 'glalie');
 		addMove('stillwater', 'relicanth');
 		addMove('loveadvice', 'luvdisc');
 		addMove('seekanddestroy', 'metagross');
