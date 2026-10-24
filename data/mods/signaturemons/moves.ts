@@ -5116,6 +5116,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Smokescreen", target);
+		},
 		onHit(target) {
 			target.clearBoosts();
 			this.add('-clearboost', target);
@@ -5139,6 +5143,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, sound: 1, bypasssub: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dragon Cheer", target);
+		},
 		volatileStatus: 'anthem',
 		condition: {
 			onStart(target, source, effect) {
