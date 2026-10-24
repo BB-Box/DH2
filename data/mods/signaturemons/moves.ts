@@ -5127,6 +5127,48 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
+	//Altaria
+	anthem: {
+		num: 3141,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Anthem",
+		desc: "The user raises its team's spirits with a song, increasing the Attack and Special Attack of itself and its allies on the field, and also boosting their chance of critical hit.",
+		shortDesc: "Atk+1, SpA+1 and Crit Ratio +1 to user and allies.",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1, sound: 1, bypasssub: 1, metronome: 1},
+		volatileStatus: 'anthem',
+		condition: {
+			onStart(target, source, effect) {
+				if (target.volatiles['focusenergy'] || target.volatiles['dragoncheer']) return false;
+				if (effect && (['costar', 'imposter', 'psychup', 'transform'].includes(effect.id))) {
+					this.add('-start', target, 'move: Anthem', '[silent]');
+				} else {
+					this.add('-start', target, 'move: Anthem');
+				}
+			},
+			onModifyCritRatio(critRatio, source) {
+				return critRatio + 1;
+			},
+			//Anthem's crit boost won't stack with other moves that boosts crit ratio, it gets overwritten instead.
+			//Laser Focus is not considered since it applies to one move only and is a guaranteed crit anyways.
+			onUpdate(pokemon) {
+				if (target.volatiles['focusenergy'] || target.volatiles['dragoncheer']) {
+					this.debug('Removing Anthem volatile on ' + pokemon);
+					pokemon.removeVolatile('anthem');
+				}
+			},
+		},
+		boosts: {
+			atk: 1,
+			spa: 1,
+		},
+		secondary: null,
+		target: "allies",
+		type: "Dragon",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

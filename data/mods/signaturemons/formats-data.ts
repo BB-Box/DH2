@@ -1623,7 +1623,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	altaria: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	/*altariamega: {
