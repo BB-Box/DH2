@@ -177,6 +177,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('bighug', 'bewear');
 		addMove('touchdown', 'passimian');
 		addMove('snuggle', 'mimikyu');
+		addMove('patientbeam', 'drampa');
 
 		//Gen 8
 		addMove('berrysnack', 'greedent');

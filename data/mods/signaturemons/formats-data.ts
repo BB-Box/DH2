@@ -3382,7 +3382,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	drampa: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	dhelmise: {
 		tier: "Sign",

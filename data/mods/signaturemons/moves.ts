@@ -5298,6 +5298,40 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
+	//Drampa
+	patientbeam: {
+		num: 3146,
+		accuracy: 70,
+		basePower: 100,
+		basePowerCallback(pokemon, target, move) {
+			if (!pokemon.lastMoveUsed || pokemon.activeMoveActions > 1) {
+				return move.basePower;
+			}
+			if (pokemon.lastMoveUsed.category === 'Status' && pokemon.lastMoveUsed.id !== 'mefirst') {
+				this.debug('doubling Patient Beam BP');
+				return move.basePower * 2;
+			}
+			if (pokemon.lastMoveUsed.id === 'patientbeam') {
+				this.debug('reducing Patient Beam BP');
+				return 10;
+			}
+			return move.basePower;
+		},
+		category: "Special",
+		name: "Patient Beam",
+		desc: "The user attacks with a refined laser beam. This move's power is doubled if the user's previous move was not an offensive move. But using it twice in a row will result in low damage.",
+		shortDesc: "Double Power if previous move was a Status move. Power is 10 on successive uses.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Hyper Beam", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
