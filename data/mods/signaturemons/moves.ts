@@ -5272,6 +5272,32 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
+	//Mr. Rime
+	icestep: {
+		num: 3145,
+		accuracy: 75,
+		basePower: 100,
+		category: "Special",
+		name: "Ice Step",
+		desc: "The user distracts its target with a tap dance show and ends with a cold damaging shockwave. This move lowers the target's Speed and Evasiveness.",
+		shortDesc: "Lowers Speed and Evasion by 1.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, dance: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Revelation Dance", target);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				spe: -1,
+				evasion: -1,
+			},
+		},
+		target: "normal",
+		type: "Ice",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

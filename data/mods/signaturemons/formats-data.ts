@@ -704,7 +704,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	mrrime: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	scyther: {
 		tier: "NoSign",
