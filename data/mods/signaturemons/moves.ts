@@ -5309,7 +5309,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		accuracy: 70,
 		basePower: 100,
 		basePowerCallback(pokemon, target, move) {
-			if (!pokemon.lastMoveUsed || pokemon.activeMoveActions > 1) {
+			if (!pokemon.lastMoveUsed || pokemon.activeMoveActions <= 1) {
 				return move.basePower;
 			}
 			if (pokemon.lastMoveUsed.category === 'Status' && pokemon.lastMoveUsed.id !== 'mefirst') {
