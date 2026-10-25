@@ -4964,6 +4964,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onAnyPrepareHit(source, target, move) {
 				const snatchUser = this.effectState.source;
 				if (snatchUser.isSkyDropped()) return;
+				if (source === snatchUser) return;
 				if (!move || move.isZ || move.isMax || !move.flags['snatch'] || move.sourceEffect === 'snatch') {
 					return;
 				}
