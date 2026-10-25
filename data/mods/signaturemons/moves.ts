@@ -5015,6 +5015,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Thunderbolt", target);
+		},
 		volatileStatus: 'charge',
 		boosts: {
 			spd: 1,
