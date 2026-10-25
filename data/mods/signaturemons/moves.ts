@@ -5163,7 +5163,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			//Anthem's crit boost won't stack with other moves that boosts crit ratio, it gets overwritten instead.
 			//Laser Focus is not considered since it applies to one move only and is a guaranteed crit anyways.
 			onUpdate(pokemon) {
-				if (target.volatiles['focusenergy'] || target.volatiles['dragoncheer']) {
+				if (pokemon.volatiles['focusenergy'] || pokemon.volatiles['dragoncheer']) {
 					this.debug('Removing Anthem volatile on ' + pokemon);
 					pokemon.removeVolatile('anthem');
 				}
