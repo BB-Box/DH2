@@ -170,6 +170,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('solarcharge', 'heliolisk');
 		addMove('rexfang', 'tyrantrum');
 		addMove('sparklyswirl', 'sylveon');
+		addMove('icebergcrash', 'avalugg');
 		addMove('killerwail', 'noivern');
 
 		//Gen 7

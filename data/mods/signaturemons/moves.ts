@@ -5425,6 +5425,51 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
+	//Avalugg
+	icebergcrash: {
+		num: 3149,
+		accuracy: 100,
+		basePower: 0,
+		basePowerCallback(pokemon, target) {
+			const targetWeight = target.getWeight();
+			const pokemonWeight = pokemon.getWeight();
+			let bp;
+			if (pokemonWeight >= targetWeight * 5) {
+				bp = 120;
+			} else if (pokemonWeight >= targetWeight * 4) {
+				bp = 100;
+			} else if (pokemonWeight >= targetWeight * 3) {
+				bp = 80;
+			} else if (pokemonWeight >= targetWeight * 2) {
+				bp = 60;
+			} else {
+				bp = 40;
+			}
+			this.debug('BP: ' + bp);
+			return bp;
+		},
+		category: "Physical",
+		name: "Iceberg Crash",
+		desc: "The user charges at its target with its massive cold body. The more the user outweights the target, the greater the move's power.",
+		shortDesc: "Higher damage if user outweights target.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, nonsky: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Body Slam", target);
+		},
+		onTryHit(target, pokemon, move) {
+			if (target.volatiles['dynamax']) {
+				this.add('-fail', pokemon, 'Dynamax');
+				this.attrLastMove('[still]');
+				return null;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
@@ -5526,7 +5571,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 	},
 	//Moves boosted against a target that used Minimize are defined inside the move itself
-	//For 'Poison Wheel'
+	//For 'Poison Wheel', 'Iceberg Crash'
 	minimize: {
 		inherit: true,
 		condition: {
@@ -5535,7 +5580,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onSourceModifyDamage(damage, source, target, move) {
 				const boostedMoves = [
 					'stomp', 'steamroller', 'bodyslam', 'flyingpress', 'dragonrush', 'heatcrash', 'heavyslam', 'maliciousmoonsault',
-					'poisonwheel',
+					'poisonwheel', 'icebergcrash',
 				];
 				if (boostedMoves.includes(move.id)) {
 					return this.chainModify(2);
@@ -5544,7 +5589,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onAccuracy(accuracy, target, source, move) {
 				const boostedMoves = [
 					'stomp', 'steamroller', 'bodyslam', 'flyingpress', 'dragonrush', 'heatcrash', 'heavyslam', 'maliciousmoonsault',
-					'poisonwheel',
+					'poisonwheel', 'icebergcrash',
 				];
 				if (boostedMoves.includes(move.id)) {
 					return true;
