@@ -5337,6 +5337,70 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
+	//Araquanid
+	bubblelauncher: {
+		num: 3147,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Bubble Launcher",
+		desc: "The user catches its foe in a web of bubbles, giving it a weakness to Water-type moves. If used on an ally, a friendly bubble will replace the target's Ability with Water Bubble instead.",
+		shortDesc: "Target gains Ice-type weakness. On Ally: Ability changes to Water Bubble.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Bubble Beam", target);
+		},
+		volatileStatus: 'bubbleweb', //Water-type weakness
+		condition: {
+			onStart(pokemon) {
+				if (pokemon.terastallized) return false;
+				this.add('-start', pokemon, 'Bubble Launcher');
+			},
+			onEffectivenessPriority: -2,
+			onEffectiveness(typeMod, target, type, move) {
+				if (move.type !== 'Water') return;
+				if (!target) return;
+				if (type !== target.getTypes()[0]) return;
+				return typeMod + 1;
+			},
+		},
+		onTryImmunity(target, source) {
+			// Only if target is an ally
+			// Truant and Insomnia have special treatment; they fail before
+			// checking accuracy and will double Stomping Tantrum's BP
+			if (source.isAlly(target) && (target.ability === 'truant' || target.ability === 'waterbubble')) {
+				return false;
+			}
+		},
+		onTryHit(target, source, move) {
+			if (source.isAlly(target)) {
+				move.volatileStatus = null;
+				move.infiltrates = true;
+				if (target.getAbility().flags['cantsuppress']) {
+					return false;
+				}
+			}
+		},
+		onHit(target, source, move) {
+			if (source.isAlly(target)) {
+				const oldAbility = pokemon.setAbility('waterbubble');
+				if (oldAbility) {
+					this.add('-ability', pokemon, 'Water Bubble', '[from] move: Bubble Launcher');
+					if (pokemon.status === 'brn') {
+						pokemon.cureStatus();
+					}
+					return;
+				}
+				return oldAbility as false | null;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Water",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
