@@ -3187,7 +3187,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		//doublesTier: "(DUU)",
 	},
 	lycanrocmidnight: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	lycanrocdusk: {

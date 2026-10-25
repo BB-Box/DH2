@@ -5401,6 +5401,30 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Water",
 	},
+	//Lycanroc-Midnight
+	//Lycanroc-Dusk
+	aggravarock: {
+		num: 3148,
+		accuracy: 100,
+		basePower: 10,
+		category: "Physical",
+		name: "Aggravarock",
+		desc: "The user throws a pebble to enrage its target. This move goes first, and the target can only use attacking moves for the three turns.",
+		shortDesc: "Target is Taunted.",
+		pp: 10,
+		priority: 1,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Rock Throw", target);
+		},
+		secondary: {
+			chance: 100,
+			volatileStatus: 'taunt',
+		},
+		target: "normal",
+		type: "Rock",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

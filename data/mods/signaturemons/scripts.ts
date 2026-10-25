@@ -174,6 +174,7 @@ export const Scripts: ModdedBattleScriptsData = {
 
 		//Gen 7
 		addMove('finaldeduction', 'gumshoos');
+		addMove('aggravarock', ['lycanrocmidnight', 'lycanrocdusk']);
 		addMove('bubblelauncher', 'araquanid');
 		addMove('bighug', 'bewear');
 		addMove('touchdown', 'passimian');
