@@ -5246,6 +5246,32 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
+	//Runerigus
+	runecurse: {
+		num: 3144,
+		accuracy: 100,
+		basePower: 120,
+		category: "Physical",
+		name: "Rune Curse",
+		desc: "The user unleashes an ancient curse at its foe. If the target's Ability is Wandering Spirit, this move has no effect.",
+		shortDesc: "Targets with the Ability Wandering Spirit are immune.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Curse", target);
+		},
+		onTryHit(target) {
+			if (target.ability === 'wanderingspirit') {
+				this.add('-immune', target);
+				return null;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ghost",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

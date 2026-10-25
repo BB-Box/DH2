@@ -185,6 +185,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('bouncyshield', 'dubwool');
 		addMove('siroccoshot', 'sandaconda');
 		addMove('ghastlywail', 'cursola');
+		addMove('runecurse', 'runerigus');
 		addMove('iceblock', 'eiscue');
 		addMove('butlerservice', 'indeedee');
 		addMove('maidservice', 'indeedeef');

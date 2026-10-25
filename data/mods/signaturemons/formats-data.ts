@@ -2445,7 +2445,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	runerigus: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	tirtouga: {
 		tier: "NoSign",
