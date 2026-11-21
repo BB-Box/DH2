@@ -1456,6 +1456,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				return false;
 			}
 		},
+		onDisableMove(pokemon) {
+			if (pokemon.activeMoveActions) {
+				pokemon.disableMove('scarecrow');
+			}
+		},
 		forceSwitch: true,
 		secondary: null,
 		target: "normal",
@@ -3727,6 +3732,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				return false;
 			}
 		},
+		onDisableMove(pokemon) {
+			if (pokemon.activeMoveActions) {
+				pokemon.disableMove('partytime');
+			}
+		},
 		onHitField(target, source, move) {
 			let result = false;
 			let message = false;
@@ -5200,8 +5210,13 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		onTry(source) {
 			if (source.activeMoveActions > 1) {
-				this.hint("Fake Out only works on your first turn out.");
+				this.hint("Quiet Bell only works on your first turn out.");
 				return false;
+			}
+		},
+		onDisableMove(pokemon) {
+			if (pokemon.activeMoveActions) {
+				pokemon.disableMove('quietbell');
 			}
 		},
 		boosts: {
@@ -5591,6 +5606,40 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
+	},
+	//Lopunny
+	flipkick: {
+		num: 3154,
+		accuracy: 95,
+		basePower: 70,
+		category: "Physical",
+		name: "Flip Kick",
+		desc: "The user throws an impressive kick that makes the target flinch. This move goes first but works only on the first turn each time the user enters battle.",
+		shortDesc: "Goes first and inflicts Flinch. Works only on first turn out.",
+		pp: 5,
+		priority: 3,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Jump Kick", target);
+		},
+		onTry(source) {
+			if (source.activeMoveActions > 1) {
+				this.hint("Flip Kick only works on your first turn out.");
+				return false;
+			}
+		},
+		onDisableMove(pokemon) {
+			if (pokemon.activeMoveActions) {
+				pokemon.disableMove('flipkick');
+			}
+		},
+		secondary: {
+			chance: 100,
+			volatileStatus: 'flinch',
+		},
+		target: "normal",
+		type: "Normal",
 	},
 	//Signature moves remixed
 	//Raticate

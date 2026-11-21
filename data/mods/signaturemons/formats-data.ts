@@ -1999,7 +1999,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	lopunny: {
-		tier: "NoSign",
+		tier: "Sign",
 	},
 	/*lopunnymega: {
 		tier: "NoSign",
