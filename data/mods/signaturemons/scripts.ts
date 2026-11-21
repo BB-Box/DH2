@@ -126,6 +126,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('worldshell', 'torterra');
 		addMove('blazingarts', 'infernape');
 		addMove('imperialsteel', 'empoleon');
+		addMove('huntingbolt', 'luxray');
 		addMove('secretthorns', 'roserade');
 		addMove('razzia', 'mothim');
 		addMove('stickyslime', 'gastrodon');

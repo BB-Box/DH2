@@ -5572,6 +5572,26 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Steel",
 	},
+	//Luxray
+	huntingbolt: {
+		num: 3153,
+		accuracy: true,
+		basePower: 40,
+		category: "Physical",
+		name: "Hunting Bolt",
+		desc: "A precise attack that goes first and never misses. This move can also hit a target hidden behind a substitute.",
+		shortDesc: "Goes first and bypasses Substitute.",
+		pp: 10,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, bypasssub: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Spark", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
