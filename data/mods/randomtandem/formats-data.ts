@@ -126,4 +126,35 @@ export const FormatsData: {[speciesid: IDEntry]: ModdedSpeciesFormatsData} = {
 	munkidori: {
 		tier: "Head",
 	},
+	rotommow: {
+		tier: "Head",
+	},
+	latias: {
+		tier: "Head",
+	},
+	pawmot: {
+		tier: "Head",
+	},
+	mabosstiff: {
+		tier: "Head",
+	},
+	toxapex: {
+		tier: "Head",
+	},
+	hydrapple: {
+		tier: "Head",
+	},
+	tentacruel: {
+		tier: "Head",
+	},
+	pelipper: {
+		tier: "Head",
+	},
+	rillaboom: {
+		tier: "Head",
+	},
+	alomomola: {
+		tier: "Head",
+	},
+	
 };
