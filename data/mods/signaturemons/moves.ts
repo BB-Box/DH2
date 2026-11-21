@@ -5546,6 +5546,32 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
+	//Empoleon
+	imperialsteel: {
+		num: 3152,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Imperial Steel",
+		desc: "The user strikes its foe with a sharp wing attack. This move lowers the target's Defense and Special Defense stats.",
+		shortDesc: "Lowers target's Def. and SpD. by 1.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Slash", target);
+		},
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+				spd: -1,
+			},
+		},
+		target: "normal",
+		type: "Steel",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

@@ -125,6 +125,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		//Gen 4
 		addMove('worldshell', 'torterra');
 		addMove('blazingarts', 'infernape');
+		addMove('imperialsteel', 'empoleon');
 		addMove('secretthorns', 'roserade');
 		addMove('razzia', 'mothim');
 		addMove('stickyslime', 'gastrodon');
