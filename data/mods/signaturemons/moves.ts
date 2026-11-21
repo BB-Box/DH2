@@ -5478,7 +5478,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		category: "Status",
 		name: "World Shell",
 		desc: "The user and its allies take a moment to rest, benefitting from the user's shell. This move restores some of their HP and resets all their negative stat changes.",
-		shortDesc: "Heal 25% HP and remove debuffs on user and allies",
+		shortDesc: "Heal 25% HP and remove debuffs on user and allies.",
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1, bypasssub: 1},
@@ -5501,6 +5501,50 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		secondary: null,
 		target: "allies",
 		type: "Grass",
+	},
+	//Infernape
+	blazingarts: {
+		num: 3151,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Blazing Arts",
+		desc: "The user improvises a new technique to hit its foe. This move is either physical or special—whichever will inflict more damage, and may burn the target.",
+		shortDesc: "Becomes Special if more damaging. 20% chance of Burn.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Flare Blitz", target); //No custom animation!
+		},
+		onModifyMove(move, pokemon, target) {
+			if (!target) return;
+			const atk = pokemon.getStat('atk', false, true);
+			const spa = pokemon.getStat('spa', false, true);
+			const def = target.getStat('def', false, true);
+			const spd = target.getStat('spd', false, true);
+			const physical = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * atk) / def) / 50);
+			const special = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * spa) / spd) / 50);
+			if (physical < special || (physical === special && this.random(2) === 0)) {
+				move.category = 'Special';
+				move.flags.contact = 0;
+			}
+		},
+		onHit(target, source, move) {
+			//Copied from Shell Side Arm btw
+			//"Shell Side Arm normally reveals its category via animation on cart, but doesn't play either custom animation against allies"
+			if (!source.isAlly(target)) this.hint(move.category + " Blazing Arts");
+		},
+		onAfterSubDamage(damage, target, source, move) {
+			if (!source.isAlly(target)) this.hint(move.category + " Blazing Arts");
+		},
+		secondary: {
+			chance: 20,
+			status: 'brn',
+		},
+		target: "normal",
+		type: "Fire",
 	},
 	//Signature moves remixed
 	//Raticate
