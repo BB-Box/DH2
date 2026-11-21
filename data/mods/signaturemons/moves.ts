@@ -5470,6 +5470,38 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
+	//Torterra
+	worldshell: {
+		num: 3150,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "World Shell",
+		desc: "The user and its allies take a moment to rest, benefitting from the user's shell. This move restores some of their HP and resets all their negative stat changes.",
+		shortDesc: "Heal 25% HP and remove debuffs on user and allies",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, heal: 1, bypasssub: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Synthesis", target);
+		},
+		heal: [1, 4],
+		//For some reason "clearnegativeboost" is only available as a z-move effect so here is the same effect hard-coded :(
+		onHit(target) {
+			let success = false;
+			let i: BoostID;
+			for (i in target.boosts) {
+				if (target.boosts[i] >= 0) continue;
+				target.boosts[i] = 0;
+				success = true;
+			}
+			if (success) this.add('-message', `Negative stat changes have been removed for ${target.name}!`);
+		},
+		secondary: null,
+		target: "allies",
+		type: "Grass",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

@@ -1870,7 +1870,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	torterra: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "(DUU)",
 	},
 	chimchar: {

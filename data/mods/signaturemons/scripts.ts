@@ -123,6 +123,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('seekanddestroy', 'metagross');
 
 		//Gen 4
+		addMove('worldshell', 'torterra');
 		addMove('secretthorns', 'roserade');
 		addMove('razzia', 'mothim');
 		addMove('stickyslime', 'gastrodon');
