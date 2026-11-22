@@ -150,6 +150,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('iceivory', 'mamoswine');
 		addMove('curseofsnow', 'froslass');
 		addMove('overcharge', 'rotom');
+		addMove('maintenance', ['rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow']);
 
 		//Gen 5
 		addMove('sunradiance', 'serperior');

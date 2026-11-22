@@ -5867,6 +5867,35 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Electric",
 	},
+	//Rotom-Heat
+	//Rotom-Wash
+	//Rotom-Frost
+	//Rotom-Fan
+	//Rotom-Mow
+	maintenance: {
+		num: 3162,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Maintenance",
+		desc: "The user performs quick upgrades on its engine, boosting its Special Attack, Speed and Accuracy.",
+		shortDesc: "Raises user's SpA. Spe. and Accuracy by 1.",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Shift Gear", target);
+		},
+		boosts: {
+			spa: 1,
+			spe: 1,
+			accuracy: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Electric",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
