@@ -149,6 +149,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('skystinger', 'gliscor');
 		addMove('iceivory', 'mamoswine');
 		addMove('curseofsnow', 'froslass');
+		addMove('overcharge', 'rotom');
 
 		//Gen 5
 		addMove('sunradiance', 'serperior');

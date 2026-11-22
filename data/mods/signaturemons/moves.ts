@@ -5841,6 +5841,32 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
+	//Rotom
+	overcharge: {
+		num: 3161,
+		accuracy: 90,
+		basePower: 110,
+		category: "Special",
+		name: "Overcharge",
+		desc: "The user attacks by surcharging the target's held item with electricity. The move fails if the target does not hold an item.",
+		shortDesc: "Fails if the target is not holding an item.",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Discharge", target);
+		},
+		onTry(source, target) {
+			return !!target.item;
+		},
+		onTryHit(target, source, move) {
+			this.add('-activate', target, 'move: Overcharge', this.dex.items.get(target.item).name);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
