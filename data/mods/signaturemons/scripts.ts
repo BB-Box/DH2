@@ -138,6 +138,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('deathspiral', 'spiritomb');
 		addMove('razorfin', 'garchomp');
 		addMove('aurastorm', 'lucario');
+		addMove('sandcannon', 'hippowdon');
 		addMove('flytrap', 'carnivine');
 		addMove('sinisterclaw', 'weavile');
 		addMove('tastetest', 'lickilicky');

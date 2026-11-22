@@ -2058,7 +2058,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	hippowdon: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUU",
 	},
 	skorupi: {

@@ -5756,6 +5756,31 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ground",
 	},
+	//Hippowdon
+	sandcannon: {
+		num: 3158,
+		accuracy: 90,
+		basePower: 110,
+		category: "Physical",
+		name: "Sand Cannon",
+		desc: "The user exhales a blast of sand at full-force to attack opposing Pokémon. This move may also lower their Accuracy.",
+		shortDesc: "Hits all foes. 10% chance to lower targets' Accuracy by 1.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sand Attack", target);
+		},
+		secondary: {
+			chance: 10,
+			boosts: {
+				accuracy: -1,
+			},
+		},
+		target: "allAdjacentFoes",
+		type: "Ground",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
