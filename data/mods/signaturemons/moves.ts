@@ -5781,6 +5781,35 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "allAdjacentFoes",
 		type: "Ground",
 	},
+	//Toxicroak
+	toxicnails: {
+		num: 3159,
+		accuracy: 95,
+		basePower: 25,
+		category: "Physical",
+		name: "Toxic Nails",
+		desc: "The user strikes its target multiple times with its claws, aiming to inflict Poison. The potency of the poison increases with the number of hits.",
+		shortDesc: "Hits 2-5 times. Inflicts Poison or Toxic Poison depending on number of hits.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Poison Jab", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			if (move.multihit === 2 || move.multihit === 3) {
+				move.status = 'psn';
+			}
+			else if (move.multihit === 4 || move.multihit === 5) {
+				move.status = 'tox';
+			}
+		},
+		multihit: [2, 5],
+		secondary: null,
+		target: "normal",
+		type: "Poison",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
