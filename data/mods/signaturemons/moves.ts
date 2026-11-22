@@ -5736,6 +5736,26 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		//left in for technicality but won't be used without z-moves
 		zMove: {effect: 'clearnegativeboost'},
 	},
+	//Garchomp
+	razorfin: {
+		num: 3157,
+		accuracy: 100,
+		basePower: 40,
+		category: "Physical",
+		name: "Razorfin",
+		desc: "The user quickly slices its target with one of its fins. This move always goes first.",
+		shortDesc: "Goes first.",
+		pp: 15,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1, slicing: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Slash", target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ground",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
