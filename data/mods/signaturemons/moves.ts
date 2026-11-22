@@ -5295,8 +5295,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Mr. Rime
 	icestep: {
 		num: 3145,
-		accuracy: 75,
-		basePower: 100,
+		accuracy: 100,
+		basePower: 75,
 		category: "Special",
 		name: "Ice Step",
 		desc: "The user distracts its target with a tap dance show and ends with a cold damaging shockwave. This move lowers the target's Speed and Evasiveness.",
@@ -5321,8 +5321,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	//Drampa
 	patientbeam: {
 		num: 3146,
-		accuracy: 70,
-		basePower: 100,
+		accuracy: 100,
+		basePower: 80,
 		basePowerCallback(pokemon, target, move) {
 			if (!pokemon.lastMoveUsed || pokemon.activeMoveActions <= 1) {
 				return move.basePower;
