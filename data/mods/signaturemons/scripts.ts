@@ -141,6 +141,7 @@ export const Scripts: ModdedBattleScriptsData = {
 		addMove('sandcannon', 'hippowdon');
 		addMove('toxicnails', 'toxicroak');
 		addMove('flytrap', 'carnivine');
+		addMove('hailstorm', 'abomasnow');
 		addMove('sinisterclaw', 'weavile');
 		addMove('tastetest', 'lickilicky');
 		addMove('sappyseed', 'leafeon');

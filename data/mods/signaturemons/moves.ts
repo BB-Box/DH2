@@ -5810,6 +5810,37 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Poison",
 	},
+	//Abomasnow
+	hailstorm: {
+		num: 3160,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Hailstorm",
+		desc: "The user attacks its target with small pinecones encoated with ice. This move's power goes up and damages all opposing Pokémon during snow weather.",
+		shortDesc: "Hits all foes and 50% boost during Snow weather.",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1, bullet: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Hail", target);
+		},
+		onBasePower(basePower, source) {
+			if (['hail', 'snow'].includes(source.effectiveWeather())) {
+				this.debug('weather buff');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifyMove(move, source, target) {
+			if (['hail', 'snow'].includes(source.effectiveWeather())) {
+				move.target = 'allAdjacentFoes';
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola

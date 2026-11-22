@@ -2088,7 +2088,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "NoSign",
 	},
 	abomasnow: {
-		tier: "NoSign",
+		tier: "Sign",
 		//doublesTier: "DUU",
 	},
 	/*abomasnowmega: {
