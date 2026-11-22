@@ -5641,6 +5641,49 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
+	//Rampardos
+	headstart: {
+		num: 3155,
+		accuracy: 95,
+		basePower: 60,
+		category: "Physical",
+		name: "Headstart",
+		desc: "The user scans its target by delivering a headbutt to it. This move raises the user's stats depending on who moves first.",
+		shortDesc: "Raises user's Atk by 1 if moves before target. Spe +1 if moves after target.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Headbutt", target);
+		},
+		onModifyMove(move, pokemon, target) {
+			if (target.newlySwitched || this.queue.willMove(target)) {
+				this.debug('User first: Atk boost');
+				return;
+			}
+			this.debug('Target first: Spe boost');
+			move.secondaries = [];
+			move.secondaries.push({
+				chance: 100,
+				self: {
+					boosts: {
+						spe: 1,
+					},
+				},
+			});
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				boosts: {
+					atk: 1,
+				},
+			},
+		},
+		target: "normal",
+		type: "Rock",
+	},
 	//Signature moves remixed
 	//Raticate
 	//Raticate-Alola
