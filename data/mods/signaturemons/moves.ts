@@ -818,7 +818,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			onFoeRedirectTarget(target, source, source2, move) {
 				if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
 					if (move.smartTarget) move.smartTarget = false;
-					this.debug("Follow Me redirected target of move");
+					this.debug("Belly Spot redirected target of move");
 					return this.effectState.target;
 				}
 			},
@@ -5683,6 +5683,58 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		target: "normal",
 		type: "Rock",
+	},
+	//Bastiodon
+	stronghold: {
+		num: 3156,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Stronghold",
+		desc: "The user protects its allies from targeted attacks using its metal face. This move raises the user's stats depending on the damage taken during the turn.",
+		shortDesc: "Draws foes' moves to the user. Raises Def or SpD depending on type of damage.",
+		pp: 10,
+		priority: 2,
+		flags: {noassist: 1, failcopycat: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Iron Defense", target);
+		},
+		volatileStatus: 'stronghold',
+		onTry(source) {
+			return this.activePerHalf > 1;
+		},
+		condition: {
+			duration: 1,
+			onStart(target, source, effect) {
+				if (effect?.id === 'zpower') {
+					this.add('-singleturn', target, 'move: Stronghold', '[zeffect]');
+				} else {
+					this.add('-singleturn', target, 'move: Stronghold');
+				}
+			},
+			onFoeRedirectTargetPriority: 1,
+			onFoeRedirectTarget(target, source, source2, move) {
+				if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
+					if (move.smartTarget) move.smartTarget = false;
+					this.debug("Stronghold redirected target of move");
+					return this.effectState.target;
+				}
+			},
+			onDamagingHit(damage, target, source, move) {
+				if (move.category === 'Physical') {
+					this.boost({def: 1});
+				}
+				if (move.category === 'Special') {
+					this.boost({spd: 1});
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Steel",
+		//left in for technicality but won't be used without z-moves
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	//Signature moves remixed
 	//Raticate
